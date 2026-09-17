@@ -19,9 +19,11 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   const navLinks = [
     { label: "首页", href: "/" },
@@ -44,25 +46,25 @@ export function Header() {
         {/* Left: Brand Identity matching reference image */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 group focus:outline-hidden"
+          className="flex items-center gap-3 group focus:outline-hidden"
           aria-label="共事智能首页"
         >
-          <div className="relative w-8 h-8 flex items-center justify-center">
+          <div className="relative h-9 w-auto flex items-center justify-center">
             <Image
-              src="/logo-transparent.png"
+              src="/logo-icon.png"
               alt="共事 Logo"
-              width={32}
-              height={32}
-              className="object-contain"
+              width={65}
+              height={36}
+              className="h-9 w-auto object-contain"
               priority
             />
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="text-xl font-bold tracking-tight text-slate-900 font-sans">
+          <div className="flex items-center gap-2">
+            <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-950 font-sans">
               共事
             </span>
-            <span className="text-slate-300 font-light text-lg">|</span>
-            <span className="text-xl font-bold tracking-tight text-blue-600 font-sans">
+            <span className="text-slate-300 font-normal text-xl">|</span>
+            <span className="text-xl sm:text-2xl font-black tracking-tight text-blue-600 font-sans">
               HAFlow
             </span>
           </div>
@@ -78,7 +80,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-sm font-medium transition-colors px-2 py-1 rounded-md cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 ${
                   isActive
                     ? "text-blue-600 font-semibold"
                     : "text-slate-700 hover:text-blue-600"
@@ -91,29 +93,23 @@ export function Header() {
         </nav>
 
         {/* Right: Blue pill button matching reference image */}
-        <div className="hidden sm:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shadow-xs hover:shadow-md"
+            className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shadow-xs hover:shadow-md cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             联系我们
           </Link>
         </div>
 
         {/* Mobile Menu Toggle Button */}
-        <div className="flex md:hidden items-center gap-2">
-          <Link
-            href="/contact"
-            className="text-xs px-3 py-1.5 font-semibold text-white bg-blue-600 rounded-full"
-          >
-            联系我们
-          </Link>
+        <div className="flex md:hidden items-center">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-slate-700 hover:text-slate-950 rounded-lg hover:bg-slate-100 focus:outline-hidden"
+            className="p-2 text-slate-700 hover:text-slate-950 rounded-lg hover:bg-slate-100 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             aria-expanded={mobileMenuOpen}
-            aria-label="打开导航菜单"
+            aria-label={mobileMenuOpen ? "关闭导航菜单" : "打开导航菜单"}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -132,6 +128,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-base font-medium ${
                     isActive
                       ? "text-blue-600 bg-blue-50 font-semibold"
@@ -147,6 +144,7 @@ export function Header() {
           <div className="pt-3 border-t border-slate-100">
             <Link
               href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
               className="w-full flex items-center justify-center gap-2 py-3 text-center text-sm font-semibold text-white bg-blue-600 rounded-full shadow-xs"
             >
               <span>联系我们</span>

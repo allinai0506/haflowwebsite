@@ -11,7 +11,6 @@ import {
   UserCheck,
   Bot,
   HelpCircle,
-  ShieldCheck,
   Layers,
 } from "lucide-react";
 import { PROBLEMS, getProblemBySlug } from "@/data/problems";
@@ -31,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!problem) return {};
 
   return {
-    title: `${problem.title} · 解决具体业务问题 | 共事智能`,
+    title: `${problem.title} · 解决具体业务问题`,
     description: `${problem.subtitle}。共事不做大系统，针对企业在“${problem.title}”场景中规则写不死、多变复杂的痛点，提供人机协同落地解决方案。`,
     keywords: [
       problem.title,
@@ -84,10 +83,10 @@ export default async function ProblemDetailPage({ params }: Props) {
         {/* Page Hero */}
         <div className="py-8 max-w-4xl">
           <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className="text-xs font-mono font-medium px-2.5 py-0.5 rounded-sm bg-slate-900 text-emerald-400">
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
               {problem.category}
             </span>
-            <span className="text-xs font-medium px-2.5 py-0.5 rounded-sm bg-white text-slate-600 border border-slate-200">
+            <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-white text-slate-600 border border-slate-200">
               {problem.tag}
             </span>
           </div>
@@ -100,11 +99,11 @@ export default async function ProblemDetailPage({ params }: Props) {
           </p>
 
           {/* Concrete Business Question Box */}
-          <div className="p-5 rounded-2xl bg-slate-950 text-white shadow-md flex items-start gap-3.5">
-            <span className="text-xs font-mono font-bold text-emerald-400 shrink-0 mt-0.5">
+          <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-100 text-slate-900 shadow-xs flex items-start gap-3.5">
+            <span className="text-xs font-mono font-bold text-blue-700 shrink-0 mt-0.5">
               [具体业务痛点]
             </span>
-            <p className="text-base sm:text-lg font-medium text-slate-100 italic">
+            <p className="text-base sm:text-lg font-medium text-slate-800 italic">
               “{problem.question}”
             </p>
           </div>
@@ -113,10 +112,10 @@ export default async function ProblemDetailPage({ params }: Props) {
         {/* Factors & Traditional Limitations Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-10">
           {/* Left: Factors to synthesize */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 flex flex-col justify-between">
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 flex flex-col justify-between shadow-xs">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Layers className="w-5 h-5 text-emerald-600" />
+                <Layers className="w-5 h-5 text-blue-600" />
                 <h2 className="text-lg font-bold text-slate-900">
                   该场景必须综合的多源变量
                 </h2>
@@ -131,7 +130,7 @@ export default async function ProblemDetailPage({ params }: Props) {
                     key={idx}
                     className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />
                     <span className="leading-relaxed">{factor}</span>
                   </li>
                 ))}
@@ -144,15 +143,15 @@ export default async function ProblemDetailPage({ params }: Props) {
           </div>
 
           {/* Right: Why traditional software failed */}
-          <div className="bg-slate-900 text-white rounded-3xl border border-slate-800 p-6 sm:p-8 flex flex-col justify-between">
+          <div className="bg-amber-50/40 rounded-3xl border border-amber-200/80 p-6 sm:p-8 flex flex-col justify-between shadow-xs">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <AlertTriangle className="w-5 h-5 text-amber-400" />
-                <h2 className="text-lg font-bold text-white">
+                <AlertTriangle className="w-5 h-5 text-amber-600" />
+                <h2 className="text-lg font-bold text-slate-900">
                   为什么传统软件很难把这件事情解决？
                 </h2>
               </div>
-              <p className="text-xs text-slate-400 mb-6 leading-relaxed">
+              <p className="text-xs text-slate-600 mb-6 leading-relaxed">
                 这不是原有系统开发团队能力不足，而是传统确定性软件架构在“规则写不死”问题面前的天然边界：
               </p>
 
@@ -160,9 +159,9 @@ export default async function ProblemDetailPage({ params }: Props) {
                 {problem.traditionalLimitations.map((lim, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300"
+                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700"
                   >
-                    <span className="w-4 h-4 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center shrink-0 mt-0.5 text-xs font-mono">
+                    <span className="w-4 h-4 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
                       ×
                     </span>
                     <span className="leading-relaxed">{lim}</span>
@@ -171,7 +170,7 @@ export default async function ProblemDetailPage({ params }: Props) {
               </ul>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-slate-800 text-xs text-slate-400">
+            <div className="mt-8 pt-4 border-t border-amber-200/60 text-xs text-slate-600">
               共事原则：不替换既有系统，而是作为轻量外挂只攻克这个具体卡点。
             </div>
           </div>
@@ -212,18 +211,18 @@ export default async function ProblemDetailPage({ params }: Props) {
             </div>
 
             {/* What Human Does */}
-            <div className="p-6 rounded-2xl bg-slate-900 text-white border border-slate-800">
-              <div className="flex items-center gap-2 text-white font-bold text-sm mb-4">
-                <UserCheck className="w-5 h-5 text-amber-400" />
+            <div className="p-6 rounded-2xl bg-amber-50/60 text-slate-900 border border-amber-200/80 shadow-xs">
+              <div className="flex items-center gap-2 text-slate-900 font-bold text-sm mb-4">
+                <UserCheck className="w-5 h-5 text-amber-600" />
                 <span>人类专家负责的节点（审核、纠偏、终裁）</span>
               </div>
               <ul className="space-y-3">
                 {problem.aiSolution.whatHumanDoes.map((human, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed"
+                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed"
                   >
-                    <span className="w-2 h-2 rounded-full bg-amber-400 mt-1.5 shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 shrink-0" />
                     <span>{human}</span>
                   </li>
                 ))}
@@ -338,18 +337,18 @@ export default async function ProblemDetailPage({ params }: Props) {
         </div>
 
         {/* Bottom CTA for this Problem */}
-        <div className="my-16 p-8 sm:p-10 rounded-3xl bg-slate-950 text-white flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        <div className="my-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-blue-50/80 via-white to-slate-50 border border-blue-200/80 text-slate-900 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left shadow-sm">
           <div>
-            <h3 className="text-xl font-bold text-white mb-2">
+            <h3 className="text-xl font-bold text-slate-950 mb-2">
               您企业也有类似“{problem.title}”的困扰？
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-600">
               提供几份脱敏材料，我们在 2 周内为您完成技术验证，行不行用事实说话。
             </p>
           </div>
           <Link
             href="/diagnose"
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-colors shrink-0 shadow-xs"
+            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors shrink-0 shadow-sm"
           >
             <span>预约该场景诊断</span>
             <ArrowRight className="w-4 h-4" />

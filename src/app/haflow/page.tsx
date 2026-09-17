@@ -1,7 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight,
   Workflow,
@@ -13,10 +12,7 @@ import {
   CheckCircle2,
   Cpu,
   Lock,
-  Eye,
   Database,
-  Terminal,
-  FileCheck,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { COMPANY_INFO } from "@/data/company";
@@ -24,7 +20,7 @@ import { COMPANY_INFO } from "@/data/company";
 export const metadata: Metadata = {
   title: "HAFlow · 人机协同任务执行平台 | Human + Agent, in Flow",
   description:
-    "HAFlow 是共事解决不同业务问题时使用的人机协同执行平台。把人、Agent、数据、工具和现有业务系统组织起来，让复杂任务持续推进并交付有依据的结果。",
+    "HAFlow 是共事智能面向复杂业务场景打造的人机协同任务执行平台。把人、Agent、数据、工具和现有业务系统组织起来，让复杂任务持续推进并交付有依据的结果。",
   keywords: [
     "HAFlow",
     "人机协同",
@@ -130,7 +126,7 @@ export default function HAFlowPage() {
             HAFlow：人机协同任务执行平台
           </h1>
           <p className="text-lg sm:text-xl text-slate-600 leading-relaxed mb-6">
-            HAFlow 是共事解决不同业务问题时使用的人机协同执行平台。它把人、Agent、数据、工具和现有业务系统组织起来，让复杂任务可以持续推进并交付有依据的结果。
+            HAFlow 是共事智能面向复杂业务场景打造的人机协同任务执行平台。它把人、Agent、数据、工具和现有业务系统组织起来，让复杂任务可以持续推进并交付有依据的结果。
           </p>
 
           <div className="p-4 rounded-2xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-700 leading-relaxed">
@@ -184,47 +180,47 @@ export default function HAFlowPage() {
           </div>
         </div>
 
-        {/* System Integration Topology */}
-        <div className="my-14 bg-slate-950 text-white rounded-3xl border border-slate-800 p-8 sm:p-12">
+        {/* System Integration Topology (Clean Light Theme) */}
+        <div className="my-14 bg-blue-50/50 text-slate-900 rounded-3xl border border-blue-100 p-8 sm:p-12 shadow-sm">
           <div className="max-w-3xl mb-10">
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold block mb-1">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
               集成架构
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 mb-3">
               如何与企业既有业务系统轻量连接
             </h2>
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed">
               共事坚决不主张推翻既有信息化设施。HAFlow 设计为松耦合的外挂执行层，通过标准接口与内部系统进行安全、受控的双向交互：
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800">
-              <Database className="w-6 h-6 text-blue-400 mb-3" />
-              <h3 className="text-base font-bold text-white mb-2">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs">
+              <Database className="w-6 h-6 text-blue-600 mb-3" />
+              <h3 className="text-base font-bold text-slate-900 mb-2">
                 1. 输入层：只读连接
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 通过数据库只读账户、企业网盘共享目录或 API，读取待处理的非结构化合同、报表、单据或历史价格表，不修改源数据。
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800">
-              <Cpu className="w-6 h-6 text-emerald-400 mb-3" />
-              <h3 className="text-base font-bold text-white mb-2">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs">
+              <Cpu className="w-6 h-6 text-blue-600 mb-3" />
+              <h3 className="text-base font-bold text-slate-900 mb-2">
                 2. 计算层：多 Agent 编排
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 在隔离环境中完成要素提取、跨系统多表联查、算法综合推演，并呈现人机协同审核工作台，由员工完成终审确认。
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800">
-              <CheckCircle2 className="w-6 h-6 text-teal-400 mb-3" />
-              <h3 className="text-base font-bold text-white mb-2">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs">
+              <CheckCircle2 className="w-6 h-6 text-emerald-600 mb-3" />
+              <h3 className="text-base font-bold text-slate-900 mb-2">
                 3. 输出层：受控回写
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed">
                 人工点击验收后，将生成的报价单、订货指令或标书风险报告，通过标准化 Webhook/API 规范回写进现有 ERP/TMS 中。
               </p>
             </div>
@@ -232,9 +228,9 @@ export default function HAFlowPage() {
         </div>
 
         {/* Enterprise Security Principles */}
-        <div className="my-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10">
+        <div className="my-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
           <div className="max-w-2xl mb-8">
-            <div className="flex items-center gap-2 text-emerald-600 mb-1">
+            <div className="flex items-center gap-2 text-blue-600 mb-1">
               <Lock className="w-5 h-5" />
               <span className="text-xs font-mono font-bold uppercase tracking-wider">
                 安全与合规
@@ -259,19 +255,19 @@ export default function HAFlowPage() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="my-16 p-8 sm:p-10 rounded-3xl bg-slate-950 text-white flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        {/* CTA (Clean Light Theme) */}
+        <div className="my-16 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-blue-50/80 via-white to-slate-50 border border-blue-100 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left shadow-sm">
           <div>
-            <h3 className="text-xl font-bold text-white mb-2">
+            <h3 className="text-xl font-bold text-slate-950 mb-2">
               想了解 HAFlow 如何适配您企业的具体业务？
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-600">
               带着一个具体问题来，我们为您梳理多 Agent 拆解与人机协同流程方案。
             </p>
           </div>
           <Link
             href="/diagnose"
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-colors shrink-0 shadow-xs"
+            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shrink-0 shadow-md shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             <span>预约平台技术诊断</span>
             <ArrowRight className="w-4 h-4" />

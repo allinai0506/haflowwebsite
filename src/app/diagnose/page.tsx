@@ -1,21 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
-import {
-  CheckCircle2,
-  AlertCircle,
-  HelpCircle,
-  Layers,
-  Sparkles,
-  ArrowRight,
-  ShieldCheck,
-  Building,
-} from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { DiagnoseForm } from "@/components/DiagnoseForm";
 
 export const metadata: Metadata = {
-  title: "AI 应用诊断 · 不知道 AI 能解决什么？先从你的一个问题开始 | 共事智能",
+  title: "AI 应用诊断 · 评估企业业务场景与落地可行性",
   description:
     "共事业务可行性诊断。评估当前工作流程、数据文档资产、现有系统及人机协同分工边界，在 24 小时内为您给出务实的落地实施建议与可行性报告。",
   keywords: ["AI应用诊断", "企业AI落地评估", "共事智能", "业务场景评估"],

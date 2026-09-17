@@ -1,146 +1,164 @@
 "use client";
 
-import React from "react";
-import { Sparkles, User, Bot, ArrowRight, Zap, Target, Brain, Users, RefreshCw } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+
+const RING_WORDS = [
+  { id: "goal", label: "目标", left: "50%", top: "22%" },
+  { id: "think", label: "思考", left: "21.5%", top: "61%" },
+  { id: "collab", label: "协作", left: "71%", top: "29%" },
+  { id: "create", label: "创造", left: "72%", top: "70%" },
+  { id: "do", label: "执行", left: "50%", top: "78%" },
+] as const;
 
 export function InfinityHeroVisual() {
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncPlaying = (visible: boolean) => {
+      stage.classList.toggle("hero-flow-paused", !(visible && !motion.matches));
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => syncPlaying(entry.isIntersecting),
+      { threshold: 0.12 },
+    );
+    io.observe(stage);
+
+    const onMotion = () => {
+      const box = stage.getBoundingClientRect();
+      syncPlaying(box.bottom > 0 && box.top < window.innerHeight);
+    };
+    motion.addEventListener("change", onMotion);
+    onMotion();
+
+    return () => {
+      io.disconnect();
+      motion.removeEventListener("change", onMotion);
+    };
+  }, []);
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") return;
+    const stage = stageRef.current;
+    if (!stage || stage.classList.contains("hero-flow-paused")) return;
+    const box = stage.getBoundingClientRect();
+    const px = (event.clientX - box.left) / box.width - 0.5;
+    const py = (event.clientY - box.top) / box.height - 0.5;
+    stage.style.setProperty("--tilt-x", `${(py * -6).toFixed(2)}deg`);
+    stage.style.setProperty("--tilt-y", `${(px * 8).toFixed(2)}deg`);
+  };
+
+  const onPointerLeave = () => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    stage.style.setProperty("--tilt-x", "0deg");
+    stage.style.setProperty("--tilt-y", "0deg");
+  };
+
   return (
-    <div className="relative w-full aspect-square max-w-[580px] mx-auto flex items-center justify-center p-4 select-none">
-      {/* Outer subtle glow circle */}
-      <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-blue-100/40 via-cyan-100/30 to-blue-200/40 blur-2xl -z-10 pointer-events-none" />
+    <div
+      ref={stageRef}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+      className="hero-flow-stage relative w-full max-w-[880px] mx-auto select-none flex items-center justify-center overflow-hidden sm:overflow-visible"
+    >
+      <p className="sr-only">
+        示意图：人与智能体一次性汇入中心共事，再回到左右。目标、思考、协作、创造、执行保持静止。
+      </p>
+      <div className="hero-flow-blob hero-flow-blob-a" aria-hidden />
+      <div className="hero-flow-blob hero-flow-blob-b" aria-hidden />
 
-      {/* Main SVG Canvas */}
-      <div className="relative w-full h-full flex items-center justify-center">
+      <div className="hero-orbit relative w-full aspect-[1200/896] max-h-[560px] flex items-center justify-center">
+        <div className="hero-ring-spin absolute inset-0 flex items-center justify-center pointer-events-none">
+          <Image
+            src="/irregular-flow-ring.png"
+            alt="HAFlow 人机共事有机流动环"
+            width={1200}
+            height={896}
+            priority
+            className="w-full h-full object-contain drop-shadow-[0_15px_35px_rgba(37,99,235,0.12)]"
+          />
+        </div>
+
         <svg
-          viewBox="0 0 600 420"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full drop-shadow-lg"
+          viewBox="0 0 1200 896"
+          className="absolute inset-0 z-10 w-full h-full pointer-events-none overflow-visible"
+          aria-hidden
         >
-          <defs>
-            {/* Main Gradient for the ribbon */}
-            <linearGradient id="flowRibbonGrad" x1="50" y1="100" x2="550" y2="320" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#2563eb" />
-              <stop offset="30%" stopColor="#00d2ff" />
-              <stop offset="50%" stopColor="#3b82f6" />
-              <stop offset="70%" stopColor="#06b6d4" />
-              <stop offset="100%" stopColor="#1d4ed8" />
-            </linearGradient>
-
-            <linearGradient id="humanSphereGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#60a5fa" />
-              <stop offset="60%" stopColor="#2563eb" />
-              <stop offset="100%" stopColor="#1d4ed8" />
-            </linearGradient>
-
-            <linearGradient id="agentSphereGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#38bdf8" />
-              <stop offset="50%" stopColor="#0284c7" />
-              <stop offset="100%" stopColor="#0369a1" />
-            </linearGradient>
-
-            {/* Shadow filter for 3D depth */}
-            <filter id="ribbonShadow" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="0" dy="8" stdDeviation="12" floodColor="#0284c7" floodOpacity="0.25" />
-            </filter>
-          </defs>
-
-          {/* Background orbital faint dashed paths */}
           <path
-            d="M 120 210 C 120 100, 240 100, 300 210 C 360 320, 480 320, 480 210 C 480 100, 360 100, 300 210 C 240 320, 120 320, 120 210 Z"
+            className="hero-collab-rail"
+            d="M 400 378 C 460 405 500 425 500 438"
+            fill="none"
             stroke="#93c5fd"
             strokeWidth="1.5"
-            strokeDasharray="4 6"
-            opacity="0.45"
+            strokeLinecap="round"
+          />
+          <path
+            className="hero-collab-rail"
+            d="M 820 428 C 760 440 740 442 724 438"
             fill="none"
-          />
-
-          {/* The Glorious 3D Infinity Ribbon (Outer Loop) */}
-          <path
-            d="M 175 210 C 175 115, 255 115, 300 210 C 345 305, 425 305, 425 210 C 425 115, 345 115, 300 210 C 255 305, 175 305, 175 210 Z"
-            stroke="url(#flowRibbonGrad)"
-            strokeWidth="38"
+            stroke="#7dd3fc"
+            strokeWidth="1.5"
             strokeLinecap="round"
-            strokeLinejoin="round"
-            filter="url(#ribbonShadow)"
           />
-
-          {/* Highlight inner flow core for glowing 3D tubular effect */}
-          <path
-            d="M 175 210 C 175 115, 255 115, 300 210 C 345 305, 425 305, 425 210 C 425 115, 345 115, 300 210 C 255 305, 175 305, 175 210 Z"
-            stroke="#ffffff"
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            opacity="0.75"
-          />
-
-          {/* Left Node: Human / 人 Sphere */}
-          <g transform="translate(175, 210)">
-            <circle r="46" fill="url(#humanSphereGrad)" filter="drop-shadow(0 6px 16px rgba(37,99,235,0.4))" />
-            <circle r="43" fill="none" stroke="#ffffff" strokeWidth="1.5" opacity="0.6" />
-            <text textAnchor="middle" y="-4" fill="#ffffff" fontSize="13" fontWeight="bold" fontFamily="sans-serif">
-              Human
-            </text>
-            <text textAnchor="middle" y="16" fill="#e0f2fe" fontSize="14" fontWeight="bold" fontFamily="sans-serif">
-              人
-            </text>
-          </g>
-
-          {/* Right Node: Agent / 智能体 Sphere */}
-          <g transform="translate(425, 210)">
-            <circle r="46" fill="url(#agentSphereGrad)" filter="drop-shadow(0 6px 16px rgba(2,132,199,0.4))" />
-            <circle r="43" fill="none" stroke="#ffffff" strokeWidth="1.5" opacity="0.6" />
-            <text textAnchor="middle" y="-4" fill="#ffffff" fontSize="13" fontWeight="bold" fontFamily="sans-serif">
-              Agent
-            </text>
-            <text textAnchor="middle" y="16" fill="#e0f2fe" fontSize="13" fontWeight="bold" fontFamily="sans-serif">
-              智能体
-            </text>
-          </g>
-
-          {/* Center Intersection: In Flow / 共事 */}
-          <g transform="translate(300, 210)">
-            <rect x="-42" y="-24" width="84" height="48" rx="24" fill="#ffffff" filter="drop-shadow(0 4px 12px rgba(15,23,42,0.08))" />
-            <rect x="-40" y="-22" width="80" height="44" rx="22" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1" />
-            <text textAnchor="middle" y="-2" fill="#0f172a" fontSize="12" fontWeight="bold" fontFamily="sans-serif">
-              In Flow
-            </text>
-            <text textAnchor="middle" y="14" fill="#2563eb" fontSize="12" fontWeight="bold" fontFamily="sans-serif">
-              共事
-            </text>
-          </g>
-
-          {/* Connected Peripheral Words with dotted lines */}
-          {/* Top Left: 目标 */}
-          <line x1="175" y1="160" x2="210" y2="90" stroke="#93c5fd" strokeWidth="1" strokeDasharray="3 3" />
-          <circle cx="210" cy="90" r="3" fill="#2563eb" />
-          <text x="220" y="94" fill="#1e293b" fontSize="13" fontWeight="600">目标</text>
-
-          {/* Bottom Left: 思考 */}
-          <line x1="140" y1="235" x2="90" y2="280" stroke="#93c5fd" strokeWidth="1" strokeDasharray="3 3" />
-          <circle cx="90" cy="280" r="3" fill="#2563eb" />
-          <text x="60" y="284" fill="#1e293b" fontSize="13" fontWeight="600">思考</text>
-
-          {/* Top Right: 协作 */}
-          <line x1="425" y1="160" x2="455" y2="90" stroke="#93c5fd" strokeWidth="1" strokeDasharray="3 3" />
-          <circle cx="455" cy="90" r="3" fill="#0284c7" />
-          <text x="465" y="94" fill="#1e293b" fontSize="13" fontWeight="600">协作</text>
-
-          {/* Mid Right: 创造 */}
-          <line x1="475" y1="210" x2="525" y2="230" stroke="#93c5fd" strokeWidth="1" strokeDasharray="3 3" />
-          <circle cx="525" cy="230" r="3" fill="#0284c7" />
-          <text x="535" y="234" fill="#1e293b" fontSize="13" fontWeight="600">创造</text>
-
-          {/* Bottom Center: 执行 */}
-          <line x1="385" y1="240" x2="330" y2="330" stroke="#93c5fd" strokeWidth="1" strokeDasharray="3 3" />
-          <circle cx="330" cy="330" r="3" fill="#0284c7" />
-          <text x="320" y="350" fill="#1e293b" fontSize="13" fontWeight="600">执行</text>
         </svg>
 
-        {/* Bottom Right Floating Badge: 更高效的组织 源于更好的共事方式 */}
-        <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-xs px-3.5 py-1.5 rounded-full border border-blue-100 shadow-xs text-[11px] font-medium text-slate-600 flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+        {RING_WORDS.map((word) => (
+          <div
+            key={word.id}
+            className="absolute -translate-x-1/2 -translate-y-1/2 z-10 font-bold text-slate-900 text-xs sm:text-sm tracking-wide whitespace-nowrap"
+            style={{ left: word.left, top: word.top }}
+          >
+            <span className="bg-white/90 backdrop-blur-sm px-2 py-0.5 sm:px-3 sm:py-1 rounded-md sm:rounded-lg shadow-sm border border-slate-100">
+              {word.label}
+            </span>
+          </div>
+        ))}
+
+        <div className="hero-merge-human absolute z-20 cursor-pointer">
+          <div className="relative w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-white/95 via-white/85 to-blue-50/80 backdrop-blur-md border border-white/90 shadow-[0_8px_25px_rgba(37,99,235,0.18)] flex flex-col items-center justify-center p-1.5 sm:p-3 text-center group transition-transform duration-300 hover:scale-105">
+            <div className="absolute top-1.5 sm:top-2 left-2 sm:left-4 w-5 sm:w-8 h-2.5 sm:h-4 rounded-full bg-gradient-to-b from-white to-transparent opacity-80" />
+            <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-600 mb-0.5 sm:mb-1 shadow-[0_0_8px_rgba(37,99,235,0.6)] hero-flow-node-dot" />
+            <span className="text-[10px] sm:text-sm font-semibold tracking-wider text-slate-500 uppercase">
+              Human
+            </span>
+            <span className="text-sm sm:text-2xl font-black text-slate-900 mt-0.5 group-hover:text-blue-600 transition-colors">
+              人
+            </span>
+          </div>
+        </div>
+
+        <div className="hero-merge-agent absolute z-20 cursor-pointer">
+          <div className="relative w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-white/95 via-white/85 to-cyan-50/80 backdrop-blur-md border border-white/90 shadow-[0_8px_25px_rgba(2,132,199,0.18)] flex flex-col items-center justify-center p-1.5 sm:p-3 text-center group transition-transform duration-300 hover:scale-105">
+            <div className="absolute top-1.5 sm:top-2 left-2 sm:left-4 w-5 sm:w-8 h-2.5 sm:h-4 rounded-full bg-gradient-to-b from-white to-transparent opacity-80" />
+            <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-500 mb-0.5 sm:mb-1 shadow-[0_0_8px_rgba(6,182,212,0.6)] hero-flow-node-dot" />
+            <span className="text-[10px] sm:text-sm font-semibold tracking-wider text-cyan-600 uppercase">
+              Agent
+            </span>
+            <span className="text-sm sm:text-2xl font-black text-slate-900 mt-0.5 group-hover:text-cyan-600 transition-colors">
+              智能体
+            </span>
+          </div>
+        </div>
+
+        <div className="hero-merge-core absolute z-30 cursor-pointer">
+          <div className="hero-flow-core relative px-3 py-1.5 sm:px-6 sm:py-3.5 rounded-full bg-white/95 backdrop-blur-lg border border-blue-100/90 shadow-[0_10px_30px_rgba(15,23,42,0.12)] flex flex-col items-center justify-center text-center transition-transform duration-300 hover:scale-105">
+            <span className="text-[9px] sm:text-xs font-bold tracking-widest text-slate-500 uppercase">
+              In Flow
+            </span>
+            <span className="text-sm sm:text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 mt-0.5">
+              共事
+            </span>
+          </div>
+        </div>
+
+        <div className="hidden sm:flex absolute -bottom-2 right-2 sm:right-6 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-blue-100 shadow-sm text-xs font-semibold text-slate-700 items-center gap-2 select-none z-10">
+          <span className="w-2 h-2 rounded-full bg-blue-600" />
           <span>更高效的组织 · 源于更好的共事方式</span>
         </div>
       </div>

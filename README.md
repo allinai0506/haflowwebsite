@@ -43,7 +43,7 @@
 │   ├── /insights/human-agent-division-of-labor # 人和 Agent 怎样分工才不沦为玩具
 │   └── /insights/two-week-mvp-methodology # 两周最小验证法
 ├── 关于共事 (/about)                      # 深入回答 6 个核心问题，阐释为何成立共事与团队价值观
-├── 联系我们 (/contact)                    # 顾问微信、官方邮箱、张江科学城预约来访通道
+├── 联系我们 (/contact)                    # 顾问微信、官方电话、星光耀广场预约来访通道
 ├── 动态站点地图 (/sitemap.xml)             # 全站静态与动态路由自动生成
 └── 爬虫协议 (/robots.txt)                  # 搜索引擎友好协议
 ```

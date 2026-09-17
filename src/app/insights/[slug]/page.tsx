@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return {};
 
   return {
-    title: `${article.title} | 观点与实践 · 共事智能`,
+    title: `${article.title} · 观点与实践`,
     description: article.summary,
     keywords: [article.title, article.category, "共事智能观点", "AI Native"],
   };
@@ -47,7 +47,7 @@ export default async function InsightDetailPage({ params }: Props) {
         {/* Article Header */}
         <header className="py-8 border-b border-slate-200">
           <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-slate-500">
-            <span className="font-semibold px-2.5 py-1 rounded-md bg-slate-900 text-white">
+            <span className="font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
               {article.category}
             </span>
             <span className="flex items-center gap-1">
@@ -113,10 +113,10 @@ export default async function InsightDetailPage({ params }: Props) {
           </Link>
           <Link
             href="/diagnose"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-slate-950 hover:bg-slate-800 rounded-xl transition-colors shadow-xs"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors shadow-sm"
           >
             <span>带着您的业务问题来诊断</span>
-            <ArrowRight className="w-4 h-4 text-emerald-400" />
+            <ArrowRight className="w-4 h-4 text-white" />
           </Link>
         </div>
       </div>

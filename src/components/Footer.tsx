@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { QrCode } from "lucide-react";
+import { COMPANY_INFO } from "@/data/company";
 
 export function Footer() {
   return (
@@ -9,36 +9,37 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-16 border-b border-slate-100">
           {/* Col 1: Brand Info (5 cols) */}
-          <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 relative flex items-center justify-center">
+          <div className="md:col-span-5">
+            <div className="flex items-start gap-3.5">
+              <div className="h-9 w-auto relative flex items-center justify-center shrink-0 pt-0.5">
                 <Image
-                  src="/logo-transparent.png"
+                  src="/logo-icon.png"
                   alt="共事 Logo"
-                  width={32}
-                  height={32}
-                  className="object-contain"
+                  width={65}
+                  height={36}
+                  className="h-9 w-auto object-contain"
                 />
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xl font-bold tracking-tight text-slate-900 font-sans">
-                  共事
-                </span>
-                <span className="text-slate-300 font-light text-lg">|</span>
-                <span className="text-xl font-bold tracking-tight text-blue-600 font-sans">
-                  HAFlow
-                </span>
-              </div>
-            </div>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-950 font-sans">
+                    共事
+                  </span>
+                  <span className="text-slate-300 font-normal text-xl">|</span>
+                  <span className="text-xl sm:text-2xl font-black tracking-tight text-blue-600 font-sans">
+                    HAFlow
+                  </span>
+                </div>
 
-            <div className="space-y-1 text-sm text-slate-500 pt-2">
-              <p className="font-medium text-slate-700">
-                上海共事智能科技有限公司
-              </p>
-              <p>让企业进入人机共事时代</p>
-              <p className="font-mono text-xs text-blue-600 pt-0.5">
-                Human + Agent, in Flow.
-              </p>
+                <div className="space-y-1 text-slate-500">
+                  <p className="text-sm text-slate-600">
+                    让企业进入人机共事时代
+                  </p>
+                  <p className="text-xs font-sans font-medium text-slate-400 tracking-wide">
+                    Human + Agent, in Flow.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -65,7 +66,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/training" className="hover:text-blue-600 transition-colors">
-                  方法论
+                  方法论与培训
                 </Link>
               </li>
             </ul>
@@ -84,7 +85,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/insights" className="hover:text-blue-600 transition-colors">
-                  新闻动态
+                  观点与实践
                 </Link>
               </li>
               <li>
@@ -103,58 +104,28 @@ export function Footer() {
           {/* Col 4: 关注我们 (3 cols with QR Code) */}
           <div className="md:col-span-3 flex flex-col items-start md:items-end space-y-3">
             {/* QR Code Container */}
-            <div className="w-28 h-28 p-2 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col items-center justify-center">
-              <svg
-                viewBox="0 0 100 100"
-                className="w-full h-full text-slate-900"
-                fill="currentColor"
-              >
-                {/* Clean realistic QR code matrix representation */}
-                <rect x="0" y="0" width="30" height="30" rx="3" fill="#0f172a" />
-                <rect x="5" y="5" width="20" height="20" rx="2" fill="#ffffff" />
-                <rect x="10" y="10" width="10" height="10" rx="1" fill="#0f172a" />
-
-                <rect x="70" y="0" width="30" height="30" rx="3" fill="#0f172a" />
-                <rect x="75" y="5" width="20" height="20" rx="2" fill="#ffffff" />
-                <rect x="80" y="10" width="10" height="10" rx="1" fill="#0f172a" />
-
-                <rect x="0" y="70" width="30" height="30" rx="3" fill="#0f172a" />
-                <rect x="5" y="75" width="20" height="20" rx="2" fill="#ffffff" />
-                <rect x="10" y="80" width="10" height="10" rx="1" fill="#0f172a" />
-
-                {/* Internal pixel clusters */}
-                <rect x="36" y="8" width="8" height="8" fill="#0f172a" />
-                <rect x="48" y="8" width="6" height="6" fill="#0f172a" />
-                <rect x="38" y="24" width="6" height="6" fill="#0f172a" />
-                <rect x="50" y="24" width="8" height="8" fill="#0f172a" />
-
-                <rect x="8" y="38" width="8" height="8" fill="#0f172a" />
-                <rect x="22" y="42" width="6" height="6" fill="#0f172a" />
-                <rect x="38" y="38" width="10" height="10" fill="#2563eb" />
-                <rect x="54" y="40" width="8" height="8" fill="#0f172a" />
-                <rect x="72" y="38" width="8" height="8" fill="#0f172a" />
-                <rect x="86" y="44" width="8" height="8" fill="#0f172a" />
-
-                <rect x="40" y="56" width="6" height="6" fill="#0f172a" />
-                <rect x="54" y="54" width="8" height="8" fill="#0f172a" />
-                <rect x="70" y="58" width="10" height="10" fill="#0f172a" />
-
-                <rect x="38" y="72" width="8" height="8" fill="#0f172a" />
-                <rect x="52" y="74" width="6" height="6" fill="#0f172a" />
-                <rect x="72" y="76" width="8" height="8" fill="#0f172a" />
-                <rect x="86" y="74" width="6" height="6" fill="#0f172a" />
-                <rect x="46" y="86" width="8" height="8" fill="#0f172a" />
-                <rect x="64" y="88" width="8" height="8" fill="#0f172a" />
-                <rect x="80" y="86" width="8" height="8" fill="#0f172a" />
-              </svg>
-            </div>
+            <a
+              href="/wechat-official.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="点击查看公众号二维码大图"
+              className="w-28 h-28 p-2 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center transition-transform hover:scale-105 cursor-pointer block"
+            >
+              <Image
+                src="/wechat-official.png"
+                alt="共事智能官方公众号二维码"
+                width={96}
+                height={96}
+                className="w-full h-full object-contain rounded-lg"
+              />
+            </a>
 
             <div className="text-left md:text-right">
               <span className="text-xs font-bold text-slate-800 block">
-                关注我们
+                关注官方公众号
               </span>
               <span className="text-[11px] text-slate-400">
-                一起探索人机共事的更多可能
+                微信扫一扫 · 探索人机共事
               </span>
             </div>
           </div>
@@ -162,11 +133,20 @@ export function Footer() {
 
         {/* Bottom Bar matching reference image */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div>
-            © 2024-2026 上海共事智能科技有限公司 沪ICP备xxxxxx号
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span>© {COMPANY_INFO.contact.copyrightYear} {COMPANY_INFO.name}</span>
+            <span className="text-slate-200">|</span>
+            <a
+              href="https://beian.miit.gov.cn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-slate-600 transition-colors"
+            >
+              {COMPANY_INFO.contact.icp}
+            </a>
           </div>
-          <div className="font-mono text-slate-500">
-            Human + Agent, in Flow.
+          <div className="font-sans text-slate-400">
+            {COMPANY_INFO.sloganEn}
           </div>
         </div>
       </div>

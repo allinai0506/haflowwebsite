@@ -1,12 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock, BookOpen, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Calendar, Clock, CheckCircle2 } from "lucide-react";
 import { INSIGHTS } from "@/data/insights";
 import { Breadcrumb } from "@/components/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "观点与实践 · 务实的 AI Native 工程落地思考 | 共事智能",
+  title: "观点与实践 · 务实的 AI Native 工程落地思考",
   description:
     "共事团队关于大模型落地企业业务的深度思考与实践总结。探讨为什么不建大平台、规则写不死的着力点、人机协同分工边界与两周验证方法论。",
   keywords: ["企业AI落地思考", "AI Native应用方法论", "人机协同思考", "共事智能观点"],
@@ -20,7 +20,7 @@ export default function InsightsPage() {
 
         {/* Page Hero */}
         <div className="py-8 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-100 text-emerald-800 border border-emerald-200 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200 mb-4">
             <span>工程手记 · 拒绝浮夸</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight mb-4">
@@ -57,7 +57,7 @@ export default function InsightsPage() {
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 leading-snug">
                   <Link
                     href={`/insights/${article.slug}`}
-                    className="hover:text-emerald-600 transition-colors"
+                    className="hover:text-blue-600 transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md"
                   >
                     {article.title}
                   </Link>
@@ -74,7 +74,7 @@ export default function InsightsPage() {
                   </span>
                   {article.keyTakeaways.map((takeaway, idx) => (
                     <p key={idx} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
                       <span>{takeaway}</span>
                     </p>
                   ))}
@@ -87,7 +87,7 @@ export default function InsightsPage() {
                 </span>
                 <Link
                   href={`/insights/${article.slug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-emerald-600"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-blue-600 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md py-1"
                 >
                   <span>阅读全文</span>
                   <ArrowRight className="w-3.5 h-3.5" />

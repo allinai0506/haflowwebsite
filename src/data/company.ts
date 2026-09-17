@@ -16,9 +16,8 @@ export const COMPANY_INFO = {
   heroDescription:
     "面对那些规则写不死、过去只能依靠人来判断的事情，我们用 AI 帮你把结果做出来。传统软件记录流程，AI Native 应用交付结果。",
   contact: {
-    address: "上海市浦东新区张江高科技园区（具体办公地址可预约来访）",
-    email: "contact@haflow.cn",
-    phone: "400-000-0000（工作日 09:30 - 18:30）",
+    address: "上海市普陀区曹杨路1888号星光耀广场1号楼1005室",
+    phone: "+86-153-1727-0756",
     wechat: "Gongshi-AI",
     wechatNote: "添加企业顾问微信，发送您的具体业务问题快速获得诊断方案",
     icp: "沪ICP备XXXXXXXX号-1",

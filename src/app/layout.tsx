@@ -36,6 +36,13 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+  alternates: {
+    canonical: "./",
+  },
+  other: {
+    "applicable-device": "pc,mobile",
+    baiduspider: "index, follow",
+  },
   openGraph: {
     type: "website",
     locale: "zh_CN",
@@ -77,14 +84,15 @@ export default function RootLayout({
     description: COMPANY_INFO.corePositioning,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "上海市",
+      streetAddress: "曹杨路1888号星光耀广场1号楼1005室",
+      addressLocality: "普陀区",
       addressRegion: "上海市",
       addressCountry: "CN",
     },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
-      email: COMPANY_INFO.contact.email,
+      telephone: COMPANY_INFO.contact.phone,
     },
   };
 
@@ -98,7 +106,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-slate-900 antialiased selection:bg-emerald-500 selection:text-white">
+      <body className="min-h-full flex flex-col bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

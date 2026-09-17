@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,7 +15,66 @@ import {
   Users,
 } from "lucide-react";
 
+function FlowConnector({
+  direction,
+  beat,
+}: {
+  direction: "down" | "up";
+  beat: 1 | 2 | 3;
+}) {
+  const Icon = direction === "down" ? ArrowDown : ArrowUp;
+  return (
+    <div
+      className={`haflow-flow-connector haflow-flow-${direction} haflow-beat-${beat}`}
+      aria-hidden
+    >
+      <span className="haflow-flow-rail" />
+      <span className="haflow-flow-packet" />
+      <Icon className="haflow-flow-chevron" strokeWidth={2.25} />
+    </div>
+  );
+}
+
 export function WhatIsHAFlow() {
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let wasPlaying = false;
+    const restartStory = () => {
+      stage.classList.remove("haflow-diagram-live");
+      void stage.offsetWidth;
+      stage.classList.add("haflow-diagram-live");
+    };
+    const syncPlaying = (visible: boolean) => {
+      const play = visible && !motion.matches;
+      if (play && !wasPlaying) restartStory();
+      stage.classList.toggle("haflow-diagram-paused", !play);
+      if (!play) stage.classList.remove("haflow-diagram-live");
+      wasPlaying = play;
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => syncPlaying(entry.isIntersecting),
+      { threshold: 0.12 },
+    );
+    io.observe(stage);
+
+    const onMotionPref = () => {
+      const box = stage.getBoundingClientRect();
+      syncPlaying(box.bottom > 0 && box.top < window.innerHeight);
+    };
+    motion.addEventListener("change", onMotionPref);
+
+    return () => {
+      io.disconnect();
+      motion.removeEventListener("change", onMotionPref);
+    };
+  }, []);
+
   const coreElements = [
     { label: "流程", icon: <Workflow className="w-5 h-5 text-blue-600" /> },
     { label: "数据", icon: <Database className="w-5 h-5 text-blue-600" /> },
@@ -27,7 +88,6 @@ export function WhatIsHAFlow() {
     <section className="py-20 bg-white border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: What is HAFlow text */}
           <div className="lg:col-span-4 space-y-6">
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 block">
               - WHAT IS HAFLOW
@@ -44,7 +104,7 @@ export function WhatIsHAFlow() {
             <div>
               <Link
                 href="/haflow"
-                className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-blue-600 hover:text-blue-700 bg-white hover:bg-blue-50/60 rounded-full border border-blue-200 transition-colors shadow-2xs"
+                className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-blue-600 hover:text-blue-700 bg-white hover:bg-blue-50/60 rounded-full border border-blue-200 transition-colors shadow-2xs cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
               >
                 <span>了解 HAFlow</span>
                 <ArrowRight className="w-4 h-4" />
@@ -52,36 +112,37 @@ export function WhatIsHAFlow() {
             </div>
           </div>
 
-          {/* Right Column: The exact diagram from reference image */}
-          <div className="lg:col-span-8 flex flex-col md:flex-row items-center justify-between gap-8 bg-slate-50/50 p-6 sm:p-10 rounded-3xl border border-slate-100">
-            {/* Center Flow Topology */}
+          <div
+            ref={stageRef}
+            className="haflow-diagram lg:col-span-8 flex flex-col md:flex-row items-center justify-between gap-8 bg-slate-50/50 p-6 sm:p-10 rounded-3xl border border-slate-100"
+          >
+            <p className="sr-only">
+              示意图：业务目标经业务流程流入 HAFlow，真实业务系统从下方接入。入视后汇流一次，随后中枢保持轻呼吸。文字保持静止。
+            </p>
+
             <div className="flex-1 w-full max-w-md flex flex-col items-center space-y-3">
-              {/* 1. 业务目标 */}
               <div className="w-full max-w-xs py-2.5 px-6 rounded-xl bg-blue-50/80 text-blue-950 text-center font-bold text-sm border border-blue-100/80 shadow-2xs">
                 业务目标
               </div>
 
-              {/* Arrow Down */}
-              <ArrowDown className="w-4 h-4 text-blue-500" />
+              <FlowConnector direction="down" beat={1} />
 
-              {/* 2. 业务流程 */}
               <div className="w-full max-w-xs py-2.5 px-6 rounded-xl bg-blue-50/80 text-blue-950 text-center font-bold text-sm border border-blue-100/80 shadow-2xs">
                 业务流程
               </div>
 
-              {/* Arrow Down */}
-              <ArrowDown className="w-4 h-4 text-blue-500" />
+              <FlowConnector direction="down" beat={2} />
 
-              {/* 3. Main Center Card: HAFlow */}
-              <div className="w-full rounded-2xl bg-white border border-blue-200/80 p-6 text-center shadow-md shadow-blue-500/5 ring-1 ring-blue-500/10">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <div className="w-7 h-7 relative flex items-center justify-center">
+              <div className="haflow-hub relative w-full rounded-2xl bg-white border border-blue-200/80 p-6 text-center shadow-md shadow-blue-500/5 ring-1 ring-blue-500/10">
+                <span className="haflow-hub-ring" aria-hidden />
+                <div className="relative flex items-center justify-center gap-2 mb-2">
+                  <div className="h-7 w-auto relative flex items-center justify-center">
                     <Image
-                      src="/logo-transparent.png"
+                      src="/logo-icon.png"
                       alt="HAFlow Logo"
-                      width={28}
+                      width={52}
                       height={28}
-                      className="object-contain"
+                      className="h-7 w-auto object-contain"
                     />
                   </div>
                   <span className="text-xl font-bold tracking-tight text-slate-900 font-sans">
@@ -89,11 +150,11 @@ export function WhatIsHAFlow() {
                   </span>
                 </div>
 
-                <div className="text-sm font-semibold text-blue-600 mb-3 font-mono">
+                <div className="relative text-sm font-semibold text-blue-600 mb-3 font-mono">
                   人 + Agent + Workflow
                 </div>
 
-                <div className="text-xs text-slate-500 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+                <div className="relative text-xs text-slate-500 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
                   <span>任务分解</span>
                   <span className="text-slate-300">|</span>
                   <span>多智能体协同</span>
@@ -104,16 +165,13 @@ export function WhatIsHAFlow() {
                 </div>
               </div>
 
-              {/* Arrow Up from Enterprise System */}
-              <ArrowUp className="w-4 h-4 text-blue-500" />
+              <FlowConnector direction="up" beat={3} />
 
-              {/* 4. 真实业务系统 */}
               <div className="w-full max-w-xs py-2.5 px-6 rounded-xl bg-blue-50/80 text-blue-950 text-center font-bold text-sm border border-blue-100/80 shadow-2xs">
                 真实业务系统
               </div>
             </div>
 
-            {/* Far Right: 覆盖企业核心要素 (6 tiles) */}
             <div className="w-full md:w-56 shrink-0 border-t md:border-t-0 md:border-l border-slate-200/80 pt-6 md:pt-0 md:pl-8">
               <h3 className="text-sm font-bold text-slate-900 mb-4 text-center md:text-left">
                 覆盖企业核心要素

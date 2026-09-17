@@ -31,6 +31,12 @@
     border-color: var(--border);
   }
 
+  html {
+    /* 严禁单字换行：优先在标点处断行，避免末行只剩 1 个汉字 */
+    line-break: strict;
+    text-wrap: pretty;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -41,6 +47,17 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   /* Custom subtle scrollbar */
@@ -101,4 +118,1115 @@
 
 .animate-signal-pulse {
   animation: signalPulse 2.4s ease-in-out infinite;
+}
+
+/* Homepage hero: living glass flow around the irregular ring */
+.hero-flow-stage {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform: perspective(1400px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform-style: preserve-3d;
+  transition: transform 180ms ease-out;
+}
+
+.hero-flow-blob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  filter: blur(48px);
+  z-index: 0;
+}
+
+.hero-flow-blob-a {
+  width: 320px;
+  height: 240px;
+  background: rgba(37, 99, 235, 0.16);
+  animation: hero-blob-a 16s ease-in-out infinite;
+}
+
+.hero-flow-blob-b {
+  width: 260px;
+  height: 200px;
+  background: rgba(6, 182, 212, 0.14);
+  animation: hero-blob-b 13s ease-in-out infinite;
+}
+
+@keyframes hero-blob-a {
+  0%,
+  100% {
+    transform: translate(-52%, -48%) scale(1);
+    border-radius: 58% 42% 50% 50%;
+  }
+  50% {
+    transform: translate(-44%, -56%) scale(1.02);
+    border-radius: 44% 56% 48% 52%;
+  }
+}
+
+@keyframes hero-blob-b {
+  0%,
+  100% {
+    transform: translate(-42%, -46%) scale(1);
+    border-radius: 46% 54% 42% 58%;
+  }
+  50% {
+    transform: translate(-58%, -40%) scale(1.02);
+    border-radius: 60% 40% 55% 45%;
+  }
+}
+
+.hero-ring-spin {
+  transform-origin: 50% 50%;
+  animation: hero-ring-turn 18s ease-in-out 0.85s infinite both;
+}
+
+@keyframes hero-ring-turn {
+  0%,
+  100% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+}
+
+.hero-orbit {
+  container-type: size;
+}
+
+.hero-merge-human,
+.hero-merge-agent,
+.hero-merge-core {
+  transform: translate(-50%, -50%);
+}
+
+.hero-merge-human {
+  left: 24%;
+  top: 42%;
+  animation: hero-merge-human 16s ease-in-out 1.05s 1 both;
+}
+
+.hero-merge-agent {
+  left: 78%;
+  top: 48%;
+  animation: hero-merge-agent 16s ease-in-out 1.05s 1 both;
+}
+
+.hero-merge-core {
+  left: 51%;
+  top: 49%;
+  animation: hero-merge-core 16s ease-in-out 1.05s 1 both;
+}
+
+@keyframes hero-merge-human {
+  0%,
+  6% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  38%,
+  78% {
+    transform: translate(calc(-50% + 27cqw), calc(-50% + 7cqh)) scale(0.18);
+    opacity: 0;
+    pointer-events: none;
+  }
+  96%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-merge-agent {
+  0%,
+  6% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  38%,
+  78% {
+    transform: translate(calc(-50% - 27cqw), calc(-50% + 1cqh)) scale(0.18);
+    opacity: 0;
+    pointer-events: none;
+  }
+  96%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes hero-merge-core {
+  0%,
+  6% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  38%,
+  78% {
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+  96%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.hero-flow-node-dot {
+  animation: hero-node-dot 3.2s ease-in-out 17.2s infinite;
+}
+
+@keyframes hero-node-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.97);
+    opacity: 0.8;
+  }
+}
+
+.hero-collab-rail {
+  opacity: 0.4;
+}
+
+.hero-flow-core {
+  animation: hero-flow-core 16s ease-in-out 1.05s 1 both;
+}
+
+@keyframes hero-flow-core {
+  0%,
+  28% {
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  }
+  38%,
+  78% {
+    box-shadow:
+      0 12px 36px rgba(37, 99, 235, 0.22),
+      0 0 0 1px rgba(6, 182, 212, 0.3);
+  }
+  96%,
+  100% {
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  }
+}
+
+.hero-flow-paused .hero-flow-blob,
+.hero-flow-paused .hero-ring-spin,
+.hero-flow-paused .hero-flow-node-dot {
+  animation-play-state: paused;
+}
+
+.hero-copy-enter {
+  animation: hero-copy-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-copy-d1 {
+  animation-delay: 120ms;
+}
+.hero-copy-d2 {
+  animation-delay: 240ms;
+}
+.hero-copy-d3 {
+  animation-delay: 360ms;
+}
+
+@keyframes hero-copy-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-slogan-mark {
+  color: #94a3b8;
+  -webkit-text-fill-color: #94a3b8;
+}
+
+.hero-slogan-flow {
+  background-image:
+    linear-gradient(
+      100deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.14) 38%,
+      rgba(186, 230, 253, 0.7) 50%,
+      rgba(255, 255, 255, 0.14) 62%,
+      transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      #0b1220 0%,
+      #0f172a 16%,
+      #1d4ed8 42%,
+      #2563eb 52%,
+      #0284c7 70%,
+      #06b6d4 84%,
+      #22d3ee 100%
+    );
+  background-size: 55% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: -60% 50%, 0 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: hero-slogan-flow 7s ease-in-out 0.9s infinite backwards;
+}
+
+@keyframes hero-slogan-flow {
+  0%,
+  57% {
+    background-position: -60% 50%, 0 50%;
+  }
+  86%,
+  100% {
+    background-position: 160% 50%, 0 50%;
+  }
+}
+
+/* What is HAFlow: one-shot confluence, then idle breath
+   Personality: Corporate / Premium. Text stays still.
+   Primary: sequential comets. Secondary: hub receive. Ambient: idle ring. */
+.haflow-flow-connector {
+  position: relative;
+  width: 20px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.haflow-flow-rail {
+  position: absolute;
+  left: 50%;
+  width: 1.5px;
+  transform: translateX(-50%);
+  border-radius: 1px;
+  opacity: 0.4;
+}
+
+.haflow-flow-down .haflow-flow-rail {
+  top: 1px;
+  bottom: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(147, 197, 253, 0.12),
+    rgba(37, 99, 235, 0.55),
+    rgba(147, 197, 253, 0.12)
+  );
+}
+
+.haflow-flow-up .haflow-flow-rail {
+  top: 14px;
+  bottom: 1px;
+  background: linear-gradient(
+    0deg,
+    rgba(125, 211, 252, 0.12),
+    rgba(2, 132, 199, 0.5),
+    rgba(125, 211, 252, 0.12)
+  );
+}
+
+.haflow-flow-packet {
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  height: 12px;
+  margin-left: -2px;
+  border-radius: 4px;
+  opacity: 0;
+  z-index: 1;
+}
+
+.haflow-diagram-live .haflow-flow-down .haflow-flow-packet {
+  top: 1px;
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0), #2563eb 55%);
+  animation: haflow-packet-down 900ms cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+}
+
+.haflow-diagram-live .haflow-flow-up .haflow-flow-packet {
+  top: 14px;
+  background: linear-gradient(0deg, rgba(2, 132, 199, 0), #0284c7 55%);
+  animation: haflow-packet-up 900ms cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+}
+
+@keyframes haflow-packet-down {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  78% {
+    transform: translateY(18px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+}
+
+@keyframes haflow-packet-up {
+  0% {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  78% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+.haflow-flow-chevron {
+  width: 14px;
+  height: 14px;
+  color: #3b82f6;
+  opacity: 0.55;
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.haflow-flow-down .haflow-flow-chevron {
+  bottom: 0;
+}
+
+.haflow-flow-up .haflow-flow-chevron {
+  top: 0;
+  color: #0284c7;
+}
+
+.haflow-diagram-live .haflow-flow-chevron {
+  animation: haflow-chevron 900ms ease-in-out 1 both;
+}
+
+.haflow-diagram-live .haflow-flow-rail {
+  animation: haflow-rail 900ms ease-in-out 1 both;
+}
+
+@keyframes haflow-chevron {
+  0%,
+  40% {
+    opacity: 0.5;
+  }
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.58;
+  }
+}
+
+@keyframes haflow-rail {
+  0%,
+  12% {
+    opacity: 0.35;
+  }
+  40% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.haflow-hub {
+  isolation: isolate;
+}
+
+.haflow-hub-ring {
+  position: absolute;
+  inset: -7px;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(37, 99, 235, 0.28);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.haflow-diagram-live .haflow-hub-ring {
+  animation:
+    haflow-hub-receive 2.8s ease-in-out 1 both,
+    haflow-hub-idle 4.8s ease-in-out 2.8s infinite;
+}
+
+.haflow-diagram-live .haflow-beat-1 .haflow-flow-rail,
+.haflow-diagram-live .haflow-beat-1 .haflow-flow-chevron,
+.haflow-diagram-live .haflow-beat-1 .haflow-flow-packet {
+  animation-delay: 0ms;
+}
+
+.haflow-diagram-live .haflow-beat-2 .haflow-flow-rail,
+.haflow-diagram-live .haflow-beat-2 .haflow-flow-chevron,
+.haflow-diagram-live .haflow-beat-2 .haflow-flow-packet {
+  animation-delay: 700ms;
+}
+
+.haflow-diagram-live .haflow-beat-3 .haflow-flow-rail,
+.haflow-diagram-live .haflow-beat-3 .haflow-flow-chevron,
+.haflow-diagram-live .haflow-beat-3 .haflow-flow-packet {
+  animation-delay: 1400ms;
+}
+
+@keyframes haflow-hub-receive {
+  0%,
+  48% {
+    opacity: 0.16;
+    transform: scale(1);
+  }
+  58% {
+    opacity: 0.72;
+    transform: scale(1.018);
+  }
+  70% {
+    opacity: 0.22;
+    transform: scale(1);
+  }
+  82% {
+    opacity: 0.62;
+    transform: scale(1.014);
+  }
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+}
+
+@keyframes haflow-hub-idle {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.38;
+    transform: scale(1.008);
+  }
+}
+
+.haflow-diagram-paused .haflow-flow-packet,
+.haflow-diagram-paused .haflow-hub-ring,
+.haflow-diagram-paused .haflow-flow-chevron,
+.haflow-diagram-paused .haflow-flow-rail {
+  animation-play-state: paused;
+}
+
+/* Why HAFlow: cards enter, old chains fire once, HAFlow keeps flowing.
+   Amplitude is readable. Labels stay still. */
+.why-haflow-live .why-card {
+  animation: why-card-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) 1 backwards;
+}
+
+.why-haflow-live .why-card:nth-child(1) {
+  animation-delay: 0ms;
+}
+.why-haflow-live .why-card:nth-child(2) {
+  animation-delay: 140ms;
+}
+.why-haflow-live .why-card:nth-child(3) {
+  animation-delay: 280ms;
+}
+
+@keyframes why-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.why-chain {
+  position: relative;
+  display: flex;
+  width: 16px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.why-chain-rail {
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  bottom: 11px;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: #93c5fd;
+}
+
+.why-chain-packet {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #2563eb;
+  opacity: 0;
+}
+
+.why-chain-chevron {
+  position: absolute;
+  bottom: 0;
+}
+
+.why-haflow-live .why-chain-packet {
+  animation: why-chain-packet 720ms cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+}
+
+.why-haflow-live .why-chain-b1 .why-chain-packet {
+  animation-delay: 700ms;
+}
+.why-haflow-live .why-chain-b2 .why-chain-packet {
+  animation-delay: 980ms;
+}
+.why-haflow-live .why-chain-b3 .why-chain-packet {
+  animation-delay: 1260ms;
+}
+.why-haflow-live .why-chain-b4 .why-chain-packet {
+  animation-delay: 1540ms;
+}
+
+@keyframes why-chain-packet {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  78% {
+    transform: translateY(16px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+}
+
+.why-now-track {
+  position: relative;
+  display: inline-flex;
+  width: 32px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.why-now-rail {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  top: 50%;
+  height: 2px;
+  border-radius: 1px;
+  background: #93c5fd;
+  transform: translateY(-50%);
+}
+
+.why-now-packet {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  z-index: 1;
+  width: 9px;
+  height: 9px;
+  margin-top: -4.5px;
+  border-radius: 50%;
+  background: #2563eb;
+  opacity: 0;
+}
+
+.why-now-chevron {
+  position: relative;
+  z-index: 2;
+}
+
+.why-haflow-live .why-now-packet {
+  animation: why-now-packet 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s infinite;
+}
+
+@keyframes why-now-packet {
+  0%,
+  8% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  32% {
+    transform: translateX(18px);
+    opacity: 1;
+  }
+  38%,
+  100% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+}
+
+.why-haflow-live .why-now-flow {
+  animation: why-now-flow-beat 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s infinite;
+}
+
+.why-haflow-live .why-now-result-icon {
+  animation: why-now-result-beat 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s infinite;
+}
+
+@keyframes why-now-flow-beat {
+  0%,
+  4% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(1.12);
+  }
+  22%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes why-now-result-beat {
+  0%,
+  26% {
+    transform: scale(1);
+  }
+  34% {
+    transform: scale(1.14);
+  }
+  46%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+.why-now-dot {
+  position: relative;
+  display: inline-block;
+}
+
+.why-now-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgb(37 99 235);
+  opacity: 0;
+}
+
+.why-haflow-live .why-now-dot::after {
+  animation: why-now-ping 1.8s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes why-now-ping {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .why-haflow-live .why-card:hover,
+  .why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  }
+  .why-haflow-live .why-card-now:hover,
+  .why-card-now:hover {
+    box-shadow: 0 14px 32px rgba(37, 99, 235, 0.16);
+  }
+  .why-card {
+    transition:
+      transform 160ms cubic-bezier(0.2, 0, 0, 1),
+      box-shadow 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+.why-haflow-paused .why-card,
+.why-haflow-paused .why-chain-packet,
+.why-haflow-paused .why-now-packet,
+.why-haflow-paused .why-now-flow,
+.why-haflow-paused .why-now-result-icon,
+.why-haflow-paused .why-now-dot::after {
+  animation-play-state: paused;
+}
+
+/* Evolution path: 6-step story
+   Personality: Corporate / Premium. Site signature cubic-bezier(0.22, 1, 0.36, 1).
+   Primary: stagger enter + walking highlight 01→06.
+   Secondary: connector packets. Ambient: HAFlow glow + settled packet loop. */
+.evo-progress-fill {
+  transform: scaleX(0.1667);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.evo-path-live .evo-card-slot {
+  animation: evo-card-enter 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--evo-delay, 0ms);
+}
+
+@keyframes evo-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.evo-card {
+  position: relative;
+  isolation: isolate;
+  transition:
+    transform 180ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 180ms cubic-bezier(0.2, 0, 0, 1),
+    border-color 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.evo-card.is-active:not(.evo-card-haflow) {
+  transform: translateY(-4px);
+  border-color: #93c5fd;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+}
+
+.evo-card-haflow.is-active {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.32);
+}
+
+.evo-card-haflow {
+  overflow: hidden;
+}
+
+.evo-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 1rem;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.22);
+}
+
+.evo-path-live .evo-glow {
+  animation: evo-haflow-glow 3.2s ease-in-out 800ms infinite;
+}
+
+@keyframes evo-haflow-glow {
+  0%,
+  100% {
+    box-shadow: 0 10px 28px rgba(37, 99, 235, 0.22);
+  }
+  50% {
+    box-shadow: 0 16px 40px rgba(37, 99, 235, 0.42);
+  }
+}
+
+.evo-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 38%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.08) 62%,
+    transparent 100%
+  );
+  background-size: 55% 100%;
+  background-repeat: no-repeat;
+  background-position: -60% 50%;
+  opacity: 0;
+}
+
+.evo-path-live .evo-sheen {
+  animation: evo-sheen 6s ease-in-out 1.2s infinite;
+}
+
+@keyframes evo-sheen {
+  0%,
+  62% {
+    opacity: 0;
+    background-position: -60% 50%;
+  }
+  70% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    opacity: 0;
+    background-position: 160% 50%;
+  }
+}
+
+.evo-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.evo-link-h {
+  width: 32px;
+  height: 24px;
+}
+
+.evo-link-v {
+  width: 24px;
+  height: 32px;
+}
+
+.evo-link-rail {
+  position: absolute;
+  border-radius: 1px;
+  background: #93c5fd;
+  opacity: 0.7;
+}
+
+.evo-link-h .evo-link-rail {
+  left: 2px;
+  right: 10px;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
+.evo-link-v .evo-link-rail {
+  top: 2px;
+  bottom: 10px;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+}
+
+.evo-link-packet {
+  position: absolute;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2563eb;
+  opacity: 0;
+}
+
+.evo-link-h .evo-link-packet {
+  left: 2px;
+  top: 50%;
+  margin-top: -4px;
+}
+
+.evo-link-v .evo-link-packet {
+  top: 2px;
+  left: 50%;
+  margin-left: -4px;
+}
+
+.evo-link-chevron {
+  position: relative;
+  z-index: 2;
+  width: 14px;
+  height: 14px;
+  color: #60a5fa;
+}
+
+.evo-link-h .evo-link-chevron {
+  margin-left: auto;
+}
+
+.evo-link-v .evo-link-chevron {
+  margin-top: auto;
+}
+
+.evo-link.is-firing .evo-link-packet {
+  animation: evo-packet-h 720ms cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+}
+
+.evo-link-v.is-firing .evo-link-packet {
+  animation-name: evo-packet-v;
+}
+
+.evo-path-live .evo-link-packet {
+  animation: evo-packet-h 2.8s cubic-bezier(0.22, 1, 0.36, 1) 800ms infinite;
+}
+
+.evo-path-live .evo-link-v .evo-link-packet {
+  animation-name: evo-packet-v;
+}
+
+.evo-path-live .evo-link-b0 .evo-link-packet {
+  animation-delay: 800ms;
+}
+.evo-path-live .evo-link-b1 .evo-link-packet {
+  animation-delay: 1360ms;
+}
+.evo-path-live .evo-link-b2 .evo-link-packet {
+  animation-delay: 1920ms;
+}
+.evo-path-live .evo-link-b3 .evo-link-packet {
+  animation-delay: 2480ms;
+}
+.evo-path-live .evo-link-b4 .evo-link-packet {
+  animation-delay: 3040ms;
+}
+
+@keyframes evo-packet-h {
+  0%,
+  8% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  72% {
+    transform: translateX(14px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+}
+
+@keyframes evo-packet-v {
+  0%,
+  8% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  72% {
+    transform: translateY(14px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .evo-card:hover:not(.evo-card-haflow) {
+    transform: translateY(-4px);
+    border-color: #93c5fd;
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.12);
+  }
+  .evo-card-haflow:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(37, 99, 235, 0.32);
+  }
+}
+
+.evo-path-paused .evo-card-slot,
+.evo-path-paused .evo-link-packet,
+.evo-path-paused .evo-glow,
+.evo-path-paused .evo-sheen {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-flow-stage {
+    transform: none;
+    transition: none;
+  }
+  .hero-ring-spin,
+  .hero-flow-core,
+  .hero-flow-node-dot,
+  .hero-merge-human,
+  .hero-merge-agent,
+  .hero-merge-core,
+  .haflow-flow-packet,
+  .haflow-hub-ring,
+  .haflow-flow-chevron,
+  .haflow-flow-rail,
+  .why-card,
+  .why-chain-packet,
+  .why-now-packet,
+  .why-now-flow,
+  .why-now-result-icon,
+  .why-now-dot::after,
+  .evo-card-slot,
+  .evo-link-packet,
+  .evo-glow,
+  .evo-sheen,
+  .evo-progress-fill {
+    animation: none;
+  }
+  .why-chain-packet,
+  .why-now-packet,
+  .why-now-dot::after,
+  .evo-link-packet,
+  .evo-sheen {
+    opacity: 0;
+  }
+  .evo-progress-fill {
+    transition: none;
+  }
+  .evo-glow {
+    opacity: 1;
+    box-shadow: 0 10px 28px rgba(37, 99, 235, 0.22);
+  }
+  .hero-slogan-flow {
+    animation: none;
+    background-image: linear-gradient(
+      90deg,
+      #0b1220 0%,
+      #1d4ed8 42%,
+      #2563eb 55%,
+      #06b6d4 82%,
+      #22d3ee 100%
+    );
+    background-size: 100% 100%;
+    background-position: 0 50%;
+  }
+  .haflow-flow-packet {
+    opacity: 0;
+  }
+  .haflow-hub-ring {
+    opacity: 0.28;
+    transform: none;
+  }
 }

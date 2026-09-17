@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, AlertCircle, HelpCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { PROBLEMS } from "@/data/problems";
 import { ProblemCard } from "@/components/ProblemCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -30,7 +30,7 @@ export default function ProblemsPage() {
 
         {/* Page Header */}
         <div className="py-8 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-100 text-emerald-800 border border-emerald-200 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200 mb-4">
             <span>核心定位 · AI Native 应用</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight mb-6">
@@ -46,7 +46,7 @@ export default function ProblemsPage() {
         {/* 7 Characteristics of Suitable Problems */}
         <div className="my-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
           <div className="max-w-2xl mb-8">
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 font-bold block mb-1">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
               场景甄选法则
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
@@ -63,7 +63,7 @@ export default function ProblemsPage() {
                 key={idx}
                 className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3"
               >
-                <span className="w-5 h-5 rounded-full bg-slate-900 text-emerald-400 flex items-center justify-center shrink-0 text-xs font-mono font-bold mt-0.5">
+                <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 text-xs font-mono font-bold mt-0.5">
                   {idx + 1}
                 </span>
                 <div>
@@ -99,19 +99,19 @@ export default function ProblemsPage() {
           </div>
         </div>
 
-        {/* Diagnostic CTA */}
-        <div className="my-16 p-8 sm:p-12 rounded-3xl bg-slate-950 text-white text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8">
+        {/* Diagnostic CTA (Clean Light Theme) */}
+        <div className="my-16 p-8 sm:p-12 rounded-3xl bg-blue-50/70 border border-blue-100 text-slate-900 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8 shadow-xs">
           <div className="space-y-2 max-w-2xl">
-            <h3 className="text-2xl font-bold text-white">
+            <h3 className="text-2xl font-extrabold text-slate-950">
               你的问题不在上述列表中？
             </h3>
-            <p className="text-sm text-slate-400 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed">
               只要你的问题同样具备“规则写不死、多变复杂、依赖人工判断”的特征，欢迎直接提交问题描述，我们将在 24 小时内完成可行性评估。
             </p>
           </div>
           <Link
             href="/diagnose"
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-colors shrink-0 shadow-xs"
+            className="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-colors shrink-0 shadow-md shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             <span>预约业务问题诊断</span>
             <ArrowRight className="w-4 h-4" />

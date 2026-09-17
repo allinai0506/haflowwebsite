@@ -145,10 +145,10 @@ export function MethodologySteps() {
         <div className="mt-12 text-center">
           <Link
             href="/diagnose"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-slate-950 hover:bg-slate-800 rounded-xl shadow-xs transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-sm transition-colors"
           >
             <span>预约一次业务问题诊断（30分钟）</span>
-            <ArrowRight className="w-4 h-4 text-emerald-400" />
+            <ArrowRight className="w-4 h-4 text-white" />
           </Link>
         </div>
       </div>

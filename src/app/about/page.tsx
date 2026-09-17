@@ -4,18 +4,16 @@ import Link from "next/link";
 import {
   ArrowRight,
   ShieldCheck,
-  HeartHandshake,
-  CheckCircle2,
-  Users,
-  Target,
+  Building2,
+  Compass,
+  Cpu,
   Sparkles,
-  Award,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { COMPANY_INFO } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "关于共事 · 让人和 Agent 共同把事情做完 | 共事智能",
+  title: "关于共事 · 让人和 Agent 共同把事情做完",
   description:
     "上海共事智能科技有限公司。我们做过很多年的企业管理软件。我们不做大而全的系统，只用 AI 帮企业解决一个个具体问题。深入阐释为什么成立共事、为什么坚持人机协同与持续免费培训。",
   keywords: ["关于共事", "共事智能", "上海共事智能科技有限公司", "企业文化", "HAFlow团队"],
@@ -54,41 +52,71 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: "关于共事" }]} />
 
-        {/* Page Hero */}
-        <div className="py-8 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-100 text-emerald-800 border border-emerald-200 mb-4">
-            <span>公司与品牌定位</span>
+        {/* Section 1: Hero & Manifesto (2-Column Balanced Grid) */}
+        <div className="py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Left Column: Hero Header (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200 mb-4 w-fit">
+              <span>公司与品牌定位</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight mb-4 leading-tight">
+              让人和 Agent<br className="hidden sm:inline" />共同把事情做完
+            </h1>
+            <p className="text-base sm:text-lg text-slate-600 font-mono font-medium mb-6">
+              Human + Agent, in Flow.
+            </p>
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
+              面对那些规则写不死、过去只能依靠人来判断的事情，我们用 AI 帮你把结果做出来。传统软件记录流程，AI Native 应用交付结果。
+            </p>
+
+            <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-600">
+              <span className="px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-2xs">
+                不做大系统，解决真问题
+              </span>
+              <span className="px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-2xs">
+                人在关键节点把关
+              </span>
+              <span className="px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-2xs">
+                持续普及 AI 技能
+              </span>
+            </div>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight mb-4 leading-tight">
-            让人和 Agent 共同把事情做完
-          </h1>
-          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed font-mono">
-            Human + Agent, in Flow.
-          </p>
+
+          {/* Right Column: Core Manifesto Card (7 cols) */}
+          <div className="lg:col-span-7 bg-blue-50/60 text-slate-900 rounded-3xl p-8 sm:p-10 border border-blue-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-xs font-mono uppercase tracking-widest text-blue-700 font-bold">
+                  初心与使命 · OUR MISSION
+                </span>
+                <Sparkles className="w-5 h-5 text-blue-600" />
+              </div>
+
+              <div className="space-y-4 text-sm sm:text-base text-slate-700 leading-relaxed">
+                <p>
+                  我们做过很多年的企业管理软件。传统软件非常擅长记录数据和固化流程，但企业里仍然有大量工作依赖人去理解、判断、协调和推进。
+                </p>
+                <p>
+                  AI 出现以后，我们第一次有机会让软件不只记录工作，而是真正参与工作。
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-6 mt-6 border-t border-blue-200/60">
+              <p className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold mb-1">
+                共事使命
+              </p>
+              <p className="text-blue-600 font-extrabold text-xl sm:text-2xl leading-snug">
+                共事想做的，就是让人和 Agent 一起，把这些事情做完。
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* Core Manifesto Box */}
-        <div className="my-8 bg-slate-950 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-xl max-w-4xl">
-          <span className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold block mb-4">
-            初心与使命
-          </span>
-          <div className="space-y-4 text-base sm:text-lg text-slate-200 leading-relaxed">
-            <p>
-              我们做过很多年的企业管理软件。传统软件非常擅长记录数据和固化流程，但企业里仍然有大量工作依赖人去理解、判断、协调和推进。
-            </p>
-            <p>
-              AI 出现以后，我们第一次有机会让软件不只记录工作，而是真正参与工作。
-            </p>
-            <p className="text-emerald-400 font-bold text-xl sm:text-2xl pt-2">
-              共事想做的，就是让人和 Agent 一起，把这些事情做完。
-            </p>
-          </div>
-        </div>
-
-        {/* Brand Hierarchy Clarification */}
-        <div className="my-12 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs max-w-4xl">
-          <div className="mb-6">
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 font-bold block mb-1">
+        {/* Section 2: Brand Hierarchy Clarification (Full Width 3-Column Grid) */}
+        <div className="my-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+          <div className="mb-8">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
               品牌层级说明
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
@@ -99,96 +127,158 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-              <span className="text-[11px] font-mono text-slate-400 block mb-1">
-                公司层级
-              </span>
-              <h3 className="font-bold text-slate-900 text-sm mb-1">
-                上海共事智能科技有限公司
-              </h3>
-              <p className="text-slate-600">
-                AI Native 应用与人机协同方案提供商
-              </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4">
+                  <Building2 className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-mono text-slate-400 block mb-1">
+                  公司层级
+                </span>
+                <h3 className="font-bold text-slate-900 text-base mb-2">
+                  上海共事智能科技有限公司
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  AI Native 应用与人机协同方案提供商，提供技术咨询、业务诊断与落地开发。
+                </p>
+              </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-              <span className="text-[11px] font-mono text-slate-400 block mb-1">
-                品牌主张
-              </span>
-              <h3 className="font-bold text-slate-900 text-sm mb-1">
-                共事 (GONGSHI AI)
-              </h3>
-              <p className="text-slate-600">
-                让人和 Agent 共同把事情做完
-              </p>
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center mb-4">
+                  <Compass className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-mono text-slate-400 block mb-1">
+                  品牌主张
+                </span>
+                <h3 className="font-bold text-slate-900 text-base mb-2">
+                  共事 (GONGSHI AI)
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  让人和 Agent 共同把事情做完。倡导人机共生、各司其职，人不被替代，软件不只记录。
+                </p>
+              </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
-              <span className="text-[11px] font-mono text-slate-400 block mb-1">
-                核心产品
-              </span>
-              <h3 className="font-bold text-slate-900 text-sm mb-1">
-                HAFlow
-              </h3>
-              <p className="text-slate-600">
-                人机协同任务执行底层平台
-              </p>
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center mb-4">
+                  <Cpu className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-mono text-slate-400 block mb-1">
+                  核心产品
+                </span>
+                <h3 className="font-bold text-slate-900 text-base mb-2">
+                  HAFlow
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  人机协同任务执行底层平台，负责复杂任务拆解、上下文流转与多 Agent 敏捷协同调度。
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* 6 Key Questions Answered */}
-        <div className="my-12 max-w-4xl space-y-6">
-          <div className="mb-6">
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 font-bold block mb-1">
+        {/* Section 3: Core Principles (Full Width 4-Column Grid) */}
+        <div className="my-10 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+          <div className="mb-8">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
+              做事准则
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+              共事团队坚守的四大原则
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              不走虚妄宣传的捷径，只以每一个具体业务场景的确定性落地为交付标准。
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {COMPANY_INFO.principles.map((item, idx) => (
+              <div
+                key={idx}
+                className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 font-mono font-bold flex items-center justify-center text-xs mb-3">
+                    0{idx + 1}
+                  </div>
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Section 4: 6 Key Questions Answered (Full Width 2-Column Grid) */}
+        <div className="my-12">
+          <div className="mb-8">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
               深度问答
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
               深入回答关于共事的六个问题
             </h2>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              关于成立初衷、系统边界、人机分工与公益培训的深度思考。
+            </p>
           </div>
 
-          {sixQuestions.map((item, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-2"
-            >
-              <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-start gap-2">
-                <span className="text-emerald-600 font-mono">Q{idx + 1}.</span>
-                <span>{item.q}</span>
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
-                {item.a}
-              </p>
-            </div>
-          ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {sixQuestions.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-3 flex flex-col justify-between hover:border-blue-200 transition-colors"
+              >
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-start gap-2.5">
+                    <span className="text-blue-600 font-mono shrink-0">
+                      Q{idx + 1}.
+                    </span>
+                    <span>{item.q}</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3">
+                    {item.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Honesty Box */}
-        <div className="my-10 max-w-4xl p-6 rounded-2xl bg-white border border-slate-200 text-xs text-slate-600 leading-relaxed flex items-start gap-3">
-          <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+        {/* Section 5: Honesty Box (Full Width) */}
+        <div className="my-10 p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-600 leading-relaxed flex items-start gap-4 shadow-xs">
+          <div className="w-10 h-10 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shrink-0">
+            <ShieldCheck className="w-5 h-5" />
+          </div>
           <div>
-            <span className="font-semibold text-slate-900 block mb-0.5">
+            <span className="font-bold text-slate-900 text-sm sm:text-base block mb-1">
               实事求是声明：
             </span>
             共事严守诚信底线，绝不虚构团队规模、融资情况、客户数量或夸张名头。我们是一支深耕企业软件与 AI Native 工程落地的严谨团队，我们唯一的声誉来自于帮客户解决的每一个具体业务问题。
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="my-14 max-w-4xl p-8 rounded-3xl bg-slate-950 text-white flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        {/* Section 6: Bottom CTA (Full Width) */}
+        <div className="my-14 p-8 sm:p-10 rounded-3xl bg-blue-50/70 border border-blue-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-left shadow-xs">
           <div>
-            <h3 className="text-xl font-bold text-white mb-1">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
               想与共事团队直接交流？
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400">
-              无论您是企业决策者还是业务骨干，随时欢迎联系我们。
+            <p className="text-xs sm:text-sm text-slate-600">
+              无论您是企业决策者还是业务骨干，随时欢迎带着一个具体问题与我们交流。
             </p>
           </div>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-colors shrink-0 shadow-xs"
+            className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-colors shrink-0 shadow-md shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             <span>联系我们</span>
             <ArrowRight className="w-4 h-4" />

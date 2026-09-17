@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight,
   Workflow,
@@ -21,7 +20,7 @@ export function HAFlowShowcase() {
       desc: "将宏观业务指令分解为相互校验的多步骤执行图谱，不再出现大模型单一回答遗漏要点的现象。",
     },
     {
-      icon: <Users className="w-5 h-5 text-emerald-600" />,
+      icon: <Users className="w-5 h-5 text-blue-600" />,
       title: "多个 Agent 分工协作",
       desc: "信息提取、规则比对、计算核算与风控审查分别由不同专业 Agent 独立负责，分工明确、互相制衡。",
     },
@@ -58,55 +57,52 @@ export function HAFlowShowcase() {
   ];
 
   return (
-    <section className="py-20 bg-slate-950 text-white relative overflow-hidden border-t border-slate-800">
-      {/* Background visual elements */}
-      <div className="absolute inset-0 dark-grid-pattern opacity-30 pointer-events-none" />
-
+    <section className="py-20 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-100">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Brand & Product Section Header */}
         <div className="max-w-3xl mb-16">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 tracking-wider uppercase">
+            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-100 text-blue-800 border border-blue-200 tracking-wider uppercase">
               核心产品能力
             </span>
-            <span className="text-xs text-slate-300 font-mono">
+            <span className="text-xs text-slate-500 font-mono">
               Human + Agent, in Flow.
             </span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-950 mb-4">
             HAFlow：人机协同任务执行平台
           </h2>
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-6">
-            HAFlow 是共事解决不同业务问题时使用的人机协同底层能力。它不是普通的网页聊天机器人，而是把人、Agent、数据、工具和现有业务系统组织起来，让规则写不死的复杂任务可以持续推进并最终交付结果。
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-6">
+            HAFlow 是共事智能面向复杂业务场景打造的人机协同底层能力。它不是普通的网页聊天机器人，而是把人、Agent、数据、工具和现有业务系统组织起来，让规则写不死的复杂任务可以持续推进并最终交付结果。
           </p>
 
-          <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-slate-600">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span className="w-2 h-2 rounded-full bg-blue-600" />
               不是通用大模型，是业务工作流执行平台
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-blue-400" />
+              <span className="w-2 h-2 rounded-full bg-blue-500" />
               连接企业现有 ERP / OA / 数据库
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-amber-400" />
+              <span className="w-2 h-2 rounded-full bg-amber-500" />
               关键节点人把关，过程可审计
             </span>
           </div>
         </div>
 
-        {/* Interactive Architecture Flow Diagram */}
-        <div className="mb-16 rounded-3xl border border-slate-800 bg-slate-900/80 p-6 sm:p-8 lg:p-10">
+        {/* Interactive Architecture Flow Diagram (Light Theme) */}
+        <div className="mb-16 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 lg:p-10 shadow-xs">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-mono text-blue-600 font-bold uppercase tracking-wider block mb-1">
               执行逻辑与架构
             </span>
-            <h3 className="text-xl font-bold text-white">
+            <h3 className="text-xl font-bold text-slate-950">
               HAFlow 如何把业务任务做完
             </h3>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               打破“人找数据、人手工对账”的孤岛模式，让人和 Agent 在同一闭环中高效共事
             </p>
           </div>
@@ -114,81 +110,81 @@ export function HAFlowShowcase() {
           {/* Flow visual columns */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
             {/* 1: Goal */}
-            <div className="rounded-2xl border border-slate-800 bg-slate-950 p-4 text-center flex flex-col items-center justify-center min-h-[140px]">
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-center flex flex-col items-center justify-center min-h-[130px]">
+              <span className="text-[10px] font-mono text-slate-400 font-semibold uppercase tracking-wider mb-1">
                 输入源
               </span>
-              <h4 className="text-sm font-bold text-white mb-1">
+              <h4 className="text-sm font-bold text-slate-900 mb-1">
                 业务目标与真实材料
               </h4>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-500">
                 PDF标书、非标询盘、POS流水、发票凭证
               </p>
             </div>
 
             {/* Arrow */}
-            <div className="hidden md:flex justify-center text-slate-600 font-mono text-xs">
+            <div className="hidden md:flex justify-center text-blue-500 font-mono text-xs">
               → 目标拆解 →
             </div>
 
             {/* 2: Multi-Agent Center */}
-            <div className="rounded-2xl border border-blue-500/40 bg-blue-950/30 p-5 text-center flex flex-col items-center justify-center min-h-[140px] ring-1 ring-blue-500/30">
+            <div className="rounded-2xl border-2 border-blue-200 bg-blue-50/50 p-5 text-center flex flex-col items-center justify-center min-h-[130px] shadow-xs">
               <div className="flex items-center gap-1.5 mb-1.5">
-                <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                <span className="text-xs font-mono font-bold text-blue-300">
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                <span className="text-xs font-mono font-bold text-blue-700">
                   HAFlow 协同引擎
                 </span>
               </div>
-              <h4 className="text-sm font-bold text-white mb-1">
+              <h4 className="text-sm font-bold text-slate-950 mb-1">
                 多 Agent 专业分工与推理
               </h4>
-              <p className="text-[11px] text-slate-300">
+              <p className="text-[11px] text-slate-600">
                 解析要素 · 比选规则 · 穿透调用工具
               </p>
             </div>
 
             {/* Arrow */}
-            <div className="hidden md:flex justify-center text-slate-600 font-mono text-xs">
+            <div className="hidden md:flex justify-center text-blue-500 font-mono text-xs">
               → 关键把关 →
             </div>
 
             {/* 3: Human in the Loop */}
-            <div className="rounded-2xl border border-amber-500/40 bg-amber-950/20 p-4 text-center flex flex-col items-center justify-center min-h-[140px]">
-              <span className="text-[10px] font-mono text-amber-400 uppercase tracking-wider mb-1">
+            <div className="rounded-2xl border border-amber-200 bg-amber-50/40 p-4 text-center flex flex-col items-center justify-center min-h-[130px]">
+              <span className="text-[10px] font-mono text-amber-700 font-bold uppercase tracking-wider mb-1">
                 Human in the loop
               </span>
-              <h4 className="text-sm font-bold text-white mb-1">
+              <h4 className="text-sm font-bold text-slate-900 mb-1">
                 人类专家终审确认
               </h4>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-600">
                 阈值审核 · 异常纠偏 · 商业终裁
               </p>
             </div>
           </div>
 
-          <div className="mt-4 pt-4 border-t border-slate-800 text-center flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
+          <div className="mt-4 pt-4 border-t border-slate-100 text-center flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500">
             <span>对接：ERP / 财务核算 / TMS / 邮件服务器 / 本地网盘</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-emerald-400">
+            <span className="text-slate-300">•</span>
+            <span className="text-blue-700 font-semibold">
               最终输出：可直接用于业务交付的高置信度结果
             </span>
           </div>
         </div>
 
         {/* 8 Core Capabilities Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {capabilities.map((cap, idx) => (
             <div
               key={idx}
-              className="rounded-2xl border border-slate-800/90 bg-slate-900/60 p-6 hover:border-slate-700 transition-colors"
+              className="rounded-2xl border border-slate-200 bg-white p-6 hover:shadow-md transition-shadow"
             >
-              <div className="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-4">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-4">
                 {cap.icon}
               </div>
-              <h3 className="text-base font-bold text-white mb-2">
+              <h3 className="text-base font-bold text-slate-900 mb-2">
                 {cap.title}
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-500 leading-relaxed">
                 {cap.desc}
               </p>
             </div>
@@ -196,13 +192,13 @@ export function HAFlowShowcase() {
         </div>
 
         {/* Footer Link */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-800">
-          <p className="text-xs text-slate-400">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200">
+          <p className="text-xs text-slate-500">
             想要详细了解 HAFlow 的技术架构、安全性规范与集成方案？
           </p>
           <Link
             href="/haflow"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
           >
             <span>进入 HAFlow 独立产品页面</span>
             <ArrowRight className="w-4 h-4" />

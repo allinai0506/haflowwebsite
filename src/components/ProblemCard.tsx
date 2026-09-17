@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, HelpCircle, ArrowUpRight, FileCheck, DollarSign, TrendingUp, Link2, BookOpen } from "lucide-react";
+import { ArrowRight, HelpCircle, FileCheck, DollarSign, TrendingUp, Link2, BookOpen } from "lucide-react";
 import { ProblemItem } from "@/data/problems";
 
 interface ProblemCardProps {
@@ -27,8 +27,9 @@ export function ProblemCard({ problem, featured = false }: ProblemCardProps) {
   };
 
   return (
-    <div
-      className={`group relative flex flex-col justify-between rounded-2xl border transition-all duration-200 bg-white hover:shadow-md ${
+    <Link
+      href={`/problems/${problem.slug}`}
+      className={`group relative flex flex-col justify-between rounded-2xl border transition-all duration-200 bg-white hover:border-blue-300 hover:shadow-xl hover:-translate-y-0.5 cursor-pointer block outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
         featured
           ? "border-slate-300 ring-1 ring-slate-900/5 p-6 sm:p-8"
           : "border-slate-200 p-6 sm:p-7"
@@ -45,7 +46,7 @@ export function ProblemCard({ problem, featured = false }: ProblemCardProps) {
               <span className="text-xs font-mono font-medium text-slate-500 uppercase tracking-wider block">
                 {problem.category}
               </span>
-              <h3 className="text-lg font-bold text-slate-900 tracking-tight">
+              <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors tracking-tight">
                 {problem.title}
               </h3>
             </div>
@@ -55,12 +56,12 @@ export function ProblemCard({ problem, featured = false }: ProblemCardProps) {
           </span>
         </div>
 
-        {/* The Concrete Business Question (Highlighted) */}
-        <div className="mb-4 p-3.5 rounded-xl bg-slate-900 text-white font-medium text-sm leading-snug flex items-start gap-2.5 shadow-2xs">
-          <span className="text-emerald-400 font-mono font-bold shrink-0 text-xs mt-0.5">
+        {/* The Concrete Business Question (Highlighted in clean light blue) */}
+        <div className="mb-4 p-3.5 rounded-xl bg-blue-50 border border-blue-100 text-blue-950 font-medium text-sm leading-snug flex items-start gap-2.5">
+          <span className="text-blue-600 font-mono font-bold shrink-0 text-xs mt-0.5">
             [具体问题]
           </span>
-          <p className="text-slate-100 italic">“{problem.question}”</p>
+          <p className="text-blue-950 italic">“{problem.question}”</p>
         </div>
 
         {/* Summary */}
@@ -79,7 +80,7 @@ export function ProblemCard({ problem, featured = false }: ProblemCardProps) {
                 key={idx}
                 className="text-xs text-slate-600 flex items-start gap-2 leading-relaxed"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
                 <span>{factor}</span>
               </li>
             ))}
@@ -94,23 +95,22 @@ export function ProblemCard({ problem, featured = false }: ProblemCardProps) {
 
       {/* Footer Deliverable & CTA */}
       <div className="pt-4 border-t border-slate-100 mt-2">
-        <div className="mb-4 bg-emerald-50/60 border border-emerald-100/80 rounded-lg p-2.5 text-xs text-emerald-900">
-          <span className="font-semibold text-emerald-950 block mb-0.5">
+        <div className="mb-4 bg-blue-50/60 border border-blue-100/80 rounded-xl p-3 text-xs text-blue-950">
+          <span className="font-semibold text-blue-950 block mb-0.5">
             最终交付结果：
           </span>
-          <p className="text-emerald-800 leading-relaxed">
+          <p className="text-blue-800 leading-relaxed">
             {problem.aiSolution.finalDeliverable}
           </p>
         </div>
 
-        <Link
-          href={`/problems/${problem.slug}`}
-          className="inline-flex items-center justify-between w-full text-xs font-semibold text-slate-900 hover:text-emerald-600 py-2 group-hover:translate-x-0.5 transition-all"
+        <div
+          className="inline-flex items-center justify-between w-full text-xs font-semibold text-slate-900 group-hover:text-blue-600 py-2 transition-colors"
         >
           <span>查看该场景解决方案与人机分工</span>
-          <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors" />
-        </Link>
+          <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
