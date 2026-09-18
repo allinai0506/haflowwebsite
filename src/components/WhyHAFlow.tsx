@@ -142,54 +142,64 @@ export function WhyHAFlow() {
               </div>
             </div>
 
-            <div className="why-card why-card-now bg-blue-50/40 rounded-2xl border-2 border-blue-500/80 p-6 flex flex-col items-center justify-between text-center min-h-[260px] shadow-md shadow-blue-500/5 relative ring-2 ring-blue-500/10">
-              <span className="text-xs font-bold text-blue-600 font-mono mb-4 flex items-center gap-1.5">
+            <div className="why-card why-card-now bg-blue-50/40 rounded-2xl border-2 border-blue-500/80 p-6 flex flex-col items-center justify-between text-center min-h-[280px] shadow-md shadow-blue-500/5 relative ring-2 ring-blue-500/10">
+              <span className="text-xs font-bold text-blue-600 font-mono mb-3 flex items-center gap-1.5">
                 <span className="why-now-dot w-2 h-2 rounded-full bg-blue-600" />
                 <span>现在 · HAFlow</span>
               </span>
 
-              <div className="flex items-center justify-center gap-2.5 w-full my-auto">
-                <div className="flex flex-col items-center space-y-2.5">
-                  <div className="flex items-center gap-1.5 text-slate-800 text-sm font-semibold">
-                    <User className="w-5 h-5 text-blue-600" />
-                    <span>人</span>
+              <div className="flex items-center justify-between w-full max-w-[240px] px-1 my-auto">
+                {/* 节点 1: 人 + Agent 协作体 */}
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center -space-x-1.5 mb-1.5">
+                    <div className="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-blue-600 shadow-2xs">
+                      <User className="w-4 h-4" />
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-blue-600 text-white border-2 border-white flex items-center justify-center shadow-2xs">
+                      <Bot className="w-4 h-4" />
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5 text-slate-800 text-sm font-semibold">
-                    <Bot className="w-5 h-5 text-blue-600" />
-                    <span>Agent</span>
-                  </div>
+                  <span className="text-xs font-bold text-slate-700 whitespace-nowrap">
+                    人 + Agent
+                  </span>
                 </div>
 
-                <span className="text-2xl font-thin text-blue-400 select-none">
-                  &#125;
+                {/* 轨迹 1 */}
+                <span className="why-now-track scale-90" aria-hidden>
+                  <span className="why-now-rail" />
+                  <span className="why-now-packet" />
+                  <ArrowRight className="why-now-chevron w-3.5 h-3.5 text-blue-500" />
                 </span>
 
+                {/* 节点 2: 工作流 */}
                 <div className="flex flex-col items-center">
-                  <div className="why-now-flow w-10 h-10 rounded-xl bg-white border border-blue-200 flex items-center justify-center text-blue-600 shadow-2xs">
-                    <FileText className="w-5 h-5" />
+                  <div className="why-now-flow w-9 h-9 rounded-xl bg-white border border-blue-200 flex items-center justify-center text-blue-600 shadow-2xs mb-1.5">
+                    <FileText className="w-4 h-4" />
                   </div>
-                  <span className="text-sm font-bold text-slate-700 mt-1 whitespace-nowrap">
+                  <span className="text-xs font-bold text-slate-700 whitespace-nowrap">
                     工作流
                   </span>
                 </div>
 
-                <span className="why-now-track" aria-hidden>
+                {/* 轨迹 2 */}
+                <span className="why-now-track scale-90" aria-hidden>
                   <span className="why-now-rail" />
                   <span className="why-now-packet" />
-                  <ArrowRight className="why-now-chevron w-4 h-4 text-blue-500" />
+                  <ArrowRight className="why-now-chevron w-3.5 h-3.5 text-blue-500" />
                 </span>
 
+                {/* 节点 3: 业务结果 */}
                 <div className="flex flex-col items-center">
-                  <div className="why-now-result-icon w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-xs">
-                    <CheckCircle2 className="w-6 h-6" />
+                  <div className="why-now-result-icon w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center shadow-xs mb-1.5">
+                    <CheckCircle2 className="w-5 h-5" />
                   </div>
-                  <span className="text-sm font-bold text-emerald-800 mt-1 whitespace-nowrap">
+                  <span className="text-xs font-bold text-emerald-800 whitespace-nowrap">
                     业务结果
                   </span>
                 </div>
               </div>
 
-              <div className="w-full pt-3 border-t border-blue-200/60 text-xs text-blue-800 font-medium">
+              <div className="w-full pt-3 mt-2 border-t border-blue-200/60 text-xs text-blue-800 font-medium">
                 让人与 Agent 共同把事情做完
               </div>
             </div>

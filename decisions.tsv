@@ -1,0 +1,2 @@
+timestamp	decision	rationale	evidence	result
+2026-09-18T14:09:00+08:00	Refactor WhyHAFlow card layout to 3-node horizontal chain	Fix card element overflow and tight horizontal margins reported by user	pnpm build exit code 0	SUCCESS
