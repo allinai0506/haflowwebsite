@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { CaseStudy } from "@/data/cases";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { ScoreAlignViewer } from "@/components/ScoreAlignViewer";
 
 const CHAPTERS = [
   { href: "#challenge", label: "挑战" },
@@ -25,6 +26,8 @@ const CHAPTERS = [
   { href: "#boundary", label: "边界" },
 ] as const;
 
+const DEMO_CHAPTER = { href: "#demo", label: "交互演示" } as const;
+
 export function CaseStoryView({
   item,
   related,
@@ -32,6 +35,10 @@ export function CaseStoryView({
   item: CaseStudy;
   related: CaseStudy[];
 }) {
+  const showDemo = item.slug === "bid-compliance";
+  const chapters = showDemo
+    ? [CHAPTERS[0], CHAPTERS[1], DEMO_CHAPTER, CHAPTERS[2], CHAPTERS[3], CHAPTERS[4]]
+    : CHAPTERS;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -149,7 +156,7 @@ export function CaseStoryView({
           className="sticky top-[72px] z-20 mt-8 -mx-4 sm:mx-0 px-4 sm:px-0 py-2 bg-slate-50/95 backdrop-blur-sm border-b border-slate-200"
         >
           <ul className="flex gap-1 overflow-x-auto text-xs font-semibold">
-            {CHAPTERS.map((chapter) => (
+            {chapters.map((chapter) => (
               <li key={chapter.href}>
                 <a
                   href={chapter.href}
@@ -249,6 +256,23 @@ export function CaseStoryView({
               </div>
             </div>
           </section>
+
+          {showDemo && (
+            <section id="demo" className="scroll-mt-28">
+              <ChapterEyebrow n="02+" title="交互演示" />
+              <p className="mt-3 text-sm text-slate-600 leading-relaxed max-w-3xl">
+                AI 评分标准解析 ·
+                左侧是招标文件原文（P46–P49），右侧是逐条直抽的结构化评分表。点击右侧任意行定位左侧出处，点击左侧高亮条款反查评分项；顶部可在「预计得分（知识库对标）/ 实际打分（评审专家）」两种阶段间切换。每一条得分都带原文出处与依据，低置信的主观项留给专家终裁。
+              </p>
+              <div className="mt-4">
+                <ScoreAlignViewer />
+              </div>
+              <p className="mt-3 text-xs text-slate-400 leading-relaxed">
+                演示数据为脱敏示例（中煤能源集团办公物资框架协议，100
+                分闭环）。正式项目中，出处校验与置信度门禁由确定性对齐引擎 + 人工复核共同承担。
+              </p>
+            </section>
+          )}
 
           <section id="collaboration" className="scroll-mt-28">
             <ChapterEyebrow n="03" title="人机协同" />

@@ -1,0 +1,721 @@
+
+  /* ========== 西域数智化投标管理平台 Design Tokens ========== */
+.score-align-demo{
+    --brand-xiyu-logo: #2E7659;
+    --brand-xiyu-logo-light: #E7F2ED;
+    --brand-xiyu-logo-active: #1F553F;
+    --brand-xiyu-logo-hover: #27674E;
+    --brand-primary: #0066CC;
+    --brand-primary-light: #E8F3FF;
+    --text-primary: #1A1A1A;
+    --text-primary-ui: #303133;
+    --text-secondary: #666666;
+    --text-secondary-ui: #606266;
+    --text-tertiary: #999999;
+    --text-muted: #909399;
+    --text-lighter: #9CA3AF;
+    --gray-50: #F8FAFC;
+    --gray-100: #F1F5F9;
+    --gray-150: #E2E8F0;
+    --gray-200: #CBD5E1;
+    --gray-300: #94A3B8;
+    --gray-700: #334155;
+    --gray-800: #1E293B;
+    --bg-white: #FFFFFF;
+    --bg-muted: #FAFAFA;
+    --bg-muted-2: #F9FAFB;
+    --bg-subtle: #F4F6F8;
+    --border-base: #DCDFE6;
+    --border-light: #E4E7ED;
+    --status-success-bg: #D1FAE5;
+    --status-success-color: #065F46;
+    --status-success-border: #BBF7D0;
+    --status-success-soft: #F0FDF4;
+    --status-warning-bg: #FEF3C7;
+    --status-warning-color: #92400E;
+    --status-warning-border: #FDE68A;
+    --status-warning-soft: #FFFBEB;
+    --status-danger-bg: #FEE2E2;
+    --status-danger-color: #991B1B;
+    --status-danger-border: #FECACA;
+    --status-danger-soft: #FEF2F2;
+    --status-info-bg: #DBEAFE;
+    --status-info-color: #1E40AF;
+    --status-neutral-bg: #F1F5F9;
+    --status-neutral-color: #475569;
+    --status-purple-bg: #EDE9FE;
+    --status-purple-color: #6D28D9;
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+  }
+
+.score-align-demo *{ box-sizing: border-box; margin: 0; padding: 0; }
+.score-align-demo{
+    font-family: var(--font-family);
+    color: var(--text-primary-ui);
+    background: #EAEEF2;
+    height: 720px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 顶部导航栏 */
+.score-align-demo .top-navbar{
+    height: 56px;
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    z-index: 20;
+  }
+.score-align-demo .nav-left{ display: flex; align-items: center; gap: 14px; }
+.score-align-demo .logo-badge{
+    background: var(--brand-xiyu-logo);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.5px;
+  }
+.score-align-demo .nav-title{ font-size: 15px; font-weight: 600; color: var(--text-primary); }
+.score-align-demo .project-tag{
+    font-size: 12px;
+    background: var(--bg-subtle);
+    color: var(--text-secondary);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+  }
+.score-align-demo .nav-center{ display: flex; align-items: center; gap: 8px; }
+.score-align-demo .phase-segmented{
+    display: inline-flex;
+    background: var(--gray-100);
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+  }
+.score-align-demo .segmented-btn{
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+.score-align-demo .segmented-btn.active{
+    background: var(--bg-white);
+    color: var(--brand-xiyu-logo);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+.score-align-demo .nav-right{ display: flex; align-items: center; gap: 12px; }
+.score-align-demo .btn-outline{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary-ui);
+    background: var(--bg-white);
+    border: 1px solid var(--border-base);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+.score-align-demo .btn-outline:hover{
+    border-color: var(--brand-xiyu-logo);
+    color: var(--brand-xiyu-logo);
+    background: var(--brand-xiyu-logo-light);
+  }
+.score-align-demo .btn-primary{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--brand-xiyu-logo);
+    border: 1px solid var(--brand-xiyu-logo);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+.score-align-demo .btn-primary:hover{ background: var(--brand-xiyu-logo-hover); }
+
+  /* 主体双屏工作区 */
+.score-align-demo .workbench-container{
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 左侧：标书原文查看器 (Document Viewer) */
+.score-align-demo .left-pane{
+    width: 48%;
+    min-width: 380px;
+    background: #E2E8F0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-base);
+    position: relative;
+  }
+.score-align-demo .doc-toolbar{
+    height: 44px;
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    flex-shrink: 0;
+  }
+.score-align-demo .doc-title-info{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+.score-align-demo .doc-format-pill{
+    font-size: 11px;
+    background: #E0F2FE;
+    color: #0369A1;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+.score-align-demo .doc-tools{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+.score-align-demo .page-stepper{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+.score-align-demo .page-input{
+    width: 40px;
+    height: 24px;
+    text-align: center;
+    border: 1px solid var(--border-base);
+    border-radius: 3px;
+    font-size: 12px;
+  }
+.score-align-demo .doc-tool-btn{
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-base);
+    background: var(--bg-white);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+.score-align-demo .doc-tool-btn:hover{ color: var(--brand-xiyu-logo); border-color: var(--brand-xiyu-logo); }
+
+.score-align-demo .doc-scroll-viewport{
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    scroll-behavior: smooth;
+  }
+
+  /* 标书页面模拟纸张效果 */
+.score-align-demo .doc-page{
+    width: 100%;
+    max-width: 680px;
+    background: var(--bg-white);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    padding: 44px 50px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #2D3748;
+    position: relative;
+    user-select: text;
+  }
+.score-align-demo .doc-page-header{
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-lighter);
+    border-bottom: 1px solid var(--gray-150);
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+  }
+.score-align-demo .doc-page-footer{
+    display: flex;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--text-lighter);
+    margin-top: 32px;
+    padding-top: 8px;
+    border-top: 1px solid var(--gray-150);
+  }
+.score-align-demo .doc-h1{ font-size: 18px; font-weight: 700; color: #1A202C; margin-bottom: 16px; text-align: center; }
+.score-align-demo .doc-h2{ font-size: 15px; font-weight: 700; color: #2D3748; margin: 20px 0 10px 0; }
+.score-align-demo .doc-p{ margin-bottom: 12px; text-align: justify; text-indent: 2em; }
+  
+  /* 标书中的评分表格 */
+.score-align-demo .doc-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+.score-align-demo .doc-table th, .score-align-demo .doc-table td{
+    border: 1px solid #CBD5E1;
+    padding: 8px 10px;
+    vertical-align: top;
+  }
+.score-align-demo .doc-table th{
+    background: #F8FAFC;
+    font-weight: 600;
+    color: #1E293B;
+  }
+
+  /* 高亮标注区域 (Highlighter Overlay) */
+.score-align-demo .doc-clause-highlight{
+    background: rgba(254, 240, 138, 0.4);
+    border-left: 3px solid #EAB308;
+    padding: 2px 4px;
+    border-radius: 2px;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+.score-align-demo .doc-clause-highlight:hover{
+    background: rgba(254, 240, 138, 0.75);
+  }
+.score-align-demo .doc-clause-highlight.active-target{
+    background: rgba(46, 118, 89, 0.2) !important;
+    border-left: 4px solid var(--brand-xiyu-logo) !important;
+    outline: 2px solid rgba(46, 118, 89, 0.5);
+    animation: pulse-glow 1.5s infinite alternate;
+  }
+.score-align-demo .doc-clause-badge{
+    position: absolute;
+    right: -4px;
+    top: -10px;
+    background: var(--brand-xiyu-logo);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    pointer-events: none;
+  }
+
+  @keyframes pulse-glow {
+    0% { outline-color: rgba(46, 118, 89, 0.3); }
+    100% { outline-color: rgba(46, 118, 89, 0.9); }
+  }
+
+  /* 拖拽分割条 */
+.score-align-demo .resizer-bar{
+    width: 6px;
+    background: transparent;
+    cursor: col-resize;
+    position: relative;
+    z-index: 10;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.score-align-demo .resizer-bar:hover, .score-align-demo .resizer-bar.dragging{
+    background: var(--brand-xiyu-logo);
+  }
+.score-align-demo .resizer-line{
+    width: 2px;
+    height: 32px;
+    background: var(--gray-300);
+    border-radius: 1px;
+  }
+
+  /* 右侧：8 列结构化表格工作区 (Scoring Table Workspace) */
+.score-align-demo .right-pane{
+    flex: 1;
+    min-width: 480px;
+    background: var(--bg-white);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+.score-align-demo .table-header-panel{
+    padding: 14px 20px;
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+.score-align-demo .score-stats-summary{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+.score-align-demo .stat-chip{
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+.score-align-demo .stat-chip.total{ color: var(--text-primary); font-size: 13px; }
+.score-align-demo .stat-chip.ok{ color: var(--brand-xiyu-logo); }
+.score-align-demo .stat-chip.danger{ color: var(--status-danger-color); }
+.score-align-demo .stat-chip.neutral{ color: var(--text-muted); }
+  
+.score-align-demo .filter-search-box{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+.score-align-demo .search-input{
+    height: 28px;
+    width: 160px;
+    border: 1px solid var(--border-base);
+    border-radius: var(--radius-sm);
+    padding: 0 8px;
+    font-size: 12px;
+    outline: none;
+  }
+.score-align-demo .search-input:focus{ border-color: var(--brand-xiyu-logo); }
+
+.score-align-demo .table-wrapper{
+    flex: 1;
+    overflow: auto;
+    padding: 0;
+  }
+.score-align-demo .parse-table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+.score-align-demo .parse-table th{
+    background: var(--gray-50);
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border-base);
+    font-size: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+.score-align-demo .parse-table td{
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--gray-150);
+    vertical-align: top;
+    color: var(--text-primary-ui);
+    transition: background 0.15s;
+  }
+.score-align-demo .parse-table tr{
+    cursor: pointer;
+  }
+.score-align-demo .parse-table tr:hover td{
+    background: var(--bg-muted-2);
+  }
+.score-align-demo .parse-table tr.active-row td{
+    background: #F0FDF4 !important;
+    border-top: 1px solid #BBF7D0;
+    border-bottom: 1px solid #BBF7D0;
+  }
+
+.score-align-demo .code-cell{
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-primary-ui);
+  }
+.score-align-demo .original-cell{
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+.score-align-demo .location-chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    color: var(--brand-xiyu-logo);
+    background: var(--brand-xiyu-logo-light);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-top: 4px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+.score-align-demo .location-chip:hover{
+    background: var(--brand-xiyu-logo);
+    color: #fff;
+  }
+.score-align-demo .dim-cell{
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary-ui);
+    word-break: break-word;
+  }
+.score-align-demo .weight-cell{
+    text-align: center;
+    font-weight: 700;
+    font-family: monospace;
+    color: var(--brand-xiyu-logo);
+    font-size: 13px;
+  }
+.score-align-demo .pill{
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    display: inline-block;
+  }
+.score-align-demo .pill.info{ background: var(--status-info-bg); color: var(--status-info-color); }
+.score-align-demo .pill.neutral{ background: var(--status-neutral-bg); color: var(--status-neutral-color); }
+.score-align-demo .pill.kb-hit{ background: var(--status-purple-bg); color: var(--status-purple-color); font-size: 10px; }
+
+.score-align-demo .status-tag{
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+.score-align-demo .status-tag.ok{ color: var(--brand-xiyu-logo); }
+.score-align-demo .status-tag.danger{ color: var(--status-danger-color); }
+.score-align-demo .status-tag.neutral{ color: var(--text-muted); }
+
+.score-align-demo .score-cell{
+    font-weight: 700;
+    font-family: monospace;
+    text-align: center;
+    font-size: 13px;
+  }
+.score-align-demo .score-cell.full{ color: var(--brand-xiyu-logo); }
+.score-align-demo .score-cell.partial{ color: var(--status-warning-color); }
+.score-align-demo .score-cell.zero{ color: var(--status-danger-color); }
+.score-align-demo .score-cell.subjective{ color: var(--text-muted); font-size: 12px; font-weight: normal; }
+
+.score-align-demo .btn-row-action{
+    padding: 2px 8px;
+    font-size: 11px;
+    color: var(--brand-xiyu-logo);
+    border: 1px solid var(--border-base);
+    background: #fff;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+.score-align-demo .btn-row-action:hover{
+    border-color: var(--brand-xiyu-logo);
+    background: var(--brand-xiyu-logo-light);
+  }
+
+  /* 表格合计底部 */
+.score-align-demo .tfoot-row{
+    background: var(--gray-50);
+    font-weight: 600;
+    border-top: 2px solid var(--border-base);
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+  }
+.score-align-demo .tfoot-total-cell{ text-align: right; font-size: 12px; }
+.score-align-demo .tfoot-stack-cell{ font-size: 11px; line-height: 1.6; }
+.score-align-demo .highlight-score-box{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 64px;
+    height: 30px;
+    padding: 0 10px;
+    background: var(--brand-xiyu-logo-light);
+    color: var(--brand-xiyu-logo-active);
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 4px;
+  }
+
+  /* 底部状态提示条 */
+.score-align-demo .workbench-statusbar{
+    height: 32px;
+    background: #1E293B;
+    color: #94A3B8;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    flex-shrink: 0;
+  }
+.score-align-demo .status-hint{ display: flex; align-items: center; gap: 8px; }
+.score-align-demo .status-hint-dot{ width: 6px; height: 6px; border-radius: 50%; background: #10B981; }
+
+  /* 模态弹窗 */
+.score-align-demo .modal-backdrop{
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+.score-align-demo .modal-backdrop.open{
+    opacity: 1;
+    pointer-events: auto;
+  }
+.score-align-demo .detail-modal-card{
+    width: 640px;
+    max-height: 85vh;
+    background: #fff;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+.score-align-demo .modal-header{
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+.score-align-demo .modal-title{ font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.score-align-demo .modal-close{ font-size: 18px; cursor: pointer; color: var(--text-muted); border: none; background: none; }
+.score-align-demo .modal-body{
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+.score-align-demo .modal-field-group{ margin-bottom: 14px; }
+.score-align-demo .modal-label{
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--brand-xiyu-logo-active);
+    margin-bottom: 4px;
+    padding-left: 6px;
+    border-left: 3px solid var(--brand-xiyu-logo);
+  }
+.score-align-demo .modal-box{
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    padding: 10px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+.score-align-demo .modal-quote{
+    background: var(--status-success-soft);
+    border-left: 3px solid var(--status-success-border);
+    padding: 10px 12px;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+    color: #1E293B;
+  }
+/* ===== 站内嵌入：横向滚动兜底 + 卡片描边 ===== */
+.score-align-demo-scroll {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #EAEEF2;
+}
+.score-align-demo {
+  min-width: 920px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+@media (max-width: 920px) {
+  .score-align-demo { height: 620px; }
+}
+
+/* ===== 全屏工具条 ===== */
+.score-align-demo-shell {
+  display: flex;
+  flex-direction: column;
+}
+.score-align-demo-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 4px;
+}
+.score-align-demo-toolbar-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+}
+.score-align-demo-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.score-align-demo-toolbar-btn:hover {
+  border-color: #2E7659;
+  color: #2E7659;
+  background: #E7F2ED;
+}
+
+/* ===== 原生全屏态：工具条留在屏内，演示区撑满 ===== */
+.score-align-demo-shell:fullscreen {
+  background: #EAEEF2;
+  padding: 12px 16px;
+  width: 100%;
+  height: 100%;
+}
+.score-align-demo-shell:fullscreen .score-align-demo-scroll {
+  flex: 1;
+  min-height: 0;
+}
+.score-align-demo-shell:fullscreen .score-align-demo {
+  height: 100%;
+  min-width: 920px;
+}
