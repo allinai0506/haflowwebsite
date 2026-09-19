@@ -176,7 +176,7 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
                   onClick={() => setSelectedType(type)}
                   className={`inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                     isActive
-                      ? "bg-slate-900 text-white"
+                      ? "bg-blue-600 text-white shadow-xs"
                       : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
                   }`}
                 >
@@ -367,7 +367,7 @@ function StatCard({
 }) {
   return (
     <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs">
-      <span className="text-2xl sm:text-3xl font-extrabold text-slate-950 block mb-0.5">
+      <span className="text-2xl sm:text-3xl font-extrabold text-slate-950 block mb-0.5 font-display tabular-nums">
         {value}
       </span>
       <span className="text-xs font-bold text-slate-900 block">{label}</span>

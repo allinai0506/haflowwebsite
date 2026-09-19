@@ -100,7 +100,7 @@ function FeaturedCard({ item }: { item: Testimonial }) {
     <article className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xs hover:shadow-md transition-shadow h-full">
       {item.metric ? (
         <div className="mb-2">
-          <p className="text-4xl font-black tracking-tight text-slate-950 tabular-nums">
+          <p className="text-4xl font-black tracking-tight text-slate-950 tabular-nums font-display">
             {item.metric.value}
           </p>
           <p className="mt-1 text-xs text-slate-500">{item.metric.label}</p>
@@ -155,7 +155,7 @@ export function Testimonials() {
               <dt className="order-2 text-xs text-slate-500 mt-1">
                 {m.label}
               </dt>
-              <dd className="order-1 text-2xl font-black tracking-tight text-slate-950 tabular-nums">
+              <dd className="order-1 text-2xl font-black tracking-tight text-slate-950 tabular-nums font-display">
                 {m.value}
               </dd>
             </div>

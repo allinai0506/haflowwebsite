@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BadgeCheck } from "lucide-react";
 import { InfinityHeroVisual } from "@/components/InfinityHeroVisual";
 import { WhatIsHAFlow } from "@/components/WhatIsHAFlow";
 import { WhyHAFlow } from "@/components/WhyHAFlow";
@@ -40,7 +40,7 @@ export default function HomePage() {
 
               {/* Stylized Brand Slogan matching reference image */}
               <div className="hero-copy-enter hero-copy-d2 pt-2 text-2xl sm:text-3xl font-extrabold tracking-tight">
-                <div className="hero-slogan-flow">
+                <div className="hero-slogan-flow font-display">
                   Human
                   <span className="hero-slogan-mark font-light mx-2">+</span>
                   Agent
@@ -73,6 +73,40 @@ export default function HomePage() {
               <InfinityHeroVisual />
             </div>
           </div>
+
+          {/* Trust strip: aggregate proof, all numbers verifiable from /cases */}
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-center">
+            <p className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-500">
+              <BadgeCheck
+                className="w-4 h-4 text-blue-600 shrink-0"
+                aria-hidden="true"
+              />
+              <span>
+                <strong className="font-bold text-slate-900 tabular-nums">
+                  14
+                </strong>{" "}
+                个落地案例
+                <span className="mx-2 text-slate-300" aria-hidden="true">
+                  ·
+                </span>
+                <strong className="font-bold text-slate-900 tabular-nums">
+                  10+
+                </strong>{" "}
+                个细分行业
+                <span className="mx-2 text-slate-300" aria-hidden="true">
+                  ·
+                </span>
+                结果全部可核对
+              </span>
+            </p>
+            <Link
+              href="/cases"
+              className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700"
+            >
+              <span>去验证</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -82,7 +116,7 @@ export default function HomePage() {
       {/* 3. WHY HAFLOW SECTION - 3 Comparison Cards from 网页参考.png */}
       <WhyHAFlow />
 
-      {/* 4. SOLUTIONS SECTION - 6 Industry Cards from 网页参考.png */}
+      {/* 4. SOLUTIONS SECTION - Evolution Path + Cases Portal (案例大卡归 /cases 页) */}
       <SolutionsSection />
 
       {/* 5. OUR BELIEF DARK MOUNTAIN BANNER - Exact layout from 网页参考.png */}

@@ -263,22 +263,22 @@ export default async function ProblemDetailPage({ params }: Props) {
 
         {/* Interactive demo teaser: only on bid-audit, demo lives in the case page */}
         {slug === "bid-audit" && (
-          <div className="my-12 p-6 sm:p-8 rounded-3xl bg-slate-950 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm">
+          <div className="my-12 p-6 sm:p-8 rounded-3xl bg-blue-50/70 border border-blue-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-xs">
             <div>
-              <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-300 font-bold block mb-2">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-blue-700 font-bold block mb-2">
                 交互演示 · 双屏联动
               </span>
-              <h3 className="text-lg sm:text-xl font-bold mb-1.5">
+              <h3 className="text-lg sm:text-xl font-bold mb-1.5 text-slate-950">
                 看 AI 怎样把 100 分评分标准逐条锚定到标书原文
               </h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-2xl">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
                 左侧招标文件原文，右侧结构化评分表，双向点击联动定位，支持预计得分 /
                 实际打分阶段切换。完整可操作的演示放在落地案例页。
               </p>
             </div>
             <Link
               href="/cases/bid-compliance#demo"
-              className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-950 bg-white hover:bg-emerald-50 rounded-xl transition-colors shrink-0"
+              className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors shadow-md shadow-blue-500/20 shrink-0"
             >
               <span>去体验双屏联动演示</span>
               <ArrowRight className="w-4 h-4" />

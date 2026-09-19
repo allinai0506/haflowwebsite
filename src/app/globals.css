@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@theme inline {
+  /* 展示字体：slogan、大数字等拉丁文案使用，中文回落系统黑体 */
+  --font-display: var(--font-bricolage), "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", system-ui, sans-serif;
+  /* 全站 mono 标签统一为 JetBrains Mono，中日韩字符回落系统字体 */
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo,
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", monospace;
+}
+
 @layer base {
   :root {
     --background: #ffffff;
@@ -20,7 +29,7 @@
     --destructive-foreground: #ffffff;
     --border: #e2e8f0;
     --input: #e2e8f0;
-    --ring: #10b981;
+    --ring: #2563eb;
     --signal-green: #05df72;
     --signal-emerald: #10b981;
     --haflow-blue: #2563eb;

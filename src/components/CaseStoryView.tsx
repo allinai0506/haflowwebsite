@@ -73,47 +73,47 @@ export function CaseStoryView({
         />
       </div>
 
-      <div className="bg-slate-950 text-white">
+      <div className="bg-gradient-to-b from-blue-50/80 via-white to-white border-b border-slate-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12 sm:pb-16">
           <div className="flex flex-wrap items-center gap-2 mb-5">
-            <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-white/10 text-blue-100 border border-white/15">
+            <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
               {item.industry}
             </span>
             <span
               className={`text-[11px] font-mono font-semibold px-2.5 py-1 rounded-md border ${
                 item.type === "实践场景"
-                  ? "bg-emerald-400/15 text-emerald-200 border-emerald-400/30"
-                  : "bg-white/10 text-slate-200 border-white/15"
+                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                  : "bg-slate-100 text-slate-600 border-slate-200"
               }`}
             >
               {item.type}
             </span>
-            <span className="text-[11px] text-slate-400 font-mono inline-flex items-center gap-1">
+            <span className="text-[11px] text-slate-500 font-mono inline-flex items-center gap-1">
               <Clock3 className="w-3.5 h-3.5" />
               {item.timeline}
             </span>
           </div>
 
-          <p className="text-xs font-mono tracking-widest text-slate-400 uppercase mb-3">
+          <p className="text-xs font-mono tracking-widest text-blue-600 uppercase mb-3">
             {item.title}
           </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[1.15] max-w-4xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[1.15] max-w-4xl text-slate-950">
             {item.headline}
           </h1>
-          <p className="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl">
+          <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
             {item.summary}
           </p>
 
-          <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+          <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-px bg-slate-200 rounded-2xl overflow-hidden border border-slate-200">
             {item.metrics.map((metric) => (
               <div
                 key={metric.label}
-                className="bg-slate-950/80 px-5 py-6 sm:px-6"
+                className="bg-white px-5 py-6 sm:px-6"
               >
-                <dt className="text-[11px] font-semibold text-slate-400 tracking-wide">
+                <dt className="text-[11px] font-semibold text-slate-500 tracking-wide">
                   {metric.label}
                 </dt>
-                <dd className="mt-2 text-3xl sm:text-4xl font-black text-white tracking-tight">
+                <dd className="mt-2 text-3xl sm:text-4xl font-black text-slate-950 tracking-tight font-display tabular-nums">
                   {metric.value}
                 </dd>
                 {metric.context && (
@@ -231,16 +231,16 @@ export function CaseStoryView({
                 </ol>
               </div>
 
-              <div className="bg-slate-950 text-white rounded-3xl p-6 sm:p-8 space-y-4">
+              <div className="bg-gradient-to-br from-blue-600 to-sky-600 text-white rounded-3xl p-6 sm:p-8 space-y-4 shadow-lg shadow-blue-500/25">
                 <h3 className="text-sm font-bold flex items-center gap-2">
-                  <Workflow className="w-4 h-4 text-blue-300" />
+                  <Workflow className="w-4 h-4 text-blue-100" />
                   用到的 HAFlow 能力
                 </h3>
                 <ul className="space-y-4">
                   {item.capabilitiesUsed.map((cap) => (
                     <li key={cap.name}>
                       <p className="text-sm font-semibold text-white">{cap.name}</p>
-                      <p className="text-xs text-slate-400 leading-relaxed mt-1">
+                      <p className="text-xs text-blue-100/85 leading-relaxed mt-1">
                         {cap.how}
                       </p>
                     </li>
@@ -248,7 +248,7 @@ export function CaseStoryView({
                 </ul>
                 <Link
                   href="/haflow"
-                  className="inline-flex items-center gap-1 text-xs font-semibold text-blue-300 hover:text-white pt-2"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-white underline underline-offset-4 decoration-blue-200 hover:decoration-white pt-2"
                 >
                   查看平台八项能力
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -330,7 +330,7 @@ export function CaseStoryView({
               <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xs">
                 <table className="w-full text-sm">
                   <caption className="sr-only">实施前后对照</caption>
-                  <thead className="bg-slate-950 text-white">
+                  <thead className="bg-slate-100 text-slate-700">
                     <tr>
                       <th className="text-left font-semibold px-4 sm:px-6 py-3">维度</th>
                       <th className="text-left font-semibold px-4 sm:px-6 py-3">之前</th>

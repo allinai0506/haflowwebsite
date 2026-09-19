@@ -1,8 +1,25 @@
 import type { Metadata } from "next";
+import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { COMPANY_INFO } from "@/data/company";
+
+/** 展示字体：仅覆盖拉丁字母与数字，中文自动回落到系统黑体 */
+const displayFont = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
+
+/** 工程感等宽字体：站点 mono 标签（眉题、编号、备注）统一使用 */
+const monoFont = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://haflow.cn"),
@@ -97,7 +114,10 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="zh-CN" className="h-full scroll-smooth">
+    <html
+      lang="zh-CN"
+      className={`${displayFont.variable} ${monoFont.variable} h-full scroll-smooth`}
+    >
       <head>
         <script
           type="application/ld+json"
