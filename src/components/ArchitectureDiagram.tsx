@@ -364,11 +364,11 @@ export function ArchitectureDiagram() {
         {/* 起点：业务目标 */}
         <div
           data-arch-reveal
-          className="arch-reveal rounded-2xl bg-slate-900 px-5 py-4"
+          className="arch-reveal rounded-2xl bg-gradient-to-r from-blue-600 to-sky-600 px-5 py-4 shadow-lg shadow-blue-500/25"
           style={{ ["--arch-delay" as string]: "120ms" }}
         >
           <div className="flex items-center justify-center gap-2">
-            <Target className="w-4 h-4 text-blue-300" aria-hidden="true" />
+            <Target className="w-4 h-4 text-blue-100" aria-hidden="true" />
             <span className="text-sm font-bold text-white">
               业务目标 / 用户需求
             </span>
@@ -377,7 +377,7 @@ export function ArchitectureDiagram() {
             {GOAL_EXAMPLES.map((goal) => (
               <span
                 key={goal}
-                className="text-[11px] font-mono text-slate-200 bg-white/10 border border-white/15 rounded-full px-2.5 py-1"
+                className="text-[11px] font-mono text-white bg-white/15 border border-white/25 rounded-full px-2.5 py-1"
               >
                 例如：{goal}
               </span>
