@@ -34,7 +34,7 @@ export default function InsightsPage() {
         </div>
 
         {/* Articles List */}
-        <div className="my-10 space-y-6 max-w-4xl">
+        <div className="my-10 space-y-6">
           {INSIGHTS.map((article) => (
             <article
               key={article.slug}
