@@ -14,6 +14,7 @@ import {
   Lock,
   Database,
 } from "lucide-react";
+import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { COMPANY_INFO } from "@/data/company";
 
@@ -134,6 +135,9 @@ export default function HAFlowPage() {
             HAFlow 不是网页上的普通 AI 聊天对话框，不夸大宣传，不使用脱离实际的宏大叙事。它是一套把人的业务经验与多 Agent 执行能力编排到企业真实系统中的工程调度平台。
           </div>
         </div>
+
+        {/* Architecture Diagram */}
+        <ArchitectureDiagram />
 
         {/* 8 Core Capabilities */}
         <div className="my-10">

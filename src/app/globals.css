@@ -1167,6 +1167,179 @@
   animation-play-state: paused;
 }
 
+/* Architecture diagram: 业务目标 → 七层架构 → 闭环回写
+   Personality: Corporate. Site signature cubic-bezier(0.22, 1, 0.36, 1).
+   Primary: 逐层上浮淡入，随滚动自上而下逐个触发，与阅读顺序一致。
+   Secondary: 卡片内节点级联 + 连接线上的数据包下行。
+   Ambient: Runtime 引擎呼吸光晕 + 三个阶段循环点亮。 */
+.arch-reveal.arch-in {
+  animation: arch-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: var(--arch-delay, 0ms);
+}
+
+@keyframes arch-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--arch-rise, 20px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arch-rail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 30px;
+}
+
+.arch-rail-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 14px;
+  width: 1.5px;
+  margin-left: -0.75px;
+  border-radius: 1px;
+  background: #e2e8f0;
+}
+
+.arch-packet {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 1;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: #2563eb;
+  opacity: 0;
+}
+
+.arch-chevron {
+  position: absolute;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  color: #cbd5e1;
+}
+
+.arch-reveal.arch-in .arch-packet {
+  animation: arch-packet-down 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--arch-delay, 0ms) + 240ms);
+}
+
+.arch-reveal.arch-in .arch-chevron {
+  animation: arch-chevron-flow 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--arch-delay, 0ms) + 240ms);
+}
+
+@keyframes arch-packet-down {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  78% {
+    transform: translateY(14px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+}
+
+@keyframes arch-chevron-flow {
+  0%,
+  30% {
+    color: #cbd5e1;
+  }
+  55%,
+  75% {
+    color: #3b82f6;
+  }
+  100% {
+    color: #cbd5e1;
+  }
+}
+
+.arch-reveal.arch-in .arch-node {
+  animation: arch-node-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--arch-delay, 0ms) + var(--arch-node-delay, 0ms));
+}
+
+@keyframes arch-node-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arch-runtime-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 1.05rem;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.18);
+}
+
+.arch-reveal.arch-in .arch-runtime-glow {
+  animation: arch-runtime-breathe 5.6s ease-in-out 1.6s infinite;
+}
+
+@keyframes arch-runtime-breathe {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.arch-reveal.arch-in .arch-stage {
+  animation: arch-stage-beat 3.6s ease-in-out infinite;
+  animation-delay: calc(var(--arch-delay, 0ms) + var(--arch-stage-delay, 0ms));
+}
+
+@keyframes arch-stage-beat {
+  0%,
+  26% {
+    border-color: #bfdbfe;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  }
+  38%,
+  56% {
+    border-color: #60a5fa;
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.18);
+  }
+  68%,
+  100% {
+    border-color: #bfdbfe;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  }
+}
+
+.arch-diagram.arch-paused .arch-stage,
+.arch-diagram.arch-paused .arch-runtime-glow {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-flow-stage {
     transform: none;
@@ -1204,6 +1377,17 @@
   }
   .evo-progress-fill {
     transition: none;
+  }
+  .arch-reveal.arch-in .arch-node,
+  .arch-reveal.arch-in .arch-stage,
+  .arch-reveal.arch-in .arch-runtime-glow,
+  .arch-reveal.arch-in .arch-packet,
+  .arch-reveal.arch-in .arch-chevron {
+    animation: none;
+  }
+  .arch-packet,
+  .arch-runtime-glow {
+    opacity: 0;
   }
   .evo-glow {
     opacity: 1;
