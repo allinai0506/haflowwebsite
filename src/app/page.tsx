@@ -10,6 +10,7 @@ import { PROBLEMS } from "@/data/problems";
 import { ProblemCard } from "@/components/ProblemCard";
 import { InteractiveFlowSim } from "@/components/InteractiveFlowSim";
 import { TRAINING_OVERVIEW } from "@/data/training";
+import { Testimonials } from "@/components/Testimonials";
 
 export default function HomePage() {
   return (
@@ -190,7 +191,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. BOTTOM CONTACT CTA */}
+      {/* 8. CUSTOMER VOICES - 客户评价 */}
+      <Testimonials />
+
+      {/* 9. BOTTOM CONTACT CTA */}
       <section className="py-20 bg-gradient-to-b from-slate-50 to-white text-slate-900 text-center border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-950 mb-4">
