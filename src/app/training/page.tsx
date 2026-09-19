@@ -11,11 +11,13 @@ import {
 import { TRAINING_OVERVIEW } from "@/data/training";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { TrainingBookingForm } from "@/components/TrainingBookingForm";
+import { pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "企业 AI 免费实战培训 · 每月四场公益公开课",
+export const metadata: Metadata = pageSeo({
+  path: "/training",
+  title: "企业AI免费培训_每月四场公益公开课",
   description:
-    "共事智能每月四场免费公益培训公开课。每周日上午 11:00 开讲，面向零基础普通业务人员与开发者。从日常任务提示词、极简多 Agent 协作流水线到 AI Coding 快速入门，完全免费参加。",
+    "共事智能每月四场免费公益培训：每周日上午11点，零基础业务人员与开发者可学。任务提示词、多Agent协作流水线、AICoding入门，完全免费。",
   keywords: [
     "企业AI培训",
     "免费AI公开课",
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
     "共事智能培训",
     "HAFlow培训",
   ],
-};
+});
 
 export default function TrainingPage() {
   return (

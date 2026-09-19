@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Calendar, Clock, CheckCircle2, ChevronLeft } from "lucide-react";
 import { INSIGHTS, getInsightBySlug } from "@/data/insights";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { pageSeo } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -19,11 +20,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getInsightBySlug(slug);
   if (!article) return {};
 
-  return {
-    title: `${article.title} · 观点与实践`,
+  return pageSeo({
+    path: `/insights/${article.slug}`,
+    title: `${article.title.slice(0, 20)}_企业AI落地思考`,
     description: article.summary,
     keywords: [article.title, article.category, "共事智能观点", "AI Native"],
-  };
+    ogType: "article",
+  });
 }
 
 export default async function InsightDetailPage({ params }: Props) {
@@ -34,8 +37,32 @@ export default async function InsightDetailPage({ params }: Props) {
     notFound();
   }
 
+  // 百度SEO：文章页补 Article 结构化数据（日期/作者/配图），提升收录与新鲜度评分
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.summary,
+    datePublished: article.date,
+    author: {
+      "@type": "Organization",
+      name: "上海共事智能科技有限公司",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "共事智能",
+    },
+    mainEntityOfPage: `https://haflow.cn/insights/${article.slug}`,
+    image: "https://haflow.cn/og-cover.jpg",
+  };
+  const related = INSIGHTS.filter((i) => i.slug !== article.slug).slice(0, 2);
+
   return (
     <div className="min-h-screen bg-slate-50 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb
           items={[
@@ -119,6 +146,26 @@ export default async function InsightDetailPage({ params }: Props) {
             <ArrowRight className="w-4 h-4 text-white" />
           </Link>
         </div>
+
+        {/* 延伸阅读：增加内链密度与页面停留，缓解薄内容问题 */}
+        {related.length > 0 && (
+          <section className="my-8 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8">
+            <h2 className="text-base font-bold text-slate-900 mb-4">延伸阅读</h2>
+            <ul className="space-y-3">
+              {related.map((r) => (
+                <li key={r.slug}>
+                  <Link
+                    href={`/insights/${r.slug}`}
+                    className="text-sm font-semibold text-blue-700 hover:text-blue-800"
+                  >
+                    {r.title}
+                  </Link>
+                  <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">{r.summary}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </div>
     </div>
   );

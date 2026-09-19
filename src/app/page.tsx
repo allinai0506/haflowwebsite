@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck } from "lucide-react";
 import { InfinityHeroVisual } from "@/components/InfinityHeroVisual";
@@ -9,8 +10,27 @@ import { OurBeliefBanner } from "@/components/OurBeliefBanner";
 import { PROBLEMS } from "@/data/problems";
 import { ProblemCard } from "@/components/ProblemCard";
 import { InteractiveFlowSim } from "@/components/InteractiveFlowSim";
+import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { TRAINING_OVERVIEW } from "@/data/training";
 import { Testimonials } from "@/components/Testimonials";
+import { pageSeo } from "@/lib/seo";
+
+// 首页 TDK：百度标题30汉字内，首屏即含 共事智能/企业AI落地/HAFlow 核心词
+export const metadata: Metadata = pageSeo({
+  path: "/",
+  title: "共事智能_企业AI落地_HAFlow人机协同",
+  description:
+    "上海共事智能科技有限公司：不做大系统，只用AI帮企业解决具体问题。HAFlow让人和Agent在同一工作流中共事：智能报价、智能订货预测、标书核查、财务穿透关联。",
+  keywords: [
+    "共事智能",
+    "上海共事智能科技有限公司",
+    "企业AI落地",
+    "HAFlow",
+    "人机协同",
+    "智能报价",
+    "标书核查",
+  ],
+});
 
 export default function HomePage() {
   return (
@@ -21,9 +41,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
             {/* Left Column: Hero Text */}
             <div className="lg:col-span-5 space-y-6 text-left">
-              {/* Main Headline */}
+              {/* Main Headline：视觉保持原样，sr-only 前缀给百度补核心关键词 */}
               <h1 className="hero-copy-enter text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.12]">
-                让企业进入
+                <span className="sr-only">共事智能企业AI落地：</span>让企业进入
                 <br />
                 <span className="text-slate-900">人机共事时代</span>
               </h1>
@@ -126,9 +146,7 @@ export default function HomePage() {
       <section className="py-20 bg-slate-50 border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 block mb-2">
-              - CONCRETE PROBLEMS
-            </span>
+            <SectionEyebrow className="mb-2">Concrete Problems</SectionEyebrow>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mb-3">
               不做大系统，只解决一个具体问题
             </h2>
@@ -165,9 +183,7 @@ export default function HomePage() {
       <section className="py-20 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 block mb-2">
-              - FREE TRAINING
-            </span>
+            <SectionEyebrow className="mb-2">Free Training</SectionEyebrow>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight mb-3">
               {TRAINING_OVERVIEW.title}
             </h2>

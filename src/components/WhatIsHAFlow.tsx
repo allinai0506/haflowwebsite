@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { SectionEyebrow } from "@/components/SectionEyebrow";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -89,9 +90,7 @@ export function WhatIsHAFlow() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-4 space-y-6">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 block">
-              - WHAT IS HAFLOW
-            </span>
+            <SectionEyebrow>What is HAFlow</SectionEyebrow>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
               HAFlow 是什么？

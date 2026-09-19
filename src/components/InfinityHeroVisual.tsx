@@ -71,16 +71,16 @@ export function InfinityHeroVisual() {
         示意图：人与智能体一次性汇入中心共事，再回到左右。目标、思考、协作、创造、执行保持静止。
       </p>
       <div className="hero-flow-blob hero-flow-blob-a" aria-hidden />
-      <div className="hero-flow-blob hero-flow-blob-b" aria-hidden />
 
       <div className="hero-orbit relative w-full aspect-[1200/896] max-h-[560px] flex items-center justify-center">
         <div className="hero-ring-spin absolute inset-0 flex items-center justify-center pointer-events-none">
           <Image
-            src="/irregular-flow-ring.png"
-            alt="HAFlow 人机共事有机流动环"
-            width={1200}
-            height={896}
+            src="/irregular-flow-ring.webp"
+            alt="HAFlow人机共事流程图_人和Agent协同"
+            width={960}
+            height={717}
             priority
+            sizes="(max-width: 1024px) 100vw, 640px"
             className="w-full h-full object-contain drop-shadow-[0_15px_35px_rgba(37,99,235,0.12)]"
           />
         </div>

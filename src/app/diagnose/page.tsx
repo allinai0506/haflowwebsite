@@ -3,13 +3,15 @@ import type { Metadata } from "next";
 import { ShieldCheck } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { DiagnoseForm } from "@/components/DiagnoseForm";
+import { pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "AI 应用诊断 · 评估企业业务场景与落地可行性",
+export const metadata: Metadata = pageSeo({
+  path: "/diagnose",
+  title: "企业AI落地诊断_业务场景可行性评估",
   description:
-    "共事业务可行性诊断。评估当前工作流程、数据文档资产、现有系统及人机协同分工边界，在 24 小时内为您给出务实的落地实施建议与可行性报告。",
+    "共事智能业务可行性诊断：评估工作流程、数据资产、现有系统与人机分工边界，24小时内给出务实落地建议与可行性报告，不推销大系统。",
   keywords: ["AI应用诊断", "企业AI落地评估", "共事智能", "业务场景评估"],
-};
+});
 
 export default function DiagnosePage() {
   const diagnosticDimensions = [

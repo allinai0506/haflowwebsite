@@ -4,13 +4,15 @@ import Link from "next/link";
 import { ArrowRight, Calendar, Clock, CheckCircle2 } from "lucide-react";
 import { INSIGHTS } from "@/data/insights";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "观点与实践 · 务实的 AI Native 工程落地思考",
+export const metadata: Metadata = pageSeo({
+  path: "/insights",
+  title: "企业AI落地思考_AINative工程方法论",
   description:
-    "共事团队关于大模型落地企业业务的深度思考与实践总结。探讨为什么不建大平台、规则写不死的着力点、人机协同分工边界与两周验证方法论。",
+    "共事智能企业AI落地思考：为什么不建大平台、规则写不死的着力点、人机协同分工边界、两周验证方法论。一线工程手记，拒绝营销套话。",
   keywords: ["企业AI落地思考", "AI Native应用方法论", "人机协同思考", "共事智能观点"],
-};
+});
 
 export default function InsightsPage() {
   return (

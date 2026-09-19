@@ -31,6 +31,8 @@ export function Header() {
     { label: "解决方案", href: "/problems" },
     { label: "客户案例", href: "/cases" },
     { label: "方法论", href: "/training" },
+    { label: "观点", href: "/insights" },
+    { label: "诊断", href: "/diagnose" },
     { label: "关于我们", href: "/about" },
   ];
 

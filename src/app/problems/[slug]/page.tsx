@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { PROBLEMS, getProblemBySlug } from "@/data/problems";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { pageSeo } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -29,9 +30,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const problem = getProblemBySlug(slug);
   if (!problem) return {};
 
-  return {
-    title: `${problem.title} · 解决具体业务问题`,
-    description: `${problem.subtitle}。共事不做大系统，针对企业在“${problem.title}”场景中规则写不死、多变复杂的痛点，提供人机协同落地解决方案。`,
+  return pageSeo({
+    path: `/problems/${problem.slug}`,
+    title: `${problem.title}_企业AI解决方案`,
+    description: `${problem.subtitle}共事智能不做大系统，针对“${problem.title}”规则写不死、多变复杂的痛点，提供人机协同落地解决方案。`,
     keywords: [
       problem.title,
       problem.category,
@@ -40,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "共事智能",
       "HAFlow",
     ],
-  };
+  });
 }
 
 export default async function ProblemDetailPage({ params }: Props) {
@@ -65,11 +67,35 @@ export default async function ProblemDetailPage({ params }: Props) {
     })),
   };
 
+  // 百度SEO：问题详情页补 Article 结构化数据（提升收录新鲜度与主题相关性）
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: problem.title,
+    description: problem.subtitle,
+    articleSection: problem.category,
+    about: problem.category,
+    image: "https://haflow.cn/og-cover.jpg",
+    author: {
+      "@type": "Organization",
+      name: "上海共事智能科技有限公司",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "共事智能",
+    },
+    mainEntityOfPage: `https://haflow.cn/problems/${problem.slug}`,
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

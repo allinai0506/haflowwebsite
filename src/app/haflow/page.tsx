@@ -17,11 +17,13 @@ import {
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { COMPANY_INFO } from "@/data/company";
+import { pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "HAFlow · 人机协同任务执行平台 | Human + Agent, in Flow",
+export const metadata: Metadata = pageSeo({
+  path: "/haflow",
+  title: "HAFlow人机协同平台_多Agent任务执行",
   description:
-    "HAFlow 是共事智能面向复杂业务场景打造的人机协同任务执行平台。把人、Agent、数据、工具和现有业务系统组织起来，让复杂任务持续推进并交付有依据的结果。",
+    "HAFlow是共事智能面向复杂业务的人机协同任务执行平台：目标拆解、多Agent分工、人工关键确认、安全调用ERP与业务系统，结果有依据全程可追溯。",
   keywords: [
     "HAFlow",
     "人机协同",
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
     "Human in the loop",
     "共事智能",
   ],
-};
+});
 
 export default function HAFlowPage() {
   const capabilities = [

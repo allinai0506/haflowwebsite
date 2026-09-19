@@ -1,41 +1,39 @@
-import type { Metadata } from "next";
-import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { COMPANY_INFO } from "@/data/company";
+import { BaiduSeoScripts } from "@/components/BaiduSeoScripts";
 
-/** 展示字体：仅覆盖拉丁字母与数字，中文自动回落到系统黑体 */
-const displayFont = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  variable: "--font-bricolage",
-  display: "swap",
-});
+/**
+ * 百度SEO说明：中文站曾用 Google Fonts（Bricolage/JetBrains）做拉丁展示字体，
+ * 但 fonts.googleapis.com 国内慢/超时，会阻塞首屏并拖累百度速度分与蜘蛛渲染。
+ * 改为全系统字体栈，零外部字体请求。展示字体用 font-display 类映射到系统黑体。
+ */
 
-/** 工程感等宽字体：站点 mono 标签（眉题、编号、备注）统一使用 */
-const monoFont = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-jetbrains",
-  display: "swap",
-});
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#2563eb",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://haflow.cn"),
   title: {
-    default: "共事智能 · 让人和 Agent 共同把事情做完 | HAFlow",
-    template: "%s | 共事智能",
+    default: "共事智能_企业AI落地_HAFlow人机协同 | 不做大系统只解具体问题",
+    template: "%s_共事智能",
   },
   description:
-    "上海共事智能科技有限公司（共事）。核心产品 HAFlow。我们是一家 AI Native 公司。不做大系统，只用 AI 帮企业解决一个个具体问题：智能报价、智能订货预测、标书质量核查、财务资料穿透关联与企业经验复用。",
+    "上海共事智能科技有限公司（共事智能）。核心产品HAFlow人机协同平台。不做大系统，只用AI帮企业解决具体问题：智能报价、智能订货预测、标书质量核查、财务资料穿透关联与企业经验复用。",
   keywords: [
     "共事",
     "共事智能",
+    "上海共事智能科技有限公司",
     "HAFlow",
     "人机协同",
+    "企业AI落地",
     "AI Native 应用开发",
-    "企业 AI 落地",
     "智能报价",
     "智能订货预测",
     "标书核查",
@@ -53,35 +51,33 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  alternates: {
-    canonical: "./",
-  },
+  // 百度SEO：layout 层不再写相对 canonical（曾用 "./" 全站复用，易误伤），
+  // 各页面（含动态详情页）在 generateMetadata/metadata 中声明绝对 canonical。
   other: {
     "applicable-device": "pc,mobile",
-    baiduspider: "index, follow",
   },
   openGraph: {
     type: "website",
     locale: "zh_CN",
-    url: "https://haflow.cn",
+    url: "https://haflow.cn/",
     siteName: "共事智能 GONGSHI AI",
-    title: "共事 · 不做大系统，只解决一个具体问题",
+    title: "共事智能_企业AI落地_HAFlow人机协同",
     description:
-      "让人和 Agent 共同把事情做完。面对规则写不死、依赖人判断的事情，我们用 AI 帮你把真实结果做出来。",
+      "上海共事智能：不做大系统，只用AI帮企业解决一个个具体问题。让人和Agent共同把事情做完。",
     images: [
       {
-        url: "/logo.png",
+        url: "https://haflow.cn/og-cover.jpg",
         width: 1200,
         height: 630,
-        alt: "共事智能 HAFlow",
+        alt: "共事智能 HAFlow_企业AI落地",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "共事 · 让人和 Agent 共同把事情做完",
-    description: "不做大系统，只用 AI 帮企业解决一个个具体问题。",
-    images: ["/logo.png"],
+    title: "共事智能_企业AI落地_HAFlow人机协同",
+    description: "不做大系统，只用AI帮企业解决一个个具体问题。",
+    images: ["https://haflow.cn/og-cover.jpg"],
   },
 };
 
@@ -90,14 +86,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Organization JSON-LD Schema
+  // Organization JSON-LD Schema（含百度偏好的 sameAs/联系方式字段）
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: COMPANY_INFO.name,
     alternateName: ["共事", "共事智能", "GONGSHI AI"],
-    url: "https://haflow.cn",
-    logo: "https://haflow.cn/logo.png",
+    url: "https://haflow.cn/",
+    logo: "https://haflow.cn/logo-icon.png",
     description: COMPANY_INFO.corePositioning,
     address: {
       "@type": "PostalAddress",
@@ -110,14 +106,13 @@ export default function RootLayout({
       "@type": "ContactPoint",
       contactType: "customer support",
       telephone: COMPANY_INFO.contact.phone,
+      areaServed: "CN",
+      availableLanguage: "zh-CN",
     },
   };
 
   return (
-    <html
-      lang="zh-CN"
-      className={`${displayFont.variable} ${monoFont.variable} h-full scroll-smooth`}
-    >
+    <html lang="zh-CN" className="h-full scroll-smooth">
       <head>
         <script
           type="application/ld+json"
@@ -127,6 +122,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+        <BaiduSeoScripts />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -11,13 +11,15 @@ import {
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { COMPANY_INFO } from "@/data/company";
+import { pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "关于共事 · 让人和 Agent 共同把事情做完",
+export const metadata: Metadata = pageSeo({
+  path: "/about",
+  title: "关于共事智能_上海企业AI落地团队",
   description:
-    "上海共事智能科技有限公司。我们做过很多年的企业管理软件。我们不做大而全的系统，只用 AI 帮企业解决一个个具体问题。深入阐释为什么成立共事、为什么坚持人机协同与持续免费培训。",
+    "上海共事智能科技有限公司：多年企业管理软件背景，不做大而全系统，只用AI解决具体问题。阐释人机协同主张与每月四场免费培训初心。",
   keywords: ["关于共事", "共事智能", "上海共事智能科技有限公司", "企业文化", "HAFlow团队"],
-};
+});
 
 export default function AboutPage() {
   const sixQuestions = [
@@ -78,6 +80,9 @@ export default function AboutPage() {
               </span>
               <span className="px-3 py-1.5 rounded-full bg-white border border-slate-200 shadow-2xs">
                 持续普及 AI 技能
+              </span>
+              <span className="px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 font-semibold shadow-2xs">
+                低承诺，高交付
               </span>
             </div>
           </div>

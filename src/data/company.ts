@@ -20,7 +20,11 @@ export const COMPANY_INFO = {
     phone: "+86-153-1727-0756",
     wechat: "Gongshi-AI",
     wechatNote: "添加企业顾问微信，发送您的具体业务问题快速获得诊断方案",
-    icp: "沪ICP备XXXXXXXX号-1",
+    // 百度SEO/合规：真实备案号通过环境变量注入，未取得前留空（页脚自动隐藏，避免渲染占位假号被降权）
+    icp:
+      typeof process !== "undefined"
+        ? process.env.NEXT_PUBLIC_ICP_BEIAN || ""
+        : "",
     copyrightYear: "2025-2026",
   },
   principles: [

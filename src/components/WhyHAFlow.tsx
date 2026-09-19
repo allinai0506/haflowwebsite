@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { SectionEyebrow } from "@/components/SectionEyebrow";
 import {
   ArrowDown,
   ArrowRight,
@@ -71,9 +72,7 @@ export function WhyHAFlow() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-4 space-y-4">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 block">
-              - WHY HAFLOW
-            </span>
+            <SectionEyebrow>Why HAFlow</SectionEyebrow>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
               为什么需要 HAFlow？
@@ -144,7 +143,7 @@ export function WhyHAFlow() {
 
             <div className="why-card why-card-now bg-blue-50/40 rounded-2xl border-2 border-blue-500/80 p-6 flex flex-col items-center justify-between text-center min-h-[280px] shadow-md shadow-blue-500/5 relative ring-2 ring-blue-500/10">
               <span className="text-xs font-bold text-blue-600 font-mono mb-3 flex items-center gap-1.5">
-                <span className="why-now-dot w-2 h-2 rounded-full bg-blue-600" />
+                <span className="w-2 h-2 rounded-full bg-blue-600" />
                 <span>现在 · HAFlow</span>
               </span>
 

@@ -5,21 +5,22 @@ import { ArrowRight } from "lucide-react";
 import { CASE_STUDIES } from "@/data/cases";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CasesClientView } from "@/components/CasesClientView";
+import { pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "落地案例",
+export const metadata: Metadata = pageSeo({
+  path: "/cases",
+  title: "企业AI落地案例_智能报价标书核查订货预测",
   description:
-    "您卡住的这件事，可能已经有人做成了。报价漏算、标书废标、凭证翻仓、门店断货——找和您同一类的问题，看现场怎么做成、结果怎么验收。",
+    "共事智能企业AI落地案例：智能报价、标书合规核查、财务凭证穿透、门店订货预测。报价漏算、标书废标、凭证翻仓、门店断货，看同类问题怎么做成、怎么验收。",
   keywords: [
     "共事案例",
-    "落地案例",
-    "AI落地案例",
+    "企业AI落地案例",
     "人机协同案例",
     "财务凭证自动关联",
     "智能报价案例",
     "标书合规核查",
   ],
-};
+});
 
 export default function CasesPage() {
   return (

@@ -5,12 +5,15 @@ import { ArrowRight } from "lucide-react";
 import { PROBLEMS } from "@/data/problems";
 import { ProblemCard } from "@/components/ProblemCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "解决具体问题 · 不做大系统，只解决一个具体业务卡点",
+export const metadata: Metadata = pageSeo({
+  path: "/problems",
+  title: "企业AI解决方案_报价订货标书财务场景",
   description:
-    "共事不承接大而全的信息化系统，也不以替换客户现有的 ERP、OA、CRM、财务系统为目标。我们只用 AI 帮企业解决一个个具体问题：智能报价、智能订货预测、标书质量核查、财务单据自动关联与经验复用。",
-};
+    "共事智能企业AI解决方案：不做大系统，不替换ERP/OA/CRM。只用AI解决具体问题：智能报价、智能订货预测、标书质量核查、财务单据自动关联与经验复用。",
+  keywords: ["企业AI解决方案", "智能报价", "智能订货预测", "标书核查", "共事智能", "HAFlow"],
+});
 
 export default function ProblemsPage() {
   const characteristics = [

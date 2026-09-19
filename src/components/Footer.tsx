@@ -136,14 +136,18 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <span>© {COMPANY_INFO.contact.copyrightYear} {COMPANY_INFO.name}</span>
             <span className="text-slate-200">|</span>
-            <a
-              href="https://beian.miit.gov.cn/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-slate-600 transition-colors"
-            >
-              {COMPANY_INFO.contact.icp}
-            </a>
+            {COMPANY_INFO.contact.icp ? (
+              <a
+                href="https://beian.miit.gov.cn/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-slate-600 transition-colors"
+              >
+                {COMPANY_INFO.contact.icp}
+              </a>
+            ) : (
+              <span className="text-slate-300">ICP备案审核中</span>
+            )}
           </div>
           <div className="font-sans text-slate-400">
             {COMPANY_INFO.sloganEn}

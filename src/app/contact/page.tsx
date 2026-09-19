@@ -10,13 +10,15 @@ import {
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { COMPANY_INFO } from "@/data/company";
+import { pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "联系我们 · 业务诊断与技术交流预约",
+export const metadata: Metadata = pageSeo({
+  path: "/contact",
+  title: "联系共事智能_业务诊断与培训预约",
   description:
-    "上海共事智能科技有限公司联系方式。欢迎企业客户预约业务诊断、咨询每周日免费公益培训。地址：上海市普陀区曹杨路1888号星光耀广场1号楼1005室，电话：+86-153-1727-0756。",
+    "上海共事智能科技有限公司联系方式：预约业务诊断、咨询周日免费公益培训。地址上海市普陀区曹杨路1888号星光耀广场1号楼1005室，电话+86-153-1727-0756。",
   keywords: ["联系共事", "共事智能联系方式", "HAFlow咨询", "AI应用诊断预约"],
-};
+});
 
 export default function ContactPage() {
   return (
@@ -61,7 +63,7 @@ export default function ContactPage() {
                     扫码添加顾问微信：
                   </span>
                   <a
-                    href="/wechat-qrcode.png"
+                    href="/wechat-qrcode-clean.png"
                     target="_blank"
                     rel="noopener noreferrer"
                     title="点击查看完整微信二维码名片"
