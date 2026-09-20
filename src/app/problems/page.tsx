@@ -93,12 +93,26 @@ export default function ProblemsPage() {
                 点击进入每个场景的业务痛点、人机协同分工、系统对接及验证报告
               </p>
             </div>
+            <Link
+              href="/solutions"
+              className="hidden items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-900 sm:inline-flex"
+            >
+              按解决方案查看
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {PROBLEMS.map((problem) => (
               <ProblemCard key={problem.slug} problem={problem} featured={true} />
             ))}
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center gap-2 text-xs text-slate-500 sm:hidden">
+            <span>想按交付路径查看？</span>
+            <Link href="/solutions" className="font-semibold text-blue-700">
+              浏览解决方案
+            </Link>
           </div>
         </div>
 

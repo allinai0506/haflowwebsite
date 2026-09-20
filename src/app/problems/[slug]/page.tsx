@@ -14,6 +14,7 @@ import {
   Layers,
 } from "lucide-react";
 import { PROBLEMS, getProblemBySlug } from "@/data/problems";
+import { getSolutionBySlug } from "@/data/solutions";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { pageSeo } from "@/lib/seo";
 
@@ -32,7 +33,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return pageSeo({
     path: `/problems/${problem.slug}`,
-    title: `${problem.title}_企业AI解决方案`,
+    title: problem.title,
+    titleSuffix: "企业AI解决方案",
     description: `${problem.subtitle}共事智能不做大系统，针对“${problem.title}”规则写不死、多变复杂的痛点，提供人机协同落地解决方案。`,
     keywords: [
       problem.title,
@@ -52,6 +54,8 @@ export default async function ProblemDetailPage({ params }: Props) {
   if (!problem) {
     notFound();
   }
+
+  const solution = getSolutionBySlug(slug);
 
   // FAQ Schema JSON-LD for SEO
   const faqSchema = {
@@ -133,6 +137,15 @@ export default async function ProblemDetailPage({ params }: Props) {
               “{problem.question}”
             </p>
           </div>
+          {solution && (
+            <Link
+              href={`/solutions/${solution.slug}`}
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-900"
+            >
+              查看完整解决方案路径
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          )}
         </div>
 
         {/* Factors & Traditional Limitations Grid */}

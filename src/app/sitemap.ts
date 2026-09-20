@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { PROBLEMS } from "@/data/problems";
 import { CASE_STUDIES } from "@/data/cases";
 import { INSIGHTS } from "@/data/insights";
+import { SOLUTIONS } from "@/data/solutions";
 
 /**
  * 百度SEO：lastModified 必须稳定，只有内容真正变更时才动。
@@ -18,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     { url: `${baseUrl}/`, lastModified: today, changeFrequency: "daily" as const, priority: 1.0 },
     { url: `${baseUrl}/problems`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
+    { url: `${baseUrl}/solutions`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/haflow`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/training`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/cases`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.8 },
@@ -32,6 +34,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: SITEMAP_BASELINE,
     changeFrequency: "weekly" as const,
     priority: 0.85,
+  }));
+
+  const solutionRoutes = SOLUTIONS.map((solution) => ({
+    url: `${baseUrl}/solutions/${solution.slug}`,
+    lastModified: SITEMAP_BASELINE,
+    changeFrequency: "weekly" as const,
+    priority: 0.88,
   }));
 
   const caseRoutes = CASE_STUDIES.map((c) => ({
@@ -49,5 +58,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  return [...staticRoutes, ...problemRoutes, ...caseRoutes, ...insightRoutes];
+  return [...staticRoutes, ...problemRoutes, ...solutionRoutes, ...caseRoutes, ...insightRoutes];
 }

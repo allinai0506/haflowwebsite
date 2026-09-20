@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return pageSeo({
     path: `/cases/${item.slug}`,
-    title: `${item.headline.slice(0, 20)}_企业AI落地案例`,
+    title: item.headline,
+    titleSuffix: "企业AI落地案例",
     description: `${item.summary}客户：${item.customerProfile.who}。${item.metrics
       .map((metric) => `${metric.value} ${metric.label}`)
       .join("，")}。`,

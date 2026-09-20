@@ -16,6 +16,8 @@ interface PageSeoInput {
   /** 以 / 开头的站内路径，首页传 "/" */
   path: string;
   title: string;
+  /** 可选的页面类型后缀；仅用于最终页面 Title，不截断业务标题。 */
+  titleSuffix?: string;
   description: string;
   keywords?: string[];
   ogType?: "website" | "article";
@@ -24,15 +26,17 @@ interface PageSeoInput {
 export function pageSeo({
   path,
   title,
+  titleSuffix,
   description,
   keywords,
   ogType = "website",
 }: PageSeoInput): Metadata {
   const url = path === "/" ? `${SITE}/` : `${SITE}${path}`;
+  const pageTitle = titleSuffix ? `${title}_${titleSuffix}` : title;
   // 百度SERP标题约30汉字内展示，模板后缀统一为 _共事智能（layout template）
-  const ogTitle = title.length > 28 ? title.slice(0, 28) : title;
+  const ogTitle = pageTitle.length > 28 ? pageTitle.slice(0, 28) : pageTitle;
   return {
-    title,
+    title: pageTitle,
     description,
     keywords,
     alternates: { canonical: url },
