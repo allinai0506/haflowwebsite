@@ -44,6 +44,7 @@
     /* 严禁单字换行：优先在标点处断行，避免末行只剩 1 个汉字 */
     line-break: strict;
     text-wrap: pretty;
+    scroll-behavior: smooth;
   }
 
   body {

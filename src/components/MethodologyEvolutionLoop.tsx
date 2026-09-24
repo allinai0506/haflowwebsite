@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AlertCircle,
   Cpu,
@@ -13,11 +13,24 @@ import {
   Sparkles,
   FileText,
   Boxes,
+  Play,
+  Pause,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { METHODOLOGY_DATA } from "@/data/methodology";
 
 export function MethodologyEvolutionLoop() {
   const [activeStep, setActiveStep] = useState<number>(1);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev === 7 ? 1 : prev + 1));
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [isPlaying]);
 
   const stepIcons = [
     <AlertCircle key="1" className="w-5 h-5 text-blue-600" />,
@@ -36,21 +49,50 @@ export function MethodologyEvolutionLoop() {
   const handleKeyDown = (e: React.KeyboardEvent, step: number) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
+      setIsPlaying(false);
       setActiveStep(step === 7 ? 1 : step + 1);
     } else if (e.key === "ArrowLeft") {
       e.preventDefault();
+      setIsPlaying(false);
       setActiveStep(step === 1 ? 7 : step - 1);
     }
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+    <div
+      id="evolution-loop"
+      className="scroll-mt-24 sm:scroll-mt-28 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs relative transition-all duration-300"
+    >
       {/* Eyebrow & Title */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>持续演化闭环模型 · The Continuous Co-Execution Loop</span>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>持续演化闭环模型 · The Continuous Co-Execution Loop</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsPlaying((prev) => !prev)}
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+                isPlaying
+                  ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                  : "bg-white text-slate-700 hover:text-blue-600 border-slate-200 hover:border-blue-300 shadow-2xs"
+              }`}
+              title={isPlaying ? "暂停演化循环自动轮播" : "开启 7 步闭环自动演示"}
+            >
+              {isPlaying ? (
+                <>
+                  <Pause className="w-3 h-3 text-white" />
+                  <span>暂停演示</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-3 h-3 text-blue-600 fill-blue-600" />
+                  <span>自动步进演示</span>
+                </>
+              )}
+            </button>
           </div>
           <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 tracking-tight">
             方法论运转全景：从一个问题到企业自主演进
@@ -207,6 +249,59 @@ export function MethodologyEvolutionLoop() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Step Navigation Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200">
+          <button
+            type="button"
+            onClick={() => {
+              setIsPlaying(false);
+              setActiveStep(activeStep === 1 ? 7 : activeStep - 1);
+            }}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+          >
+            <ChevronLeft className="w-4 h-4 text-slate-500" />
+            <span>上一步 (0{activeStep === 1 ? 7 : activeStep - 1})</span>
+          </button>
+
+          <div className="flex items-center gap-1.5 text-xs text-slate-400 font-mono py-1">
+            {METHODOLOGY_DATA.evolutionLoop.map((s) => (
+              <button
+                key={s.step}
+                type="button"
+                onClick={() => {
+                  setIsPlaying(false);
+                  setActiveStep(s.step);
+                }}
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  s.step === activeStep ? "w-6 bg-blue-600" : "w-2 bg-slate-300 hover:bg-slate-400"
+                }`}
+                title={`跳转到第 0${s.step} 步`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              setIsPlaying(false);
+              setActiveStep(activeStep === 7 ? 1 : activeStep + 1);
+            }}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-all cursor-pointer shadow-xs"
+          >
+            {activeStep === 7 ? (
+              <>
+                <Repeat className="w-4 h-4 text-white" />
+                <span>闭环回流：01 真实业务问题</span>
+              </>
+            ) : (
+              <>
+                <span>下一步 (0{activeStep + 1})</span>
+                <ChevronRight className="w-4 h-4 text-white" />
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>

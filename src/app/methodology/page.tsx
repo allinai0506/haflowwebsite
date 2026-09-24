@@ -20,6 +20,7 @@ import {
   BrainCircuit,
   Zap,
   Quote,
+  Repeat,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { METHODOLOGY_DATA } from "@/data/methodology";
@@ -100,8 +101,9 @@ export default function MethodologyPage() {
                 </a>
                 <a
                   href="#evolution-loop"
-                  className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-white hover:bg-blue-50/60 text-slate-700 hover:text-blue-700 border border-slate-200 text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-white hover:bg-blue-50/60 text-slate-700 hover:text-blue-700 border border-slate-200 text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-2xs group"
                 >
+                  <Repeat className="w-4 h-4 text-blue-600 group-hover:rotate-180 transition-transform duration-500" />
                   <span>体验 7 步演化闭环</span>
                 </a>
               </div>
