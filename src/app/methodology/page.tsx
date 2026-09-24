@@ -26,6 +26,7 @@ import { METHODOLOGY_DATA } from "@/data/methodology";
 import { MethodologyEvolutionLoop } from "@/components/MethodologyEvolutionLoop";
 import { MethodologyChapterNav } from "@/components/MethodologyChapterNav";
 import { MethodologyTaskVisual } from "@/components/MethodologyTaskVisual";
+import { TrainingBookingForm } from "@/components/TrainingBookingForm";
 import { pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = pageSeo({
@@ -819,7 +820,7 @@ export default function MethodologyPage() {
         </section>
 
         {/* 7. TRAINING IN METHODOLOGY (CLARIFICATION SECTION) */}
-        <section className="bg-blue-50/50 rounded-3xl border border-blue-200 p-6 sm:p-10 shadow-xs">
+        <section id="training" className="scroll-mt-28 bg-blue-50/50 rounded-3xl border border-blue-200 p-6 sm:p-10 shadow-xs space-y-8">
           <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
             <div className="flex-1 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-white text-blue-700 border border-blue-200 shadow-2xs">
@@ -857,14 +858,19 @@ export default function MethodologyPage() {
                 </p>
               </div>
 
-              <Link
-                href="/training"
+              <a
+                href="#booking"
                 className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-full text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 transition-all cursor-pointer"
               >
-                <span>{METHODOLOGY_DATA.trainingRole.linkText}</span>
+                <span>立即在线预约本周课</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
+          </div>
+
+          {/* Embedded Training Booking Form */}
+          <div className="pt-4 border-t border-blue-100">
+            <TrainingBookingForm />
           </div>
         </section>
 
