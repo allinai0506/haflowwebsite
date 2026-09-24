@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   ArrowDown,
   Sparkles,
+  Database,
 } from "lucide-react";
 
 const SAMPLE_SCENARIOS = [
@@ -138,7 +139,8 @@ export function MethodologyTaskVisual() {
           <Sparkles className="w-3 h-3 text-blue-600" />
           Human + Agent, in Flow
         </span>
-        <span className="text-slate-400 font-mono text-[10px]">
+        <span className="inline-flex items-center gap-1 text-slate-400 font-mono text-[10px]">
+          <Database className="w-3 h-3 text-slate-400" />
           结果可验证 · 资产可沉淀
         </span>
       </div>
