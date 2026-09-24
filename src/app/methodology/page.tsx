@@ -19,12 +19,13 @@ import {
   CheckSquare,
   BrainCircuit,
   Zap,
-  Sparkles,
+  Quote,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { METHODOLOGY_DATA } from "@/data/methodology";
 import { MethodologyEvolutionLoop } from "@/components/MethodologyEvolutionLoop";
 import { MethodologyChapterNav } from "@/components/MethodologyChapterNav";
+import { MethodologyTaskVisual } from "@/components/MethodologyTaskVisual";
 import { pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = pageSeo({
@@ -52,55 +53,98 @@ export default function MethodologyPage() {
         <Breadcrumb items={[{ label: "共事方法论" }]} />
 
         {/* 1. HERO SECTION */}
-        <section className="py-6 space-y-8">
-          <div className="max-w-4xl">
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 shadow-2xs">
-                共事方法论 · METHODOLOGY
-              </span>
-              <span className="text-xs font-mono text-slate-500">
-                Human + Agent Co-Execution Method
-              </span>
+        <section className="py-2 lg:py-4 space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            {/* Left Column: Manifesto & Editorial Lead */}
+            <div className="lg:col-span-7 space-y-5">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-blue-50/90 text-blue-900 border border-blue-200/80 shadow-2xs text-xs font-mono">
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                <span className="font-bold">共事方法论</span>
+                <span className="text-slate-300">|</span>
+                <span className="text-blue-700 font-medium">Human + Agent Co-Execution Method</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-[1.16]">
+                不是先做系统，
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600">
+                  而是先把事情做成
+                </span>
+              </h1>
+
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
+                传统企业软件通常从一张功能清单开始：需要哪些菜单、表单、审批流程与报表？最后得到一套软件，但事情并没有真正变简单。
+                共事智能采用完全不同的路径：以 <strong className="text-slate-900 font-bold underline decoration-blue-300 decoration-2 underline-offset-4">Task（一件可验证结果的事）</strong> 为思考原点，让 Agent 深度参与执行，让人专注目标与关键裁决。
+              </p>
+
+              {/* High-End Editorial Brand Quote */}
+              <div className="relative p-4 sm:p-5 rounded-2xl bg-blue-50/60 border border-blue-200/80 shadow-2xs space-y-2">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-blue-700 font-bold">
+                  <Quote className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>共事方法论核心信条</span>
+                </div>
+                <blockquote className="text-lg sm:text-xl font-black text-slate-950 leading-snug tracking-tight">
+                  我们不从“做什么软件”开始，
+                  <br className="hidden sm:inline" />
+                  而从“这件事到底是怎么被完成的”开始。
+                </blockquote>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                  不是交付一个静态软件，而是与企业共同建立一套人机协同生产系统。HAFlow 作为方法论的技术载体，让不同 Agent、领域知识与人在同一流中协同闭环。
+                </p>
+              </div>
+
+              {/* Action Buttons & Value Anchor Badges */}
+              <div className="space-y-3 pt-1">
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href="#c01"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow transition-all cursor-pointer"
+                  >
+                    <span>浏览 8 大实施章节</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="#evolution-loop"
+                    className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-white hover:bg-blue-50/60 text-slate-700 hover:text-blue-700 border border-slate-200 text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-2xs"
+                  >
+                    <span>体验 7 步演化闭环</span>
+                  </a>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600 font-medium pt-1">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200 shadow-2xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    以 Task 为思考原点
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200 shadow-2xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    人机同流分级裁决
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200 shadow-2xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                    过程沉淀为企业数字资产
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight mb-5 leading-tight">
-              不是先做系统，
-              <br className="hidden sm:inline" />
-              而是先把事情做成
-            </h1>
-
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed mb-8">
-              传统企业软件通常从一张功能清单开始：需要哪些菜单、表单、审批流程与报表？最后得到一套软件，但事情并没有真正变简单。
-              共事智能采用完全不同的路径：我们与客户一起建立一套<strong>“人 + Agent 持续完成工作的系统”</strong>。
-            </p>
-
-            {/* Core Brand Quote Card */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-blue-50 via-sky-50/70 to-blue-50 border-2 border-blue-200 shadow-sm relative overflow-hidden">
-              <div className="absolute right-0 top-0 w-44 h-44 bg-blue-100/40 rounded-full blur-2xl pointer-events-none -mr-10 -mt-10" />
-              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-blue-700 font-bold mb-2">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>共事智能核心信条 · Brand Soul</span>
-              </div>
-              <blockquote className="text-xl sm:text-2xl font-extrabold text-blue-950 leading-snug mb-3">
-                “{METHODOLOGY_DATA.coreQuote}”
-              </blockquote>
-              <p className="text-sm font-medium text-blue-800/90 leading-relaxed">
-                {METHODOLOGY_DATA.coreSubQuote} HAFlow 正好成为这套方法论的技术载体，而不是官网上孤立的一款产品。
-              </p>
+            {/* Right Column: Paradigm Shift Interactive Visual */}
+            <div className="lg:col-span-5 w-full">
+              <MethodologyTaskVisual />
             </div>
           </div>
 
           {/* Hero 4 Highlights Metric Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-2">
             {METHODOLOGY_DATA.heroHighlights.map((h, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-blue-300 hover:shadow-sm transition-all"
+                className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-blue-300 hover:shadow-sm transition-all"
               >
                 <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block mb-1">
                   {h.label}
                 </span>
-                <div className="text-base font-bold text-slate-950 mb-1 leading-snug">
+                <div className="text-base sm:text-lg font-bold text-slate-950 mb-0.5 leading-snug">
                   {h.value}
                 </div>
                 <span className="text-xs text-blue-700 font-medium">
