@@ -109,7 +109,7 @@ export function MethodologyEvolutionLoop() {
         <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50 via-indigo-50/60 to-blue-50 border border-blue-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs mb-8">
           <div className="flex items-center gap-2.5 text-blue-900 font-semibold">
             <div className="w-7 h-7 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
-              <Repeat className="w-4 h-4 animate-spin-slow" />
+              <Repeat className="w-4 h-4" />
             </div>
             <span>
               核心闭环机制：第七步“下一个任务”经验无缝回流第一步“真实问题”，形成自驱动业务演化闭环
