@@ -1,3 +1,4 @@
 timestamp	decision	rationale	evidence	result
 2026-09-18T14:09:00+08:00	Refactor WhyHAFlow card layout to 3-node horizontal chain	Fix card element overflow and tight horizontal margins reported by user	pnpm build exit code 0	SUCCESS
 2026-09-24T15:40:00+08:00	Revamp methodology section to 共事方法论 (Human + Agent Co-Execution Method)	User requested methodology section focus on Task minimal unit and human+agent co-execution system rather than training-only	pnpm build exit 0, curl http://localhost:3000/methodology HTTP 200, independent review LGTM	SUCCESS
+2026-09-24T15:52:00+08:00	Polish methodology page via ui-ux-pro-max	Add floating sticky TOC chapter nav, mobile-first comparison cards, 3-pillar loop inspector, and WCAG accessibility	pnpm build exit 0, eslint exit 0, curl HTTP 200	SUCCESS

@@ -1,6 +1,7 @@
 export interface MethodologyChapter {
   id: string;
   num: string;
+  shortNavLabel: string;
   title: string;
   tagline: string;
   summary: string;
@@ -15,6 +16,17 @@ export interface MethodologyChapter {
   deliverables?: string[];
 }
 
+export interface EvolutionLoopStep {
+  step: number;
+  name: string;
+  nameEn: string;
+  desc: string;
+  badge: string;
+  input: string;
+  action: string;
+  output: string;
+}
+
 export const METHODOLOGY_DATA = {
   name: "共事方法论",
   nameEn: "Human + Agent Co-Execution Method",
@@ -23,6 +35,30 @@ export const METHODOLOGY_DATA = {
   minUnitQuote: "企业 AI 最小单位，不是模型，不是 Agent，也不是工作流，而是“一件可以被完整完成、可以验证结果的事情”。",
   finalVisionZh: "如何让人、Agent 和已有系统一起，把事情做完？",
   finalVisionSub: "Human + Agent, in Flow —— 让人和 Agent 共同把事情做完。",
+
+  // Hero 核心工程亮点卡片
+  heroHighlights: [
+    {
+      label: "核心思考原点",
+      value: "从完成一件事出发",
+      sub: "以 Task 为最小单位",
+    },
+    {
+      label: "人机协同机制",
+      value: "Human + Agent, in Flow",
+      sub: "三级人机权限分工",
+    },
+    {
+      label: "工程推进路径",
+      value: "两周完成最小可用验证",
+      sub: "拒绝大而空的平台立项",
+    },
+    {
+      label: "企业留存收益",
+      value: "沉淀 8 大可复用数字资产",
+      sub: "能力属于企业自己",
+    },
+  ],
 
   // 传统 vs 共事对比
   paradigmComparison: [
@@ -58,7 +94,7 @@ export const METHODOLOGY_DATA = {
     },
   ],
 
-  // 方法论演化闭环（7个环节）
+  // 方法论演化闭环（7个环节深度数据）
   evolutionLoop: [
     {
       step: 1,
@@ -66,6 +102,9 @@ export const METHODOLOGY_DATA = {
       nameEn: "Real Problem",
       desc: "拒绝假大空规划，寻找高频、具体、有客观验收标准的真实业务痛点。",
       badge: "起点",
+      input: "工位一线最耗时、最痛、最依赖老师傅经验的具体事务",
+      action: "现场深入诊断，厘清输入材料、依赖系统与阻断症结",
+      output: "清晰定义的业务交付目标与客观验收边界",
     },
     {
       step: 2,
@@ -73,6 +112,9 @@ export const METHODOLOGY_DATA = {
       nameEn: "Task Modeling",
       desc: "拆解目标、所需信息、经验规则、判断逻辑与人机边界，而非简单画菜单。",
       badge: "解构",
+      input: "模糊的经验直觉、历史历史单据与隐性行业常识",
+      action: "回答五大起点追问，理顺数据链路、判断分支与授权阈值",
+      output: "结构化的任务执行图谱与人机分工说明",
     },
     {
       step: 3,
@@ -80,6 +122,9 @@ export const METHODOLOGY_DATA = {
       nameEn: "Agent Execution",
       desc: "多 Agent 分工协作，自主阅读资料、跨系统查数、逻辑推理并调用受限工具。",
       badge: "执行",
+      input: "非结构化多模态文档、企业数据库视图与第三方行情数据",
+      action: "信息提取、跨表关联、运费测算、条款比对与草案初拟",
+      output: "带有完整推演过程与数据出处的中间交付草案",
     },
     {
       step: 4,
@@ -87,6 +132,9 @@ export const METHODOLOGY_DATA = {
       nameEn: "Human-in-Flow",
       desc: "分级授权控制风险。Agent 处理日常推演，关键节点与异常交由人确认纠偏。",
       badge: "协同",
+      input: "Agent 初拟的成果草案、标红预警的冲突疑点与例外情形",
+      action: "业务专家一键确认合规项、微调业务参数、对高风险节点拍板",
+      output: "经过人类关键终审、符合商业合规底线的确定性决策",
     },
     {
       step: 5,
@@ -94,6 +142,9 @@ export const METHODOLOGY_DATA = {
       nameEn: "Verification",
       desc: "全程留痕可审计。用脱敏真实数据盲测检验，哪里失败、人为何修改一目了然。",
       badge: "验证",
+      input: "客户脱敏的数十份甚至数百份历史真实业务样本",
+      action: "新老系统盲测比对，比对耗时、准确率与逻辑严密性",
+      output: "透明审计流水与可量化的提效/减错对比报告",
     },
     {
       step: 6,
@@ -101,6 +152,9 @@ export const METHODOLOGY_DATA = {
       nameEn: "Asset Crystallization",
       desc: "将验证通过的知识、规则、Agent 和工作流固化为企业持久的数字资产。",
       badge: "资产",
+      input: "人在实操纠偏中补充的规则理由与修正案例",
+      action: "规则集在线更新、向量库更新、Agent 提示词与工具配置固化",
+      output: "企业专有可复用的 8 大核心数字资产",
     },
     {
       step: 7,
@@ -108,14 +162,18 @@ export const METHODOLOGY_DATA = {
       nameEn: "Next Task",
       desc: "已有资产直接复用，从一个场景平滑扩展到下一个场景，形成企业自主演化网络。",
       badge: "演化",
+      input: "首个场景已验证的连接器、规则链、Agent 角色模型",
+      action: "以极低试错成本平滑复用到上下游相似业务场景",
+      output: "滚雪球式企业级人机协同网络（重新循环回真实问题）",
     },
-  ],
+  ] as EvolutionLoopStep[],
 
   // 8 大章节
   chapters: [
     {
       id: "c01",
       num: "01",
+      shortNavLabel: "01 完成一件事",
       title: "从“业务功能”开始，改成从“完成一件事”开始",
       tagline: "企业里的工作不是菜单和模块，而是一个个需要被完成的任务",
       summary: "我们把企业里的工作看成一个个需要被完成的任务。它们需要结合数据、知识、规则、判断、工具和人共同完成。",
@@ -143,6 +201,7 @@ export const METHODOLOGY_DATA = {
     {
       id: "c02",
       num: "02",
+      shortNavLabel: "02 经验结构化",
       title: "把隐性的工作经验，变成显性的工作结构",
       tagline: "关键能力藏在老员工脑子里，AI 让模糊经验第一次进入系统",
       summary: "很多企业真正重要的能力，并不存在于软件中，而是存在于人的脑子里。我们把经验解构成知识、上下文、规则、任务、判断与动作。",
@@ -164,6 +223,7 @@ export const METHODOLOGY_DATA = {
     {
       id: "c03",
       num: "03",
+      shortNavLabel: "03 持续验证",
       title: "不追求“一次设计正确”，而是持续验证",
       tagline: "打破“需求冻结后再开发”的幻想，以运转留痕驱动系统演进",
       summary: "现实中的企业业务永远充满变量。我们采用“观察 → 执行 → 验证 → 修正 → 沉淀”的敏捷闭环，不断逼近业务真实。",
@@ -183,6 +243,7 @@ export const METHODOLOGY_DATA = {
     {
       id: "c04",
       num: "04",
+      shortNavLabel: "04 执行新角色",
       title: "Agent 不是功能，而是新的执行角色",
       tagline: "从“人操作软件”走向“人与 Agent 一起完成工作”",
       summary: "我们不把 AI 当作软件里的附加按钮，Agent 是有明确职责分工的工作参与者。人负责目标与责任，Agent 负责海量具体执行。",
@@ -199,6 +260,7 @@ export const METHODOLOGY_DATA = {
     {
       id: "c05",
       num: "05",
+      shortNavLabel: "05 人机边界",
       title: "人始终在流程里面",
       tagline: "拒绝全自动盲盒。Human + Agent, in Flow",
       summary: "全自动不是企业 AI 的终点。真实企业充满责任、合规与风险，我们设计分级人机边界，让人与 Agent 在同一条工作流里顺畅协作。",
@@ -216,6 +278,7 @@ export const METHODOLOGY_DATA = {
     {
       id: "c06",
       num: "06",
+      shortNavLabel: "06 HAFlow底座",
       title: "HAFlow：把这种方法真正运行起来",
       tagline: "共事方法论的执行底座，让 Agent、数据、工具与人协同工作",
       summary: "HAFlow 是共事智能方法论的工程底座。它不重新造大模型，不替代现有 ERP，而是让各类要素围绕具体任务高效协作。",
@@ -232,6 +295,7 @@ export const METHODOLOGY_DATA = {
     {
       id: "c07",
       num: "07",
+      shortNavLabel: "07 真实切入",
       title: "每个项目，都从一个真实问题开始",
       tagline: "不搞宏大叙事，打透一个高频具体问题，再逐渐形成企业级能力",
       summary: "我们很少建议客户一开始就立项庞大的‘企业级 AI 大中台’。我们倾向于找到一个高频、具体、两周内可验证的切入口，再逐步复制演进。",
@@ -249,6 +313,7 @@ export const METHODOLOGY_DATA = {
     {
       id: "c08",
       num: "08",
+      shortNavLabel: "08 数字资产",
       title: "我们交付的不是项目结束，而是能力开始",
       tagline: "传统 IT 终点是系统验收，共事留给企业的是持续可复制的数字资产",
       summary: "传统项目的终点通常是上线签字验收；我们更关注客户是否获得了一种可以继续自我复制、持续进化的能力。",
