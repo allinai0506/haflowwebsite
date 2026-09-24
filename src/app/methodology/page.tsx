@@ -1,0 +1,717 @@
+import React from "react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Workflow,
+  ShieldCheck,
+  Cpu,
+  GraduationCap,
+} from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
+import { METHODOLOGY_DATA } from "@/data/methodology";
+import { MethodologyEvolutionLoop } from "@/components/MethodologyEvolutionLoop";
+import { pageSeo } from "@/lib/seo";
+
+export const metadata: Metadata = pageSeo({
+  path: "/methodology",
+  title: "共事方法论_人机协同系统实施方法_HAFlow工程底座",
+  description:
+    "共事方法论（Human + Agent Co-Execution Method）：我们不从‘做什么软件’开始，而从‘这件事到底是怎么被完成的’开始。以 Task 为企业 AI 最小单位，和客户一起建立人 + Agent 持续完成工作的系统。",
+  keywords: [
+    "共事方法论",
+    "Human + Agent Co-Execution Method",
+    "HAFlow",
+    "人机协同方法论",
+    "企业AI最小单位",
+    "AI应用实施方法",
+    "多Agent协同",
+    "共事智能",
+  ],
+});
+
+export default function MethodologyPage() {
+  return (
+    <div className="min-h-screen bg-slate-50 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Breadcrumb */}
+        <Breadcrumb items={[{ label: "共事方法论" }]} />
+
+        {/* 1. HERO SECTION */}
+        <section className="py-6 max-w-4xl">
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+              共事方法论 · METHODOLOGY
+            </span>
+            <span className="text-xs font-mono text-slate-500">
+              Human + Agent Co-Execution Method
+            </span>
+          </div>
+
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight mb-5 leading-tight">
+            不是先做系统，
+            <br className="hidden sm:inline" />
+            而是先把事情做成
+          </h1>
+
+          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed mb-8">
+            传统企业软件通常从一张功能清单开始：需要哪些菜单、表单、审批流程与报表？最后得到一套软件，但事情并没有真正变简单。
+            共事智能采用完全不同的路径：我们与客户一起建立一套<strong>“人 + Agent 持续完成工作的系统”</strong>。
+          </p>
+
+          {/* Core Brand Quote Card */}
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-blue-50 via-sky-50/70 to-blue-50 border-2 border-blue-200 shadow-sm relative overflow-hidden">
+            <div className="absolute right-0 top-0 w-36 h-36 bg-blue-100/40 rounded-full blur-2xl pointer-events-none -mr-10 -mt-10" />
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-700 font-bold block mb-2">
+              共事智能核心信条 · Brand Soul
+            </span>
+            <blockquote className="text-xl sm:text-2xl font-extrabold text-blue-950 leading-snug mb-3">
+              “{METHODOLOGY_DATA.coreQuote}”
+            </blockquote>
+            <p className="text-sm font-medium text-blue-800/90 leading-relaxed">
+              {METHODOLOGY_DATA.coreSubQuote} HAFlow 正好成为这套方法论的技术载体，而不是官网上孤立的一款产品。
+            </p>
+          </div>
+        </section>
+
+        {/* 2. CONTRAST OF PAIN POINTS - 为什么传统做系统不管用 */}
+        <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+          <div className="max-w-3xl mb-8">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
+              问题溯源
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mb-3">
+              很多企业真正的问题，从来不是“缺少一个页面”
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+              为什么上了很多套 ERP、CRM、OA 之后，一线员工依然每天焦头烂额？因为复杂业务真正卡住的地方，根本不是界面。
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+              <span className="text-xs font-mono font-bold text-slate-400 mb-3">01</span>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 mb-1.5">信息散落多处</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  合同在邮件、价格在表格、单据在微信、历史记录在老系统，无法自动穿透联动。
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+              <span className="text-xs font-mono font-bold text-slate-400 mb-3">02</span>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 mb-1.5">规则藏在脑子里</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  何时折让、哪家供应商靠谱、哪项合规有隐患，只存在于资深老员工的直觉经验中。
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+              <span className="text-xs font-mono font-bold text-slate-400 mb-3">03</span>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 mb-1.5">反复人工判断</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  每单业务都需人工反复肉眼对账、逐条清标、比选航线，高耗时且极易因疲倦出错。
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+              <span className="text-xs font-mono font-bold text-slate-400 mb-3">04</span>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 mb-1.5">传递摩擦与衰减</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  业务口头告诉助理，助理整理后交财务，人与人之间不断倒腾上下文，极易失真。
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+              <span className="text-xs font-mono font-bold text-slate-400 mb-3">05</span>
+              <div>
+                <h3 className="text-sm font-bold text-slate-900 mb-1.5">系统并未真正参与</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  现有软件只是冷冰冰地记录了数据，但所有繁杂的推演和执行依然全靠人工手动完成。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-blue-50/60 border border-blue-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="text-sm text-slate-800">
+              <strong className="text-blue-900">转变从提问开始：</strong>
+              传统问“你想做一个什么系统？”，共事先问
+              <span className="text-blue-700 font-bold ml-1">
+                “这件事情今天到底是怎么被完成的？”
+              </span>
+            </div>
+            <Link
+              href="/diagnose"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-colors shrink-0 shadow-xs"
+            >
+              <span>提交你的业务痛点诊断</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </section>
+
+        {/* 3. MINIMUM UNIT OF ENTERPRISE AI MANIFESTO */}
+        <section className="bg-gradient-to-r from-blue-50 via-sky-50/40 to-blue-50 rounded-3xl border border-blue-200 p-6 sm:p-10 shadow-xs">
+          <div className="max-w-4xl mx-auto text-center space-y-4">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-700 bg-white px-3 py-1 rounded-full border border-blue-200 inline-block shadow-2xs">
+              企业 AI 核心概念
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight leading-snug">
+              “{METHODOLOGY_DATA.minUnitQuote}”
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto pt-2">
+              这套内容和传统 IT 实施方法论最大的区别，不是换了一套名词，而是<strong>基本单位变了</strong>。
+              传统方法的基本单位是“功能/模块/流程”，共事的基本单位是 <strong>Task —— 一件需要被完成的事</strong>。
+              传统项目管理的是需求和交付，我们管理的是 <strong>目标、上下文、执行、证据和持续改进</strong>。
+            </p>
+          </div>
+
+          {/* Comparison Matrix */}
+          <div className="mt-10 overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm bg-white rounded-2xl border border-slate-200 shadow-2xs">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50/80 text-slate-700 font-semibold">
+                  <th className="py-3 px-4 sm:px-6 w-1/4">对比维度</th>
+                  <th className="py-3 px-4 sm:px-6 w-3/8 text-slate-500">传统企业软件思维</th>
+                  <th className="py-3 px-4 sm:px-6 w-3/8 text-blue-700 font-bold bg-blue-50/50">共事方法论思维 (Human + Agent)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {METHODOLOGY_DATA.paradigmComparison.map((row, idx) => (
+                  <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
+                    <td className="py-3.5 px-4 sm:px-6 font-bold text-slate-900 font-mono text-xs">
+                      {row.dimension}
+                    </td>
+                    <td className="py-3.5 px-4 sm:px-6 text-slate-600 leading-relaxed">
+                      {row.traditional}
+                    </td>
+                    <td className="py-3.5 px-4 sm:px-6 text-slate-900 font-medium bg-blue-50/30 leading-relaxed">
+                      {row.gongshi}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* 4. THE CONTINUOUS EVOLUTION LOOP (DIAGRAM) */}
+        <MethodologyEvolutionLoop />
+
+        {/* 5. EIGHT CORE CHAPTERS (01 - 08) */}
+        <section className="space-y-8">
+          <div className="max-w-3xl">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
+              深度解析 · 8大核心支柱
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-950">
+              共事方法论的落地工程细节
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
+              从解构一件业务任务，到把经验结构化，再到 Agent 执行与分级人机边界，步步扎实，有迹可循。
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {/* Chapter 01 */}
+            <div id="c01" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">
+                  第 01 章
+                </span>
+                <span className="text-xs text-slate-400 font-mono">TASK ORIENTED</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
+                {METHODOLOGY_DATA.chapters[0].title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-blue-700 font-semibold mb-6">
+                {METHODOLOGY_DATA.chapters[0].tagline}
+              </p>
+
+              <div className="space-y-3 text-slate-600 text-sm leading-relaxed mb-6">
+                {METHODOLOGY_DATA.chapters[0].leadParagraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              {/* Concrete Task Examples */}
+              <div className="my-6 p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                <span className="text-xs font-mono text-slate-500 font-bold block mb-3 uppercase tracking-wider">
+                  典型任务形态（这不是一个功能，而是一件完整做完的事）：
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {METHODOLOGY_DATA.chapters[0].examples?.map((ex, idx) => (
+                    <span
+                      key={idx}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slate-800 border border-slate-200/90 shadow-2xs"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-blue-600" />
+                      <span>{ex}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* 5 Core Questions */}
+              <div className="p-6 rounded-2xl bg-blue-50/60 border border-blue-200">
+                <span className="text-xs font-mono font-bold text-blue-900 block mb-3 uppercase tracking-wider">
+                  共事在每个项目起点的五个核心追问：
+                </span>
+                <ul className="space-y-2 text-xs sm:text-sm text-slate-700">
+                  {METHODOLOGY_DATA.chapters[0].questions?.map((q, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-blue-200/80 text-blue-900 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                        {idx + 1}
+                      </span>
+                      <span className="leading-snug">{q}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 pt-4 border-t border-blue-200/80 text-xs text-blue-950 font-semibold">
+                  {METHODOLOGY_DATA.chapters[0].callout}
+                </div>
+              </div>
+            </div>
+
+            {/* Chapter 02 */}
+            <div id="c02" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">
+                  第 02 章
+                </span>
+                <span className="text-xs text-slate-400 font-mono">EXPERIENCE STRUCTURE</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
+                {METHODOLOGY_DATA.chapters[1].title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-blue-700 font-semibold mb-6">
+                {METHODOLOGY_DATA.chapters[1].tagline}
+              </p>
+
+              <div className="space-y-3 text-slate-600 text-sm leading-relaxed mb-6">
+                {METHODOLOGY_DATA.chapters[1].leadParagraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              {/* 6 Structural Elements Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                {METHODOLOGY_DATA.chapters[1].keyPoints?.map((item, idx) => (
+                  <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                    <span className="text-xs font-bold text-blue-700 block mb-1">
+                      {item.title}
+                    </span>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-xs sm:text-sm text-blue-950 font-semibold">
+                {METHODOLOGY_DATA.chapters[1].callout}
+              </div>
+            </div>
+
+            {/* Chapter 03 */}
+            <div id="c03" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">
+                  第 03 章
+                </span>
+                <span className="text-xs text-slate-400 font-mono">CONTINUOUS VERIFICATION</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
+                {METHODOLOGY_DATA.chapters[2].title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-blue-700 font-semibold mb-6">
+                {METHODOLOGY_DATA.chapters[2].tagline}
+              </p>
+
+              <div className="space-y-3 text-slate-600 text-sm leading-relaxed mb-6">
+                {METHODOLOGY_DATA.chapters[2].leadParagraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              {/* 5 Cycles Horizontal Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 mb-6">
+                {METHODOLOGY_DATA.chapters[2].keyPoints?.map((item, idx) => (
+                  <div key={idx} className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+                    <div>
+                      <span className="text-xs font-mono font-bold text-blue-600 block mb-1">
+                        0{idx + 1}
+                      </span>
+                      <h4 className="text-xs font-bold text-slate-900 mb-1">{item.title}</h4>
+                      <p className="text-[11px] text-slate-600 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-xs sm:text-sm text-blue-950 leading-relaxed font-medium">
+                {METHODOLOGY_DATA.chapters[2].callout}
+              </div>
+            </div>
+
+            {/* Chapter 04 */}
+            <div id="c04" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">
+                  第 04 章
+                </span>
+                <span className="text-xs text-slate-400 font-mono">AGENT AS ACTOR</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
+                {METHODOLOGY_DATA.chapters[3].title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-blue-700 font-semibold mb-6">
+                {METHODOLOGY_DATA.chapters[3].tagline}
+              </p>
+
+              <div className="space-y-3 text-slate-600 text-sm leading-relaxed mb-6">
+                {METHODOLOGY_DATA.chapters[3].leadParagraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                {METHODOLOGY_DATA.chapters[3].keyPoints?.map((item, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                    <h4 className="text-sm font-bold text-slate-900 mb-2 flex items-center gap-2">
+                      <Cpu className="w-4 h-4 text-blue-600" />
+                      <span>{item.title}</span>
+                    </h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-xs sm:text-sm text-blue-950 font-semibold">
+                {METHODOLOGY_DATA.chapters[3].callout}
+              </div>
+            </div>
+
+            {/* Chapter 05 */}
+            <div id="c05" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">
+                  第 05 章
+                </span>
+                <span className="text-xs text-slate-400 font-mono">HUMAN IN FLOW</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
+                {METHODOLOGY_DATA.chapters[4].title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-blue-700 font-semibold mb-6">
+                {METHODOLOGY_DATA.chapters[4].tagline}
+              </p>
+
+              <div className="space-y-3 text-slate-600 text-sm leading-relaxed mb-6">
+                {METHODOLOGY_DATA.chapters[4].leadParagraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              {/* 3 Tier Boundaries */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                {METHODOLOGY_DATA.chapters[4].keyPoints?.map((item, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-mono font-bold text-blue-700">L{idx + 1}</span>
+                        <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                      </div>
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 mb-2">{item.title}</h4>
+                      <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-xs sm:text-sm text-blue-950 font-semibold">
+                {METHODOLOGY_DATA.chapters[4].callout}
+              </div>
+            </div>
+
+            {/* Chapter 06 */}
+            <div id="c06" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">
+                  第 06 章
+                </span>
+                <span className="text-xs text-slate-400 font-mono">HAFLOW EXECUTION ENGINE</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
+                {METHODOLOGY_DATA.chapters[5].title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-blue-700 font-semibold mb-6">
+                {METHODOLOGY_DATA.chapters[5].tagline}
+              </p>
+
+              <div className="space-y-3 text-slate-600 text-sm leading-relaxed mb-6">
+                {METHODOLOGY_DATA.chapters[5].leadParagraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                {METHODOLOGY_DATA.chapters[5].keyPoints?.map((item, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                    <h4 className="text-sm font-bold text-slate-900 mb-2 flex items-center gap-2">
+                      <Workflow className="w-4 h-4 text-blue-600" />
+                      <span>{item.title}</span>
+                    </h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm text-blue-950">
+                <span className="font-semibold">{METHODOLOGY_DATA.chapters[5].callout}</span>
+                <Link
+                  href="/haflow"
+                  className="inline-flex items-center gap-1.5 font-bold text-blue-700 hover:text-blue-800 shrink-0"
+                >
+                  <span>探索 HAFlow 架构与能力</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Chapter 07 */}
+            <div id="c07" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">
+                  第 07 章
+                </span>
+                <span className="text-xs text-slate-400 font-mono">START REAL</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
+                {METHODOLOGY_DATA.chapters[6].title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-blue-700 font-semibold mb-6">
+                {METHODOLOGY_DATA.chapters[6].tagline}
+              </p>
+
+              <div className="space-y-3 text-slate-600 text-sm leading-relaxed mb-6">
+                {METHODOLOGY_DATA.chapters[6].leadParagraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                {METHODOLOGY_DATA.chapters[6].keyPoints?.map((item, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                    <span className="text-xs font-mono font-bold text-blue-600 block mb-1">
+                      阶段 0{idx + 1}
+                    </span>
+                    <h4 className="text-sm font-bold text-slate-900 mb-2">{item.title}</h4>
+                    <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-xs sm:text-sm text-blue-950 font-semibold">
+                {METHODOLOGY_DATA.chapters[6].callout}
+              </div>
+            </div>
+
+            {/* Chapter 08 */}
+            <div id="c08" className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">
+                  第 08 章
+                </span>
+                <span className="text-xs text-slate-400 font-mono">DIGITAL ASSETS</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 mb-2">
+                {METHODOLOGY_DATA.chapters[7].title}
+              </h3>
+              <p className="text-xs sm:text-sm font-mono text-blue-700 font-semibold mb-6">
+                {METHODOLOGY_DATA.chapters[7].tagline}
+              </p>
+
+              <div className="space-y-3 text-slate-600 text-sm leading-relaxed mb-6">
+                {METHODOLOGY_DATA.chapters[7].leadParagraphs.map((p, idx) => (
+                  <p key={idx}>{p}</p>
+                ))}
+              </div>
+
+              {/* 8 Deliverable Assets */}
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 mb-6">
+                <span className="text-xs font-mono text-slate-500 font-bold block mb-4 uppercase tracking-wider">
+                  共事项目交付沉淀在客户手中的 8 大永久数字资产：
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {METHODOLOGY_DATA.chapters[7].deliverables?.map((asset, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 flex items-start gap-2 shadow-2xs"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <span className="font-medium leading-snug">{asset}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-xs sm:text-sm text-blue-950 font-semibold">
+                {METHODOLOGY_DATA.chapters[7].callout}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 6. SIX BASIC PRINCIPLES */}
+        <section className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+          <div className="max-w-3xl mb-8">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
+              价值准则
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+              共事智能的基本原则
+            </h2>
+            <p className="text-sm text-slate-500 mt-1">
+              不追求酷炫的演示，一切以真实业务落地与客观效果为唯一衡量标尺。
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {METHODOLOGY_DATA.principles.map((p) => (
+              <div
+                key={p.num}
+                className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between hover:border-blue-200 transition-colors"
+              >
+                <div>
+                  <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 font-mono font-bold flex items-center justify-center text-xs mb-4">
+                    {p.num}
+                  </div>
+                  <h3 className="text-base font-bold text-slate-900 mb-2 leading-snug">
+                    {p.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {p.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 7. TRAINING IN METHODOLOGY (CLARIFICATION SECTION) */}
+        <section className="bg-blue-50/50 rounded-3xl border border-blue-200 p-6 sm:p-10 shadow-xs">
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
+            <div className="flex-1 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-white text-blue-700 border border-blue-200 shadow-2xs">
+                <GraduationCap className="w-3.5 h-3.5" />
+                <span>能力沉淀与组织带练</span>
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 tracking-tight">
+                {METHODOLOGY_DATA.trainingRole.title}
+              </h2>
+
+              <p className="text-sm sm:text-base font-semibold text-blue-900">
+                “{METHODOLOGY_DATA.trainingRole.subtitle}”
+              </p>
+
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {METHODOLOGY_DATA.trainingRole.content}
+              </p>
+
+              <div className="p-4 rounded-xl bg-white border border-blue-200/80 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                {METHODOLOGY_DATA.trainingRole.whyFree}
+              </div>
+            </div>
+
+            <div className="w-full lg:w-80 shrink-0 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold block mb-1">
+                  每月4场公益公开课
+                </span>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  面向零基础业务人员与开发者
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  每周日上午 11:00，每次 40 分钟带练一个具体任务，完全免费。
+                </p>
+              </div>
+
+              <Link
+                href="/training"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-full text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 transition-all"
+              >
+                <span>{METHODOLOGY_DATA.trainingRole.linkText}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* 8. FINAL VISION & ACTION CALLOUT */}
+        <section className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 text-center shadow-xs">
+          <div className="max-w-3xl mx-auto space-y-6">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block">
+              展望 · The Future of Work
+            </span>
+
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight">
+              最终，我们想做的事情其实很简单
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left my-6">
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                <span className="text-xs font-mono text-slate-400 font-bold block mb-1">过去三十年</span>
+                <p className="text-sm font-semibold text-slate-800">
+                  企业管理软件主要在回答一个问题：
+                  <br />
+                  <strong className="text-slate-900">“如何让人更好地使用系统？”</strong>
+                </p>
+              </div>
+              <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200">
+                <span className="text-xs font-mono text-blue-700 font-bold block mb-1">未来企业软件</span>
+                <p className="text-sm font-semibold text-blue-950">
+                  AI 到来以后，核心问题正在变成：
+                  <br />
+                  <strong className="text-blue-900">“如何让人、Agent 和已有系统一起，把事情做完？”</strong>
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 inline-block">
+              <p className="text-base sm:text-lg font-extrabold text-slate-950">
+                {METHODOLOGY_DATA.finalVisionSub}
+              </p>
+            </div>
+
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                href="/diagnose"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full shadow-md shadow-blue-500/20 transition-all"
+              >
+                <span>提交真实业务问题进行诊断</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/haflow"
+                className="w-full sm:w-auto inline-flex items-center justify-center py-3 px-6 text-sm font-semibold text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100/70 rounded-full border border-blue-200 transition-colors"
+              >
+                <span>了解 HAFlow 执行底座</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}

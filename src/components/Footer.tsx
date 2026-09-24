@@ -65,8 +65,13 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/methodology" className="hover:text-blue-600 transition-colors">
+                  共事方法论
+                </Link>
+              </li>
+              <li>
                 <Link href="/training" className="hover:text-blue-600 transition-colors">
-                  方法论与培训
+                  公益实战培训
                 </Link>
               </li>
             </ul>

@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   Calendar,
   Clock,
@@ -35,8 +36,25 @@ export default function TrainingPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: "免费培训" }]} />
 
+        {/* Link back to full methodology */}
+        <div className="mt-4 mb-2 p-3.5 rounded-2xl bg-white border border-blue-200/80 flex items-center justify-between text-xs text-slate-700 shadow-2xs">
+          <div className="flex items-center gap-2">
+            <span className="font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
+              共事方法论 · 能力沉淀
+            </span>
+            <span>培训只是我们方法论中很小的一部分，核心是建立“人 + Agent 持续完成工作的系统”。</span>
+          </div>
+          <Link
+            href="/methodology"
+            className="font-bold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1 shrink-0 ml-3"
+          >
+            <span>阅读完整共事方法论</span>
+            <span>→</span>
+          </Link>
+        </div>
+
         {/* Page Hero */}
-        <div className="py-8 max-w-4xl">
+        <div className="py-6 max-w-4xl">
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
               公益科普 · 技能普惠

@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/problems`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/solutions`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/haflow`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
+    { url: `${baseUrl}/methodology`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/training`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/cases`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${baseUrl}/diagnose`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.8 },

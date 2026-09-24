@@ -49,6 +49,7 @@ export const COMPANY_INFO = {
     { label: "解决具体问题", href: "/problems" },
     { label: "实践案例", href: "/cases" },
     { label: "HAFlow", href: "/haflow" },
+    { label: "共事方法论", href: "/methodology" },
     { label: "免费培训", href: "/training", badge: "每月4场" },
     { label: "AI 应用诊断", href: "/diagnose" },
     { label: "观点与实践", href: "/insights" },
