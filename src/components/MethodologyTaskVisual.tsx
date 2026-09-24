@@ -6,160 +6,141 @@ import {
   Cpu,
   UserCheck,
   ShieldCheck,
-  Database,
   ArrowDown,
-  CheckCircle2,
   Sparkles,
 } from "lucide-react";
 
-const SAMPLE_TASKS = [
+const SAMPLE_SCENARIOS = [
   {
     id: "quote",
-    label: "高频复杂报价",
-    goal: "生成一次精准且具备利润把控的商务报价",
-    steps: [
-      { role: "规则引擎", icon: Database, text: "自动匹配客商阶梯价与历史返点政策", tag: "知识" },
-      { role: "核算 Agent", icon: Cpu, text: "调取运费与汇率执行多维毛利测算", tag: "执行" },
-      { role: "商务负责人", icon: UserCheck, text: "毛利率偏离临界值时人工确认裁决", tag: "In Flow" },
-      { role: "系统回写", icon: ShieldCheck, text: "生成正式报价单并直写回 ERP 归档", tag: "闭环" },
-    ],
+    name: "复杂业务报价",
+    goal: "完成一次精准报价并把控毛利底线",
+    agent: "规则引擎自动算价与多维毛利测算",
+    human: "毛利率偏离临界值时总监终审裁决",
+    result: "生成带核算依据的报价单并回写 ERP",
   },
   {
     id: "bid",
-    label: "标书合规审查",
-    goal: "审查数百页招标文件中的废标硬性风险项",
-    steps: [
-      { role: "知识图谱", icon: Database, text: "提取行业资质、财务指标与法律合规库", tag: "知识" },
-      { role: "质检 Agent", icon: Cpu, text: "逐段穿透比对资质条款，标红废标偏离", tag: "执行" },
-      { role: "投标总监", icon: UserCheck, text: "针对偏离条款签署风控意见与澄清方案", tag: "In Flow" },
-      { role: "审计溯源", icon: ShieldCheck, text: "导出带原文页码出处的《合规审查报告》", tag: "闭环" },
-    ],
+    name: "标书合规审查",
+    goal: "数百页招标文件废标硬性风险穿透审查",
+    agent: "比对资质与财务条款，自动标红偏离",
+    human: "风控负责人针对偏离条款签署处置意见",
+    result: "导出带原文页码出处的《合规审查报告》",
   },
 ];
 
 export function MethodologyTaskVisual() {
-  const [activeTask, setActiveTask] = useState<"quote" | "bid">("quote");
-  const current = SAMPLE_TASKS.find((t) => t.id === activeTask) || SAMPLE_TASKS[0];
+  const [activeTab, setActiveTab] = useState<"quote" | "bid">("quote");
+  const current = SAMPLE_SCENARIOS.find((s) => s.id === activeTab) || SAMPLE_SCENARIOS[0];
 
   return (
-    <div className="w-full rounded-3xl bg-white border border-slate-200/90 shadow-md shadow-slate-100 overflow-hidden relative">
-      {/* Visual Accent Top Bar */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-blue-600 via-sky-500 to-blue-600" />
+    <div className="w-full rounded-3xl bg-white border border-slate-200/90 shadow-md shadow-slate-100/80 p-5 space-y-4 relative overflow-hidden">
+      {/* Top Accent Gradient Bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-sky-500 to-blue-600" />
 
-      <div className="p-5 sm:p-6 space-y-5">
-        {/* Card Header */}
-        <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[11px] font-mono uppercase tracking-wider text-blue-700 font-bold">
-                企业 AI 最小单位：Task
-              </span>
-            </div>
-            <h3 className="text-base font-bold text-slate-900 mt-0.5">
-              一件可被完整完成、可验证的事情
-            </h3>
-          </div>
-
-          {/* Task Switcher Pill Buttons */}
-          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-            {SAMPLE_TASKS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setActiveTask(t.id as "quote" | "bid")}
-                className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
-                  activeTask === t.id
-                    ? "bg-white text-blue-700 shadow-2xs font-bold"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 1. Paradigm Contrast: Traditional Software Box */}
-        <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70">
-          <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 mb-2">
-            <span className="font-semibold text-slate-600">传统软件视角（拆功能清单）</span>
-            <span className="text-rose-600 font-medium">系统录入，人工拼凑</span>
-          </div>
-          <div className="flex items-center justify-between gap-1 text-center text-[11px] sm:text-xs font-medium">
-            <div className="flex-1 py-1.5 px-1 rounded-lg bg-white border border-slate-200 text-slate-600 shadow-2xs">
-              功能菜单
-            </div>
-            <span className="text-slate-300 text-xs shrink-0">→</span>
-            <div className="flex-1 py-1.5 px-1 rounded-lg bg-white border border-slate-200 text-slate-600 shadow-2xs">
-              录入表单
-            </div>
-            <span className="text-slate-300 text-xs shrink-0">→</span>
-            <div className="flex-1 py-1.5 px-1 rounded-lg bg-white border border-slate-200 text-slate-600 shadow-2xs">
-              流转审批
-            </div>
-            <span className="text-slate-300 text-xs shrink-0">→</span>
-            <div className="flex-1 py-1.5 px-1 rounded-lg bg-white border border-slate-200 text-slate-600 shadow-2xs">
-              统计报表
-            </div>
-          </div>
-        </div>
-
-        {/* Transition Indicator */}
-        <div className="flex items-center justify-center -my-0.5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold shadow-2xs">
-            <ArrowDown className="w-3.5 h-3.5 text-blue-600 animate-bounce" />
-            <span>跃迁至共事工作流 · HAFlow 协同</span>
-          </div>
-        </div>
-
-        {/* 2. Co-Execution Paradigm Box */}
-        <div className="p-4 rounded-2xl bg-gradient-to-b from-blue-50/70 to-sky-50/30 border border-blue-200/90 space-y-3">
-          {/* Target Banner */}
-          <div className="flex items-center gap-2 text-xs font-bold text-blue-950 bg-white/80 py-1.5 px-3 rounded-xl border border-blue-100">
-            <Workflow className="w-4 h-4 text-blue-600 shrink-0" />
-            <span className="text-slate-500 font-normal">当前目标：</span>
-            <span className="text-blue-900 truncate">{current.goal}</span>
-          </div>
-
-          {/* 4 Steps In Flow */}
-          <div className="space-y-2">
-            {current.steps.map((s, idx) => {
-              const Icon = s.icon;
-              return (
-                <div
-                  key={idx}
-                  className="flex items-start gap-3 p-2.5 rounded-xl bg-white border border-blue-100/80 shadow-2xs hover:border-blue-300 transition-colors"
-                >
-                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center shrink-0 mt-0.5">
-                    <Icon className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2 mb-0.5">
-                      <span className="text-xs font-bold text-slate-900">{s.role}</span>
-                      <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-200/60">
-                        {s.tag}
-                      </span>
-                    </div>
-                    <p className="text-xs text-slate-600 leading-snug">{s.text}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Footer Guarantee */}
-        <div className="pt-1 flex items-center justify-between text-xs text-slate-500 font-medium">
-          <span className="inline-flex items-center gap-1.5 text-blue-700 font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            Human + Agent, in Flow
-          </span>
-          <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-            结果可验证 · 能力可沉淀
+      {/* Header: Title + Scenario Switcher */}
+      <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-xs font-bold text-slate-900 tracking-tight">
+            企业 AI 最小单位：Task
           </span>
         </div>
+
+        <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg text-[11px]">
+          {SAMPLE_SCENARIOS.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => setActiveTab(s.id as "quote" | "bid")}
+              className={`px-2 py-0.5 rounded-md font-medium transition-all cursor-pointer ${
+                activeTab === s.id
+                  ? "bg-white text-blue-700 font-bold shadow-2xs"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              {s.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 1. Traditional Paradigm (Muted & Compact) */}
+      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70 text-[11px]">
+        <div className="flex items-center justify-between text-slate-500 mb-1.5 font-mono text-[10px]">
+          <span>传统功能清单视角</span>
+          <span className="text-rose-500">仅记录数据，人肉拼凑</span>
+        </div>
+        <div className="flex items-center justify-between text-slate-600 font-medium px-1">
+          <span className="bg-white px-2 py-1 rounded border border-slate-200 shadow-2xs">功能菜单</span>
+          <span className="text-slate-300">→</span>
+          <span className="bg-white px-2 py-1 rounded border border-slate-200 shadow-2xs">录入表单</span>
+          <span className="text-slate-300">→</span>
+          <span className="bg-white px-2 py-1 rounded border border-slate-200 shadow-2xs">审批流转</span>
+          <span className="text-slate-300">→</span>
+          <span className="bg-white px-2 py-1 rounded border border-slate-200 shadow-2xs">统计报表</span>
+        </div>
+      </div>
+
+      {/* Transition Pill */}
+      <div className="flex items-center justify-center -my-1">
+        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-bold shadow-2xs">
+          <ArrowDown className="w-3 h-3 text-blue-600" />
+          <span>跃迁至共事工作流 · 把一件事做完</span>
+        </div>
+      </div>
+
+      {/* 2. Co-Execution Task Core (Compact & High Contrast) */}
+      <div className="p-3.5 rounded-2xl bg-gradient-to-b from-blue-50/70 to-sky-50/30 border border-blue-200/90 space-y-2.5">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-blue-950 bg-white/90 py-1 px-2.5 rounded-lg border border-blue-100">
+          <Workflow className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+          <span className="text-slate-500 text-[11px] font-normal">目标：</span>
+          <span className="text-blue-900 truncate text-[11px] sm:text-xs">{current.goal}</span>
+        </div>
+
+        {/* 3 Core Pillars: Agent / Human / Evidence */}
+        <div className="grid grid-cols-1 gap-1.5 text-xs">
+          <div className="flex items-center gap-2 p-2 rounded-xl bg-white border border-blue-100 shadow-2xs">
+            <div className="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+              <Cpu className="w-3.5 h-3.5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <span className="text-[10px] font-mono font-bold text-blue-700 mr-1.5">Agent 执行</span>
+              <span className="text-slate-700 text-[11px] leading-tight truncate block sm:inline">{current.agent}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 p-2 rounded-xl bg-white border border-blue-100 shadow-2xs">
+            <div className="w-6 h-6 rounded-md bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+              <UserCheck className="w-3.5 h-3.5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <span className="text-[10px] font-mono font-bold text-amber-700 mr-1.5">人机裁决</span>
+              <span className="text-slate-700 text-[11px] leading-tight truncate block sm:inline">{current.human}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 p-2 rounded-xl bg-white border border-blue-100 shadow-2xs">
+            <div className="w-6 h-6 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-3.5 h-3.5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <span className="text-[10px] font-mono font-bold text-emerald-700 mr-1.5">结果闭环</span>
+              <span className="text-slate-700 text-[11px] leading-tight truncate block sm:inline">{current.result}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Minimal Indicator */}
+      <div className="flex items-center justify-between text-[11px] text-slate-500 font-medium px-1 pt-0.5">
+        <span className="inline-flex items-center gap-1 text-blue-700 font-semibold">
+          <Sparkles className="w-3 h-3 text-blue-600" />
+          Human + Agent, in Flow
+        </span>
+        <span className="text-slate-400 font-mono text-[10px]">
+          结果可验证 · 资产可沉淀
+        </span>
       </div>
     </div>
   );
