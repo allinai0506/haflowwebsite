@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return pageSeo({
     path: `/insights/${article.slug}`,
-    title: article.title,
+    title: article.seoTitle,
     titleSuffix: "企业AI落地思考",
     description: article.summary,
     keywords: [article.title, article.category, "共事智能观点", "AI Native"],

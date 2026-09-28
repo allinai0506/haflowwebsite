@@ -18,13 +18,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = getCaseBySlug(slug);
   if (!item) return {};
 
+  // 百度SERP约30字截断：headline已压缩至18字内，后缀精简为7字，品牌后缀确保可见；
+  // description按“结论+摘要”重组并截断至100字，核心信息前置
+  const descBase = `${item.headline}。${item.summary}`;
+  const description =
+    descBase.length > 100
+      ? (() => {
+          const cut = descBase.slice(0, 100);
+          const lastStop = Math.max(cut.lastIndexOf("。"), cut.lastIndexOf("，"));
+          // 句号结尾保留，逗号结尾换成句号，避免摘要以逗号收尾
+          return lastStop > 60 ? `${cut.slice(0, lastStop)}。` : cut;
+        })()
+      : descBase;
+
   return pageSeo({
     path: `/cases/${item.slug}`,
     title: item.headline,
-    titleSuffix: "企业AI落地案例",
-    description: `${item.summary}客户：${item.customerProfile.who}。${item.metrics
-      .map((metric) => `${metric.value} ${metric.label}`)
-      .join("，")}。`,
+    titleSuffix: "企业AI案例",
+    description,
     keywords: [item.title, item.headline, item.industry, item.tag, "共事案例", "HAFlow落地"],
     ogType: "article",
   });

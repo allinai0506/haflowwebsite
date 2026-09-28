@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, FileCheck, TrendingUp, DollarSign } from "lucide-react";
 import type { SolutionItem } from "@/data/solutions";
+import { getCaseBySlug } from "@/data/cases";
 
 interface SolutionCardProps {
   solution: SolutionItem;
@@ -14,6 +15,10 @@ const ICONS = {
 
 export function SolutionCard({ solution }: SolutionCardProps) {
   const Icon = ICONS[solution.slug];
+  // 蜘蛛视角：卡片挂相关案例内链，既加独有文本又织密内链
+  const relatedCases = solution.caseSlugs
+    .map(getCaseBySlug)
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   return (
     <Link
@@ -38,9 +43,19 @@ export function SolutionCard({ solution }: SolutionCardProps) {
         <p className="mb-5 text-sm leading-relaxed text-slate-600">
           {solution.audience}
         </p>
+        <p className="mb-5 text-xs leading-relaxed text-slate-500 line-clamp-3">
+          <span className="font-semibold text-slate-700">输入：</span>
+          {solution.inputSummary}
+        </p>
         <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-4 text-sm font-medium leading-relaxed text-blue-950">
           “{solution.businessQuestion}”
         </div>
+        {relatedCases.length > 0 && (
+          <p className="mt-4 text-xs leading-relaxed text-slate-500">
+            <span className="font-semibold text-slate-700">相关案例：</span>
+            {relatedCases.map((item) => item.headline).join("、")}
+          </p>
+        )}
       </div>
       <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-5 text-sm font-semibold text-slate-900 transition-colors group-hover:text-blue-700">
         <span>查看交付路径与验收边界</span>

@@ -2,6 +2,8 @@ export interface InsightArticle {
   id: string;
   slug: string;
   title: string;
+  /** SEO标题（≤18字，与后缀合计≤30字）；正文H1继续用title */
+  seoTitle: string;
   date: string;
   readTime: string;
   summary: string;
@@ -18,6 +20,7 @@ export const INSIGHTS: InsightArticle[] = [
     id: "why-not-rebuild-monoliths",
     slug: "why-not-rebuild-monoliths",
     title: "为什么我们不主张企业推倒重来建“大模型平台”？",
+    seoTitle: "企业别推倒重建大模型平台",
     date: "2025-09-01",
     readTime: "6分钟",
     category: "企业实践",
@@ -47,6 +50,7 @@ export const INSIGHTS: InsightArticle[] = [
     id: "where-rules-cannot-be-hardcoded",
     slug: "where-rules-cannot-be-hardcoded",
     title: "规则写不死的地方，才是 AI 真正的着力点",
+    seoTitle: "规则写不死才是AI着力点",
     date: "2025-08-18",
     readTime: "5分钟",
     category: "技术认知",
@@ -76,6 +80,7 @@ export const INSIGHTS: InsightArticle[] = [
     id: "human-agent-division-of-labor",
     slug: "human-agent-division-of-labor",
     title: "人和 Agent 怎样分工，才不会沦为“AI 玩具”？",
+    seoTitle: "人机分工别沦为AI玩具",
     date: "2025-08-02",
     readTime: "7分钟",
     category: "工程落地",
@@ -105,6 +110,7 @@ export const INSIGHTS: InsightArticle[] = [
     id: "two-week-mvp-methodology",
     slug: "two-week-mvp-methodology",
     title: "企业如何用 2 周时间完成第一个 AI Native 小应用验证？",
+    seoTitle: "2周验证第一个AI小应用",
     date: "2025-07-20",
     readTime: "5分钟",
     category: "工程落地",
