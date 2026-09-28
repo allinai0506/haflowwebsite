@@ -67,9 +67,9 @@ export function MethodologyEvolutionLoop() {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>持续演化闭环模型 · The Continuous Co-Execution Loop</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>持续演化闭环模型</span>
             </div>
             <button
               type="button"
@@ -195,11 +195,16 @@ export function MethodologyEvolutionLoop() {
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
           <div className="flex items-center gap-2.5">
-            <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-600 text-white">
+            <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-600 text-white shrink-0">
               步骤 0{currentStepData.step} 深度执行解构
             </span>
-            <span className="text-sm font-bold text-slate-900">
-              {currentStepData.name} · {currentStepData.nameEn}
+            <span>
+              <span className="text-sm font-bold text-slate-900 block">
+                {currentStepData.name}
+              </span>
+              <span className="font-mono text-[11px] text-slate-400 block">
+                {currentStepData.nameEn}
+              </span>
             </span>
           </div>
 

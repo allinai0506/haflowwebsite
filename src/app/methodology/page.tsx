@@ -241,8 +241,11 @@ export default function MethodologyPage() {
         {/* 3. MINIMUM UNIT OF ENTERPRISE AI MANIFESTO & PARADIGM COMPARISON */}
         <section className="bg-gradient-to-r from-blue-50 via-sky-50/40 to-blue-50 rounded-3xl border border-blue-200 p-6 sm:p-10 shadow-xs">
           <div className="max-w-4xl mx-auto text-center space-y-4">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-700 bg-white px-3.5 py-1 rounded-full border border-blue-200 inline-block shadow-2xs">
-              企业 AI 核心概念 · Minimum Viable Unit
+            <span className="text-xs font-bold text-blue-700 bg-white px-3.5 py-1.5 rounded-full border border-blue-200 inline-block shadow-2xs">
+              企业 AI 核心概念
+            </span>
+            <span className="font-mono text-[11px] tracking-widest text-slate-400 block -mt-2">
+              MINIMUM VIABLE UNIT
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight leading-snug">
               “{METHODOLOGY_DATA.minUnitQuote}”
@@ -857,8 +860,11 @@ export default function MethodologyPage() {
         {/* 8. FINAL VISION & ACTION CALLOUT */}
         <section className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 text-center shadow-xs">
           <div className="max-w-3xl mx-auto space-y-6">
-            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block">
-              展望 · The Future of Work
+            <span className="block text-xs font-bold text-blue-600">
+              展望
+            </span>
+            <span className="block font-mono text-[11px] tracking-widest text-slate-400">
+              THE FUTURE OF WORK
             </span>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-950 tracking-tight">

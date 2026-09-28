@@ -82,21 +82,23 @@ function LayerHeader({
       : "bg-slate-100 text-slate-600 border-slate-200";
 
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-3">
+    <div className="mb-3">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span
+          className={`font-mono text-[10px] font-bold px-2 py-0.5 rounded-md border ${badge}`}
+        >
+          {num}
+        </span>
+        <h3
+          className={`text-sm font-bold ${
+            tone === "dark" ? "text-blue-950" : "text-slate-900"
+          }`}
+        >
+          {title}
+        </h3>
+      </div>
       <span
-        className={`font-mono text-[10px] font-bold px-2 py-0.5 rounded-md border ${badge}`}
-      >
-        {num}
-      </span>
-      <h3
-        className={`text-sm font-bold ${
-          tone === "dark" ? "text-blue-950" : "text-slate-900"
-        }`}
-      >
-        {title}
-      </h3>
-      <span
-        className={`font-mono text-[10px] ${
+        className={`font-mono text-[10px] mt-0.5 block ${
           tone === "dark" ? "text-blue-500" : "text-slate-400"
         }`}
       >
@@ -347,8 +349,11 @@ export function ArchitectureDiagram() {
         className="arch-reveal max-w-3xl mb-8"
         style={{ ["--arch-delay" as string]: "0ms" }}
       >
-        <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
-          平台架构全景 · Architecture
+        <span className="block text-xs font-bold text-blue-600">
+          平台架构全景
+        </span>
+        <span className="block font-mono text-[11px] tracking-widest text-slate-400 mb-1">
+          ARCHITECTURE
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
           一张图看懂 HAFlow 如何把一件事做完

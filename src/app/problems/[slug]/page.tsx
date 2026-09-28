@@ -218,8 +218,11 @@ export default async function ProblemDetailPage({ params }: Props) {
         {/* AI + Human in the loop Solution Framework */}
         <div className="my-12 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
           <div className="max-w-3xl mb-8">
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 font-bold block mb-1">
-              人机协同架构 · Human + Agent, in Flow
+            <span className="block text-xs font-bold text-emerald-600 mb-0.5">
+              人机协同架构
+            </span>
+            <span className="block font-mono text-[11px] tracking-widest text-slate-400 mb-1">
+              HUMAN + AGENT, IN FLOW
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
               共事怎样解决这项业务难题？

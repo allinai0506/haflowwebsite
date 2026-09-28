@@ -35,63 +35,72 @@ export const metadata: Metadata = pageSeo({
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* 1. HERO SECTION - Exact layout and typography from 网页参考.png */}
-      <section className="relative pt-10 pb-12 sm:pt-12 sm:pb-16 lg:pt-20 lg:pb-24 overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
-            {/* Left Column: Hero Text */}
-            <div className="lg:col-span-5 space-y-6 text-left">
-              {/* Main Headline：视觉保持原样，sr-only 前缀给百度补核心关键词 */}
-              <h1 className="hero-copy-enter text-[32px] sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.15] text-balance">
-                <span className="sr-only">共事智能企业AI落地：</span>让企业进入
-                <br />
-                <span className="text-slate-900">人机共事时代</span>
-              </h1>
+      {/* 1. HERO BANNER - 居中式：徽章 + 主张 + 行动 + 可视化 + 信任条 */}
+      <section className="relative pt-10 pb-12 sm:pt-14 sm:pb-16 lg:pt-20 lg:pb-24 overflow-hidden bg-gradient-to-b from-blue-50/70 via-white to-white">
+        {/* 浅色装饰光晕，小屏缩小 */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 sm:w-[36rem] sm:h-[36rem] rounded-full bg-blue-100/50 blur-3xl" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center space-y-5 sm:space-y-6">
+            {/* Eyebrow 徽章 */}
+            <p className="hero-copy-enter">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-blue-700 border border-blue-200 shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-600" aria-hidden="true" />
+                企业 AI 落地引擎 · HAFlow 人机协同
+              </span>
+            </p>
+            {/* Main Headline：sr-only 前缀给百度补核心关键词；关键句用主题蓝渐变，不再通篇大黑体 */}
+            <h1 className="hero-copy-enter text-3xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-slate-900 tracking-tight leading-[1.2] text-balance">
+              <span className="sr-only">共事智能企业AI落地：</span>让企业进入
+              <span className="bg-gradient-to-r from-blue-600 to-sky-600 bg-clip-text text-transparent">
+                人机共事时代
+              </span>
+            </h1>
 
-              {/* Subtitles matching reference */}
-              <div className="hero-copy-enter hero-copy-d1 space-y-3 text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
-                <p className="font-semibold text-slate-800">
-                  HAFlow 让人和 Agent 在同一个工作流中共事。
-                </p>
-                <p className="text-sm sm:text-base text-slate-500">
-                  从业务流程设计，到多 Agent 协同，再到真实企业系统落地，HAFlow 是我们所有产品背后的方法论与工程底座。不做大系统，只用 AI 帮企业解决一个个具体问题。
-                </p>
-              </div>
+            {/* Subtitles */}
+            <div className="hero-copy-enter hero-copy-d1 space-y-3 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+              <p className="font-semibold text-slate-800">
+                HAFlow 让人和 Agent 在同一个工作流中共事。
+              </p>
+              <p className="text-sm sm:text-base text-slate-500">
+                从业务流程设计，到多 Agent 协同，再到真实企业系统落地，HAFlow 是我们所有产品背后的方法论与工程底座。不做大系统，只用 AI 帮企业解决一个个具体问题。
+              </p>
+            </div>
 
-              {/* Stylized Brand Slogan matching reference image */}
-              <div className="hero-copy-enter hero-copy-d2 pt-2 text-2xl sm:text-3xl font-extrabold tracking-tight">
-                <div className="hero-slogan-flow font-display">
-                  Human
-                  <span className="hero-slogan-mark font-light mx-2">+</span>
-                  Agent
-                  <span className="hero-slogan-mark font-normal">, in </span>
-                  Flow.
-                </div>
-              </div>
-
-              {/* Dual Action Buttons matching reference image：移动端全宽堆叠 */}
-              <div className="hero-copy-enter hero-copy-d3 pt-4 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
-                <Link
-                  href="/haflow"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-full transition-all shadow-md hover:shadow-lg shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-                >
-                  <span>了解 HAFlow</span>
-                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                </Link>
-
-                <Link
-                  href="/cases"
-                  className="inline-flex items-center justify-center px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-blue-600 hover:text-blue-700 active:bg-blue-100 bg-white hover:bg-blue-50/50 rounded-full border border-blue-200 transition-colors shadow-2xs cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-                >
-                  <span>查看真实案例</span>
-                </Link>
+            {/* Stylized Brand Slogan */}
+            <div className="hero-copy-enter hero-copy-d2 text-xl sm:text-2xl font-extrabold tracking-tight">
+              <div className="hero-slogan-flow font-display">
+                Human
+                <span className="hero-slogan-mark font-light mx-2">+</span>
+                Agent
+                <span className="hero-slogan-mark font-normal">, in </span>
+                Flow.
               </div>
             </div>
 
-            {/* Right Column: 3D Infinity Ribbon Visual (Large & Balanced) */}
-            <div className="lg:col-span-7 flex items-center justify-center lg:justify-end w-full">
-              <InfinityHeroVisual />
+            {/* Dual Action Buttons：移动端全宽堆叠，桌面居中 */}
+            <div className="hero-copy-enter hero-copy-d3 pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
+              <Link
+                href="/haflow"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-full transition-all shadow-md hover:shadow-lg shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              >
+                <span>了解 HAFlow</span>
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </Link>
+
+              <Link
+                href="/cases"
+                className="inline-flex items-center justify-center px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-blue-600 hover:text-blue-700 active:bg-blue-100 bg-white hover:bg-blue-50/50 rounded-full border border-blue-200 transition-colors shadow-2xs cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              >
+                <span>查看真实案例</span>
+              </Link>
             </div>
+          </div>
+
+          {/* 可视化：居中收窄 */}
+          <div className="mt-10 sm:mt-14 max-w-3xl mx-auto">
+            <InfinityHeroVisual />
           </div>
 
           {/* Trust strip: aggregate proof, all numbers verifiable from /cases */}

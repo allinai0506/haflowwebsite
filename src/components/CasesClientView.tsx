@@ -241,10 +241,14 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
                   <h2 className="text-xl font-extrabold text-slate-950 group-hover:text-blue-600 transition-colors leading-snug">
                     {item.headline}
                   </h2>
-                  <p className="text-[11px] font-mono text-slate-400 mt-1.5">
+                  <p className="text-xs font-semibold text-slate-500 mt-1.5">
                     {item.title}
-                    {item.englishTitle ? ` · ${item.englishTitle}` : ""}
                   </p>
+                  {item.englishTitle ? (
+                    <p className="text-[11px] font-mono text-slate-400 mt-0.5">
+                      {item.englishTitle}
+                    </p>
+                  ) : null}
 
                   <p className="text-sm text-slate-600 leading-relaxed mt-3 line-clamp-2">
                     {item.challengeStakes}

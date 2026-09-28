@@ -5,11 +5,11 @@ import { COMPANY_INFO } from "@/data/company";
 
 export function Footer() {
   return (
-    <footer aria-label="页脚" className="bg-white text-slate-600 border-t border-slate-100 pt-16 pb-12">
+    <footer aria-label="页脚" className="bg-white text-slate-600 border-t border-slate-100 pt-10 sm:pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-16 border-b border-slate-100">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-8 md:gap-10 pb-10 md:pb-16 border-b border-slate-100">
           {/* Col 1: Brand Info (5 cols) */}
-          <div className="md:col-span-5">
+          <div className="col-span-2 md:col-span-5">
             <div className="flex items-start gap-3.5">
               <div className="h-9 w-auto relative flex items-center justify-center shrink-0 pt-0.5">
                 <Image
@@ -44,7 +44,7 @@ export function Footer() {
           </div>
 
           {/* Col 2: 产品与方案 (2 cols) */}
-          <nav aria-label="产品与方案" className="md:col-span-2 space-y-3">
+          <nav aria-label="产品与方案" className="col-span-1 md:col-span-2 space-y-3">
             <h4 className="text-sm font-bold text-slate-900">
               产品与方案
             </h4>
@@ -78,7 +78,7 @@ export function Footer() {
           </nav>
 
           {/* Col 3: 关于我们 (2 cols) */}
-          <nav aria-label="关于我们" className="md:col-span-2 space-y-3">
+          <nav aria-label="关于我们" className="col-span-1 md:col-span-2 space-y-3">
             <h4 className="text-sm font-bold text-slate-900">
               关于我们
             </h4>
@@ -106,8 +106,8 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Col 4: 关注我们 (3 cols with QR Code) */}
-          <div className="md:col-span-3 flex flex-col items-start md:items-end space-y-3">
+          {/* Col 4: 关注我们 (3 cols with QR Code)：移动端横向排布，不占纵向长度 */}
+          <div className="col-span-2 md:col-span-3 flex flex-row items-center gap-4 md:flex-col md:items-end md:gap-0 md:space-y-3">
             {/* QR Code Container */}
             <a
               href="/wechat-official.png"
@@ -115,7 +115,7 @@ export function Footer() {
               rel="noopener noreferrer"
               title="点击查看公众号二维码大图"
               aria-label="查看共事智能官方公众号二维码大图"
-              className="w-28 h-28 p-2 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center transition-transform hover:scale-105 cursor-pointer block"
+              className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 p-2 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center transition-transform hover:scale-105 cursor-pointer block"
             >
               <Image
                 src="/wechat-official.png"

@@ -216,8 +216,11 @@ export function EvolutionPath() {
     >
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-6 border-b border-slate-200">
         <div className="space-y-2 max-w-3xl">
-          <span className="text-sm font-mono font-bold uppercase tracking-wider text-blue-600 block">
-            清晰的数字化演进路线 · THE EVOLUTIONARY PATH
+          <span className="block text-sm font-bold text-blue-600">
+            清晰的数字化演进路线
+          </span>
+          <span className="block font-mono text-[11px] tracking-widest text-slate-400">
+            THE EVOLUTIONARY PATH
           </span>
           <h3 className="text-xl sm:text-2xl font-bold text-slate-900 leading-snug tracking-tight">
             系统不是散落的项目，而是从“传统记录”到“人机共事”的进化链路
