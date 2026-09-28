@@ -48,6 +48,8 @@
     /* 移动端：消除 300ms 点按延迟，点按反馈跟手 */
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    /* 页面级横向滚动彻底禁掉：clip 不产生滚动容器，比 hidden 更彻底 */
+    overflow-x: clip;
   }
 
   /* 移动端无滚动条横滑条：保留滑动能力，只隐藏视觉滚动条 */

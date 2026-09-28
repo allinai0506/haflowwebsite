@@ -113,7 +113,7 @@ export function ComparisonMatrix() {
               </ul>
             </div>
 
-            <div className="mt-8 pt-5 border-t border-slate-100 bg-slate-50 -mx-7 -mb-7 p-6 rounded-b-3xl">
+            <div className="mt-8 pt-5 border-t border-slate-100 bg-slate-50 -mx-6 -mb-6 sm:-mx-9 sm:-mb-9 p-6 rounded-b-3xl">
               <span className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-1">
                 结论定位：
               </span>
@@ -171,7 +171,7 @@ export function ComparisonMatrix() {
               </ul>
             </div>
 
-            <div className="mt-8 pt-5 border-t border-blue-100 bg-white -mx-7 -mb-7 p-6 rounded-b-3xl border-x border-b border-blue-100">
+            <div className="mt-8 pt-5 border-t border-blue-100 bg-white -mx-6 -mb-6 sm:-mx-9 sm:-mb-9 p-6 rounded-b-3xl border-x border-b border-blue-100">
               <span className="text-xs font-bold text-blue-700 uppercase tracking-wider block mb-1">
                 落地策略：
               </span>

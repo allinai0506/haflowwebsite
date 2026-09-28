@@ -329,7 +329,12 @@ export function CaseStoryView({
           <section id="outcome" className="scroll-mt-28">
             <ChapterEyebrow n="04" title="结果" />
             <div className="mt-4 space-y-6">
-              <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-xs">
+              <div
+                role="region"
+                aria-label="实施前后对照表，可横滑查看"
+                tabIndex={0}
+                className="overflow-x-auto no-scrollbar rounded-3xl border border-slate-200 bg-white shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+              >
                 <table className="w-full min-w-[560px] text-sm">
                   <caption className="sr-only">实施前后对照</caption>
                   <thead className="bg-slate-100 text-slate-700">

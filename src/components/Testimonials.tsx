@@ -40,7 +40,7 @@ function QuoteMark() {
 
 function PersonFooter({ item }: { item: Testimonial }) {
   return (
-    <footer className="mt-5 pt-4 border-t border-dashed border-slate-200 bg-slate-50/80 -mx-6 -mb-6 px-6 py-4 rounded-b-2xl">
+    <footer className="mt-5 pt-4 border-t border-dashed border-slate-200 bg-slate-50/80 -mx-6 -mb-6 sm:-mx-8 sm:-mb-8 px-6 py-4 rounded-b-2xl">
       <div className="flex items-center gap-3">
         <span
           className="w-9 h-9 shrink-0 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center"
@@ -177,7 +177,7 @@ export function Testimonials() {
                   role="tab"
                   aria-selected={active}
                   onClick={() => setActiveTheme(theme.key)}
-                  className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs sm:text-sm font-semibold transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 ${
+                  className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 min-h-[44px] text-xs sm:text-sm font-semibold transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 ${
                     active
                       ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
                       : "text-slate-500 hover:text-slate-900"
