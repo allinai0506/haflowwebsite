@@ -42,7 +42,8 @@ export default function HomePage() {
           <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 sm:w-[36rem] sm:h-[36rem] rounded-full bg-blue-100/50 blur-3xl" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center space-y-5 sm:space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-center">
+          <div className="lg:col-span-5 max-w-3xl mx-auto lg:mx-0 w-full text-center lg:text-left space-y-5 sm:space-y-6">
             {/* Eyebrow 徽章 */}
             <p className="hero-copy-enter">
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-blue-700 border border-blue-200 shadow-xs">
@@ -59,7 +60,7 @@ export default function HomePage() {
             </h1>
 
             {/* Subtitles */}
-            <div className="hero-copy-enter hero-copy-d1 space-y-3 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+            <div className="hero-copy-enter hero-copy-d1 space-y-3 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               <p className="font-semibold text-slate-800">
                 HAFlow 让人和 Agent 在同一个工作流中共事。
               </p>
@@ -79,8 +80,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Dual Action Buttons：移动端全宽堆叠，桌面居中 */}
-            <div className="hero-copy-enter hero-copy-d3 pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
+            {/* Dual Action Buttons：移动端全宽堆叠，PC 左对齐 */}
+            <div className="hero-copy-enter hero-copy-d3 pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto lg:mx-0">
               <Link
                 href="/haflow"
                 className="inline-flex items-center justify-center gap-2 px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-full transition-all shadow-md hover:shadow-lg shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
@@ -98,9 +99,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* 可视化：居中收窄 */}
-          <div className="mt-10 sm:mt-14 max-w-3xl mx-auto">
+          {/* 可视化：移动端居中收窄，PC 右列 */}
+          <div className="lg:col-span-7 mt-2 lg:mt-0 max-w-3xl lg:max-w-none mx-auto w-full flex items-center justify-center lg:justify-end">
             <InfinityHeroVisual />
+          </div>
           </div>
 
           {/* Trust strip: aggregate proof, all numbers verifiable from /cases */}
