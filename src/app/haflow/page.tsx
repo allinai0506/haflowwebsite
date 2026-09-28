@@ -35,6 +35,22 @@ export const metadata: Metadata = pageSeo({
 });
 
 export default function HAFlowPage() {
+  // GEO/富媒体：产品级 SoftwareApplication 结构化数据（Organization/Breadcrumb 已由 layout/Breadcrumb 提供）
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "HAFlow",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description:
+      "共事智能面向复杂业务场景的人机协同任务执行平台：目标拆解、多Agent分工、人工关键确认、安全调用ERP与业务系统，结果有依据全程可追溯。",
+    publisher: {
+      "@type": "Organization",
+      name: "上海共事智能科技有限公司",
+      url: "https://www.haflow.cn/",
+    },
+  };
+
   const capabilities = [
     {
       num: "01",
@@ -111,6 +127,10 @@ export default function HAFlowPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: "HAFlow 平台" }]} />
 

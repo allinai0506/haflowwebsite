@@ -14,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: "https://haflow.cn/sitemap.xml",
+    sitemap: "https://www.haflow.cn/sitemap.xml",
   };
 }

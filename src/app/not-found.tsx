@@ -4,7 +4,8 @@ import { Home, Search } from "lucide-react";
 export const metadata = {
   title: "页面不存在_404",
   description: "抱歉，您访问的页面不存在或已被移动。",
-  robots: "noindex, nofollow",
+  // 404 必须 noindex：对象写法覆盖 layout 的 index 默认（Next 会额外输出一条自动 noindex，两条均为限制性，取最严生效）
+  robots: { index: false, follow: false },
 };
 
 export default function NotFound() {

@@ -13,16 +13,16 @@ import { SOLUTIONS } from "@/data/solutions";
 const SITEMAP_BASELINE = new Date("2026-09-01");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://haflow.cn";
+  const baseUrl = "https://www.haflow.cn";
   const today = new Date();
 
+  // /training 已 308 永久合并到 /methodology#training（兼容旧外链与浏览器历史），不再进 sitemap
   const staticRoutes = [
     { url: `${baseUrl}/`, lastModified: today, changeFrequency: "daily" as const, priority: 1.0 },
     { url: `${baseUrl}/problems`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/solutions`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/haflow`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/methodology`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
-    { url: `${baseUrl}/training`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/cases`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${baseUrl}/diagnose`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${baseUrl}/insights`, lastModified: SITEMAP_BASELINE, changeFrequency: "weekly" as const, priority: 0.7 },

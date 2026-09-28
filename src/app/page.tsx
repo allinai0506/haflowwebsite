@@ -15,10 +15,10 @@ import { TRAINING_OVERVIEW } from "@/data/training";
 import { Testimonials } from "@/components/Testimonials";
 import { pageSeo } from "@/lib/seo";
 
-// 首页 TDK：百度标题30汉字内，首屏即含 共事智能/企业AI落地/HAFlow 核心词
+// 首页 TDK：百度标题30汉字内；品牌词由 layout template 统一追加，此处不再重复
 export const metadata: Metadata = pageSeo({
   path: "/",
-  title: "共事智能_企业AI落地_HAFlow人机协同",
+  title: "企业AI落地_HAFlow人机协同",
   description:
     "上海共事智能科技有限公司：不做大系统，只用AI帮企业解决具体问题。HAFlow让人和Agent在同一工作流中共事：智能报价、智能订货预测、标书核查、财务穿透关联。",
   keywords: [
@@ -33,8 +33,21 @@ export const metadata: Metadata = pageSeo({
 });
 
 export default function HomePage() {
+  // GEO/实体：WebSite 帮助搜索引擎确立站点名称与品牌实体（Organization 已在 layout 全站输出）
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "共事智能 HAFlow_企业AI落地",
+    alternateName: ["共事智能", "HAFlow", "GONGSHI AI"],
+    url: "https://www.haflow.cn/",
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       {/* 1. HERO BANNER - 居中式：徽章 + 主张 + 行动 + 可视化 + 信任条 */}
       <section className="relative pt-10 pb-12 sm:pt-14 sm:pb-16 lg:pt-20 lg:pb-24 overflow-hidden bg-gradient-to-b from-blue-50/70 via-white to-white">
         {/* 浅色装饰光晕，小屏缩小 */}
@@ -233,7 +246,7 @@ export default function HomePage() {
 
                 <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 mt-4">
                   <span>{s.dateStr}</span>
-                  <Link href="/training#booking" className="font-semibold text-blue-600 hover:text-blue-700">
+                  <Link href="/methodology#booking" className="font-semibold text-blue-600 hover:text-blue-700">
                     立即预约
                   </Link>
                 </div>
@@ -243,7 +256,7 @@ export default function HomePage() {
 
           <div className="text-center">
             <Link
-              href="/training"
+              href="/methodology#training"
               className="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full shadow-md shadow-blue-500/20 transition-all"
             >
               <span>查看本月课表与预约入口</span>

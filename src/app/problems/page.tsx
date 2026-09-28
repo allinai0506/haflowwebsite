@@ -9,7 +9,7 @@ import { pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = pageSeo({
   path: "/problems",
-  title: "企业AI解决方案_报价订货标书财务场景",
+  title: "企业AI问题场景_报价订货标书财务诊断",
   description:
     "共事智能企业AI解决方案：不做大系统，不替换ERP/OA/CRM。只用AI解决具体问题：智能报价、智能订货预测、标书质量核查、财务单据自动关联与经验复用。",
   keywords: ["企业AI解决方案", "智能报价", "智能订货预测", "标书核查", "共事智能", "HAFlow"],

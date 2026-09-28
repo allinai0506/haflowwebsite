@@ -14,7 +14,7 @@ export function Footer() {
               <div className="h-9 w-auto relative flex items-center justify-center shrink-0 pt-0.5">
                 <Image
                   src="/logo-icon.png"
-                  alt="共事 Logo"
+                  alt="共事智能HAFlow_企业AI落地"
                   width={65}
                   height={36}
                   className="h-9 w-auto object-contain"
@@ -70,7 +70,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/training" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
+                <Link href="/methodology#training" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   公益实战培训
                 </Link>
               </li>

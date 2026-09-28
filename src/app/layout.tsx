@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://haflow.cn"),
+  metadataBase: new URL("https://www.haflow.cn"),
   title: {
     default: "共事智能_企业AI落地_HAFlow人机协同 | 不做大系统只解具体问题",
     template: "%s_共事智能",
@@ -62,14 +62,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "zh_CN",
-    url: "https://haflow.cn/",
+    url: "https://www.haflow.cn/",
     siteName: "共事智能 GONGSHI AI",
     title: "共事智能_企业AI落地_HAFlow人机协同",
     description:
       "上海共事智能：不做大系统，只用AI帮企业解决一个个具体问题。让人和Agent共同把事情做完。",
     images: [
       {
-        url: "https://haflow.cn/og-cover.jpg",
+        url: "https://www.haflow.cn/og-cover.jpg",
         width: 1200,
         height: 630,
         alt: "共事智能 HAFlow_企业AI落地",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "共事智能_企业AI落地_HAFlow人机协同",
     description: "不做大系统，只用AI帮企业解决一个个具体问题。",
-    images: ["https://haflow.cn/og-cover.jpg"],
+    images: ["https://www.haflow.cn/og-cover.jpg"],
   },
 };
 
@@ -95,8 +95,8 @@ export default function RootLayout({
     "@type": "Organization",
     name: COMPANY_INFO.name,
     alternateName: ["共事", "共事智能", "GONGSHI AI"],
-    url: "https://haflow.cn/",
-    logo: "https://haflow.cn/logo-icon.png",
+    url: "https://www.haflow.cn/",
+    logo: "https://www.haflow.cn/logo-icon.png",
     description: COMPANY_INFO.corePositioning,
     address: {
       "@type": "PostalAddress",
@@ -123,18 +123,7 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
-        {/* 百度统计：tongji.baidu.com 原样代码（勿改格式，百度按此检测安装状态） */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?ccc65e8c67181fa1170784a1c40da717";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();`,
-          }}
-        />
+        {/* 百度统计改为 BaiduSeoScripts 内 afterInteractive 加载，不再阻塞首屏 */}
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
         <BaiduSeoScripts />

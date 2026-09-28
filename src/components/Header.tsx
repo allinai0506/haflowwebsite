@@ -69,7 +69,7 @@ export function Header() {
           <div className="relative h-9 w-auto flex items-center justify-center">
             <Image
               src="/logo-icon.png"
-              alt="共事 Logo"
+              alt="共事智能HAFlow_企业AI落地"
               width={65}
               height={36}
               className="h-9 w-auto object-contain"

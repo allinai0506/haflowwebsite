@@ -124,7 +124,7 @@ export function DualPortal() {
 
             <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <Link
-                href="/training"
+                href="/methodology#training"
                 className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-colors shadow-sm"
               >
                 <span>查看本月课表与预约</span>

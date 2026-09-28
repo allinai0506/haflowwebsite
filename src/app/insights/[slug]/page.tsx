@@ -45,6 +45,7 @@ export default async function InsightDetailPage({ params }: Props) {
     headline: article.title,
     description: article.summary,
     datePublished: article.date,
+    dateModified: article.date,
     author: {
       "@type": "Organization",
       name: "上海共事智能科技有限公司",
@@ -53,8 +54,8 @@ export default async function InsightDetailPage({ params }: Props) {
       "@type": "Organization",
       name: "共事智能",
     },
-    mainEntityOfPage: `https://haflow.cn/insights/${article.slug}`,
-    image: "https://haflow.cn/og-cover.jpg",
+    mainEntityOfPage: `https://www.haflow.cn/insights/${article.slug}`,
+    image: "https://www.haflow.cn/og-cover.jpg",
   };
   const related = INSIGHTS.filter((i) => i.slug !== article.slug).slice(0, 2);
 

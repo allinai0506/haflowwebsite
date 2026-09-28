@@ -20,11 +20,11 @@ export const COMPANY_INFO = {
     phone: "+86-153-1727-0756",
     wechat: "Gongshi-AI",
     wechatNote: "添加企业顾问微信，发送您的具体业务问题快速获得诊断方案",
-    // 百度SEO/合规：真实备案号通过环境变量注入，未取得前留空（页脚自动隐藏，避免渲染占位假号被降权）
+    // 真实备案号：沪ICP备2025125372号-5（已取得，页脚强制展示；环境变量可覆盖）
     icp:
       typeof process !== "undefined"
-        ? process.env.NEXT_PUBLIC_ICP_BEIAN || ""
-        : "",
+        ? process.env.NEXT_PUBLIC_ICP_BEIAN || "沪ICP备2025125372号-5"
+        : "沪ICP备2025125372号-5",
     copyrightYear: "2025-2026",
   },
   principles: [
@@ -50,7 +50,7 @@ export const COMPANY_INFO = {
     { label: "实践案例", href: "/cases" },
     { label: "HAFlow", href: "/haflow" },
     { label: "共事方法论", href: "/methodology" },
-    { label: "免费培训", href: "/training", badge: "每月4场" },
+    { label: "免费培训", href: "/methodology#training", badge: "每月4场" },
     { label: "AI 应用诊断", href: "/diagnose" },
     { label: "观点与实践", href: "/insights" },
     { label: "关于共事", href: "/about" },

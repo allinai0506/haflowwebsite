@@ -79,7 +79,7 @@ export default async function ProblemDetailPage({ params }: Props) {
     description: problem.subtitle,
     articleSection: problem.category,
     about: problem.category,
-    image: "https://haflow.cn/og-cover.jpg",
+    image: "https://www.haflow.cn/og-cover.jpg",
     author: {
       "@type": "Organization",
       name: "上海共事智能科技有限公司",
@@ -88,7 +88,7 @@ export default async function ProblemDetailPage({ params }: Props) {
       "@type": "Organization",
       name: "共事智能",
     },
-    mainEntityOfPage: `https://haflow.cn/problems/${problem.slug}`,
+    mainEntityOfPage: `https://www.haflow.cn/problems/${problem.slug}`,
   };
 
   return (

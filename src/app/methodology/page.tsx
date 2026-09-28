@@ -32,7 +32,7 @@ import { pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = pageSeo({
   path: "/methodology",
-  title: "共事方法论_人机协同系统实施方法_HAFlow工程底座",
+  title: "共事方法论_人机协同系统实施",
   description:
     "共事方法论（Human + Agent Co-Execution Method）：我们不从‘做什么软件’开始，而从‘这件事到底是怎么被完成的’开始。以 Task 为企业 AI 最小单位，和客户一起建立人 + Agent 持续完成工作的系统。",
   keywords: [

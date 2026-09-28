@@ -42,8 +42,32 @@ export default async function SolutionDetailPage({ params }: Props) {
 
   if (!problem || relatedCases.length === 0) notFound();
 
+  // 百度SEO：解决方案详情页补 Article 结构化数据（与 problems/cases/insights 对齐）
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: solution.seoTitle,
+    description: solution.seoDescription,
+    articleSection: solution.eyebrow,
+    about: solution.title,
+    image: "https://www.haflow.cn/og-cover.jpg",
+    author: {
+      "@type": "Organization",
+      name: "上海共事智能科技有限公司",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "共事智能",
+    },
+    mainEntityOfPage: `https://www.haflow.cn/solutions/${solution.slug}`,
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Breadcrumb
           items={[

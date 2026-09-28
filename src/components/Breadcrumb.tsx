@@ -21,13 +21,13 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
         "@type": "ListItem",
         position: 1,
         name: "首页",
-        item: "https://haflow.cn",
+        item: "https://www.haflow.cn",
       },
       ...items.map((item, idx) => ({
         "@type": "ListItem",
         position: idx + 2,
         name: item.label,
-        item: item.href ? `https://haflow.cn${item.href}` : undefined,
+        item: item.href ? `https://www.haflow.cn${item.href}` : undefined,
       })),
     ],
   };

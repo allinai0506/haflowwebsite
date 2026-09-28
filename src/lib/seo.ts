@@ -4,7 +4,7 @@ import type { Metadata } from "next";
  * 百度SEO：统一分页 SEO（绝对 canonical + 绝对 OG/Twitter）。
  * 曾全站复用 layout 的相对 canonical "./" 与首页 OG URL，详情页去重信号错误。
  */
-const SITE = "https://haflow.cn";
+const SITE = "https://www.haflow.cn";
 const OG_IMAGE = {
   url: `${SITE}/og-cover.jpg`,
   width: 1200,
