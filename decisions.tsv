@@ -12,3 +12,4 @@ timestamp	decision	rationale	evidence	result
 2026-09-28T19:00:00+08:00	SEO域名纠正：全站canonical由apex改为www，与百度站长平台验证站点一致	用户指出应使用www；平台token与验证站点均绑定www，apex方向会导致推送/验证失效	sed批量替换src内18处域名；next.config改为apex→www 301；build成功；curl验证canonical/OG/sitemap全www、apex 308跳转、training 308保持	SUCCESS
 2026-09-28T19:20:00+08:00	/haflow页新增SoftwareApplication结构化数据；核实外部SEO审计四项	外部审计仅schema建议有效；robots 403/SSR/canonical问题经线上实测多为误报或已在代码层修复待部署	build成功；/haflow输出Organization+SoftwareApplication+BreadcrumbList；线上robots/sitemap均为200	SUCCESS
 2026-09-28T19:40:00+08:00	首页新增WebSite结构化数据；外部超时告警核实为抓取节点网络问题	外部审计建议WebSite；本站可达性经三地实测正常（200，首页0.8-1.8s），超时系对方节点到电信上海链路问题	build成功；首页输出Organization+WebSite；P0需以GSC/百度抓取诊断为准	SUCCESS
+2026-09-28T20:00:00+08:00	部署上线：rsync同步+服务器构建+pm2重启+百度推送	corepack版pnpm在Node20上报ERR_VM错，改用npm run build成功；百度推送返回over quota（配额耗尽，明日重推）	线上验证：canonical www、新标题、apex308、training308、sitemap36、robots www；pm2 online已save	SUCCESS
