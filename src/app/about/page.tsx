@@ -50,12 +50,12 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: "关于共事" }]} />
 
         {/* Section 1: Hero & Manifesto (2-Column Balanced Grid) */}
-        <div className="py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="py-4 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: Hero Header (5 cols) */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200 mb-4 w-fit">

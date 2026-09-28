@@ -24,11 +24,11 @@ export const metadata: Metadata = pageSeo({
 
 export default function SolutionsPage() {
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: "解决方案" }]} />
 
-        <header className="max-w-4xl py-8">
+        <header className="max-w-4xl py-4 sm:py-8">
           <SectionEyebrow className="mb-4">Solution Paths · 解决方案</SectionEyebrow>
           <h1 className="mb-6 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
             从一个具体问题开始，

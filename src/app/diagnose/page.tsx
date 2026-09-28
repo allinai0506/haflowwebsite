@@ -58,12 +58,12 @@ export default function DiagnosePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: "AI 应用诊断" }]} />
 
         {/* Page Hero */}
-        <div className="py-8 max-w-4xl">
+        <div className="py-4 sm:py-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-100 text-emerald-800 border border-emerald-200 mb-4">
             <span>务实诊断 · 不推销大系统</span>
           </div>

@@ -76,7 +76,7 @@ export function CaseStoryView({
       </div>
 
       <div className="bg-gradient-to-b from-blue-50/80 via-white to-white border-b border-slate-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-12 sm:pb-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-10 pb-8 sm:pb-16">
           <div className="flex flex-wrap items-center gap-2 mb-5">
             <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
               {item.industry}

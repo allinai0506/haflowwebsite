@@ -92,7 +92,7 @@ export default async function ProblemDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -111,7 +111,7 @@ export default async function ProblemDetailPage({ params }: Props) {
         />
 
         {/* Page Hero */}
-        <div className="py-8 max-w-4xl">
+        <div className="py-4 sm:py-8 max-w-4xl">
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
               {problem.category}

@@ -43,7 +43,7 @@ export default async function SolutionDetailPage({ params }: Props) {
   if (!problem || relatedCases.length === 0) notFound();
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Breadcrumb
           items={[
@@ -52,7 +52,7 @@ export default async function SolutionDetailPage({ params }: Props) {
           ]}
         />
 
-        <header className="max-w-4xl py-8">
+        <header className="max-w-4xl py-4 sm:py-8">
           <p className="mb-4 text-xs font-mono font-bold uppercase tracking-wider text-blue-700">
             {solution.eyebrow}
           </p>

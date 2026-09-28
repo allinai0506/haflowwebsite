@@ -22,12 +22,12 @@ export const metadata: Metadata = pageSeo({
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: "联系我们" }]} />
 
         {/* Page Hero */}
-        <div className="py-8 max-w-4xl">
+        <div className="py-4 sm:py-8 max-w-4xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200 mb-4">
             <span>开放交流 · 快速响应</span>
           </div>

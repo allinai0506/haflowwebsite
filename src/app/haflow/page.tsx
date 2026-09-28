@@ -110,12 +110,12 @@ export default function HAFlowPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: "HAFlow 平台" }]} />
 
         {/* Page Hero */}
-        <div className="py-8 max-w-4xl">
+        <div className="py-4 sm:py-8 max-w-4xl">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
               底层协同底座

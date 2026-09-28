@@ -49,8 +49,8 @@ export const metadata: Metadata = pageSeo({
 
 export default function MethodologyPage() {
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         {/* Breadcrumb */}
         <Breadcrumb items={[{ label: "共事方法论" }]} />
 

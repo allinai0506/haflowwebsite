@@ -59,7 +59,7 @@ export default async function InsightDetailPage({ params }: Props) {
   const related = INSIGHTS.filter((i) => i.slug !== article.slug).slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -73,7 +73,7 @@ export default async function InsightDetailPage({ params }: Props) {
         />
 
         {/* Article Header */}
-        <header className="py-8 border-b border-slate-200">
+        <header className="py-4 sm:py-8 border-b border-slate-200">
           <div className="flex flex-wrap items-center gap-3 mb-4 text-xs text-slate-500">
             <span className="font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-200">
               {article.category}
