@@ -52,8 +52,9 @@ export default function HomePage() {
               </span>
             </p>
             {/* Main Headline：sr-only 前缀给百度补核心关键词；关键句用主题蓝渐变，不再通篇大黑体 */}
-            <h1 className="hero-copy-enter text-3xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-slate-900 tracking-tight leading-[1.2] text-balance">
+            <h1 className="hero-copy-enter text-3xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-slate-900 tracking-tight leading-[1.2]">
               <span className="sr-only">共事智能企业AI落地：</span>让企业进入
+              <br />
               <span className="bg-gradient-to-r from-blue-600 to-sky-600 bg-clip-text text-transparent">
                 人机共事时代
               </span>
