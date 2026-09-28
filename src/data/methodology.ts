@@ -80,7 +80,7 @@ export const METHODOLOGY_DATA = {
     {
       dimension: "业务规则沉淀",
       traditional: "硬编码写死在程序中，或分散于员工个人脑海经验",
-      gongshi: "结构化解构成知识、上下文、规则、判断与工具动作",
+      gongshi: "以企业本体统一组织为知识、上下文、规则、判断与工具动作",
     },
     {
       dimension: "演化与上线方式",
@@ -201,14 +201,15 @@ export const METHODOLOGY_DATA = {
     {
       id: "c02",
       num: "02",
-      shortNavLabel: "02 经验结构化",
-      title: "把隐性的工作经验，变成显性的工作结构",
-      tagline: "关键能力藏在老员工脑子里，AI 让模糊经验第一次进入系统",
-      summary: "很多企业真正重要的能力，并不存在于软件中，而是存在于人的脑子里。我们把经验解构成知识、上下文、规则、任务、判断与动作。",
+      shortNavLabel: "02 说清楚怎么做事",
+      title: "先把企业怎么做事，说清楚",
+      tagline: "企业里的很多知识和规则，并不真正存在于软件里",
+      summary: "很多企业真正重要的能力，并不存在于软件中，而是散落在人的经验、文档、数据库、流程和历史做法中。我们把它显性化，并收敛为企业本体中的对象、关系、规则与动作。",
       leadParagraphs: [
-        "为什么这个客户可以给出这个折扣？为什么这份标书存在极高废标风险？为什么这个费用异常可以放行？为什么这种情况必须找财务负责人？",
-        "这些关键判断过去完全依赖业务老手的经验。传统企业软件很难处理，因为传统系统只擅长记录确定的数据库字段，极不擅长理解模糊、动态的业务上下文。",
-        "AI 改变了这一点。我们的工作绝非浮于表面地‘加一个 AI 聊天窗口’，而是将企业隐性经验解构成六个严密的显性结构：",
+        "企业里的很多知识和规则，并不真正存在于软件里。它们散落在人的经验、文档、数据库、流程和历史做法中。",
+        "Agent 要参与真实业务，首先需要理解企业里有什么、它们是什么关系、遵循什么规则，以及允许执行什么动作。",
+        "为什么这个客户可以给出这个折扣？为什么这份标书存在极高废标风险？为什么这个费用异常可以放行？为什么这种情况必须找财务负责人？这些关键判断过去完全依赖业务老手的经验。传统企业软件很难处理，因为传统系统只擅长记录确定的数据库字段，极不擅长理解模糊、动态的业务上下文。",
+        "AI 改变了这一点。我们的工作绝非浮于表面地‘加一个 AI 聊天窗口’，而是将企业隐性经验解构成严密的显性结构，并进一步收敛为统一的企业运行模型：",
       ],
       keyPoints: [
         { title: "知识 (Knowledge)", desc: "企业知道什么：历史案例、产品手册、价格底线、行业法规与专有名词。" },
@@ -218,7 +219,7 @@ export const METHODOLOGY_DATA = {
         { title: "判断 (Judgments)", desc: "哪些地方需要 Agent 理解和推理：模糊语义识别、矛盾点发现、多方案权衡。" },
         { title: "动作 (Actions)", desc: "判断之后应该调用什么工具、系统或流程：写回 ERP、生成 PDF、发送审批或预警。" },
       ],
-      callout: "过去沉淀在专家脑子里的无形经验，通过这种结构，第一次能够成为系统可执行、可共享、可传承的生产力。",
+      callout: "过去沉淀在专家脑子里的无形经验，通过这种结构，第一次能够成为系统可执行、可共享、可传承的生产力。我们把这套模型称为企业本体（Enterprise Ontology）：把企业里的对象、关系、规则和动作，变成 Human 与 Agent 都可以理解和执行的共同业务模型。",
     },
     {
       id: "c03",
@@ -238,7 +239,7 @@ export const METHODOLOGY_DATA = {
         { title: "修正 (Refine)", desc: "分析 Agent 的错漏处与人类专家的修改理由，精细调整规则与上下文。" },
         { title: "沉淀 (Crystallize)", desc: "把验证正确的判断逻辑固化入知识库与规则集，确保错误不再重复出现。" },
       ],
-      callout: "每一次 Agent 执行任务都留下完整过程：读取了什么、做了什么判断、调用了什么工具、输出了什么结果、哪里失败了、人为什么修改了它。系统因此不是一次性交付的，而是在真实使用中不断自我进化。",
+      callout: "每一次 Agent 执行任务都留下完整过程：读取了什么、做了什么判断、调用了什么工具、输出了什么结果、哪里失败了、人为什么修改了它。系统因此不是一次性交付的，而是在真实使用中不断验证、修正并沉淀完善。",
     },
     {
       id: "c04",
@@ -378,4 +379,137 @@ export const METHODOLOGY_DATA = {
     linkText: "了解公益培训课表与预约",
     href: "/methodology#training",
   },
+
+  // 企业本体四要素（对象 / 关系 / 规则 / 动作）
+  ontologyFour: [
+    {
+      title: "对象",
+      titleEn: "Object",
+      examples: ["客户", "项目", "报价", "合同", "任务", "文档"],
+      desc: "企业里真实存在的业务对象。",
+    },
+    {
+      title: "关系",
+      titleEn: "Relation",
+      examples: ["客户 → 项目", "项目 → 报价", "合同 → 客户", "任务 → Workspace"],
+      desc: "对象之间真实存在的业务联系。",
+    },
+    {
+      title: "规则",
+      titleEn: "Rule / Policy",
+      examples: ["折扣超过 10% → 销售经理确认", "毛利低于 15% → 财务确认"],
+      desc: "企业实际工作的约束和判断标准。",
+    },
+    {
+      title: "动作",
+      titleEn: "Action",
+      examples: ["生成报价", "提交审批", "创建任务", "更新客户", "发送通知", "写回系统"],
+      desc: "系统、人和 Agent 可以真正执行的业务动作。",
+    },
+  ],
+
+  // 本体 → Workspace → 任务 → 上下文 → 工作流 → 人机 → 动作 → 真实企业主链路
+  ontologyFlow: [
+    {
+      name: "企业本体",
+      nameEn: "Enterprise Ontology",
+      desc: "对象 · 关系 · 规则 · 动作",
+      note: "长期稳定的企业运行模型",
+    },
+    {
+      name: "工作空间",
+      nameEn: "Workspace",
+      desc: "当前正在发生的事情",
+      note: "当前业务实例",
+    },
+    {
+      name: "当前任务",
+      nameEn: "Current Task",
+      desc: "这一次要完成的事",
+      note: "目标与验收标准",
+    },
+    {
+      name: "上下文编译器",
+      nameEn: "Context Compiler",
+      desc: "只提取当前任务真正需要的信息",
+      note: "不过载、不缺失",
+    },
+    {
+      name: "任务上下文",
+      nameEn: "Context Pack",
+      desc: "本次任务专属的工作材料",
+      note: "交给 Agent 的输入",
+    },
+    {
+      name: "工作流",
+      nameEn: "Workflow",
+      desc: "这次事情先做什么、后做什么、由谁做",
+      note: "流程结束 = 事情真正做完",
+    },
+    {
+      name: "Human + Agent",
+      nameEn: "Human + Agent, in Flow",
+      desc: "Agent 执行，人关键节点确认",
+      note: "正常自动、异常找人",
+    },
+    {
+      name: "业务动作",
+      nameEn: "Action",
+      desc: "经连接器写回企业现有系统",
+      note: "ERP / CRM / OA / API",
+    },
+    {
+      name: "真实业务结果",
+      nameEn: "Business Outcome",
+      desc: "可验证的交付成果",
+      note: "沉淀为新的企业事实",
+    },
+  ],
+
+  // 报价示例：对象关系卡片
+  quoteExampleCards: [
+    {
+      title: "客户",
+      titleEn: "Customer",
+      items: ["客户等级", "历史订单", "信用状态", "专属价格"],
+    },
+    {
+      title: "项目 / 商机",
+      titleEn: "Project / Deal",
+      items: ["产品", "数量", "交付时间", "预算"],
+    },
+    {
+      title: "报价",
+      titleEn: "Quotation",
+      items: ["成本", "毛利", "折扣", "有效期"],
+    },
+  ],
+
+  quoteExampleRules: ["普通销售折扣 ≤ 10%", "折扣 > 10% → 销售经理确认", "毛利 < 15% → 财务确认"],
+
+  quoteExampleActions: ["生成报价", "修改报价", "提交确认", "发送客户", "创建跟进任务"],
+
+  quoteExampleFlow: [
+    "收到客户需求",
+    "找到客户 Workspace",
+    "加载相关企业本体",
+    "组装任务上下文",
+    "运行报价 Workflow",
+    "Agent 生成方案",
+    "Policy 检查",
+    "必要时找人确认",
+    "生成正式报价",
+    "回写 Workspace",
+  ],
+
+  // 本体持续演化（轻闭环）：执行 → 新事实 → 审核 → 更新
+  ontologyEvolveSteps: [
+    { name: "执行真实任务", nameEn: "Execute" },
+    { name: "发现新的业务事实", nameEn: "New Facts" },
+    { name: "发现模型缺失或规则变化", nameEn: "Gap Found" },
+    { name: "提出修改建议", nameEn: "Propose" },
+    { name: "人工审核", nameEn: "Human Review" },
+    { name: "验证", nameEn: "Verify" },
+    { name: "更新企业本体", nameEn: "Update Ontology" },
+  ],
 };

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { METHODOLOGY_DATA } from "@/data/methodology";
+import { gotoMethodologyChapter } from "@/components/MethodologyChapters";
 import { Compass, ChevronRight } from "lucide-react";
 
 export function MethodologyChapterNav() {
@@ -27,29 +28,9 @@ export function MethodologyChapterNav() {
   }, []);
 
   const scrollToChapter = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = 90;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = el.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-      setActiveId(id);
-      // 键盘/读屏用户：把焦点移入章节标题，避免焦点滞留 pill
-      const heading = el.querySelector("h2, h3, [tabindex]");
-      if (heading instanceof HTMLElement) {
-        if (!heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
-        heading.focus({ preventScroll: true });
-      } else if (el instanceof HTMLElement) {
-        if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
-        el.focus({ preventScroll: true });
-      }
-    }
+    // 手风琴模式：先展开目标章节，再滚动（展开会改变布局，需延迟定位）
+    gotoMethodologyChapter(id);
+    setActiveId(id);
   };
 
   return (
