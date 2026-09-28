@@ -14,3 +14,4 @@ timestamp	decision	rationale	evidence	result
 2026-09-28T19:40:00+08:00	首页新增WebSite结构化数据；外部超时告警核实为抓取节点网络问题	外部审计建议WebSite；本站可达性经三地实测正常（200，首页0.8-1.8s），超时系对方节点到电信上海链路问题	build成功；首页输出Organization+WebSite；P0需以GSC/百度抓取诊断为准	SUCCESS
 2026-09-28T20:00:00+08:00	部署上线：rsync同步+服务器构建+pm2重启+百度推送	corepack版pnpm在Node20上报ERR_VM错，改用npm run build成功；百度推送返回over quota（配额耗尽，明日重推）	线上验证：canonical www、新标题、apex308、training308、sitemap36、robots www；pm2 online已save	SUCCESS
 2026-09-28T20:30:00+08:00	蜘蛛建议落地：14案例标题≤30字+description截断100字句号结尾+solutions栏目页增厚+insights加seoTitle	案例标题原~40字品牌后缀被截断；solutions仅905字；insights问句标题做title超长	build成功；36页标题全≤30；solutions 905→1150字；H1保持原文；本地待部署	SUCCESS
+2026-09-28T20:45:00+08:00	部署上线354d61e：案例标题/description/insights-seoTitle/solutions增厚	提交后rsync+npm构建+pm2重启	线上验证：案例新标题、desc96字、insights新标题、solutions含输入行；pm2 online已save	SUCCESS
