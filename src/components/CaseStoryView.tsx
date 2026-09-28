@@ -157,12 +157,12 @@ export function CaseStoryView({
           aria-label="案例章节"
           className="sticky top-[72px] z-20 mt-8 -mx-4 sm:mx-0 px-4 sm:px-0 py-2 bg-slate-50/95 backdrop-blur-sm border-b border-slate-200"
         >
-          <ul className="flex gap-1 overflow-x-auto text-xs font-semibold">
+          <ul className="flex gap-2 overflow-x-auto no-scrollbar text-xs font-semibold py-1">
             {chapters.map((chapter) => (
-              <li key={chapter.href}>
+              <li key={chapter.href} className="shrink-0">
                 <a
                   href={chapter.href}
-                  className="inline-flex px-3 py-2 rounded-full text-slate-600 hover:text-blue-700 hover:bg-blue-50 whitespace-nowrap transition-colors"
+                  className="inline-flex items-center px-3.5 py-2.5 min-h-[44px] rounded-full text-slate-600 hover:text-blue-700 hover:bg-blue-50 whitespace-nowrap transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                 >
                   {chapter.label}
                 </a>
@@ -329,8 +329,8 @@ export function CaseStoryView({
           <section id="outcome" className="scroll-mt-28">
             <ChapterEyebrow n="04" title="结果" />
             <div className="mt-4 space-y-6">
-              <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xs">
-                <table className="w-full text-sm">
+              <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white shadow-xs">
+                <table className="w-full min-w-[560px] text-sm">
                   <caption className="sr-only">实施前后对照</caption>
                   <thead className="bg-slate-100 text-slate-700">
                     <tr>
@@ -428,7 +428,7 @@ export function CaseStoryView({
                 <Link
                   key={story.slug}
                   href={`/cases/${story.slug}`}
-                  className="group rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-md transition-all"
+                  className="group rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                 >
                   <span className="text-[11px] font-semibold text-blue-700">
                     {story.industry}
@@ -445,16 +445,16 @@ export function CaseStoryView({
           </section>
         )}
 
-        <div className="my-12 flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-200">
+        <div className="my-12 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-6 border-t border-slate-200">
           <Link
             href="/cases"
-            className="text-xs font-semibold text-slate-600 hover:text-slate-900"
+            className="inline-flex items-center justify-center sm:justify-start min-h-[44px] text-xs font-semibold text-slate-600 hover:text-slate-900"
           >
             ← 返回案例列表
           </Link>
           <Link
             href="/diagnose"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors shadow-sm"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[48px] text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-xl transition-colors shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             带着您的业务问题来诊断
             <ArrowRight className="w-4 h-4" />

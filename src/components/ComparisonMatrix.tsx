@@ -49,7 +49,7 @@ export function ComparisonMatrix() {
   ];
 
   return (
-    <section className="py-20 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-100">
+    <section className="py-12 sm:py-20 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-100">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
@@ -69,9 +69,9 @@ export function ComparisonMatrix() {
         {/* Side by Side Comparison Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Left: Traditional Software */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 sm:p-9 flex flex-col justify-between shadow-xs">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-9 flex flex-col justify-between shadow-xs">
             <div>
-              <div className="flex items-center justify-between pb-5 mb-6 border-b border-slate-100">
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-5 mb-6 border-b border-slate-100">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600">
                     <Database className="w-5 h-5" />
@@ -124,9 +124,9 @@ export function ComparisonMatrix() {
           </div>
 
           {/* Right: AI Native Applications */}
-          <div className="rounded-3xl border-2 border-blue-200 bg-blue-50/30 p-7 sm:p-9 flex flex-col justify-between shadow-md shadow-blue-500/5">
+          <div className="rounded-3xl border-2 border-blue-200 bg-blue-50/30 p-6 sm:p-9 flex flex-col justify-between shadow-md shadow-blue-500/5">
             <div>
-              <div className="flex items-center justify-between pb-5 mb-6 border-b border-blue-100">
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-5 mb-6 border-b border-blue-100">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs">
                     <Bot className="w-5 h-5" />

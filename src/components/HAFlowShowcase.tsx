@@ -57,7 +57,7 @@ export function HAFlowShowcase() {
   ];
 
   return (
-    <section className="py-20 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-100">
+    <section className="py-12 sm:py-20 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-100">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Brand & Product Section Header */}
         <div className="max-w-3xl mb-16">

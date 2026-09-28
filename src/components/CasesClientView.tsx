@@ -109,11 +109,12 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
       </div>
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-        <div className="inline-flex p-1 bg-slate-200/80 rounded-xl">
+        <div className="inline-flex p-1 bg-slate-200/80 rounded-xl max-w-full overflow-x-auto no-scrollbar">
           <button
             type="button"
             onClick={() => setActiveTab("systems")}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+            aria-pressed={activeTab === "systems"}
+            className={`px-4 py-2.5 min-h-[44px] whitespace-nowrap rounded-lg text-xs font-bold transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
               activeTab === "systems"
                 ? "bg-white text-blue-600 shadow-xs"
                 : "text-slate-600 hover:text-slate-900"
@@ -124,13 +125,14 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
           <button
             type="button"
             onClick={() => setActiveTab("tools")}
-            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+            aria-pressed={activeTab === "tools"}
+            className={`px-4 py-2.5 min-h-[44px] whitespace-nowrap rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
               activeTab === "tools"
                 ? "bg-white text-blue-600 shadow-xs"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            <Wrench className="w-3.5 h-3.5" />
+            <Wrench className="w-3.5 h-3.5" aria-hidden="true" />
             <span>可体验的小工具</span>
           </button>
         </div>
@@ -145,21 +147,21 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
       {activeTab === "systems" && (
         <div className="space-y-6">
           <div className="relative max-w-2xl">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" aria-hidden="true" />
             <input
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               aria-label="按结果、行业、客户角色或系统名称检索案例"
               placeholder="按结果、行业、客户角色、系统名称检索..."
-              className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all shadow-2xs"
+              className="w-full min-h-[48px] pl-11 pr-16 py-3 bg-white border border-slate-200 rounded-2xl text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all shadow-2xs"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
                 aria-label="清空搜索内容"
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 px-2 py-0.5 rounded-full cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 min-h-[44px] px-3 inline-flex items-center text-xs text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full cursor-pointer"
               >
                 清空
               </button>
@@ -174,7 +176,8 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
                   key={type}
                   type="button"
                   onClick={() => setSelectedType(type)}
-                  className={`inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  aria-pressed={isActive}
+                  className={`inline-flex items-center px-3.5 py-2.5 min-h-[44px] rounded-full text-xs font-semibold transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                     isActive
                       ? "bg-blue-600 text-white shadow-xs"
                       : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
@@ -192,7 +195,8 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
                   key={cat.value}
                   type="button"
                   onClick={() => setSelectedCategory(cat.value)}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  aria-pressed={isActive}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-full text-xs font-semibold transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                     isActive
                       ? "bg-blue-600 text-white shadow-xs"
                       : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
@@ -250,12 +254,12 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
                     {item.metrics.map((metric) => (
                       <div
                         key={metric.label}
-                        className="rounded-xl bg-slate-50 border border-slate-100 px-2.5 py-2.5"
+                        className="rounded-xl bg-slate-50 border border-slate-100 px-2 py-2.5 min-w-0"
                       >
-                        <dt className="text-[10px] text-slate-500 leading-tight">
+                        <dt className="text-[10px] text-slate-500 leading-tight break-words">
                           {metric.label}
                         </dt>
-                        <dd className="text-sm sm:text-base font-black text-slate-950 mt-1 tracking-tight">
+                        <dd className="text-sm sm:text-base font-black text-slate-950 mt-1 tracking-tight break-words">
                           {metric.value}
                         </dd>
                       </div>
@@ -291,7 +295,7 @@ export function CasesClientView({ initialCases }: CasesClientViewProps) {
                   setSelectedCategory("全部");
                   setSelectedType("全部");
                 }}
-                className="px-4 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-xl text-xs font-semibold cursor-pointer"
+                className="px-5 py-2.5 min-h-[44px] bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-xl text-xs font-semibold cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
               >
                 重置筛选条件
               </button>

@@ -45,6 +45,18 @@
     line-break: strict;
     text-wrap: pretty;
     scroll-behavior: smooth;
+    /* 移动端：消除 300ms 点按延迟，点按反馈跟手 */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 移动端无滚动条横滑条：保留滑动能力，只隐藏视觉滚动条 */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   body {
@@ -54,9 +66,24 @@
     font-size: 16px;
     line-height: 1.7;
     overflow-x: hidden;
+    /* 移动端：纵向防误触回弹横移，允许正常下拉刷新 */
+    overscroll-behavior-y: auto;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 移动端表单：iOS 上 <16px 会触发自动缩放，强制 16px 起步 */
+  @media (max-width: 639px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+    /* 首屏重模糊在小屏降载：减少 GPU 开销，避免滚动掉帧 */
+    .hero-flow-blob {
+      filter: blur(28px);
+    }
   }
 
   h1,

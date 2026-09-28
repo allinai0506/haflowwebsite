@@ -2,14 +2,14 @@ import React from "react";
 
 export function OurBeliefBanner() {
   return (
-    <section className="relative py-20 lg:py-24 bg-gradient-to-b from-blue-50/70 via-white to-white border-t border-slate-100 overflow-hidden">
+    <section className="relative py-12 sm:py-20 lg:py-24 bg-gradient-to-b from-blue-50/70 via-white to-white border-t border-slate-100 overflow-hidden">
       {/* 浅色装饰：两团淡蓝光晕，替代原来的暗夜山形 SVG */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
       >
-        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-100/50 blur-3xl" />
-        <div className="absolute -bottom-32 right-0 w-[28rem] h-[28rem] rounded-full bg-sky-100/40 blur-3xl" />
+        <div className="absolute -top-24 -left-24 w-48 h-48 sm:w-96 sm:h-96 rounded-full bg-blue-100/50 blur-3xl" />
+        <div className="absolute -bottom-32 right-0 w-56 h-56 sm:w-[28rem] sm:h-[28rem] rounded-full bg-sky-100/40 blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

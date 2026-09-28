@@ -65,7 +65,7 @@ export function WhyHAFlow() {
   }, []);
 
   return (
-    <section className="py-20 bg-slate-50/60 border-t border-slate-100">
+    <section className="py-12 sm:py-20 bg-slate-50/60 border-t border-slate-100">
       <p className="sr-only">
         示意图：过去与 AI 初期是人到工具的单向传递，入视后下行一次即停；现在人与 Agent 持续进入工作流并交付业务结果。
       </p>

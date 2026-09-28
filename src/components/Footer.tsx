@@ -5,7 +5,7 @@ import { COMPANY_INFO } from "@/data/company";
 
 export function Footer() {
   return (
-    <footer className="bg-white text-slate-600 border-t border-slate-100 pt-16 pb-12">
+    <footer aria-label="页脚" className="bg-white text-slate-600 border-t border-slate-100 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-16 border-b border-slate-100">
           {/* Col 1: Brand Info (5 cols) */}
@@ -44,67 +44,67 @@ export function Footer() {
           </div>
 
           {/* Col 2: 产品与方案 (2 cols) */}
-          <div className="md:col-span-2 space-y-3">
+          <nav aria-label="产品与方案" className="md:col-span-2 space-y-3">
             <h4 className="text-sm font-bold text-slate-900">
               产品与方案
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-500">
+            <ul className="space-y-1 text-xs sm:text-sm text-slate-500">
               <li>
-                <Link href="/haflow" className="hover:text-blue-600 transition-colors">
+                <Link href="/haflow" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   HAFlow
                 </Link>
               </li>
               <li>
-                <Link href="/problems" className="hover:text-blue-600 transition-colors">
+                <Link href="/problems" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   行业解决方案
                 </Link>
               </li>
               <li>
-                <Link href="/cases" className="hover:text-blue-600 transition-colors">
+                <Link href="/cases" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   客户案例
                 </Link>
               </li>
               <li>
-                <Link href="/methodology" className="hover:text-blue-600 transition-colors">
+                <Link href="/methodology" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   共事方法论
                 </Link>
               </li>
               <li>
-                <Link href="/training" className="hover:text-blue-600 transition-colors">
+                <Link href="/training" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   公益实战培训
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Col 3: 关于我们 (2 cols) */}
-          <div className="md:col-span-2 space-y-3">
+          <nav aria-label="关于我们" className="md:col-span-2 space-y-3">
             <h4 className="text-sm font-bold text-slate-900">
               关于我们
             </h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-500">
+            <ul className="space-y-1 text-xs sm:text-sm text-slate-500">
               <li>
-                <Link href="/about" className="hover:text-blue-600 transition-colors">
+                <Link href="/about" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   公司介绍
                 </Link>
               </li>
               <li>
-                <Link href="/insights" className="hover:text-blue-600 transition-colors">
+                <Link href="/insights" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   观点与实践
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-blue-600 transition-colors">
+                <Link href="/about" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   加入我们
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-blue-600 transition-colors">
+                <Link href="/contact" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   联系我们
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Col 4: 关注我们 (3 cols with QR Code) */}
           <div className="md:col-span-3 flex flex-col items-start md:items-end space-y-3">
@@ -114,6 +114,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               title="点击查看公众号二维码大图"
+              aria-label="查看共事智能官方公众号二维码大图"
               className="w-28 h-28 p-2 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center transition-transform hover:scale-105 cursor-pointer block"
             >
               <Image
@@ -146,7 +147,7 @@ export function Footer() {
                 href="https://beian.miit.gov.cn/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-slate-600 transition-colors"
+                className="hover:text-slate-600 transition-colors inline-flex items-center min-h-[44px]"
               >
                 {COMPANY_INFO.contact.icp}
               </a>

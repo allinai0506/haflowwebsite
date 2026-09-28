@@ -38,24 +38,24 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
-      <nav aria-label="Breadcrumb" className="py-4">
-        <ol className="flex items-center flex-wrap gap-1.5 text-xs text-slate-500">
+      <nav aria-label="面包屑导航" className="py-4">
+        <ol className="flex items-center flex-wrap gap-x-1.5 gap-y-2 text-xs text-slate-500">
           <li className="flex items-center">
             <Link
               href="/"
-              className="hover:text-slate-900 transition-colors flex items-center gap-1"
+              className="hover:text-slate-900 transition-colors flex items-center gap-1 min-h-[44px] py-2"
             >
-              <Home className="w-3.5 h-3.5" />
+              <Home className="w-3.5 h-3.5" aria-hidden="true" />
               <span>首页</span>
             </Link>
           </li>
           {items.map((item, idx) => (
             <li key={idx} className="flex items-center gap-1.5">
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" aria-hidden="true" />
               {item.href ? (
                 <Link
                   href={item.href}
-                  className="hover:text-slate-900 transition-colors"
+                  className="hover:text-slate-900 transition-colors inline-flex items-center min-h-[44px] py-2"
                 >
                   {item.label}
                 </Link>

@@ -90,8 +90,8 @@ export function DiagnoseForm() {
 
           {/* Error Banner */}
           {submittedStatus === "error" && (
-            <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+            <div role="alert" className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" aria-hidden="true" />
               <div className="text-xs leading-relaxed">
                 <strong className="font-bold text-rose-950 block text-sm mb-0.5">
                   提交遇到问题
@@ -104,13 +104,15 @@ export function DiagnoseForm() {
           {/* Contact Base Info */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                您的姓名 <span className="text-rose-500">*</span>
+              <label htmlFor="diagnose-name" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                您的姓名 <span className="text-rose-500" aria-hidden="true">*</span>
               </label>
               <input
                 type="text"
+                id="diagnose-name"
                 name="name"
                 required
+                autoComplete="name"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="例如：张先生 / 李女士"
@@ -119,13 +121,15 @@ export function DiagnoseForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                企业 / 机构全称 <span className="text-rose-500">*</span>
+              <label htmlFor="diagnose-company" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                企业 / 机构全称 <span className="text-rose-500" aria-hidden="true">*</span>
               </label>
               <input
                 type="text"
+                id="diagnose-company"
                 name="company"
                 required
+                autoComplete="organization"
                 value={formData.company}
                 onChange={handleChange}
                 placeholder="例如：某国际供应链物流有限公司"
@@ -134,13 +138,15 @@ export function DiagnoseForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                手机号或微信号 <span className="text-rose-500">*</span>
+              <label htmlFor="diagnose-contact" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                手机号或微信号 <span className="text-rose-500" aria-hidden="true">*</span>
               </label>
               <input
                 type="text"
+                id="diagnose-contact"
                 name="contact"
                 required
+                autoComplete="tel"
                 value={formData.contact}
                 onChange={handleChange}
                 placeholder="便于接收诊断报告与方案沟通"
@@ -149,11 +155,12 @@ export function DiagnoseForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+              <label htmlFor="diagnose-department" className="block text-xs font-semibold text-slate-700 mb-1.5">
                 所属部门 / 业务条线
               </label>
               <input
                 type="text"
+                id="diagnose-department"
                 name="department"
                 value={formData.department}
                 onChange={handleChange}
@@ -166,10 +173,11 @@ export function DiagnoseForm() {
           {/* Problem Breakdown Fields */}
           <div className="space-y-4 pt-4 border-t border-slate-100">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                1. 想解决的具体业务问题是什么？ <span className="text-rose-500">*</span>
+              <label htmlFor="diagnose-problem" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                1. 想解决的具体业务问题是什么？ <span className="text-rose-500" aria-hidden="true">*</span>
               </label>
               <textarea
+                id="diagnose-problem"
                 name="problem"
                 required
                 rows={3}
@@ -181,10 +189,11 @@ export function DiagnoseForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+              <label htmlFor="diagnose-process" className="block text-xs font-semibold text-slate-700 mb-1.5">
                 2. 目前工作中是怎样处理的？最耗时的是哪一步？
               </label>
               <textarea
+                id="diagnose-process"
                 name="currentProcess"
                 rows={2}
                 value={formData.currentProcess}
@@ -196,11 +205,12 @@ export function DiagnoseForm() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                <label htmlFor="diagnose-systems" className="block text-xs font-semibold text-slate-700 mb-1.5">
                   3. 涉及哪些现有系统与文档材料？
                 </label>
                 <input
                   type="text"
+                  id="diagnose-systems"
                   name="systemsAndDocs"
                   value={formData.systemsAndDocs}
                   onChange={handleChange}
@@ -210,11 +220,12 @@ export function DiagnoseForm() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                <label htmlFor="diagnose-outcome" className="block text-xs font-semibold text-slate-700 mb-1.5">
                   4. 希望取得的理想交付结果是什么？
                 </label>
                 <input
                   type="text"
+                  id="diagnose-outcome"
                   name="expectedOutcome"
                   value={formData.expectedOutcome}
                   onChange={handleChange}
@@ -239,22 +250,22 @@ export function DiagnoseForm() {
           >
             {submitting ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin text-white" />
+                <Loader2 className="w-4 h-4 animate-spin text-white" aria-hidden="true" />
                 <span>正在提交评估需求...</span>
               </>
             ) : (
               <>
                 <span>提交业务问题评估</span>
-                <Send className="w-4 h-4 text-white" />
+                <Send className="w-4 h-4 text-white" aria-hidden="true" />
               </>
             )}
           </button>
         </form>
       ) : (
         /* Real Success State with Confirmation Receipt */
-        <div className="py-4 space-y-6 text-left animate-in fade-in duration-300">
+        <div role="status" className="py-4 space-y-6 text-left animate-in fade-in duration-300">
           <div className="flex items-start gap-4 p-5 rounded-2xl bg-emerald-50 border border-emerald-200">
-            <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0" aria-hidden="true">
               <Check className="w-6 h-6 stroke-[3]" />
             </div>
             <div className="space-y-1">
@@ -329,18 +340,18 @@ export function DiagnoseForm() {
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+              className="inline-flex items-center gap-1.5 min-h-[44px] px-2 text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
               <span>提交另一个业务问题</span>
             </button>
             <div className="flex items-center gap-3">
               <Link
                 href="/cases"
-                className="text-xs text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1"
+                className="text-xs text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1 min-h-[44px] px-2"
               >
                 <span>查看其他客户落地案例</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
               </Link>
             </div>
           </div>

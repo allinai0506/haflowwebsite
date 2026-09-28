@@ -36,13 +36,13 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* 1. HERO SECTION - Exact layout and typography from 网页参考.png */}
-      <section className="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden bg-white">
+      <section className="relative pt-10 pb-12 sm:pt-12 sm:pb-16 lg:pt-20 lg:pb-24 overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
             {/* Left Column: Hero Text */}
             <div className="lg:col-span-5 space-y-6 text-left">
               {/* Main Headline：视觉保持原样，sr-only 前缀给百度补核心关键词 */}
-              <h1 className="hero-copy-enter text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.12]">
+              <h1 className="hero-copy-enter text-[32px] sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.15] text-balance">
                 <span className="sr-only">共事智能企业AI落地：</span>让企业进入
                 <br />
                 <span className="text-slate-900">人机共事时代</span>
@@ -69,19 +69,19 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Dual Action Buttons matching reference image */}
-              <div className="hero-copy-enter hero-copy-d3 pt-4 flex flex-wrap items-center gap-4">
+              {/* Dual Action Buttons matching reference image：移动端全宽堆叠 */}
+              <div className="hero-copy-enter hero-copy-d3 pt-4 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
                 <Link
                   href="/haflow"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shadow-md hover:shadow-lg shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-full transition-all shadow-md hover:shadow-lg shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                 >
                   <span>了解 HAFlow</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </Link>
 
                 <Link
                   href="/cases"
-                  className="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold text-blue-600 hover:text-blue-700 bg-white hover:bg-blue-50/50 rounded-full border border-blue-200 transition-colors shadow-2xs cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                  className="inline-flex items-center justify-center px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-blue-600 hover:text-blue-700 active:bg-blue-100 bg-white hover:bg-blue-50/50 rounded-full border border-blue-200 transition-colors shadow-2xs cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                 >
                   <span>查看真实案例</span>
                 </Link>
@@ -143,7 +143,7 @@ export default function HomePage() {
       <OurBeliefBanner />
 
       {/* 6. CONCRETE PROBLEM SOLVING & LIVE SIMULATION (Reinforcing Business Power) */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200/80">
+      <section className="py-12 sm:py-20 bg-slate-50 border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12">
             <SectionEyebrow className="mb-2">Concrete Problems</SectionEyebrow>
@@ -180,7 +180,7 @@ export default function HomePage() {
       </section>
 
       {/* 7. MONTHLY FREE WORKSHOPS SECTION (Embodying Gongshi's Attitude) */}
-      <section className="py-20 bg-white border-t border-slate-100">
+      <section className="py-12 sm:py-20 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <SectionEyebrow className="mb-2">Free Training</SectionEyebrow>
@@ -245,7 +245,7 @@ export default function HomePage() {
       <Testimonials />
 
       {/* 9. BOTTOM CONTACT CTA */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-white text-slate-900 text-center border-t border-slate-100">
+      <section className="py-12 sm:py-20 bg-gradient-to-b from-slate-50 to-white text-slate-900 text-center border-t border-slate-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-950 mb-4">
             带着一个具体业务问题来交流
@@ -254,16 +254,16 @@ export default function HomePage() {
             从一次复杂报价、一份标书审核、一次日级订货预测开始。我们帮您用 AI 做出真实结果。
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shadow-md shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center px-8 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-full transition-all shadow-md shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             >
               联系我们
             </Link>
             <Link
               href="/diagnose"
-              className="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold text-blue-600 hover:text-blue-700 bg-white hover:bg-blue-50/60 rounded-full border border-blue-200 transition-colors shadow-2xs cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-blue-600 hover:text-blue-700 active:bg-blue-100 bg-white hover:bg-blue-50/60 rounded-full border border-blue-200 transition-colors shadow-2xs cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             >
               在线问题诊断
             </Link>

@@ -55,6 +55,9 @@ export const metadata: Metadata = {
   // 各页面（含动态详情页）在 generateMetadata/metadata 中声明绝对 canonical。
   other: {
     "applicable-device": "pc,mobile",
+    // 百度站长 PHTML 标签验证：必须输出到首页 <head> 内
+    "baidu-site-verification":
+      process.env.NEXT_PUBLIC_BAIDU_VERIFICATION || "codeva-14uL2L1zsa",
   },
   openGraph: {
     type: "website",
@@ -120,11 +123,31 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        {/* 百度统计：tongji.baidu.com 原样代码（勿改格式，百度按此检测安装状态） */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ccc65e8c67181fa1170784a1c40da717";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();`,
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
         <BaiduSeoScripts />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-full focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          跳到主要内容
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1 scroll-mt-20">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

@@ -19,6 +19,21 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // 移动端抽屉：Esc 关闭 + 打开时锁住背景滚动
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [mobileMenuOpen]);
+
   const [prevPathname, setPrevPathname] = useState(pathname);
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
@@ -44,7 +59,7 @@ export function Header() {
           : "bg-white border-b border-slate-100"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between">
         {/* Left: Brand Identity matching reference image */}
         <Link
           href="/"
@@ -82,6 +97,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`text-sm font-medium transition-colors px-2 py-1 rounded-md cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 ${
                   isActive
                     ? "text-blue-600 font-semibold"
@@ -104,24 +120,35 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle Button */}
+        {/* Mobile Menu Toggle Button：命中区 44px 起步 */}
         <div className="flex md:hidden items-center">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-slate-700 hover:text-slate-950 rounded-lg hover:bg-slate-100 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 text-slate-700 hover:text-slate-950 rounded-lg hover:bg-slate-100 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
             aria-label={mobileMenuOpen ? "关闭导航菜单" : "打开导航菜单"}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" aria-hidden="true" />
+            ) : (
+              <Menu className="w-6 h-6" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg animate-in slide-in-from-top-2 duration-200">
-          <div className="flex flex-col space-y-1">
+        <div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="移动端导航菜单"
+          className="md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-4rem)] overflow-y-auto"
+        >
+          <nav aria-label="移动端主要导航" className="flex flex-col space-y-1">
             {navLinks.map((link) => {
               const isActive =
                 pathname === link.href ||
@@ -131,7 +158,8 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-base font-medium ${
+                  aria-current={isActive ? "page" : undefined}
+                  className={`flex items-center justify-between px-3 py-3 min-h-[44px] rounded-lg text-base font-medium ${
                     isActive
                       ? "text-blue-600 bg-blue-50 font-semibold"
                       : "text-slate-700 hover:text-slate-950 hover:bg-slate-50"
@@ -141,7 +169,7 @@ export function Header() {
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
           <div className="pt-3 border-t border-slate-100">
             <Link

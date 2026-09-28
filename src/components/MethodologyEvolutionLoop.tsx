@@ -74,7 +74,8 @@ export function MethodologyEvolutionLoop() {
             <button
               type="button"
               onClick={() => setIsPlaying((prev) => !prev)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
+              aria-pressed={isPlaying}
+              className={`inline-flex items-center gap-1.5 px-3.5 py-2 min-h-[44px] rounded-full text-xs font-semibold border transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                 isPlaying
                   ? "bg-blue-600 text-white border-blue-600 shadow-xs"
                   : "bg-white text-slate-700 hover:text-blue-600 border-slate-200 hover:border-blue-300 shadow-2xs"
@@ -83,12 +84,12 @@ export function MethodologyEvolutionLoop() {
             >
               {isPlaying ? (
                 <>
-                  <Pause className="w-3 h-3 text-white" />
+                  <Pause className="w-3 h-3 text-white" aria-hidden="true" />
                   <span>暂停演示</span>
                 </>
               ) : (
                 <>
-                  <Play className="w-3 h-3 text-blue-600 fill-blue-600" />
+                  <Play className="w-3 h-3 text-blue-600 fill-blue-600" aria-hidden="true" />
                   <span>自动步进演示</span>
                 </>
               )}
@@ -145,7 +146,7 @@ export function MethodologyEvolutionLoop() {
                       {item.badge}
                     </span>
                   </div>
-                  <div className="mb-2">{stepIcons[idx]}</div>
+                  <div className="mb-2" aria-hidden="true">{stepIcons[idx]}</div>
                   <h4
                     className={`text-xs font-bold leading-tight ${
                       isSelected ? "text-blue-950 font-extrabold" : "text-slate-900"
@@ -259,26 +260,34 @@ export function MethodologyEvolutionLoop() {
               setIsPlaying(false);
               setActiveStep(activeStep === 1 ? 7 : activeStep - 1);
             }}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 min-h-[48px] rounded-xl bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-semibold transition-all cursor-pointer shadow-2xs outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
-            <ChevronLeft className="w-4 h-4 text-slate-500" />
+            <ChevronLeft className="w-4 h-4 text-slate-500" aria-hidden="true" />
             <span>上一步 (0{activeStep === 1 ? 7 : activeStep - 1})</span>
           </button>
 
-          <div className="flex items-center gap-1.5 text-xs text-slate-400 font-mono py-1">
+          <div className="flex items-center gap-1 text-xs text-slate-400 font-mono py-1" role="tablist" aria-label="步骤快捷跳转">
             {METHODOLOGY_DATA.evolutionLoop.map((s) => (
               <button
                 key={s.step}
                 type="button"
+                role="tab"
+                aria-selected={s.step === activeStep}
+                aria-label={`跳转到第 0${s.step} 步`}
                 onClick={() => {
                   setIsPlaying(false);
                   setActiveStep(s.step);
                 }}
-                className={`h-2 rounded-full transition-all cursor-pointer ${
-                  s.step === activeStep ? "w-6 bg-blue-600" : "w-2 bg-slate-300 hover:bg-slate-400"
-                }`}
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg"
                 title={`跳转到第 0${s.step} 步`}
-              />
+              >
+                <span
+                  aria-hidden="true"
+                  className={`h-2 rounded-full transition-all ${
+                    s.step === activeStep ? "w-6 bg-blue-600" : "w-2 bg-slate-300"
+                  }`}
+                />
+              </button>
             ))}
           </div>
 
@@ -288,17 +297,17 @@ export function MethodologyEvolutionLoop() {
               setIsPlaying(false);
               setActiveStep(activeStep === 7 ? 1 : activeStep + 1);
             }}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-all cursor-pointer shadow-xs"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 min-h-[48px] rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-semibold transition-all cursor-pointer shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             {activeStep === 7 ? (
               <>
-                <Repeat className="w-4 h-4 text-white" />
+                <Repeat className="w-4 h-4 text-white" aria-hidden="true" />
                 <span>闭环回流：01 真实业务问题</span>
               </>
             ) : (
               <>
                 <span>下一步 (0{activeStep + 1})</span>
-                <ChevronRight className="w-4 h-4 text-white" />
+                <ChevronRight className="w-4 h-4 text-white" aria-hidden="true" />
               </>
             )}
           </button>

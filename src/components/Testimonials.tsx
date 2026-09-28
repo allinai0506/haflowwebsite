@@ -125,7 +125,7 @@ export function Testimonials() {
   const [featured, ...rest] = activeItems;
 
   return (
-    <section className="py-20 bg-slate-50 border-t border-slate-200/80">
+    <section className="py-12 sm:py-20 bg-slate-50 border-t border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* PaceUI 式居中头：pill + 大标题 + 居中副标题 */}
         <div className="max-w-3xl mx-auto text-center mb-10">

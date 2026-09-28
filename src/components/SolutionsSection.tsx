@@ -7,7 +7,7 @@ import { EvolutionPath } from "@/components/EvolutionPath";
 
 export function SolutionsSection() {
   return (
-    <section className="py-20 bg-white border-t border-slate-100" id="solutions-section">
+    <section className="py-12 sm:py-20 bg-white border-t border-slate-100" id="solutions-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header with user-directed positioning */}
         <div className="max-w-3xl mb-12 space-y-3">
@@ -56,10 +56,10 @@ export function SolutionsSection() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 shrink-0 w-full lg:w-auto">
             <Link
               href="/cases"
-              className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shadow-md shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 min-h-[48px] w-full sm:w-auto text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-full transition-all shadow-md shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             >
               <span>找和您最像的案例</span>
               <ArrowRight className="w-4 h-4" />

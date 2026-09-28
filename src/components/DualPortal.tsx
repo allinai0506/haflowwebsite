@@ -4,7 +4,7 @@ import { ArrowRight, Wrench, GraduationCap, CheckCircle2 } from "lucide-react";
 
 export function DualPortal() {
   return (
-    <section className="py-20 bg-white border-t border-slate-100">
+    <section className="py-12 sm:py-20 bg-white border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <div className="max-w-3xl mx-auto text-center mb-14">

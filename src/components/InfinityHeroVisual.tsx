@@ -120,7 +120,7 @@ export function InfinityHeroVisual() {
           </div>
         ))}
 
-        <div className="hero-merge-human absolute z-20 cursor-pointer">
+        <div className="hero-merge-human absolute z-20">
           <div className="relative w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-white/95 via-white/85 to-blue-50/80 backdrop-blur-md border border-white/90 shadow-[0_8px_25px_rgba(37,99,235,0.18)] flex flex-col items-center justify-center p-1.5 sm:p-3 text-center group transition-transform duration-300 hover:scale-105">
             <div className="absolute top-1.5 sm:top-2 left-2 sm:left-4 w-5 sm:w-8 h-2.5 sm:h-4 rounded-full bg-gradient-to-b from-white to-transparent opacity-80" />
             <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-600 mb-0.5 sm:mb-1 shadow-[0_0_8px_rgba(37,99,235,0.6)] hero-flow-node-dot" />
@@ -133,7 +133,7 @@ export function InfinityHeroVisual() {
           </div>
         </div>
 
-        <div className="hero-merge-agent absolute z-20 cursor-pointer">
+        <div className="hero-merge-agent absolute z-20">
           <div className="relative w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-white/95 via-white/85 to-cyan-50/80 backdrop-blur-md border border-white/90 shadow-[0_8px_25px_rgba(2,132,199,0.18)] flex flex-col items-center justify-center p-1.5 sm:p-3 text-center group transition-transform duration-300 hover:scale-105">
             <div className="absolute top-1.5 sm:top-2 left-2 sm:left-4 w-5 sm:w-8 h-2.5 sm:h-4 rounded-full bg-gradient-to-b from-white to-transparent opacity-80" />
             <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-500 mb-0.5 sm:mb-1 shadow-[0_0_8px_rgba(6,182,212,0.6)] hero-flow-node-dot" />
@@ -146,7 +146,7 @@ export function InfinityHeroVisual() {
           </div>
         </div>
 
-        <div className="hero-merge-core absolute z-30 cursor-pointer">
+        <div className="hero-merge-core absolute z-30">
           <div className="hero-flow-core relative px-3 py-1.5 sm:px-6 sm:py-3.5 rounded-full bg-white/95 backdrop-blur-lg border border-blue-100/90 shadow-[0_10px_30px_rgba(15,23,42,0.12)] flex flex-col items-center justify-center text-center transition-transform duration-300 hover:scale-105">
             <span className="text-[9px] sm:text-xs font-bold tracking-widest text-slate-500 uppercase">
               In Flow
