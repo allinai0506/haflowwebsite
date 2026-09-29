@@ -15,6 +15,7 @@ import {
   Database,
 } from "lucide-react";
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
+import { ProductPreview } from "@/components/ProductPreview";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { COMPANY_INFO } from "@/data/company";
 import { pageSeo } from "@/lib/seo";
@@ -160,6 +161,19 @@ export default function HAFlowPage() {
 
         {/* Architecture Diagram */}
         <ArchitectureDiagram />
+
+        {/* Product Interface Preview */}
+        <div className="my-10">
+          <div className="max-w-3xl mb-4">
+            <span className="text-xs font-mono uppercase tracking-wider text-blue-600 font-bold block mb-1">
+              产品界面
+            </span>
+            <p className="text-xs sm:text-sm text-slate-500">
+              HAFlow 工作台：左侧导航、中间流程画布、右侧节点检查器，任务执行状态实时可见。
+            </p>
+          </div>
+          <ProductPreview />
+        </div>
 
         {/* 8 Core Capabilities */}
         <div className="my-10">
