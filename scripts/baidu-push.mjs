@@ -145,7 +145,20 @@ async function collectUrls() {
   return FALLBACK_URLS;
 }
 
-function push(urls, pushedSet) {
+// 百度偶发返回 505 "please retry later"（服务端繁忙/限流）。原实现直接放弃，
+// 结果当天配额被浪费、URL 也未记入已推记忆。这里改为带退避的重试。
+const MAX_ATTEMPTS = 3;
+// 退避可用 BAIDU_PUSH_RETRY_BACKOFF_MS 覆盖（测试或想更快重试时）
+const RETRY_BACKOFF_MS = process.env.BAIDU_PUSH_RETRY_BACKOFF_MS
+  ? Math.max(0, parseInt(process.env.BAIDU_PUSH_RETRY_BACKOFF_MS, 10) || 0)
+  : 30_000;
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+// 单次推送，返回结构化结果供上层重试逻辑判断
+function pushOnce(urls) {
   return new Promise((resolve) => {
     const postData = urls.join("\n");
     const apiUrl = `http://data.zz.baidu.com/urls?site=${SITE_PARAM}&token=${TOKEN}`;
@@ -170,26 +183,64 @@ function push(urls, pushedSet) {
             if (typeof json.success === "number") {
               console.log(`✅ 成功推送链接数: ${json.success}`);
               console.log(`当天剩余可推送链接配额: ${json.remain}`);
-              // 百度按顺序处理：只把确认成功的记入已推记忆
-              urls.slice(0, json.success).forEach((u) => pushedSet.add(u));
-              savePushed(pushedSet);
+              resolve({ ok: true, success: json.success });
             } else {
               console.error(`❌ 推送失败:`, json);
+              const msg = json.message || JSON.stringify(json);
+              resolve({
+                ok: false,
+                success: 0,
+                message: `error ${json.error ?? res.statusCode}: ${msg}`,
+              });
             }
           } catch {
             console.log("响应内容:", body);
+            resolve({ ok: false, success: 0, message: `非 JSON 响应 (HTTP ${res.statusCode})` });
           }
-          resolve();
         });
       },
     );
     req.on("error", (err) => {
       console.error("网络请求错误:", err.message);
-      resolve();
+      resolve({ ok: false, success: 0, message: err.message });
     });
     req.write(postData);
     req.end();
   });
+}
+
+// 带重试的推送：只有百度确认受理的 URL 才记入已推记忆，其余留待下次定时任务重试
+async function pushWithRetry(batch, pushedSet) {
+  let remaining = [...batch];
+  let totalAccepted = 0;
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS && remaining.length > 0; attempt++) {
+    const result = await pushOnce(remaining);
+    if (!result.ok) {
+      if (attempt < MAX_ATTEMPTS) {
+        const waitMs = RETRY_BACKOFF_MS * attempt;
+        console.log(`[重试] 第 ${attempt}/${MAX_ATTEMPTS - 1} 次失败（${result.message}），${waitMs / 1000}s 后重试...`);
+        await sleep(waitMs);
+      } else {
+        console.error(`❌ ${MAX_ATTEMPTS} 次尝试均失败（${result.message}），${remaining.length} 个 URL 未记入已推记忆`);
+      }
+      continue;
+    }
+    // 百度按顺序处理：只把确认成功的记入已推记忆
+    remaining.slice(0, result.success).forEach((u) => pushedSet.add(u));
+    totalAccepted += result.success;
+    savePushed(pushedSet, { lastAccepted: result.success });
+    remaining = remaining.slice(result.success);
+    if (remaining.length > 0 && attempt < MAX_ATTEMPTS) {
+      console.log(`[部分接受] 百度仅受理 ${result.success} 个，${RETRY_BACKOFF_MS / 1000}s 后重试剩余 ${remaining.length} 个...`);
+      await sleep(RETRY_BACKOFF_MS);
+    }
+  }
+
+  if (remaining.length > 0) {
+    console.log(`[未完成] ${remaining.length} 个 URL 本次未推送成功，下次定时任务将自动重试`);
+  }
+  return totalAccepted;
 }
 
 const startTime = new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
@@ -231,7 +282,7 @@ if (isDryRun) {
   process.exit(0);
 }
 
-await push(batch, pushed);
+await pushWithRetry(batch, pushed);
 
 const endTime = new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
 console.log(`[${endTime}] 百度 URL 主动推送定时任务结束\n`);
