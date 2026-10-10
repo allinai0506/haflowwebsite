@@ -29,7 +29,21 @@ export type InsightBlock =
   /** 加粗金句，视觉上作为该节的结论锚点 */
   | { type: "emphasis"; text: string }
   /** 可勾选行动清单 */
-  | { type: "checklist"; items: string[] };
+  | { type: "checklist"; items: string[] }
+  /**
+   * 配图。`width`/`height` 为图片原始像素（必填，用于预留空间避免布局抖动）。
+   * 路线图这类信息密度高的宽图建议配 `zoom: true`，窄屏可横向滚动查看细节。
+   */
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+      width: number;
+      height: number;
+      caption?: string;
+      /** 点击原图查看（宽图在窄屏不可读时的兜底） */
+      zoom?: boolean;
+    };
 
 export interface InsightSection {
   heading?: string;
@@ -453,6 +467,15 @@ export const INSIGHTS: InsightArticle[] = [
           {
             type: "paragraph",
             text: "前面讲了很多方法，但真正执行的时候，不需要一下子全部完成。我建议把前 90 天分成三个阶段。",
+          },
+          {
+            type: "image",
+            src: "/insights-90day-roadmap.webp",
+            alt: "中国企业 90 天打造 AI 原生团队行动路线图：按管理层、AI 推进负责人、各部门负责人、员工、知识库与培训、工具与系统六个角色，横跨 W1 至 W12 周次，划分准备与启动、试点与验证、推广与固化三个阶段，并列出关键里程碑与核心指标。",
+            width: 1586,
+            height: 992,
+            caption: "90 天行动路线图：三个阶段 × 六个角色 × 关键里程碑（点击可查看原图）",
+            zoom: true,
           },
           { type: "subheading", text: "第一个月：先让 AI 真正用起来" },
           {

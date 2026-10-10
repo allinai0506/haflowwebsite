@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Calendar, Clock, CheckCircle2, ChevronLeft } from "lucide-react";
 import { INSIGHTS, getInsightBySlug, type InsightBlock, type InsightRun } from "@/data/insights";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { ImageLightbox } from "@/components/ImageLightbox";
 import { pageSeo } from "@/lib/seo";
 
 /** 段落内文本 + 可选内链。link 为站内路径，external 为外链新窗口打开。 */
@@ -117,6 +118,39 @@ function InsightBlockView({ block }: { block: InsightBlock }) {
           </table>
         </div>
       );
+
+    case "image": {
+      // 宽图（路线图类）在窄屏必须能横向滚动，否则关键信息不可读。
+      // 用 overflow-x-auto 包裹 + min-w 保持原始宽度，滚动条提示可滑动。
+      const body = block.zoom ? (
+        // 用 aspect-ratio 预留空间：lightbox 内部是按钮，仍需显式占位避免 CLS
+        <div style={{ aspectRatio: `${block.width} / ${block.height}` }}>
+          <ImageLightbox src={block.src} alt={block.alt} caption={block.caption} />
+        </div>
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={block.src}
+          alt={block.alt}
+          width={block.width}
+          height={block.height}
+          loading="lazy"
+          decoding="async"
+          className="block w-full h-auto rounded-xl border border-slate-200"
+        />
+      );
+
+      return (
+        <figure className="space-y-2">
+          {body}
+          {block.caption && (
+            <figcaption className="text-xs text-slate-500 text-center leading-relaxed">
+              {block.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    }
   }
 }
 
