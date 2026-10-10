@@ -37,7 +37,8 @@
 │   └── /cases/freight-quotation           # 一次复杂国际货代报价（方案示例）
 ├── 每月免费培训 (/training)                 # 4场零基础公益公开课完整大纲、实操任务、真实待接入登记表单、常见问答
 ├── AI 应用诊断 (/diagnose)                 # 8维度业务诊断框架、在线需求评估表单（真实暂存与快捷复制）
-├── 观点与实践 (/insights)                  # 4篇深度工程思考与方法论手记
+├── 观点与实践 (/insights)                  # 5篇深度工程思考与方法论手记
+│   ├── /insights/ai-native-team-in-90-days # 中国企业90天打造AI原生团队行动手册
 │   ├── /insights/why-not-rebuild-monoliths # 为什么不主张推倒重来建“大模型平台”
 │   ├── /insights/where-rules-cannot-be-hardcoded # 规则写不死的地方才是 AI 着力点
 │   ├── /insights/human-agent-division-of-labor # 人和 Agent 怎样分工才不沦为玩具
@@ -83,6 +84,6 @@ pnpm start
 - `src/data/problems.ts`：解决具体问题的数据源（5个场景的要素、人机分工、对接系统、FAQ）
 - `src/data/cases.ts`：实践案例数据源（严格遵循 9 项结构，包含真实性声明）
 - `src/data/training.ts`：每月 4 场免费培训的教学大纲、日程、实操要求与问答
-- `src/data/insights.ts`：观点与实践文章内容与提纲
+- `src/data/insights.ts`：观点与实践文章内容与提纲（正文支持段落/列表/表格/金句四种富文本块，详见 `InsightBlock`）
 
 新增案例或修改课程无需重写页面组件，只需修改对应 TS 数据文件即可自动完成静态页面编译与 Sitemap 索引更新。

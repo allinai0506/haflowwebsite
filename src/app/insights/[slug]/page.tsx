@@ -3,9 +3,100 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Calendar, Clock, CheckCircle2, ChevronLeft } from "lucide-react";
-import { INSIGHTS, getInsightBySlug } from "@/data/insights";
+import { INSIGHTS, getInsightBySlug, type InsightBlock } from "@/data/insights";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { pageSeo } from "@/lib/seo";
+
+/**
+ * 正文块渲染器：段落 / 列表 / 表格 / 金句。
+ * 遵循 DESIGN.md——不用深色底，强调一律用蓝色浅底 + 蓝色描边。
+ */
+function InsightBlockView({ block }: { block: InsightBlock }) {
+  switch (block.type) {
+    case "paragraph":
+      return (
+        <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans">
+          {block.text}
+        </p>
+      );
+
+    case "subheading":
+      return (
+        <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-tight pt-3">
+          {block.text}
+        </h3>
+      );
+
+    case "emphasis":
+      return (
+        <p className="px-4 py-3 rounded-xl bg-blue-50 border-l-4 border-blue-600 text-sm sm:text-base font-bold text-blue-950 leading-relaxed">
+          {block.text}
+        </p>
+      );
+
+    case "checklist":
+      return (
+        <ul className="space-y-2 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200">
+          {block.items.map((item, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-sm text-slate-700 leading-relaxed">
+              <span
+                aria-hidden="true"
+                className="shrink-0 mt-0.5 w-4 h-4 rounded border-2 border-slate-300 bg-white"
+              />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      );
+
+    case "list": {
+      const Tag = block.ordered ? "ol" : "ul";
+      return (
+        <Tag className="space-y-2 pl-1">
+          {block.items.map((item, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-sm sm:text-base text-slate-700 leading-relaxed">
+              <span className="shrink-0 mt-0.5 w-5 h-5 rounded-md bg-blue-100 text-blue-700 font-mono text-[11px] font-bold flex items-center justify-center">
+                {block.ordered ? i + 1 : "·"}
+              </span>
+              <span>
+                {item.lead && <span className="font-bold text-slate-900">{item.lead}</span>}
+                {item.text}
+              </span>
+            </li>
+          ))}
+        </Tag>
+      );
+    }
+
+    case "table":
+      return (
+        <div className="overflow-x-auto rounded-2xl border border-slate-200">
+          <table className="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr className="bg-blue-50">
+                <th className="px-4 py-2.5 font-bold text-blue-900 whitespace-nowrap border-b border-blue-200">
+                  {block.head[0]}
+                </th>
+                <th className="px-4 py-2.5 font-bold text-blue-900 border-b border-blue-200">
+                  {block.head[1]}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row, i) => (
+                <tr key={i} className="border-b border-slate-100 last:border-0 even:bg-slate-50/60">
+                  <td className="px-4 py-2.5 font-semibold text-slate-900 whitespace-nowrap align-top">
+                    {row[0]}
+                  </td>
+                  <td className="px-4 py-2.5 text-slate-700 align-top">{row[1]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+  }
+}
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -118,16 +209,22 @@ export default async function InsightDetailPage({ params }: Props) {
         {/* Article Body Content */}
         <div className="my-10 space-y-8 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
           {article.contentParagraphs.map((para, idx) => (
-            <div key={idx} className="space-y-3">
+            <section key={idx} className="space-y-4">
               {para.heading && (
                 <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight pt-2">
                   {para.heading}
                 </h2>
               )}
-              <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans">
-                {para.body}
-              </p>
-            </div>
+              {para.blocks
+                ? para.blocks.map((block, bidx) => (
+                    <InsightBlockView key={bidx} block={block} />
+                  ))
+                : para.body && (
+                    <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans">
+                      {para.body}
+                    </p>
+                  )}
+            </section>
           ))}
         </div>
 
