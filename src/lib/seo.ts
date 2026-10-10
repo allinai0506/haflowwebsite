@@ -11,7 +11,7 @@ const SITE = "https://www.haflow.cn";
  * 文件名带 -v2：静态资源有 immutable 一年缓存，改图必须换文件名。
  */
 const OG_IMAGE = {
-  url: `${SITE}/og-cover-v13.jpg`,
+  url: `${SITE}/og-cover-v14.jpg`,
   width: 1200,
   height: 630,
   alt: "共事智能 HAFlow——企业 AI 落地，让人和 Agent 共同把事情做完",
@@ -27,7 +27,7 @@ interface PageSeoInput {
   keywords?: string[];
   ogType?: "website" | "article";
   /**
-   * 页面专属分享图（不含域名的站内路径）。留空则用全站默认 og-cover-v13.jpg。
+   * 页面专属分享图（不含域名的站内路径）。留空则用全站默认 og-cover-v14.jpg。
    * 文章/案例页可传自己的卡片，避免改动全站默认图影响其他页面。
    */
   ogImage?: { url: string; alt: string; width?: number; height?: number };

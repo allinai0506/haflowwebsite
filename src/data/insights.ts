@@ -63,7 +63,7 @@ export interface InsightArticle {
   readTime: string;
   summary: string;
   category: "技术认知" | "工程落地" | "企业实践";
-  /** 专属社交分享图；留空用全站默认 og-cover-v13.jpg */
+  /** 专属社交分享图；留空用全站默认 og-cover-v14.jpg */
   ogImage?: { src: string; alt: string };
   keyTakeaways: string[];
   contentParagraphs: InsightSection[];
