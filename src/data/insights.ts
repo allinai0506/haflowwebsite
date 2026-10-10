@@ -63,6 +63,8 @@ export interface InsightArticle {
   readTime: string;
   summary: string;
   category: "技术认知" | "工程落地" | "企业实践";
+  /** 专属社交分享图；留空用全站默认 og-cover.jpg */
+  ogImage?: { src: string; alt: string };
   keyTakeaways: string[];
   contentParagraphs: InsightSection[];
 }
@@ -78,6 +80,10 @@ export const INSIGHTS: InsightArticle[] = [
     category: "企业实践",
     summary:
       "给老板和管理者的一份 90 天行动手册：先找到一个人负责，挑出最值得改造的 10 件事，用两周把一个场景做出来，再按三个月逐步复制、协同，并附一份可直接打勾的行动清单。",
+    ogImage: {
+      src: "/og-insights-90day.jpg",
+      alt: "共事智能《中国企业 90 天打造 AI 原生团队》——准备与启动、试点与验证、推广与固化三个阶段的行动路线图",
+    },
     keyTakeaways: [
       "AI 原生不是全员都会写提示词，而是遇到一项工作时，先判断哪些由人做、哪些交给 AI、哪些人机共做。",
       "人人负责等于没人负责。先指定一个懂业务、愿学习、能推动的具名负责人，并给他明确的工作时间。",

@@ -174,6 +174,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: article.summary,
     keywords: [article.title, article.category, "共事智能观点", "AI Native"],
     ogType: "article",
+    ogImage: article.ogImage
+      ? { url: article.ogImage.src, alt: article.ogImage.alt, width: 1200, height: 630 }
+      : undefined,
   });
 }
 
@@ -202,7 +205,10 @@ export default async function InsightDetailPage({ params }: Props) {
       name: "共事智能",
     },
     mainEntityOfPage: `https://www.haflow.cn/insights/${article.slug}`,
-    image: "https://www.haflow.cn/og-cover.jpg",
+    // 与 og:image 保持一致：有专属卡片则用专属图，否则回落全站默认图
+    image: article.ogImage
+      ? `https://www.haflow.cn${article.ogImage.src}`
+      : "https://www.haflow.cn/og-cover.jpg",
   };
   const related = INSIGHTS.filter((i) => i.slug !== article.slug).slice(0, 2);
 
