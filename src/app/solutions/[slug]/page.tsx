@@ -50,7 +50,7 @@ export default async function SolutionDetailPage({ params }: Props) {
     description: solution.seoDescription,
     articleSection: solution.eyebrow,
     about: solution.title,
-    image: "https://www.haflow.cn/og-cover-v4.jpg",
+    image: "https://www.haflow.cn/og-cover-v5.jpg",
     author: {
       "@type": "Organization",
       name: "上海共事智能科技有限公司",
