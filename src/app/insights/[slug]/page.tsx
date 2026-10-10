@@ -208,7 +208,7 @@ export default async function InsightDetailPage({ params }: Props) {
     // 与 og:image 保持一致：有专属卡片则用专属图，否则回落全站默认图
     image: article.ogImage
       ? `https://www.haflow.cn${article.ogImage.src}`
-      : "https://www.haflow.cn/og-cover-v5.jpg",
+      : "https://www.haflow.cn/og-cover-v6.jpg",
   };
   const related = INSIGHTS.filter((i) => i.slug !== article.slug).slice(0, 2);
 

@@ -48,7 +48,7 @@ export function CaseStoryView({
     articleSection: item.category,
     about: item.industry,
     datePublished: item.timeline,
-    image: "https://www.haflow.cn/og-cover-v5.jpg",
+    image: "https://www.haflow.cn/og-cover-v6.jpg",
     author: {
       "@type": "Organization",
       name: "上海共事智能科技有限公司",
