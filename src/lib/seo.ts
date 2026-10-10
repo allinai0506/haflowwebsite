@@ -5,11 +5,16 @@ import type { Metadata } from "next";
  * 曾全站复用 layout 的相对 canonical "./" 与首页 OG URL，详情页去重信号错误。
  */
 const SITE = "https://www.haflow.cn";
+/**
+ * 全站默认分享图。白底居中构图：左侧文字落在中心 600px 安全区内，
+ * 微信按方图裁切时 logo/标题/副标题仍完整；右侧同心圆呼应 logo 意象。
+ * 文件名带 -v2：静态资源有 immutable 一年缓存，改图必须换文件名。
+ */
 const OG_IMAGE = {
-  url: `${SITE}/og-cover.jpg`,
+  url: `${SITE}/og-cover-v2.jpg`,
   width: 1200,
   height: 630,
-  alt: "共事智能 HAFlow_企业AI落地",
+  alt: "共事智能 HAFlow——企业 AI 落地，让人和 Agent 共同把事情做完",
 };
 
 interface PageSeoInput {
@@ -22,7 +27,7 @@ interface PageSeoInput {
   keywords?: string[];
   ogType?: "website" | "article";
   /**
-   * 页面专属分享图（不含域名的站内路径）。留空则用全站默认 og-cover.jpg。
+   * 页面专属分享图（不含域名的站内路径）。留空则用全站默认 og-cover-v2.jpg。
    * 文章/案例页可传自己的卡片，避免改动全站默认图影响其他页面。
    */
   ogImage?: { url: string; alt: string; width?: number; height?: number };
