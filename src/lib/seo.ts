@@ -6,15 +6,16 @@ import type { Metadata } from "next";
  */
 const SITE = "https://www.haflow.cn";
 /**
- * 全站默认分享图。白底居中构图：左侧文字落在中心 600px 安全区内，
- * 微信按方图裁切时 logo/标题/副标题仍完整；右侧同心圆呼应 logo 意象。
- * 文件名带 -v2：静态资源有 immutable 一年缓存，改图必须换文件名。
+ * 全站默认分享图。正方形 1200×1200，纯白背景，
+ * 居中放置 HAFlow logo 与「共事智能」，二者视觉像素边界左右对齐。
+ * 逐像素扫描验证：icon 374~824 / 文字 375~825（偏差 1px）。
+ * 文件名 og-cover-square.jpg：静态资源有 immutable 一年缓存，改图须换文件名。
  */
 const OG_IMAGE = {
-  url: `${SITE}/og-cover-v14.jpg`,
+  url: `${SITE}/og-cover-square.jpg`,
   width: 1200,
-  height: 630,
-  alt: "共事智能 HAFlow——企业 AI 落地，让人和 Agent 共同把事情做完",
+  height: 1200,
+  alt: "共事智能 HAFlow",
 };
 
 interface PageSeoInput {
@@ -27,7 +28,7 @@ interface PageSeoInput {
   keywords?: string[];
   ogType?: "website" | "article";
   /**
-   * 页面专属分享图（不含域名的站内路径）。留空则用全站默认 og-cover-v14.jpg。
+   * 页面专属分享图（不含域名的站内路径）。留空则用全站默认 og-cover-square.jpg。
    * 文章/案例页可传自己的卡片，避免改动全站默认图影响其他页面。
    */
   ogImage?: { url: string; alt: string; width?: number; height?: number };

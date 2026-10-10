@@ -69,9 +69,9 @@ export const metadata: Metadata = {
       "上海共事智能：不做大系统，只用AI帮企业解决一个个具体问题。让人和Agent共同把事情做完。",
     images: [
       {
-        url: "https://www.haflow.cn/og-cover-v14.jpg",
+        url: "https://www.haflow.cn/og-cover-square.jpg",
         width: 1200,
-        height: 630,
+        height: 1200,
         alt: "共事智能 HAFlow——企业 AI 落地，让人和 Agent 共同把事情做完",
       },
     ],
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "共事智能_企业AI落地_HAFlow人机协同",
     description: "不做大系统，只用AI帮企业解决一个个具体问题。",
-    images: ["https://www.haflow.cn/og-cover-v14.jpg"],
+    images: ["https://www.haflow.cn/og-cover-square.jpg"],
   },
 };
 
