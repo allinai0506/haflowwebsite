@@ -2,13 +2,28 @@
  * 正文富文本块。长文（方法论/清单体）需要列表、表格与金句，
  * 短文仍可用 `contentParagraphs[].body` 单段纯文字，两者共存且互相兼容。
  */
+/**
+ * 段落内的一段文本。`link` 非空时渲染为站内锚点，
+ * 用于正文自然嵌入内链（长文 SEO 权重传递 + 读者路径）。
+ * 需要多条链接时把同一段拆成多个 entry 即可。
+ */
+export interface InsightRun {
+  text: string;
+  /** 站内绝对路径，如 "/problems/quote"；外链请用完整 URL */
+  link?: string;
+  /** 锚点是否在新标签打开（外链用 true） */
+  external?: boolean;
+}
+
 export type InsightBlock =
   /** 普通段落 */
   | { type: "paragraph"; text: string }
+  /** 带内链的段落：正文长文的常规写法 */
+  | { type: "paragraph"; runs: InsightRun[] }
   /** 小节标题（h3），用于「第一个月 / 第二个月」这类阶段划分 */
   | { type: "subheading"; text: string }
-  /** 无序列表 / 有序列表；`lead` 为每项前缀的加粗引导词，如「第 1-3 天：」 */
-  | { type: "list"; ordered?: boolean; items: { text: string; lead?: string }[] }
+  /** 无序列表 / 有序列表；`lead` 为每项前缀的加粗引导词，如「第 1-3 天：」；`runs` 支持项内内链 */
+  | { type: "list"; ordered?: boolean; items: { text?: string; runs?: InsightRun[]; lead?: string }[] }
   /** 两列表格（部门场景、指标对照等） */
   | { type: "table"; head: [string, string]; rows: [string, string][] }
   /** 加粗金句，视觉上作为该节的结论锚点 */
@@ -100,7 +115,13 @@ export const INSIGHTS: InsightArticle[] = [
           {
             type: "list",
             items: [
-              { text: "客户提出需求以后，AI 可以协助整理需求、查询产品资料、生成报价初稿。" },
+              {
+                runs: [
+                  { text: "客户提出需求以后，AI 可以协助整理需求、查询产品资料、生成报价初稿。这类场景我们在" },
+                  { text: "智能报价", link: "/problems/quote" },
+                  { text: "里拆解过。" },
+                ],
+              },
               { text: "销售人员负责判断报价是否合理，与客户沟通，处理特殊情况。" },
               { text: "客户沟通结束以后，AI 协助整理跟进记录，并根据确认的信息更新 CRM。" },
               { text: "原来需要销售人员在多个系统之间反复操作的工作，现在由人和 AI 共同完成。" },
@@ -179,7 +200,17 @@ export const INSIGHTS: InsightArticle[] = [
           },
           {
             type: "paragraph",
-            text: "比如，一家企业每个月需要编写几十份投标文件。过去工作人员需要逐页阅读招标文件，寻找评分标准、技术要求、商务条款；现在可以先让 AI 协助提取这些信息，再由工作人员核对原文。如果确实能减少重复劳动并保证准确性，这就是一个很好的切入点。相比之下，一开始就想让 AI 自动管理整个销售部门显然不现实。",
+            runs: [
+              {
+                text: "比如，一家企业每个月需要编写几十份投标文件。过去工作人员需要逐页阅读招标文件，寻找评分标准、技术要求、商务条款；现在可以先让 AI 协助提取这些信息，再由工作人员核对原文。如果确实能减少重复劳动并保证准确性，这就是一个很好的切入点——我们在",
+              },
+              { text: "标书质量核查", link: "/problems/bid-audit" },
+              { text: "和", },
+              { text: "几百页招标文件废标风险穿透核验", link: "/cases/bid-compliance" },
+              {
+                text: "两个案例里都验证过。相比之下，一开始就想让 AI 自动管理整个销售部门显然不现实。",
+              },
+            ],
           },
           { type: "emphasis", text: "先解决一个具体问题，比做十场培训更有说服力。" },
         ],
@@ -189,7 +220,11 @@ export const INSIGHTS: InsightArticle[] = [
         blocks: [
           {
             type: "paragraph",
-            text: "找到场景以后，不要急着采购一整套 AI 平台，先验证这件事能不能做。我建议采用一个简单的办法：选择一个场景，让业务人员和懂 AI 的人一起，用两周时间做出一个能用的版本。以报价流程为例——",
+            runs: [
+              { text: "找到场景以后，不要急着采购一整套 AI 平台，先验证这件事能不能做。我建议采用一个简单的办法：选择一个场景，让业务人员和懂 AI 的人一起，用两周时间做出一个能用的版本——这就是我们说的" },
+              { text: "两周最小验证法", link: "/insights/two-week-mvp-methodology" },
+              { text: "。以报价流程为例——" },
+            ],
           },
           {
             type: "list",
@@ -304,7 +339,13 @@ export const INSIGHTS: InsightArticle[] = [
           { type: "emphasis", text: "真正值得追求的是：AI 能够在原来的业务流程中工作。" },
           {
             type: "paragraph",
-            text: "以客户报价为例：销售提交客户需求，AI 协助分析需求、查询资料、生成报价草稿；涉及价格调整、特殊条款时，由相关负责人审批；审批通过以后，再生成正式报价文件。整个过程中，人负责判断和决策，AI 负责适合自动化的工作。再比如投标：AI 协助解析招标文件、提取评分项、检查标书内容，投标负责人审核结果，确认以后进入下一环节。这才是人和 AI 真正协同。",
+            runs: [
+              {
+                text: "以客户报价为例：销售提交客户需求，AI 协助分析需求、查询资料、生成报价草稿；涉及价格调整、特殊条款时，由相关负责人审批；审批通过以后，再生成正式报价文件。整个过程中，人负责判断和决策，AI 负责适合自动化的工作。再比如投标：AI 协助解析招标文件、提取评分项、检查标书内容，投标负责人审核结果，确认以后进入下一环节。这才是人和 AI 真正协同——我们在",
+              },
+              { text: "HAFlow", link: "/haflow" },
+              { text: "里把它做成了可复用的底层能力。" },
+            ],
           },
           {
             type: "paragraph",
@@ -525,7 +566,13 @@ export const INSIGHTS: InsightArticle[] = [
           },
           {
             type: "paragraph",
-            text: "当这些问题明确以后，再把人、AI 和企业现有的系统组织到同一条工作流程里。这就是我理解的：",
+            runs: [
+              { text: "当这些问题明确以后，再把人、AI 和企业现有的系统组织到同一条工作流程里。这就是" },
+              { text: "共事", link: "/about" },
+              { text: "名字的由来，也是我们对" },
+              { text: "HAFlow", link: "/haflow" },
+              { text: "的定位：" },
+            ],
           },
           { type: "emphasis", text: "Human + Agent, in Flow." },
           {
@@ -538,7 +585,11 @@ export const INSIGHTS: InsightArticle[] = [
           },
           {
             type: "paragraph",
-            text: "企业需要的，不只是更多 AI 工具，而是一种能够持续改进工作流程的能力。",
+            runs: [
+              { text: "企业需要的，不只是更多 AI 工具，而是一种能够持续改进工作流程的能力。完整的实施思路与阶段划分，我们在" },
+              { text: "方法论", link: "/methodology" },
+              { text: "里展开过。" },
+            ],
           },
           {
             type: "paragraph",
@@ -553,7 +604,11 @@ export const INSIGHTS: InsightArticle[] = [
         blocks: [
           {
             type: "paragraph",
-            text: "如果你准备在接下来的 90 天里推动 AI 落地，可以从下面这些事情开始：",
+            runs: [
+              { text: "如果你准备在接下来的 90 天里推动 AI 落地，可以从下面这些事情开始。若不确定先动哪一件，也可以带着具体业务问题来做一次" },
+              { text: "AI 应用诊断", link: "/diagnose" },
+              { text: "：" },
+            ],
           },
           {
             type: "checklist",

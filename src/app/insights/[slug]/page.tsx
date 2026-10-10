@@ -3,9 +3,31 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Calendar, Clock, CheckCircle2, ChevronLeft } from "lucide-react";
-import { INSIGHTS, getInsightBySlug, type InsightBlock } from "@/data/insights";
+import { INSIGHTS, getInsightBySlug, type InsightBlock, type InsightRun } from "@/data/insights";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { pageSeo } from "@/lib/seo";
+
+/** 段落内文本 + 可选内链。link 为站内路径，external 为外链新窗口打开。 */
+function InsightRuns({ runs }: { runs: InsightRun[] }) {
+  return (
+    <>
+      {runs.map((run, i) =>
+        run.link ? (
+          <Link
+            key={i}
+            href={run.link}
+            {...(run.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            className="text-blue-700 font-semibold hover:text-blue-800 underline decoration-blue-300 decoration-2 underline-offset-4 hover:decoration-blue-600 transition-colors"
+          >
+            {run.text}
+          </Link>
+        ) : (
+          <span key={i}>{run.text}</span>
+        )
+      )}
+    </>
+  );
+}
 
 /**
  * 正文块渲染器：段落 / 列表 / 表格 / 金句。
@@ -16,7 +38,7 @@ function InsightBlockView({ block }: { block: InsightBlock }) {
     case "paragraph":
       return (
         <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-sans">
-          {block.text}
+          {"runs" in block ? <InsightRuns runs={block.runs} /> : block.text}
         </p>
       );
 
@@ -60,7 +82,7 @@ function InsightBlockView({ block }: { block: InsightBlock }) {
               </span>
               <span>
                 {item.lead && <span className="font-bold text-slate-900">{item.lead}</span>}
-                {item.text}
+                {item.runs ? <InsightRuns runs={item.runs} /> : item.text}
               </span>
             </li>
           ))}
