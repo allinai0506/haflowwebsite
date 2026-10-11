@@ -6,6 +6,8 @@ import { ArrowRight, Calendar, Clock, CheckCircle2, ChevronLeft } from "lucide-r
 import { INSIGHTS, getInsightBySlug, type InsightBlock, type InsightRun } from "@/data/insights";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ImageLightbox } from "@/components/ImageLightbox";
+import { InsightDualLoop } from "@/components/InsightDualLoop";
+import { InsightTimeline } from "@/components/InsightTimeline";
 import { pageSeo } from "@/lib/seo";
 
 /** 段落内文本 + 可选内链。link 为站内路径，external 为外链新窗口打开。 */
@@ -58,7 +60,7 @@ function InsightBlockView({ block }: { block: InsightBlock }) {
       );
 
     case "code":
-      // 等宽原样文本：日志时间线、ASCII 架构图。必须横向滚动，折行会毁掉对齐。
+      // 等宽原样文本：命令行输出、片段引用。必须横向滚动，折行会毁掉对齐。
       return (
         <figure className="space-y-2">
           <pre className="overflow-x-auto rounded-2xl bg-slate-900 p-4 sm:p-5 border border-slate-800">
@@ -72,6 +74,19 @@ function InsightBlockView({ block }: { block: InsightBlock }) {
             </figcaption>
           )}
         </figure>
+      );
+
+    case "diagram":
+      // 架构图 / 流程图 / 时间线：结构化图形用 CSS 渲染，不用字符框线
+      return (
+        <>
+          {block.variant === "dual-loop" ? <InsightDualLoop /> : <InsightTimeline />}
+          {block.caption && (
+            <figcaption className="text-xs text-slate-500 text-center leading-relaxed">
+              {block.caption}
+            </figcaption>
+          )}
+        </>
       );
 
     case "quote":
