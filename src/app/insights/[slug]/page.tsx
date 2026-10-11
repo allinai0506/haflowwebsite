@@ -57,6 +57,54 @@ function InsightBlockView({ block }: { block: InsightBlock }) {
         </p>
       );
 
+    case "code":
+      // 等宽原样文本：日志时间线、ASCII 架构图。必须横向滚动，折行会毁掉对齐。
+      return (
+        <figure className="space-y-2">
+          <pre className="overflow-x-auto rounded-2xl bg-slate-900 p-4 sm:p-5 border border-slate-800">
+            <code className="font-mono text-[11px] sm:text-xs leading-relaxed text-slate-100 whitespace-pre">
+              {block.text}
+            </code>
+          </pre>
+          {block.caption && (
+            <figcaption className="text-xs text-slate-500 text-center leading-relaxed">
+              {block.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+
+    case "quote":
+      return (
+        <aside className="rounded-2xl bg-amber-50/70 border border-amber-200/80 border-l-4 border-l-amber-500 p-4 sm:p-5">
+          {block.title && (
+            <span className="block mb-2 font-mono text-[11px] font-bold uppercase tracking-wider text-amber-700">
+              {block.title}
+            </span>
+          )}
+          {block.items.length > 1 ? (
+            <ol className="space-y-1.5">
+              {block.items.map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm sm:text-base text-amber-950/90 leading-relaxed">
+                  <span className="shrink-0 mt-0.5 w-5 h-5 rounded-md bg-amber-100 text-amber-700 font-mono text-[11px] font-bold flex items-center justify-center">
+                    {i + 1}
+                  </span>
+                  <span>{item.runs ? <InsightRuns runs={item.runs} /> : item.text}</span>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p className="text-sm sm:text-base text-amber-950/90 leading-relaxed">
+              {block.items[0].runs ? (
+                <InsightRuns runs={block.items[0].runs} />
+              ) : (
+                block.items[0].text
+              )}
+            </p>
+          )}
+        </aside>
+      );
+
     case "checklist":
       return (
         <ul className="space-y-2 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200">

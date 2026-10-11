@@ -10,8 +10,14 @@ export const metadata: Metadata = pageSeo({
   path: "/insights",
   title: "企业AI落地思考_AINative工程方法论",
   description:
-    "共事智能企业AI落地思考：为什么不建大平台、规则写不死的着力点、人机协同分工边界、两周验证方法论。一线工程手记，拒绝营销套话。",
-  keywords: ["企业AI落地思考", "AI Native应用方法论", "人机协同思考", "共事智能观点"],
+    "共事智能企业AI落地思考：多Agent协同踩坑复盘与双环自治架构、为什么不建大平台、规则写不死的着力点、人机协同分工边界、两周验证方法论。一线工程手记，拒绝营销套话。",
+  keywords: [
+    "企业AI落地思考",
+    "AI Native应用方法论",
+    "多Agent协同",
+    "人机协同思考",
+    "共事智能观点",
+  ],
 });
 
 export default function InsightsPage() {
@@ -29,7 +35,7 @@ export default function InsightsPage() {
             观点与实践思考
           </h1>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-            我们不写充斥空话套话的营销通稿。这里记录了我们在真实企业场景中摸爬滚打得出的第一手工程认知：关于大系统的陷阱、规则写不死的深水区，以及人和 Agent 应当如何真实共事。
+            我们不写充斥空话套话的营销通稿。这里记录了我们在真实企业场景中摸爬滚打得出的第一手工程认知：多 Agent 协同踩过的坑与双环自治架构、大系统的陷阱、规则写不死的深水区，以及人和 Agent 应当如何真实共事。
           </p>
         </div>
 
