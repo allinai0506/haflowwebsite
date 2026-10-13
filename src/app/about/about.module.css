@@ -1,0 +1,88 @@
+/* Keep viewport scrolling: hidden on body creates a non-scrolling sticky ancestor. */
+:global(body):has(.page) { overflow-x: clip; }
+
+.page {
+  --about-ink: #172533;
+  --about-muted: #566573;
+  --about-blue: #245de8;
+  --about-rule: #e0e5e9;
+  --about-header-height: 64px;
+  --about-nav-height: 56px;
+  min-height: 100vh;
+  background: #fcfcfa;
+  color: var(--about-ink);
+}
+.container { max-width: 1120px; margin-inline: auto; padding: 28px 24px 48px; }
+.hero { padding: 40px 0 48px; scroll-margin-top: calc(var(--about-header-height) + var(--about-nav-height) + 24px); }
+.heroGrid { display: grid; gap: 32px; }
+.heroIdentity { position: relative; }
+.heroTitle { margin: 22px 0 0; font-size: clamp(34px, 4.4vw, 52px); font-weight: 650; line-height: 1.3; letter-spacing: -0.055em; color: #142230; }
+.eyebrow { color: var(--about-blue); font-size: 13px; font-weight: 600; letter-spacing: .03em; line-height: 1.6; }
+.heroIntro { display: flex; flex-direction: column; gap: 18px; font-size: 15px; line-height: 1.9; color: var(--about-muted); }
+.heroIntro > p { margin: 0; }
+.heroIntro > p:first-child { font-size: 18px; font-weight: 600; line-height: 1.75; color: var(--about-ink); }
+.heroIntro > p:last-child { margin-top: 2px; padding-top: 20px; border-top: 1px solid #c9d8f5; font-size: 15px; line-height: 1.9; color: var(--about-blue); }
+.chapterNav { position: sticky; top: var(--about-header-height); z-index: 40; background: rgb(252 252 250 / 96%); backdrop-filter: blur(12px); border-block: 1px solid var(--about-rule); }
+.chapterList { display: flex; align-items: stretch; gap: 26px; height: var(--about-nav-height); overflow-x: auto; scrollbar-width: none; }
+.chapterList::-webkit-scrollbar { display: none; }
+.chapterLink { position: relative; display: inline-flex; gap: 8px; align-items: center; flex: none; white-space: nowrap; font-size: 13px; font-weight: 500; color: #66727e; transition: color 150ms; }
+.chapterNumber { font-family: ui-monospace, monospace; font-size: 10px; color: #96a3b0; }
+.chapterLink:hover, .chapterLink[aria-current="location"] { color: var(--about-blue); }
+.chapterLink[aria-current="location"]::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--about-blue); }
+.chapterLink[aria-current="location"] .chapterNumber { color: var(--about-blue); }
+.chapterLink:focus-visible { outline: 2px solid var(--about-blue); outline-offset: -3px; border-radius: 2px; }
+.section { padding-block: 48px; border-bottom: 1px solid var(--about-rule); scroll-margin-top: calc(var(--about-header-height) + var(--about-nav-height) + 24px); }
+.sectionTitle { color: var(--about-ink); font-size: 27px; font-weight: 600; line-height: 1.45; letter-spacing: -.025em; }
+.splitSection { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.splitSection > .sectionLead, .splitSection > .sectionCopy { width: 100%; max-width: 800px; min-width: 0; margin-inline: auto; }
+.splitSection .sectionTitle br { display: none; }
+.sectionLead > p:first-child, .section > p:first-child { font-size: 12px; letter-spacing: .03em; }
+.sectionCopy { font-size: 16px; line-height: 1.9; color: var(--about-muted); }
+.sectionCopy > p + p { margin-top: 16px; }
+.practiceSteps { display: grid; gap: 24px; margin-top: 32px; }
+.practiceSteps > li { border-top: 1px solid #becce3; padding-top: 20px; }
+.practiceSteps h3 { font-size: 18px; font-weight: 600; }
+.brandGrid { display: grid; margin-top: 32px; border-top: 1px solid #cad5e2; }
+.brand { position: relative; padding: 28px 0; border-bottom: 1px solid var(--about-rule); }
+.brand:last-child { border-bottom: 0; }
+.brand h3 { font-size: 28px; font-weight: 600; letter-spacing: -.025em; }
+.brand > p { font-size: 12px; }
+.brandIcon { width: 20px; height: 20px; margin-bottom: 20px; color: var(--about-blue); }
+.brandCopy { color: var(--about-muted); font-size: 14px; line-height: 1.95; }
+.storySection { margin-block: 24px; padding: 32px 24px; border: 1px solid var(--about-rule); background: #fff; border-radius: 4px; }
+.storySection .sectionCopy > p:first-child { color: var(--about-ink); font-weight: 500; }
+.principlesGrid { display: grid; gap: 32px; margin-top: 32px; }
+.principle { padding-top: 20px; border-top: 1px solid var(--about-rule); }
+.principle h3 { font-size: 19px; font-weight: 600; line-height: 1.6; }
+.principle > p:last-child { font-size: 14px; line-height: 1.95; color: var(--about-muted); }
+.traits { display: grid; gap: 26px; margin-top: 32px; }
+.traits dt { padding-top: 16px; border-top: 1px solid #cad5e2; font-size: 16px; font-weight: 600; }
+.traits dd { color: var(--about-muted); font-size: 14px; line-height: 1.9; }
+.honesty { margin-block: 32px; padding: 0 0 0 20px; border-left: 2px solid #a6b3c0; }
+.honesty h2 { font-size: 14px; font-weight: 600; }
+.honesty p { font-size: 13px; line-height: 1.95; color: #6b7781; }
+.contact { margin-top: 36px; padding: 32px 24px; border: 1px solid #d8e3f6; border-radius: 4px; background: #f2f6fc; }
+@media (min-width: 640px) {
+  .page { --about-header-height: 72px; }
+  .hero { padding-top: 48px; }
+  .practiceSteps, .principlesGrid, .traits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .section { padding-block: 56px; }
+  .sectionTitle { font-size: 30px; }
+  .storySection { padding: 40px; }
+  .contact { padding: 40px; }
+}
+@media (min-width: 1024px) {
+  .heroGrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
+  .heroIntro { padding-top: 32px; }
+  .heroIdentity { align-self: center; padding-top: 0; }
+  .splitSection { gap: 28px; }
+  .practiceSteps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .brandGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .brand { padding: 28px 28px 12px; border-bottom: 0; border-left: 1px solid var(--about-rule); }
+  .brand:first-child { padding-left: 0; border-left: 0; }
+  .brand:last-child { padding-right: 0; }
+  .brand:not(:last-child)::after { content: "→"; position: absolute; top: 75px; right: -13px; z-index: 1; padding: 4px; background: #fcfcfa; font-size: 18px; color: var(--about-blue); }
+  .traits { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .principlesGrid { column-gap: 48px; }
+}
+@media (prefers-reduced-motion: reduce) { .chapterLink { transition: none; } }
