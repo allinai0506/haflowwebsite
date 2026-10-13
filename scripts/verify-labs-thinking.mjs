@@ -35,7 +35,7 @@ for (let index = 1; index <= 9; index++) {
 assert.equal((article.match(/<table\b/g) || []).length, 3);
 assert.equal((article.match(/<figure\b/g) || []).length, 4);
 assert.equal((html.match(/<h1\b/g) || []).length, 1);
-assert.ok(html.indexOf('id="design-thinking"') < html.indexOf('<iframe'));
+assert.ok(html.indexOf('<iframe') < html.indexOf('id="design-thinking"'));
 assert.ok(!article.includes('google.com/s2/favicons'));
 assert.ok(!article.includes('[diagram:'));
 assert.ok(html.includes('title="HAFlow 下一代企业运行空间交互原型"'));

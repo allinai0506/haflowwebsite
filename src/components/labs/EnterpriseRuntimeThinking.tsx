@@ -1,5 +1,5 @@
 import { Fragment, type ReactNode } from "react";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowRight } from "lucide-react";
 import { ENTERPRISE_MODEL, EVOLUTION, THINKING_INTRODUCTION, THINKING_SECTIONS, THINKING_TITLE } from "@/data/enterprise-runtime-thinking";
 
 function InlineText({ text }: { text: string }) {
@@ -83,7 +83,7 @@ export function EnterpriseRuntimeThinking() {
       <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8 lg:p-10">
         <ThinkingBody text={THINKING_INTRODUCTION} />
         {THINKING_SECTIONS.map((section) => <Fragment key={section.id}><section id={section.id} className="scroll-mt-24 border-t border-slate-200 pt-10 mt-10" aria-labelledby={`${section.id}-heading`}><h3 id={`${section.id}-heading`} className="mb-6 text-xl font-bold leading-9 text-slate-950 sm:text-2xl">{section.title}</h3><ThinkingBody text={section.body} /></section></Fragment>)}
-        <div className="mt-10 border-t border-slate-200 pt-8"><p className="text-sm leading-7 text-slate-500">下面的交互原型，是对这篇思考的一个界面层验证。业务与执行均为模拟数据。</p><a href="#experience" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700">进入下一代企业运行空间 <ArrowDown size={16} aria-hidden="true" /></a></div>
+        <div className="mt-10 border-t border-slate-200 pt-8"><p className="text-sm leading-7 text-slate-500">页面上方的交互原型，是对这篇思考的一个界面层验证。业务与执行均为模拟数据。</p><a href="#experience" className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700">返回上方原型体验 <ArrowUp size={16} aria-hidden="true" /></a></div>
       </div>
     </div>
   </article>;

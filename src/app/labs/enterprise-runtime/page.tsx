@@ -25,8 +25,8 @@ export default function EnterpriseRuntimePage() {
           <div className="mt-6 flex flex-wrap items-center gap-4"><a href="#design-thinking" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700">阅读完整思考 <ArrowDown size={16} /></a><a href="#experience" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700">开始体验 <ArrowDown size={16} /></a><span className="text-xs leading-6 text-slate-500">交互原型 · 模拟业务数据 · 尚未连接真实 AI 或企业系统</span></div>
         </div>
       </div>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><EnterpriseRuntimeThinking /></div>
       <div className="mx-auto max-w-[1600px] px-2 sm:px-6 lg:px-8"><PrototypeExperience /></div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><EnterpriseRuntimeThinking /></div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <section className="py-12 sm:py-16" aria-labelledby="try-heading">
           <h2 id="try-heading" className="text-2xl font-bold text-slate-950">从这三个操作开始</h2>
