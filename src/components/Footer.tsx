@@ -94,6 +94,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/labs" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
+                  HAFlow 实验室
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
                   加入我们
                 </Link>
