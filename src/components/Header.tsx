@@ -47,6 +47,7 @@ export function Header() {
     { label: "客户案例", href: "/cases" },
     { label: "方法论", href: "/methodology" },
     { label: "观点", href: "/insights" },
+    { label: "实验室", href: "/labs" },
     { label: "诊断", href: "/diagnose" },
     { label: "关于我们", href: "/about" },
   ];
@@ -88,7 +89,7 @@ export function Header() {
         </Link>
 
         {/* Center: Desktop Navigation matching reference image */}
-        <nav className="hidden md:flex items-center gap-8" aria-label="主要导航">
+        <nav className="hidden md:flex items-center gap-1" aria-label="主要导航">
           {navLinks.map((link) => {
             const isActive =
               pathname === link.href ||
