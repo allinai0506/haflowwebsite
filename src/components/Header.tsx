@@ -64,13 +64,13 @@ export function Header() {
         {/* Left: Brand Identity matching reference image */}
         <Link
           href="/"
-          className="flex items-center gap-3 group focus:outline-hidden"
+          className="flex shrink-0 items-center gap-2 sm:gap-3 group focus:outline-hidden"
           aria-label="共事智能首页"
         >
           <div className="relative h-9 w-auto flex items-center justify-center">
             <Image
               src="/logo-icon.png"
-              alt="共事智能HAFlow_企业AI落地"
+              alt="共事智能标志"
               width={65}
               height={36}
               className="h-9 w-auto object-contain"
@@ -79,17 +79,17 @@ export function Header() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-950 font-sans">
-              共事
+              共事智能
             </span>
             <span className="text-slate-300 font-normal text-xl">|</span>
-            <span className="text-xl sm:text-2xl font-black tracking-tight text-blue-600 font-sans">
+            <span className="text-base sm:text-xl font-bold tracking-tight text-blue-600 font-sans">
               HAFlow
             </span>
           </div>
         </Link>
 
         {/* Center: Desktop Navigation matching reference image */}
-        <nav className="hidden md:flex items-center gap-1" aria-label="主要导航">
+        <nav className="hidden xl:flex items-center gap-1 2xl:gap-4" aria-label="主要导航">
           {navLinks.map((link) => {
             const isActive =
               pathname === link.href ||
@@ -112,7 +112,7 @@ export function Header() {
         </nav>
 
         {/* Right: Blue pill button matching reference image */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <Link
             href="/contact"
             className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shadow-xs hover:shadow-md cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
@@ -122,7 +122,7 @@ export function Header() {
         </div>
 
         {/* Mobile Menu Toggle Button：命中区 44px 起步 */}
-        <div className="flex md:hidden items-center">
+        <div className="flex xl:hidden items-center">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -147,7 +147,7 @@ export function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="移动端导航菜单"
-          className="md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-4rem)] overflow-y-auto"
+          className="xl:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg animate-in slide-in-from-top-2 duration-200 max-h-[calc(100dvh-4rem)] overflow-y-auto"
         >
           <nav aria-label="移动端主要导航" className="flex flex-col space-y-1">
             {navLinks.map((link) => {

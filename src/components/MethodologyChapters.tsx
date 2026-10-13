@@ -360,7 +360,7 @@ export function MethodologyChapters() {
           id="chapters-heading"
           className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-950"
         >
-          共事方法论的落地工程细节
+          共事智能方法论的落地工程细节
         </h2>
         <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
           从解构一件业务任务，到把经验结构化，再到 Agent

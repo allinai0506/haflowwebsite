@@ -97,7 +97,7 @@ export function WhatIsHAFlow() {
             </h2>
 
             <p className="text-base text-slate-600 leading-relaxed">
-              HAFlow 不是一个聊天机器人，也不是一个单独的 Agent。它是一套把企业任务拆成工作流，让人和不同 Agent 共同参与，并最终工程化落地为业务系统的方法与底座。
+              HAFlow 不是一个聊天机器人，也不是一个单独的 Agent。它是共事智能的人机协同任务执行平台，把企业任务拆成工作流，让人和不同 Agent 共同参与，并最终工程化落地为业务系统。
             </p>
 
             <div>

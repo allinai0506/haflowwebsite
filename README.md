@@ -11,7 +11,7 @@
 | 层级 | 名称 | 定位 |
 | :--- | :--- | :--- |
 | **公司** | 上海共事智能科技有限公司 | AI Native 应用与人机协同方案提供商 |
-| **品牌** | 共事 (GONGSHI AI) | 让人和 Agent 共同把事情做完 |
+| **品牌** | 共事智能 (GONGSHI AI) | 让人和 Agent 共同把事情做完 |
 | **产品** | HAFlow | 人机协同任务执行底层平台 |
 | **服务** | AI Native 应用定制落地 | 从一个具体业务痛点开始，做出真实交付结果 |
 | **公益入口** | 每月免费培训 | 每周日 11:00 40分钟零基础公益科普，学完自己做也欢迎 |
@@ -88,3 +88,31 @@ pnpm start
 - `src/data/insights.ts`：观点与实践文章内容与提纲（正文支持段落/小节标题/列表/表格/金句/代码图/引用块/清单/配图九种富文本块，详见 `InsightBlock`）
 
 新增案例或修改课程无需重写页面组件，只需修改对应 TS 数据文件即可自动完成静态页面编译与 Sitemap 索引更新。
+
+## 品牌 SEO 维护
+
+首页承接“共事智能 / 共事智能官网”，`/haflow` 承接产品词。品牌标识使用完整名称“共事智能”；自然行文可简称“共事”。`pageSeo` 直接生成绝对标题，已经包含品牌的标题不再追加品牌。站点 `WebSite` 名称是共事智能，HAFlow 用产品实体表达，与公司通过稳定 `@id` 关联。
+
+`sitemap.ts` 中 `SITE_UPDATED_AT` 记录实际全站内容修改日期。只有全站标题、导航或内容实际改变时才更新它；仅改动某一页时为该页维护独立日期，不使用构建时间。文章发布日期晚于全站修改日期时采用文章日期。
+
+构建后启动本地生产服务器，并在另一个终端验证生成的 HTML：
+
+```bash
+pnpm build
+pnpm start --port 3112
+# 另一个终端
+pnpm verify:seo
+pnpm test:baidu
+```
+
+`SEO_TEST_ORIGIN` 可指定已部署站点地址。验证覆盖 sitemap 中所有页面的完整品牌标题、唯一标题、单一 H1 和独立 canonical，并检查品牌展示和结构化实体关联。
+
+部署并确认线上 HTML 正确后，优先提交本次更新的品牌入口：
+
+```bash
+pnpm push:baidu --dry-run --url=/ --url=/about --url=/haflow --url=/methodology
+# 确认列表后执行；从部署环境读取 BAIDU_PUSH_TOKEN
+pnpm push:baidu --url=/ --url=/about --url=/haflow --url=/methodology
+```
+
+`--url=` 可重复，指定 URL 会绕过已推记录，受 `--limit=N` 限制，不清空其他提交记录。无 `--url` 时保留原有 sitemap 轮转行为。dry-run 不需要 token、不发送提交请求、不改写状态。提交受理不等于收录；发布后按周记录“共事智能”“共事智能官网”“HAFlow”“共事智能 HAFlow”的搜索展示、点击及有效咨询。

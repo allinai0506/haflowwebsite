@@ -28,7 +28,7 @@ export interface EvolutionLoopStep {
 }
 
 export const METHODOLOGY_DATA = {
-  name: "共事方法论",
+  name: "共事智能方法论",
   nameEn: "Human + Agent Co-Execution Method",
   coreQuote: "我们不从“做什么软件”开始，而从“这件事到底是怎么被完成的”开始。",
   coreSubQuote: "不是交付一个软件，而是和客户一起建立一套“人 + Agent 持续完成工作的系统”。",
@@ -281,10 +281,10 @@ export const METHODOLOGY_DATA = {
       num: "06",
       shortNavLabel: "06 HAFlow底座",
       title: "HAFlow：把这种方法真正运行起来",
-      tagline: "共事方法论的执行底座，让 Agent、数据、工具与人协同工作",
+      tagline: "共事智能方法论的执行底座，让 Agent、数据、工具与人协同工作",
       summary: "HAFlow 是共事智能方法论的工程底座。它不重新造大模型，不替代现有 ERP，而是让各类要素围绕具体任务高效协作。",
       leadParagraphs: [
-        "方法论如果缺乏坚实的工程工具支撑，就会沦为空洞的咨询报告。HAFlow 正是共事方法论的执行底座与技术载体。",
+        "方法论如果缺乏坚实的工程工具支撑，就会沦为空洞的咨询报告。HAFlow 正是共事智能方法论的执行底座与技术载体。",
         "HAFlow 不试图去重新造一个大模型，也不去推倒企业已投资多年的各种业务系统。它专注做一件极其关键的事：让不同 Agent、领域知识、业务数据、受限工具和人类员工，紧密围绕一个具体任务共同工作。",
       ],
       keyPoints: [
@@ -372,7 +372,7 @@ export const METHODOLOGY_DATA = {
 
   // 培训与赋能在方法论中的定位
   trainingRole: {
-    title: "培训在共事方法论中的真实定位",
+    title: "培训在共事智能方法论中的真实定位",
     subtitle: "培训只是我们很小的一部分，但它是能力交付与组织带练的关键基石",
     content: "很多客户初次接触共事，会以为我们是一家培训机构。我们必须坦诚：培训只是共事业务中很小的一部分，我们真正的核心是与客户共同建立这套人机协同的工作系统。",
     whyFree: "我们之所以坚持每周日上午提供 100% 免费的公益培训，是因为我们深知：如果企业一线的业务专家和开发人员不懂得如何拆解任务、如何与 Agent 协同，任何先进的系统都无法发挥真正威力。学会了自己做，我们也由衷欢迎。",

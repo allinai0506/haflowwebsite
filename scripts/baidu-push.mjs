@@ -5,7 +5,8 @@
  *   node scripts/baidu-push.mjs                      # 从 .env.production / .env.local 读取 BAIDU_PUSH_TOKEN
  *   node scripts/baidu-push.mjs <YOUR_BAIDU_TOKEN>    # 或直接传 token
  *   BAIDU_PUSH_TOKEN=xxx node scripts/baidu-push.mjs  # 或环境变量
- *   node scripts/baidu-push.mjs --dry-run             # 仅测试解析与待推列表，不实际发起推送
+ *   node scripts/baidu-push.mjs --dry-run             # 无需 token，不提交也不改写状态
+ *   node scripts/baidu-push.mjs --url=/ --url=/about  # 指定更新页面，绕过已推记录（仍受 limit 限制）
  *
  * URL 来源：线上 sitemap.xml 实时解析（失败时回退到内置表），推送前统一为 www 域名
  * （百度要求推送 URL 与 site 参数站点一致）。
@@ -66,9 +67,8 @@ function loadTokenFromEnvFiles() {
 
 const isDryRun = process.argv.includes("--dry-run");
 const explicitToken = process.argv.find((a) => !a.startsWith("--") && a !== process.argv[0] && a !== process.argv[1]);
-const TOKEN = explicitToken || process.env.BAIDU_PUSH_TOKEN || loadTokenFromEnvFiles();
 
-// 分批推送：--limit N 只推 N 个（默认 10，新站每日配额小，超配额会 over quota）
+// 分批推送：--limit=N 只推 N 个（默认 10，新站每日配额小，超配额会 over quota）
 // 已推记忆：/opt/baidu-push-state.json（放在仓库目录外，避免 rsync --delete 误删）
 const limitArg = process.argv.find((a) => a.startsWith("--limit="));
 const LIMIT = limitArg ? Math.max(1, parseInt(limitArg.split("=")[1], 10) || 0) : 10;
@@ -248,20 +248,48 @@ console.log(`\n==================================================`);
 console.log(`[${startTime}] 百度 URL 主动推送定时任务开始`);
 console.log(`==================================================`);
 
-const urls = await collectUrls();
+// 定向提交更新页面，保留其他 URL 的历史记录。参数必须是本站无查询/片段的 canonical。
+const urlArgs = process.argv.filter((arg) => arg.startsWith("--url="));
+let explicitUrls;
+try {
+  explicitUrls = [...new Set(urlArgs.map((arg) => {
+    const value = arg.slice("--url=".length);
+    if (!value || (!value.startsWith("/") && !value.startsWith("https://") && !value.startsWith("http://"))) {
+      throw new Error("--url 必须是站内路径或本站完整 URL");
+    }
+    const url = new URL(toWww(value), SITE);
+    if (url.origin !== SITE || url.href.includes("?") || url.href.includes("#") || url.username || url.password) {
+      throw new Error("--url 仅接受 https://www.haflow.cn 的 canonical URL，不含查询、片段或凭据");
+    }
+    return url.href;
+  }))];
+} catch (error) {
+  console.error(error.message);
+  process.exit(2);
+}
+const urls = explicitUrls.length ? explicitUrls : await collectUrls();
 let pushed = loadPushed();
-let pending = urls.filter((u) => !pushed.has(u));
+let pending = explicitUrls.length ? urls : urls.filter((u) => !pushed.has(u));
 
-// 轮转机制：当全部 URL 均已完成一轮推送后，自动重置已推集合，开始新一轮推送，保证每日定时任务持续生效并促使蜘蛛重新抓取更新
-if (pending.length === 0) {
-  console.log(`[轮转提示] 全部 ${urls.length} 个 URL 均已推送过，开启新一轮轮转推送（促进百度蜘蛛重新抓取与快照更新）...`);
+// 一轮完成后再次轮转；状态在真实提交前才落盘，dry-run 始终只读。
+const resetCycle = !explicitUrls.length && pending.length === 0;
+if (resetCycle) {
+  console.log(`[轮转提示] 全部 ${urls.length} 个 URL 均已推送过，开启新一轮轮转推送...`);
   pushed = new Set();
   pending = [...urls];
-  savePushed(pushed, { note: "轮转周期重置" });
 }
 
 const batch = pending.slice(0, LIMIT);
 console.log(`待推送总量: ${pending.length} 个，本次准备提交: ${batch.length} 个（LIMIT=${LIMIT}）`);
+
+if (isDryRun) {
+  console.log(`\n[DRY-RUN] 模拟执行模式，以下为待提交的 ${batch.length} 个链接:`);
+  batch.forEach((u) => console.log(`  * ${u}`));
+  console.log(`[DRY-RUN] 模拟执行结束，未实际发送请求。`);
+  process.exit(0);
+}
+
+const TOKEN = explicitToken || process.env.BAIDU_PUSH_TOKEN || loadTokenFromEnvFiles();
 
 if (!TOKEN) {
   console.error(`
@@ -275,13 +303,7 @@ ${urls.map((u) => "  - " + u).join("\n")}
   process.exit(1);
 }
 
-if (isDryRun) {
-  console.log(`\n[DRY-RUN] 模拟执行模式，以下为待提交的 ${batch.length} 个链接:`);
-  batch.forEach((u) => console.log(`  * ${u}`));
-  console.log(`[DRY-RUN] 模拟执行结束，未实际发送请求。`);
-  process.exit(0);
-}
-
+if (resetCycle) savePushed(pushed, { note: "轮转周期重置" });
 await pushWithRetry(batch, pushed);
 
 const endTime = new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
