@@ -67,8 +67,11 @@ test("sitemap dates are stable and reflect the global branding update", async ()
     match[1].match(/<lastmod>(.*?)<\/lastmod>/)?.[1],
   ]));
   assert.equal(entries.get(`${site}/`), "2026-10-11T16:00:00.000Z");
-  for (const path of ["/about", "/labs", "/labs/enterprise-runtime"]) {
+  for (const path of ["/about"]) {
     assert.equal(entries.get(`${site}${path}`), "2026-10-12T16:00:00.000Z", path);
+  }
+  for (const path of ["/labs", "/labs/enterprise-runtime"]) {
+    assert.equal(entries.get(`${site}${path}`), "2026-10-13T16:00:00.000Z", path);
   }
   for (const date of dates) assert.ok(new Date(date) >= new Date("2026-10-12T00:00:00+08:00"), date);
 });

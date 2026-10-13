@@ -15,8 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // /training 已 308 永久合并到 /methodology#training（兼容旧外链与浏览器历史），不再进 sitemap
   const staticRoutes = [
-    { url: `${baseUrl}/labs`, lastModified: new Date("2026-10-13T00:00:00+08:00"), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${baseUrl}/labs/enterprise-runtime`, lastModified: new Date("2026-10-13T00:00:00+08:00"), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${baseUrl}/labs`, lastModified: new Date("2026-10-14T00:00:00+08:00"), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${baseUrl}/labs/enterprise-runtime`, lastModified: new Date("2026-10-14T00:00:00+08:00"), changeFrequency: "monthly" as const, priority: 0.7 },
     { url: `${baseUrl}/`, lastModified: SITE_UPDATED_AT, changeFrequency: "daily" as const, priority: 1.0 },
     { url: `${baseUrl}/problems`, lastModified: SITE_UPDATED_AT, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/solutions`, lastModified: SITE_UPDATED_AT, changeFrequency: "weekly" as const, priority: 0.9 },
