@@ -45,3 +45,15 @@ BUILD_ID：jPio0pFbuSM1RSGwUe5ni。
 保留 previous.next、previous-source.tar.gz 与 new-files.json。回滚恢复旧构建和已有文件，移除本轮新增文件。无数据库迁移。
 
 技术验收覆盖本次发布窗口。文章中未来年份为作者推演，交互原型为模拟数据，未连接真实 AI 或企业系统。
+
+## 同日调整：原型直接展示
+
+按用户反馈，将原型移至简短介绍之后、完整思考之前，打开页面直接展示 iframe。长文结尾入口改为返回上方原型。正文与原型内容不变。
+
+功能提交：c20e1f7；同一 PR #2。
+发布目录：/opt/haflow-releases/labs-inline-20261014。
+BUILD_ID：ZCDTFuWpof-sTWFiooKG8。
+构建清单 SHA256：fe69779deeefa42fc9973b5718a9b2f52555d47e15f612ef41f259928c824001。
+本地及服务器构建、ESLint、百度测试 3/3 通过。全文检查在候选与公网通过，新增校验 iframe 位于思考正文之前。桌面浏览器初次打开 iframe top=595px、正文 top=1356px，iframe display=block，无需点击入口。
+发布窗口错误日志 78547 字节前后不变；激活前后同一构建清单校验通过。
+回滚：`ssh PLM 'bash /opt/haflow-releases/labs-inline-20261014/rollback.sh'`。
