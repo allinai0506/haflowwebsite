@@ -22,7 +22,8 @@ export default function LabsPage() {
               <h2 className="mt-7 text-3xl font-bold leading-tight text-slate-950 sm:text-4xl"><Link href="/labs/enterprise-runtime" className="hover:text-blue-700">下一代企业运行空间</Link></h2>
               <p className="mt-5 text-lg leading-8 text-slate-800">如果企业软件围绕「业务完成」组织，<br className="hidden sm:block" />首页会是什么样？</p>
               <p className="mt-4 text-sm leading-7 text-slate-500">从业务目标出发，让工作自主推进，让交付物随时可见，让真正需要人判断的例外浮出水面。</p>
-              <Link href="/labs/enterprise-runtime" className="mt-8 inline-flex min-h-12 items-center gap-4 rounded-full bg-blue-600 px-6 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">进入体验 <ArrowUpRight size={18} /></Link>
+              <p className="mt-4 text-sm leading-7 text-slate-600">设计思考：未来20年，企业还需要审批流吗？OA会不会彻底消失？</p>
+              <Link href="/labs/enterprise-runtime" className="mt-8 inline-flex min-h-12 items-center gap-4 rounded-full bg-blue-600 px-6 text-sm font-semibold text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600">阅读思考与体验 <ArrowUpRight size={18} /></Link>
             </div>
             <div className="flex flex-col justify-center border-t border-slate-200 bg-blue-50/60 p-6 text-slate-900 sm:p-10 lg:border-t-0 lg:border-l lg:p-12">
               <p className="text-xs font-mono tracking-widest text-blue-700">从目标到结果</p>

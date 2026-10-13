@@ -22,7 +22,7 @@ import { pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = pageSeo({
   path: "/haflow",
-  title: "HAFlow人机协同平台_多Agent任务执行",
+  title: "HAFlow 人机协同任务执行平台",
   description:
     "HAFlow是共事智能面向复杂业务的人机协同任务执行平台：目标拆解、多Agent分工、人工关键确认、安全调用ERP与业务系统，结果有依据全程可追溯。",
   keywords: [
@@ -40,16 +40,15 @@ export default function HAFlowPage() {
   const softwareSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    "@id": "https://www.haflow.cn/haflow#software",
     name: "HAFlow",
+    url: "https://www.haflow.cn/haflow",
+    brand: { "@type": "Brand", name: "共事智能" },
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     description:
       "共事智能面向复杂业务场景的人机协同任务执行平台：目标拆解、多Agent分工、人工关键确认、安全调用ERP与业务系统，结果有依据全程可追溯。",
-    publisher: {
-      "@type": "Organization",
-      name: "上海共事智能科技有限公司",
-      url: "https://www.haflow.cn/",
-    },
+    publisher: { "@id": "https://www.haflow.cn/#organization" },
   };
 
   const capabilities = [

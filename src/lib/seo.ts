@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { COMPANY_INFO } from "@/data/company";
 
 /**
  * 百度SEO：统一分页 SEO（绝对 canonical + 绝对 OG/Twitter）。
@@ -53,10 +54,13 @@ export function pageSeo({
       }
     : OG_IMAGE;
   const pageTitle = titleSuffix ? `${title}_${titleSuffix}` : title;
-  // 百度SERP标题约30汉字内展示，模板后缀统一为 _共事智能（layout template）
+  // 首页与根布局同层，不继承 title.template；在这里生成完整标题，避免漏品牌或重复后缀。
+  const fullTitle = pageTitle.includes(COMPANY_INFO.brand)
+    ? pageTitle
+    : `${pageTitle}｜${COMPANY_INFO.brand}`;
   const ogTitle = pageTitle.length > 28 ? pageTitle.slice(0, 28) : pageTitle;
   return {
-    title: pageTitle,
+    title: { absolute: fullTitle },
     description,
     keywords,
     alternates: { canonical: url },
@@ -64,7 +68,7 @@ export function pageSeo({
       type: ogType,
       locale: "zh_CN",
       url,
-      siteName: "共事智能 GONGSHI AI",
+      siteName: COMPANY_INFO.brand,
       title: ogTitle,
       description,
       images: [shareImage],

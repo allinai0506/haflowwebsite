@@ -7,7 +7,7 @@ export interface NavItem {
 export const COMPANY_INFO = {
   name: "上海共事智能科技有限公司",
   shortName: "共事智能",
-  brand: "共事",
+  brand: "共事智能",
   brandEn: "GONGSHI AI",
   product: "HAFlow",
   sloganZh: "让人和 Agent 共同把事情做完",
@@ -49,10 +49,10 @@ export const COMPANY_INFO = {
     { label: "解决具体问题", href: "/problems" },
     { label: "实践案例", href: "/cases" },
     { label: "HAFlow", href: "/haflow" },
-    { label: "共事方法论", href: "/methodology" },
+    { label: "共事智能方法论", href: "/methodology" },
     { label: "免费培训", href: "/methodology#training", badge: "每月4场" },
     { label: "AI 应用诊断", href: "/diagnose" },
     { label: "观点与实践", href: "/insights" },
-    { label: "关于共事", href: "/about" },
+    { label: "关于共事智能", href: "/about" },
   ] as NavItem[],
 };

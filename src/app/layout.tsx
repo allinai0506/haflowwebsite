@@ -21,8 +21,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.haflow.cn"),
   title: {
-    default: "共事智能_企业AI落地_HAFlow人机协同 | 不做大系统只解具体问题",
-    template: "%s_共事智能",
+    default: "共事智能官网｜企业 AI 落地与 HAFlow 人机协同平台",
+    template: "%s｜共事智能",
   },
   description:
     "上海共事智能科技有限公司（共事智能）。核心产品HAFlow人机协同平台。不做大系统，只用AI帮企业解决具体问题：智能报价、智能订货预测、标书质量核查、财务资料穿透关联与企业经验复用。",
@@ -63,8 +63,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "zh_CN",
     url: "https://www.haflow.cn/",
-    siteName: "共事智能 GONGSHI AI",
-    title: "共事智能_企业AI落地_HAFlow人机协同",
+    siteName: COMPANY_INFO.brand,
+    title: "共事智能官网｜企业 AI 落地与 HAFlow 人机协同平台",
     description:
       "上海共事智能：不做大系统，只用AI帮企业解决一个个具体问题。让人和Agent共同把事情做完。",
     images: [
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "共事智能_企业AI落地_HAFlow人机协同",
+    title: "共事智能官网｜企业 AI 落地与 HAFlow 人机协同平台",
     description: "不做大系统，只用AI帮企业解决一个个具体问题。",
     images: ["https://www.haflow.cn/og-cover-square-v2.jpg"],
   },
@@ -89,12 +89,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Organization JSON-LD Schema（含百度偏好的 sameAs/联系方式字段）
+  // 稳定实体 ID 将站点和 HAFlow 产品关联到同一家公司。
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: COMPANY_INFO.name,
-    alternateName: ["共事", "共事智能", "GONGSHI AI"],
+    "@id": "https://www.haflow.cn/#organization",
+    name: COMPANY_INFO.brand,
+    legalName: COMPANY_INFO.name,
+    alternateName: [COMPANY_INFO.name, COMPANY_INFO.brandEn],
     url: "https://www.haflow.cn/",
     logo: "https://www.haflow.cn/logo-icon.png",
     description: COMPANY_INFO.corePositioning,

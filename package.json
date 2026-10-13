@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "push:baidu": "node scripts/baidu-push.mjs"
+    "push:baidu": "node scripts/baidu-push.mjs",
+    "verify:seo": "node scripts/verify-brand-seo.mjs",
+    "test:baidu": "node --test scripts/baidu-push.test.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.45.0",

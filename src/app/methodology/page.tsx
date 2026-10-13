@@ -32,11 +32,11 @@ import { pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = pageSeo({
   path: "/methodology",
-  title: "共事方法论_人机协同系统实施",
+  title: "共事智能方法论｜企业人机协同实施",
   description:
-    "共事方法论（Human + Agent Co-Execution Method）：我们不从‘做什么软件’开始，而从‘这件事到底是怎么被完成的’开始。以 Task 为企业 AI 最小单位，和客户一起建立人 + Agent 持续完成工作的系统。",
+    "共事智能方法论（Human + Agent Co-Execution Method）：我们不从‘做什么软件’开始，而从‘这件事到底是怎么被完成的’开始。以 Task 为企业 AI 最小单位，和客户一起建立人 + Agent 持续完成工作的系统。",
   keywords: [
-    "共事方法论",
+    "共事智能方法论",
     "Human + Agent Co-Execution Method",
     "HAFlow",
     "人机协同方法论",
@@ -52,7 +52,7 @@ export default function MethodologyPage() {
     <div className="min-h-screen bg-slate-50 py-5 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         {/* Breadcrumb */}
-        <Breadcrumb items={[{ label: "共事方法论" }]} />
+        <Breadcrumb items={[{ label: "共事智能方法论" }]} />
 
         {/* 1. HERO SECTION */}
         <section className="py-2 lg:py-4 space-y-8">
@@ -61,7 +61,7 @@ export default function MethodologyPage() {
             <div className="lg:col-span-7 space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 text-blue-900 border border-blue-200/80 shadow-2xs text-xs font-mono">
                 <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                <span className="font-bold">共事方法论</span>
+                <span className="font-bold">共事智能方法论</span>
                 <span className="text-slate-300">|</span>
                 <span className="text-blue-700 font-medium">Human + Agent Co-Execution</span>
               </div>
@@ -265,7 +265,7 @@ export default function MethodologyPage() {
                   <th className="py-3.5 px-6 w-1/4">对比维度</th>
                   <th className="py-3.5 px-6 w-3/8 text-slate-500">传统企业软件思维</th>
                   <th className="py-3.5 px-6 w-3/8 text-blue-800 font-bold bg-blue-50/60">
-                    共事方法论思维 (Human + Agent)
+                    共事智能方法论思维 (Human + Agent)
                   </th>
                 </tr>
               </thead>
@@ -306,7 +306,7 @@ export default function MethodologyPage() {
                 </div>
                 <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-200/80 space-y-1">
                   <span className="text-[11px] font-mono text-blue-700 font-bold block">
-                    共事方法论：
+                    共事智能方法论：
                   </span>
                   <p className="text-xs font-semibold text-blue-950 leading-relaxed">
                     {row.gongshi}
@@ -327,7 +327,7 @@ export default function MethodologyPage() {
               深度解析 · 8大核心支柱
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-950">
-              共事方法论的落地工程细节
+              共事智能方法论的落地工程细节
             </h2>
             <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
               从解构一件业务任务，到把经验结构化，再到 Agent 执行与分级人机边界，步步扎实，有迹可循。

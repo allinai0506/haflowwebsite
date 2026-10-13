@@ -14,13 +14,14 @@ import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { TRAINING_OVERVIEW } from "@/data/training";
 import { Testimonials } from "@/components/Testimonials";
 import { pageSeo } from "@/lib/seo";
+import { COMPANY_INFO } from "@/data/company";
 
-// 首页 TDK：百度标题30汉字内；品牌词由 layout template 统一追加，此处不再重复
+// 首页承接品牌词，HAFlow 产品词由独立产品页承接。
 export const metadata: Metadata = pageSeo({
   path: "/",
-  title: "企业AI落地_HAFlow人机协同",
+  title: "共事智能官网｜企业 AI 落地与 HAFlow 人机协同平台",
   description:
-    "上海共事智能科技有限公司：不做大系统，只用AI帮企业解决具体问题。HAFlow让人和Agent在同一工作流中共事：智能报价、智能订货预测、标书核查、财务穿透关联。",
+    "共事智能是上海共事智能科技有限公司的品牌，HAFlow 是共事智能的核心产品。我们围绕智能报价、订货预测、标书核查等具体业务场景，帮助企业建立人与 Agent 协同工作的系统。",
   keywords: [
     "共事智能",
     "上海共事智能科技有限公司",
@@ -37,8 +38,10 @@ export default function HomePage() {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "共事智能 HAFlow_企业AI落地",
-    alternateName: ["共事智能", "HAFlow", "GONGSHI AI"],
+    "@id": "https://www.haflow.cn/#website",
+    name: COMPANY_INFO.brand,
+    alternateName: [COMPANY_INFO.brandEn],
+    publisher: { "@id": "https://www.haflow.cn/#organization" },
     url: "https://www.haflow.cn/",
   };
 
@@ -61,12 +64,12 @@ export default function HomePage() {
             <p className="hero-copy-enter">
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-blue-700 border border-blue-200 shadow-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-600" aria-hidden="true" />
-                企业 AI 落地引擎 · HAFlow 人机协同
+                共事智能 · 企业 AI 落地
               </span>
             </p>
-            {/* Main Headline：sr-only 前缀给百度补核心关键词；关键句用主题蓝渐变，不再通篇大黑体 */}
+            {/* 品牌与主张均作为可见文字展示 */}
             <h1 className="hero-copy-enter text-3xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-slate-900 tracking-tight leading-[1.2]">
-              <span className="sr-only">共事智能企业AI落地：</span>让企业进入
+              共事智能，让企业进入
               <br />
               <span className="bg-gradient-to-r from-blue-600 to-sky-600 bg-clip-text text-transparent">
                 人机共事时代
@@ -76,10 +79,10 @@ export default function HomePage() {
             {/* Subtitles */}
             <div className="hero-copy-enter hero-copy-d1 space-y-3 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               <p className="font-semibold text-slate-800">
-                HAFlow 让人和 Agent 在同一个工作流中共事。
+                HAFlow 是共事智能打造的人机协同任务执行平台。
               </p>
               <p className="text-sm sm:text-base text-slate-500">
-                从业务流程设计，到多 Agent 协同，再到真实企业系统落地，HAFlow 是我们所有产品背后的方法论与工程底座。不做大系统，只用 AI 帮企业解决一个个具体问题。
+                共事智能从业务流程设计、多 Agent 协同到真实企业系统落地，帮助人和 Agent 共同把事情做完。HAFlow 是这套方法的工程底座。不做大系统，只用 AI 帮企业解决一个个具体问题。
               </p>
             </div>
 

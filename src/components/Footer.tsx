@@ -14,7 +14,7 @@ export function Footer() {
               <div className="h-9 w-auto relative flex items-center justify-center shrink-0 pt-0.5">
                 <Image
                   src="/logo-icon.png"
-                  alt="共事智能HAFlow_企业AI落地"
+                  alt="共事智能标志"
                   width={65}
                   height={36}
                   className="h-9 w-auto object-contain"
@@ -23,10 +23,10 @@ export function Footer() {
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-950 font-sans">
-                    共事
+                    共事智能
                   </span>
                   <span className="text-slate-300 font-normal text-xl">|</span>
-                  <span className="text-xl sm:text-2xl font-black tracking-tight text-blue-600 font-sans">
+                  <span className="text-base sm:text-xl font-bold tracking-tight text-blue-600 font-sans">
                     HAFlow
                   </span>
                 </div>
@@ -66,7 +66,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/methodology" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
-                  共事方法论
+                  共事智能方法论
                 </Link>
               </li>
               <li>
@@ -85,7 +85,7 @@ export function Footer() {
             <ul className="space-y-1 text-xs sm:text-sm text-slate-500">
               <li>
                 <Link href="/about" className="hover:text-blue-600 transition-colors inline-flex items-center min-h-[44px] py-1">
-                  公司介绍
+                  关于共事智能
                 </Link>
               </li>
               <li>
