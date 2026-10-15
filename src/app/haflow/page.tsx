@@ -219,6 +219,28 @@ export default function HAFlowPage() {
           </div>
         </div>
 
+        {/* ExperienceHub V1 发布入口 */}
+        <div className="my-10 p-8 sm:p-10 rounded-3xl bg-white border border-blue-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="max-w-2xl">
+            <span className="inline-block text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-600 text-white mb-3">
+              新能力发布 · ExperienceHub V1
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
+              企业经验中枢：让每位员工的经验，自动变成全公司的数字资产
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              把真实任务中人类对 Agent 的纠偏，自动提炼为可审核、可复用的业务规则。同一客户的同类任务，在另一台电脑上自动注入生效，未审不可见、跨客户隔离、Hub 故障不阻塞主流程。
+            </p>
+          </div>
+          <Link
+            href="/insights/experiencehub-v1"
+            className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shrink-0 shadow-md shadow-blue-500/20 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          >
+            <span>阅读发布全文</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
         {/* System Integration Topology (Clean Light Theme) */}
         <div className="my-14 bg-blue-50/50 text-slate-900 rounded-3xl border border-blue-100 p-8 sm:p-12 shadow-sm">
           <div className="max-w-3xl mb-10">

@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/`, lastModified: SITE_UPDATED_AT, changeFrequency: "daily" as const, priority: 1.0 },
     { url: `${baseUrl}/problems`, lastModified: SITE_UPDATED_AT, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/solutions`, lastModified: SITE_UPDATED_AT, changeFrequency: "weekly" as const, priority: 0.9 },
-    { url: `${baseUrl}/haflow`, lastModified: SITE_UPDATED_AT, changeFrequency: "weekly" as const, priority: 0.9 },
+    { url: `${baseUrl}/haflow`, lastModified: new Date("2026-10-15T00:00:00+08:00"), changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/methodology`, lastModified: SITE_UPDATED_AT, changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/cases`, lastModified: SITE_UPDATED_AT, changeFrequency: "weekly" as const, priority: 0.8 },
     { url: `${baseUrl}/diagnose`, lastModified: SITE_UPDATED_AT, changeFrequency: "weekly" as const, priority: 0.8 },
