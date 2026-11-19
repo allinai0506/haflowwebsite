@@ -54,6 +54,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // 严格模式已默认开启
   reactStrictMode: true,
+  output: "standalone",
 };
 
 export default nextConfig;

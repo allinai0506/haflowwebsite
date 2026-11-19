@@ -1,0 +1,25 @@
+services:
+  haflow-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: haflow-website:latest
+    container_name: haflow-website
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      - nexusarchive_default
+    deploy:
+      resources:
+        limits:
+          memory: 350M
+        reservations:
+          memory: 100M
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+
+networks:
+  nexusarchive_default:
+    external: true
