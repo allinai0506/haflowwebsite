@@ -116,3 +116,41 @@ pnpm push:baidu --url=/ --url=/about --url=/haflow --url=/methodology
 ```
 
 `--url=` 可重复，指定 URL 会绕过已推记录，受 `--limit=N` 限制，不清空其他提交记录。无 `--url` 时保留原有 sitemap 轮转行为。dry-run 不需要 token、不发送提交请求、不改写状态。提交受理不等于收录；发布后按周记录“共事智能”“共事智能官网”“HAFlow”“共事智能 HAFlow”的搜索展示、点击及有效咨询。
+
+---
+
+## 生产环境部署与运维架构
+
+- **生产服务器**：火山引擎 ECS（**`115.190.237.184`**，与数凭电子会计档案系统同机部署）
+- **服务器路径**：`/opt/haflow-website`
+- **运行方式**：Docker 容器化（`node:20-alpine`，内存限制 350M，常驻 ~35MB）
+- **网关代理**：由数凭 Nginx 容器（`nexus-frontend`，配置位于 `/opt/nexusarchive/nginx/nginx.prod.conf`）统一接管 80 与 443 端口，并通过 Docker 内部网络（`nexusarchive_default`）反向代理至 `haflow-website:3000`
+- **SSL 证书**：Certbot 自动续期，证书位于 `/etc/letsencrypt/live/haflow.cn/`，续期通过 webroot 模式（`/opt/nexusarchive/frontend`）自动重载 Nginx
+- **详细迁移与架构记录**：详见 [2026-11-19-server-migration-digivoucher-ecs.md](docs/releases/2026-11-19-server-migration-digivoucher-ecs.md)
+
+### 1. 一键部署上线
+
+所有生产打包均在**本地完成**（Next.js 16 Standalone 模式，产物约 54MB），禁止在服务器上直接执行 `pnpm build`，避免抢占数凭系统的数据库与后端资源：
+
+```bash
+./scripts/deploy/deploy.sh docker
+```
+
+脚本将自动执行：本地生产编译 $\rightarrow$ 组装精简包 $\rightarrow$ rsync 增量同步至远端 $\rightarrow$ 远端重建拉起容器 $\rightarrow$ 本机健康度校验。
+
+### 2. 常用运维与排查命令
+
+```bash
+# 查看容器运行状态与内存占用（常驻约 35MB）
+ssh root@115.190.237.184 "docker stats --no-stream haflow-website"
+
+# 查看应用运行时日志
+ssh root@115.190.237.184 "docker logs -f --tail 100 haflow-website"
+
+# 查看 Nginx 访问与错误日志
+ssh root@115.190.237.184 "docker exec nexus-frontend tail -f /var/log/nginx/haflow-access.log"
+ssh root@115.190.237.184 "docker exec nexus-frontend tail -f /var/log/nginx/haflow-error.log"
+
+# 手动验证 SSL 证书静默续期（干跑模拟）
+ssh root@115.190.237.184 "certbot renew --dry-run --no-random-sleep-on-renew"
+```

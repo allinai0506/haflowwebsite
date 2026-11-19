@@ -1,0 +1,9 @@
+Dockerfile
+docker-compose.yml
+scripts
+.git
+.omc
+decisions.tsv
+README.md
+*.png
+*.jpg
