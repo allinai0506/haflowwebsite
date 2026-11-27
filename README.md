@@ -121,36 +121,30 @@ pnpm push:baidu --url=/ --url=/about --url=/haflow --url=/methodology
 
 ## 生产环境部署与运维架构
 
-- **生产服务器**：火山引擎 ECS（**`115.190.237.184`**，与数凭电子会计档案系统同机部署）
-- **服务器路径**：`/opt/haflow-website`
-- **运行方式**：Docker 容器化（`node:20-alpine`，内存限制 350M，常驻 ~35MB）
-- **网关代理**：由数凭 Nginx 容器（`nexus-frontend`，配置位于 `/opt/nexusarchive/nginx/nginx.prod.conf`）统一接管 80 与 443 端口，并通过 Docker 内部网络（`nexusarchive_default`）反向代理至 `haflow-website:3000`
-- **SSL 证书**：Certbot 自动续期，证书位于 `/etc/letsencrypt/live/haflow.cn/`，续期通过 webroot 模式（`/opt/nexusarchive/frontend`）自动重载 Nginx
-- **详细迁移与架构记录**：详见 [2026-11-19-server-migration-digivoucher-ecs.md](docs/releases/2026-11-19-server-migration-digivoucher-ecs.md)
+- **运行方式**：Docker 容器化（`node:20-alpine`，内存限制 350M，宿主机端口仅绑定 `127.0.0.1:3000`）
+- **网关代理**：由 Nginx 统一接管 80 与 443 端口，通过内部网络反向代理至 `haflow-website:3000`
+- **SSL 证书**：Certbot webroot 模式自动续期
+- **详细架构记录**：详见 [2026-11-19-server-migration-digivoucher-ecs.md](docs/releases/2026-11-19-server-migration-digivoucher-ecs.md)
 
-### 1. 一键部署上线
+### 1. 人工发布上线
 
-所有生产打包均在**本地完成**（Next.js 16 Standalone 模式，产物约 54MB），禁止在服务器上直接执行 `pnpm build`，避免抢占数凭系统的数据库与后端资源：
+所有生产打包均在**本地完成**（Next.js 16 Standalone 模式），禁止在服务器上直接执行 `pnpm build`。部署前需设置受控环境变量 `DEPLOY_SERVER_IP` 与 `DEPLOY_SERVER_USER` 并由人工确认执行：
 
 ```bash
-./scripts/deploy/deploy.sh docker
+DEPLOY_SERVER_IP=<PROD_SERVER_IP> DEPLOY_SERVER_USER=<DEPLOY_USER> ./scripts/deploy/deploy.sh docker
 ```
 
-脚本将自动执行：本地生产编译 $\rightarrow$ 组装精简包 $\rightarrow$ rsync 增量同步至远端 $\rightarrow$ 远端重建拉起容器 $\rightarrow$ 本机健康度校验。
+脚本将执行：本地生产编译 $\rightarrow$ 组装精简包（不含本地线索数据与密钥）$\rightarrow$ rsync 同步至远端 $\rightarrow$ 远端重建拉起容器 $\rightarrow$ 本机回环健康度校验。
 
 ### 2. 常用运维与排查命令
 
 ```bash
-# 查看容器运行状态与内存占用（常驻约 35MB）
-ssh root@115.190.237.184 "docker stats --no-stream haflow-website"
+# 查看容器运行状态与内存占用
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "docker stats --no-stream haflow-website"
 
 # 查看应用运行时日志
-ssh root@115.190.237.184 "docker logs -f --tail 100 haflow-website"
-
-# 查看 Nginx 访问与错误日志
-ssh root@115.190.237.184 "docker exec nexus-frontend tail -f /var/log/nginx/haflow-access.log"
-ssh root@115.190.237.184 "docker exec nexus-frontend tail -f /var/log/nginx/haflow-error.log"
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "docker logs -f --tail 100 haflow-website"
 
 # 手动验证 SSL 证书静默续期（干跑模拟）
-ssh root@115.190.237.184 "certbot renew --dry-run --no-random-sleep-on-renew"
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "certbot renew --dry-run --no-random-sleep-on-renew"
 ```

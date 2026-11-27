@@ -8,8 +8,14 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:3000:3000"
+    volumes:
+      - haflow_leads:/app/data/leads
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     networks:
-      - nexusarchive_default
+      - haflow_net
     deploy:
       resources:
         limits:
@@ -20,6 +26,10 @@ services:
       - NODE_ENV=production
       - PORT=3000
 
+volumes:
+  haflow_leads:
+
 networks:
-  nexusarchive_default:
+  haflow_net:
+    name: ${DOCKER_PROXY_NETWORK:-haflow_net}
     external: true

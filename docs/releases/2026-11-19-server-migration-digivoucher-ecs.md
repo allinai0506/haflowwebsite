@@ -1,7 +1,7 @@
 # 生产服务器迁移归档记录：迁移至数凭火山云服务器
 
 - **发布日期**：2026-11-19
-- **迁移目标**：将共事智能公司官网（`haflow.cn` / `www.haflow.cn`）从旧服务器（`180.184.54.214`）全量迁移至数凭电子会计档案系统所在的火山云 ECS 服务器（`115.190.237.184`），实现同机混合部署并节约服务器资源开销。
+- **迁移目标**：将共事智能公司官网（`haflow.cn` / `www.haflow.cn`）从旧服务器（`<LEGACY_SERVER_IP>`）全量迁移至数凭电子会计档案系统所在的火山云 ECS 服务器（`<PROD_SERVER_IP>`），实现同机混合部署并节约服务器资源开销。
 - **当前状态**：**已上线且运行稳定 (SUCCESS)**
 
 ---
@@ -10,7 +10,7 @@
 
 ### 1.1 服务器基础设施
 * **云厂商**：火山引擎 (Volcano Engine) ECS
-* **服务器 IP**：`115.190.237.184`（数凭项目同机）
+* **服务器 IP**：`<PROD_SERVER_IP>`（数凭项目同机）
 * **操作系统**：CentOS Stream 9 (x86_64, Linux 5.15)
 * **部署路径**：`/opt/haflow-website`
 * **ICP 备案**：沪ICP备2025125372号-5（两台机器均在火山云，备案实例已确认绑定）
@@ -48,7 +48,7 @@
 该脚本全自动执行以下 5 步：
 1. 本地清空缓存并编译 `pnpm build`（Turbopack + Standalone）；
 2. 组装 `/tmp/haflow-deploy-pkg` 精简发布包（~54MB）；
-3. rsync 增量同步至 `root@115.190.237.184:/opt/haflow-website/`；
+3. rsync 增量同步至 `<DEPLOY_USER>@<PROD_SERVER_IP>:/opt/haflow-website/`；
 4. 远端宿主机触发 `docker compose up -d --build` 重新构建并热替换容器；
 5. 远端执行 `curl -s -I http://127.0.0.1:3000` 进行健康度断言。
 
@@ -56,20 +56,20 @@
 
 ```bash
 # 1. 查看 haflow-website 容器运行状态与资源占用（常驻 ~35MB）
-ssh root@115.190.237.184 "docker stats --no-stream haflow-website"
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "docker stats --no-stream haflow-website"
 
 # 2. 查看官网实时应用日志
-ssh root@115.190.237.184 "docker logs -f --tail 100 haflow-website"
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "docker logs -f --tail 100 haflow-website"
 
 # 3. 查看 Nginx 访问与错误日志
-ssh root@115.190.237.184 "docker exec nexus-frontend tail -f /var/log/nginx/haflow-access.log"
-ssh root@115.190.237.184 "docker exec nexus-frontend tail -f /var/log/nginx/haflow-error.log"
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "docker exec nexus-frontend tail -f /var/log/nginx/haflow-access.log"
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "docker exec nexus-frontend tail -f /var/log/nginx/haflow-error.log"
 
 # 4. 手动验证 SSL 证书静默续期
-ssh root@115.190.237.184 "certbot renew --dry-run --no-random-sleep-on-renew"
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "certbot renew --dry-run --no-random-sleep-on-renew"
 
 # 5. 重启官网服务
-ssh root@115.190.237.184 "cd /opt/haflow-website && docker compose restart"
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "cd /opt/haflow-website && docker compose restart"
 ```
 
 ---
@@ -79,7 +79,7 @@ ssh root@115.190.237.184 "cd /opt/haflow-website && docker compose restart"
 本次迁移各项功能均已通过实际终端命令严格测试验证：
 
 1. **公网 DNS 解析**：
-   `haflow.cn` 与 `www.haflow.cn` 全网解析至 `115.190.237.184`（经阿里 DNS、腾讯 DNS 及本地解析复核）。
+   `haflow.cn` 与 `www.haflow.cn` 全网解析至 `<PROD_SERVER_IP>`（经阿里 DNS、腾讯 DNS 及本地解析复核）。
 2. **全站 HTTPS 连通性**：
    * `https://www.haflow.cn/`：`HTTP/2 200 OK`
    * `https://haflow.cn/`：`HTTP/2 308 Permanent Redirect` $\rightarrow$ `https://www.haflow.cn/`

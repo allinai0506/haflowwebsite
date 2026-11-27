@@ -2,7 +2,13 @@ Dockerfile
 docker-compose.yml
 scripts
 .git
+.github
 .omc
+data
+.env*
+!.env.example
+*.pem
+*.key
 decisions.tsv
 README.md
 *.png

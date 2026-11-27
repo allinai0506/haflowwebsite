@@ -3,17 +3,11 @@
 
 ## 生产部署规范 (Production Deployment)
 
-- **生产服务器**：火山引擎 ECS `115.190.237.184`（数凭项目同机，绝不可使用旧 IP `180.184.54.214`）
-- **登录方式**：`ssh root@115.190.237.184`
 - **运行架构**：
-  - 本地预编译 Standalone（`next.config.ts` 中的 `output: "standalone"`），禁止在服务器上执行 `pnpm build`
-  - 远端运行目录：`/opt/haflow-website`
-  - 容器管理：Docker 容器 `haflow-website`（基于 `node:20-alpine`，内存限制 350M）
-  - 网络拓扑：加入数凭网络 `nexusarchive_default`
-  - Nginx 统一网关：数凭容器 `nexus-frontend`，配置文件为宿主机 `/opt/nexusarchive/nginx/nginx.prod.conf`
-  - SSL 证书：`/etc/letsencrypt/live/haflow.cn/`（Certbot webroot 模式自动续期）
-- **一键发布**：
-  ```bash
-  ./scripts/deploy/deploy.sh docker
-  ```
-- **架构与迁移档案**：详见 `docs/releases/2026-11-19-server-migration-digivoucher-ecs.md`
+  - 本地预编译 Standalone（`next.config.ts` 中的 `output: "standalone"`），禁止在生产服务器上执行 `pnpm build`
+  - 容器管理：Docker 容器 `haflow-website`（基于 `node:20-alpine`，内存限制 350M，仅绑定宿主 `127.0.0.1:3000`）
+  - 反向代理：由 Nginx 统一接管 80 / 443 端口并配置 TLS 1.2/1.3、HSTS 与请求限流
+  - SSL 证书：Certbot 自动续期
+- **部署安全要求**：
+  - 生产服务器地址、SSH 凭证与 Webhook 密钥等敏感配置仅保存在受控环境变量或运维密钥库中，禁止写入代码仓库
+  - 禁止 Agent 自动执行生产部署或直接修改生产服务器
