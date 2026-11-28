@@ -1,9 +1,39 @@
-// @ts-nocheck
-// 由 scripts 口径的移植脚本自 HTML 原型自动生成，勿手工改；要改先改原型再重跑。
+interface ScoreItem {
+  code: string;
+  dim: string;
+  weight: number;
+  scoreType: string;
+  location: string;
+  page: number;
+  clauseId: string;
+  detail: string;
+  estStatus: string;
+  estScore: number | string;
+  estBasis: string;
+  kbHit: boolean;
+  actualStatus: string;
+  actualScore: number | string;
+  actualBasis: string;
+}
+
+interface ScoreAlignWindow extends Window {
+  focusClause?: (clauseId: string, rowId: string) => void;
+  selectRowByCode?: (code: string) => void;
+  jumpToPage?: (pageNo: number, clauseId?: string) => void;
+  locateClause?: (secId: string) => void;
+  switchPhase?: (mode: 'est' | 'actual') => void;
+  zoomDoc?: (factor: number) => void;
+  toggleSplitLayout?: () => void;
+  filterRows?: () => void;
+  openDetailModal?: (code: string) => void;
+  closeDetailModal?: () => void;
+}
+
+// 由 scripts 口径的移植脚本自 HTML 原型自动生成，要改先改原型再重跑。
 export function initScoreAlignViewer() {
 
     // 数据源定义
-    const scoreItemsData = {
+    const scoreItemsData: Record<string, ScoreItem> = {
       '1': {
         code: '1',
         dim: '办公通用类物资',
@@ -91,11 +121,22 @@ export function initScoreAlignViewer() {
       }
     };
 
-    let currentMode = 'est';
+    let currentMode: 'est' | 'actual' = 'est';
     let currentScale = 1.0;
 
+    function byId<T extends HTMLElement = HTMLElement>(id: string): T | null {
+      return document.getElementById(id) as T | null;
+    }
+
+    function setText(id: string, text: string, className?: string) {
+      const el = byId(id);
+      if (!el) return;
+      el.innerText = text;
+      if (className !== undefined) el.className = className;
+    }
+
     // 1. 双向联动：从表格聚焦到左侧文档
-    function focusClause(clauseId, rowId) {
+    function focusClause(clauseId: string, rowId: string) {
       // 激活表格行高亮
       document.querySelectorAll('.parse-table tr').forEach(tr => tr.classList.remove('active-row'));
       const targetRow = document.getElementById(rowId);
@@ -111,18 +152,19 @@ export function initScoreAlignViewer() {
     }
 
     // 2. 双向联动：从左侧文档点击聚焦到右侧表格行
-    function selectRowByCode(code) {
+    function selectRowByCode(code: string) {
       const data = scoreItemsData[code];
       if (!data) return;
       focusClause(data.clauseId, 'row_' + code.replace(/\./g, '_'));
     }
 
     // 3. 页码直接跳转
-    function jumpToPage(pageNo, clauseId) {
+    function jumpToPage(pageNo: number, clauseId?: string) {
       const pageEl = document.getElementById('page_' + pageNo);
       if (pageEl) {
         pageEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        document.getElementById('pageIndicator').value = pageNo;
+        const indicator = byId<HTMLInputElement>('pageIndicator');
+        if (indicator) indicator.value = String(pageNo);
       }
       if (clauseId) {
         setTimeout(() => {
@@ -136,7 +178,7 @@ export function initScoreAlignViewer() {
     }
 
     // 4. 定位特定章节
-    function locateClause(secId) {
+    function locateClause(secId: string) {
       const secEl = document.getElementById(secId);
       if (secEl) {
         secEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -145,43 +187,39 @@ export function initScoreAlignViewer() {
     }
 
     // 5. 阶段模式切换 (阶段1 预计得分 vs 阶段2 实际打分)
-    function switchPhase(mode) {
+    function switchPhase(mode: 'est' | 'actual') {
       currentMode = mode;
-      document.getElementById('btnPhase1').classList.toggle('active', mode === 'est');
-      document.getElementById('btnPhase2').classList.toggle('active', mode === 'actual');
-      document.getElementById('colScoreHeader').innerText = mode === 'actual' ? '实际得分' : '预计得分';
+      byId('btnPhase1')?.classList.toggle('active', mode === 'est');
+      byId('btnPhase2')?.classList.toggle('active', mode === 'actual');
+      setText('colScoreHeader', mode === 'actual' ? '实际得分' : '预计得分');
 
       if (mode === 'actual') {
-        document.getElementById('score_1').innerText = '29';
-        document.getElementById('score_2_2_1').innerText = '6';
-        document.getElementById('score_3_1').innerText = '15';
-        document.getElementById('score_3_2').innerText = '10';
-        document.getElementById('score_3_2').className = 'score-cell full';
-        document.getElementById('score_4_1').innerText = '39.4';
-        document.getElementById('score_4_1').className = 'score-cell partial';
-        document.getElementById('totalScoreBox').innerText = '99.4';
-        document.getElementById('statOk').innerText = '✓ 5 满足';
-        document.getElementById('statNeutral').innerText = '● 0 待确认';
+        setText('score_1', '29');
+        setText('score_2_2_1', '6');
+        setText('score_3_1', '15');
+        setText('score_3_2', '10', 'score-cell full');
+        setText('score_4_1', '39.4', 'score-cell partial');
+        setText('totalScoreBox', '99.4');
+        setText('statOk', '✓ 5 满足');
+        setText('statNeutral', '● 0 待确认');
       } else {
-        document.getElementById('score_1').innerText = '29';
-        document.getElementById('score_2_2_1').innerText = '6';
-        document.getElementById('score_3_1').innerText = '15';
-        document.getElementById('score_3_2').innerText = '待确认';
-        document.getElementById('score_3_2').className = 'score-cell subjective';
-        document.getElementById('score_4_1').innerText = '待确认';
-        document.getElementById('score_4_1').className = 'score-cell subjective';
-        document.getElementById('totalScoreBox').innerText = '50';
-        document.getElementById('statOk').innerText = '✓ 3 满足';
-        document.getElementById('statNeutral').innerText = '● 2 待确认';
+        setText('score_1', '29');
+        setText('score_2_2_1', '6');
+        setText('score_3_1', '15');
+        setText('score_3_2', '待确认', 'score-cell subjective');
+        setText('score_4_1', '待确认', 'score-cell subjective');
+        setText('totalScoreBox', '50');
+        setText('statOk', '✓ 3 满足');
+        setText('statNeutral', '● 2 待确认');
       }
     }
 
     // 6. 文档缩放
-    function zoomDoc(factor) {
+    function zoomDoc(factor: number) {
       currentScale *= factor;
       if (currentScale < 0.7) currentScale = 0.7;
       if (currentScale > 1.4) currentScale = 1.4;
-      document.querySelectorAll('.doc-page').forEach(page => {
+      document.querySelectorAll<HTMLElement>('.doc-page').forEach(page => {
         page.style.transform = `scale(${currentScale})`;
         page.style.transformOrigin = 'top center';
       });
@@ -192,20 +230,21 @@ export function initScoreAlignViewer() {
     const splitWidths = ['48%', '60%', '38%'];
     function toggleSplitLayout() {
       currentSplitState = (currentSplitState + 1) % splitWidths.length;
-      document.getElementById('leftPane').style.width = splitWidths[currentSplitState];
+      const leftPane = byId('leftPane');
+      if (leftPane) leftPane.style.width = splitWidths[currentSplitState];
     }
 
     // 8. 过滤表格行
     function filterRows() {
-      const query = document.getElementById('filterInput').value.trim().toLowerCase();
-      document.querySelectorAll('#scoreTableBody tr').forEach(tr => {
+      const query = (byId<HTMLInputElement>('filterInput')?.value || '').trim().toLowerCase();
+      document.querySelectorAll<HTMLElement>('#scoreTableBody tr').forEach(tr => {
         const text = tr.innerText.toLowerCase();
         tr.style.display = text.includes(query) ? '' : 'none';
       });
     }
 
     // 9. 详情 Modal 弹窗
-    function openDetailModal(code) {
+    function openDetailModal(code: string) {
       const data = scoreItemsData[code];
       if (!data) return;
 
@@ -214,9 +253,9 @@ export function initScoreAlignViewer() {
       const scoreVal = isActual ? data.actualScore : data.estScore;
       const basisVal = isActual ? data.actualBasis : data.estBasis;
 
-      document.getElementById('modalTitle').innerText = `${data.code} · ${data.dim} — ${isActual ? '实际打分详情' : '预计得分详情'}`;
+      setText('modalTitle', `${data.code} · ${data.dim} — ${isActual ? '实际打分详情' : '预计得分详情'}`);
 
-      let html = `
+      const html = `
         <div class="modal-field-group">
           <div class="modal-label">标书原文 (逐字直抽保真)</div>
           <div class="modal-box" style="white-space: pre-wrap; font-size: 13px; line-height: 1.6;">${data.detail}</div>
@@ -251,29 +290,34 @@ export function initScoreAlignViewer() {
         </div>
       `;
 
-      document.getElementById('modalBody').innerHTML = html;
-      document.getElementById('detailModal').classList.add('open');
+      const modalBody = byId('modalBody');
+      if (modalBody) modalBody.innerHTML = html;
+      byId('detailModal')?.classList.add('open');
     }
 
     function closeDetailModal() {
-      document.getElementById('detailModal').classList.remove('open');
+      byId('detailModal')?.classList.remove('open');
     }
 
     // 10. 拖拽分割条交互
-    const resizer = document.getElementById('resizer');
-    const leftPane = document.getElementById('leftPane');
+    const resizer = byId('resizer');
+    const leftPane = byId('leftPane');
     let isDragging = false;
 
-    resizer.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      resizer.classList.add('dragging');
-      document.body.style.cursor = 'col-resize';
-      document.body.style.userSelect = 'none';
-    });
+    if (resizer) {
+      resizer.addEventListener('mousedown', function() {
+        isDragging = true;
+        resizer.classList.add('dragging');
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+      });
+    }
 
     document.addEventListener('mousemove', function(e) {
-      if (!isDragging) return;
-      const containerWidth = document.getElementById('workbench').offsetWidth;
+      if (!isDragging || !leftPane) return;
+      const workbench = byId('workbench');
+      if (!workbench) return;
+      const containerWidth = workbench.offsetWidth;
       const newLeftWidth = Math.max(320, Math.min(e.clientX, containerWidth - 400));
       leftPane.style.width = newLeftWidth + 'px';
     });
@@ -281,7 +325,7 @@ export function initScoreAlignViewer() {
     document.addEventListener('mouseup', function() {
       if (isDragging) {
         isDragging = false;
-        resizer.classList.remove('dragging');
+        resizer?.classList.remove('dragging');
         document.body.style.cursor = '';
         document.body.style.userSelect = '';
       }
@@ -289,15 +333,16 @@ export function initScoreAlignViewer() {
 
     // 默认初始选中第一行并高亮（React useEffect 调用时 DOM 已就绪）
     focusClause('clause_1', 'row_1');
-  
-  (window as any).focusClause = focusClause;
-  (window as any).selectRowByCode = selectRowByCode;
-  (window as any).jumpToPage = jumpToPage;
-  (window as any).locateClause = locateClause;
-  (window as any).switchPhase = switchPhase;
-  (window as any).zoomDoc = zoomDoc;
-  (window as any).toggleSplitLayout = toggleSplitLayout;
-  (window as any).filterRows = filterRows;
-  (window as any).openDetailModal = openDetailModal;
-  (window as any).closeDetailModal = closeDetailModal;
+
+  const win = window as unknown as ScoreAlignWindow;
+  win.focusClause = focusClause;
+  win.selectRowByCode = selectRowByCode;
+  win.jumpToPage = jumpToPage;
+  win.locateClause = locateClause;
+  win.switchPhase = switchPhase;
+  win.zoomDoc = zoomDoc;
+  win.toggleSplitLayout = toggleSplitLayout;
+  win.filterRows = filterRows;
+  win.openDetailModal = openDetailModal;
+  win.closeDetailModal = closeDetailModal;
 }
