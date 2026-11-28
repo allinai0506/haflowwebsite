@@ -19,11 +19,11 @@ All AI coding agents operating in this repository MUST strictly adhere to the fo
    - Never commit secrets, server IP addresses, internal co-tenant paths, or credentials to Git. Use `.env.example` with placeholder values only.
 
 2. **No Unauthorized Production Server Modifications**:
-   - Agents must **never** modify production servers, production Nginx configs, firewalls, databases, or customer lead files (`data/leads/`) directly.
+   - Agents must not directly modify production servers, production Nginx configs, firewalls, databases, or customer lead files (`data/leads/`) without explicit human authorization in the current session. If the user explicitly instructs the agent to make a production change in that session, the agent may act within the authorized scope and the limits of this policy.
    - Never delete or overwrite existing customer lead data.
 
 3. **No Autonomous Production Deployments**:
-   - Agents are **prohibited** from executing production deployment commands (`scripts/deploy/deploy.sh`, `ssh`, `rsync` to prod, `docker compose up` on prod). Production releases require explicit human execution and approval.
+   - Agents must not execute production deployment commands (`scripts/deploy/deploy.sh`, `ssh` to prod, `rsync` to prod, `docker compose up` on prod) without explicit human authorization in the current session. If the user explicitly instructs the agent to deploy to production in that session, the agent may execute the authorized commands within the scope of that instruction and the limits of this policy.
 
 4. **Mandatory Human Review for Sensitive Changes**:
    - Any changes to security headers/CSP (`next.config.ts`), API validation/rate limiting (`/api/diagnose`, `src/lib/security/`), authentication/authorization, secret handling, or deployment scripts (`scripts/deploy/`, `Dockerfile`, `docker-compose.yml`, `ecosystem.config.cjs`) **must** be reviewed and approved by a human maintainer before merging.
