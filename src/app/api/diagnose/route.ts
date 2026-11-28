@@ -1,22 +1,16 @@
+import crypto from "crypto";
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { parseAndValidateDiagnoseRequest } from "@/lib/security/diagnose-validation";
+import { LeadStorageQuotaError, persistLeadRecord } from "@/lib/security/lead-storage";
+import { diagnoseRateLimiter, getClientIp } from "@/lib/security/rate-limit";
+import {
+  sanitizeTelUri,
+  sanitizeWebhookMultiLine,
+  sanitizeWebhookSingleLine,
+} from "@/lib/security/webhook-sanitize";
 
 export const runtime = "nodejs";
 
-interface DiagnosePayload {
-  name: string;
-  company: string;
-  contact: string;
-  department?: string;
-  problem: string;
-  currentProcess?: string;
-  systemsAndDocs?: string;
-  expectedOutcome?: string;
-  riskAndHumanRole?: string;
-}
-
-// 格式化上海本地时间 (CST)
 function formatCSTDate(date: Date): string {
   return new Intl.DateTimeFormat("zh-CN", {
     timeZone: "Asia/Shanghai",
@@ -30,8 +24,25 @@ function formatCSTDate(date: Date): string {
   }).format(date);
 }
 
-// 发送企业微信群机器人 Webhook
-async function sendWeComNotification(lead: {
+function isAllowedWebhookUrl(rawUrl: string | undefined): rawUrl is string {
+  if (!rawUrl) return false;
+  try {
+    const parsed = new URL(rawUrl.trim());
+    if (parsed.protocol === "https:") return true;
+    if (
+      process.env.NODE_ENV !== "production" &&
+      parsed.protocol === "http:" &&
+      (parsed.hostname === "127.0.0.1" || parsed.hostname === "localhost")
+    ) {
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+interface NotificationLead {
   id: string;
   name: string;
   company: string;
@@ -42,28 +53,41 @@ async function sendWeComNotification(lead: {
   systemsAndDocs?: string;
   expectedOutcome?: string;
   localTime: string;
-}) {
+}
+
+async function sendWeComNotification(lead: NotificationLead): Promise<boolean> {
   const webhookUrl = process.env.WECOM_WEBHOOK_URL?.trim();
-  if (!webhookUrl || !webhookUrl.startsWith("http")) {
-    console.warn("[Diagnose API] WECOM_WEBHOOK_URL is not configured. Skipping WeChat Work notification.");
+  if (!isAllowedWebhookUrl(webhookUrl)) {
+    console.warn("[Diagnose API] WECOM_WEBHOOK_URL is not configured or invalid. Skipping WeChat Work notification.");
     return false;
   }
 
+  const safeName = sanitizeWebhookSingleLine(lead.name, 80);
+  const safeCompany = sanitizeWebhookSingleLine(lead.company, 150);
+  const safeContact = sanitizeWebhookSingleLine(lead.contact, 100);
+  const safeDepartment = lead.department ? sanitizeWebhookSingleLine(lead.department, 100) : "未填写";
+  const safeSystems = lead.systemsAndDocs ? sanitizeWebhookSingleLine(lead.systemsAndDocs, 300) : "未填写";
+  const safeOutcome = lead.expectedOutcome ? sanitizeWebhookSingleLine(lead.expectedOutcome, 300) : "未填写";
+  const safeProblem = sanitizeWebhookMultiLine(lead.problem, 2000).replace(/\n+/g, "\n> ");
+  const safeProcess = lead.currentProcess
+    ? sanitizeWebhookMultiLine(lead.currentProcess, 1500).replace(/\n+/g, "\n> ")
+    : "";
+  const telUri = sanitizeTelUri(lead.contact);
+  const contactDisplay = telUri ? `[${safeContact}](tel:${telUri})` : safeContact;
+
   const markdownContent = [
     `### 🔔 收到新的业务诊断需求（官网获客）`,
-    `> **客户姓名**：<font color="info">${lead.name}</font>`,
-    `> **所属企业**：**${lead.company}**`,
-    `> **联系方式**：[${lead.contact}](tel:${lead.contact.replace(/\D/g, "") || lead.contact})`,
-    `> **所属部门**：${lead.department || "未填写"}`,
-    `> **涉及系统/资料**：${lead.systemsAndDocs || "未填写"}`,
-    `> **期望达成结果**：${lead.expectedOutcome || "未填写"}`,
+    `> **客户姓名**：<font color="info">${safeName}</font>`,
+    `> **所属企业**：**${safeCompany}**`,
+    `> **联系方式**：${contactDisplay}`,
+    `> **所属部门**：${safeDepartment}`,
+    `> **涉及系统/资料**：${safeSystems}`,
+    `> **期望达成结果**：${safeOutcome}`,
     ``,
     `**【需要解决的核心业务痛点】**`,
-    `> ${lead.problem.replace(/\n+/g, "\n> ")}`,
+    `> ${safeProblem}`,
     ``,
-    lead.currentProcess
-      ? `**【目前处理方式与瓶颈环节】**\n> ${lead.currentProcess.replace(/\n+/g, "\n> ")}\n`
-      : "",
+    safeProcess ? `**【目前处理方式与瓶颈环节】**\n> ${safeProcess}\n` : "",
     `> <font color="comment">提交时间：${lead.localTime} | 线索编号：${lead.id}</font>`,
   ]
     .filter(Boolean)
@@ -84,35 +108,31 @@ async function sendWeComNotification(lead: {
 
     const result = await res.json().catch(() => ({}));
     if (res.ok && result.errcode === 0) {
-      console.log(`[Diagnose API] WeChat Work notification delivered successfully for lead ${lead.id}`);
+      console.log(`[Diagnose API] WeCom notification delivered for lead ${lead.id}`);
       return true;
-    } else {
-      console.error(`[Diagnose API] WeChat Work notification returned error:`, result);
-      return false;
     }
-  } catch (err) {
-    console.error(`[Diagnose API] Failed to deliver WeChat Work notification:`, err);
+    console.error(`[Diagnose API] WeCom notification failed for lead ${lead.id} (status=${res.status}, errcode=${result.errcode ?? "unknown"})`);
+    return false;
+  } catch {
+    console.error(`[Diagnose API] WeCom notification request error for lead ${lead.id}`);
     return false;
   }
 }
 
-// 支持飞书群机器人 Webhook（富文本卡片）
-async function sendFeishuNotification(lead: {
-  id: string;
-  name: string;
-  company: string;
-  contact: string;
-  department?: string;
-  problem: string;
-  currentProcess?: string;
-  systemsAndDocs?: string;
-  expectedOutcome?: string;
-  localTime: string;
-}) {
+async function sendFeishuNotification(lead: NotificationLead): Promise<boolean> {
   const feishuUrl = process.env.FEISHU_WEBHOOK_URL?.trim();
-  if (!feishuUrl || !feishuUrl.startsWith("http")) {
+  if (!isAllowedWebhookUrl(feishuUrl)) {
     return false;
   }
+
+  const safeName = sanitizeWebhookSingleLine(lead.name, 80);
+  const safeCompany = sanitizeWebhookSingleLine(lead.company, 150);
+  const safeContact = sanitizeWebhookSingleLine(lead.contact, 100);
+  const safeDepartment = lead.department ? sanitizeWebhookSingleLine(lead.department, 100) : "未填写";
+  const safeProblem = sanitizeWebhookMultiLine(lead.problem, 2000);
+  const safeProcess = lead.currentProcess ? sanitizeWebhookMultiLine(lead.currentProcess, 1500) : "";
+  const safeSystems = lead.systemsAndDocs ? sanitizeWebhookSingleLine(lead.systemsAndDocs, 300) : "";
+  const safeOutcome = lead.expectedOutcome ? sanitizeWebhookSingleLine(lead.expectedOutcome, 300) : "";
 
   const cardPayload = {
     msg_type: "interactive",
@@ -130,79 +150,53 @@ async function sendFeishuNotification(lead: {
           fields: [
             {
               is_short: true,
-              text: {
-                tag: "lark_md",
-                content: `**客户姓名**\n${lead.name}`,
-              },
+              text: { tag: "lark_md", content: `**客户姓名**\n${safeName}` },
             },
             {
               is_short: true,
-              text: {
-                tag: "lark_md",
-                content: `**所属企业**\n${lead.company}`,
-              },
+              text: { tag: "lark_md", content: `**所属企业**\n${safeCompany}` },
             },
             {
               is_short: true,
-              text: {
-                tag: "lark_md",
-                content: `**联系方式**\n${lead.contact}`,
-              },
+              text: { tag: "lark_md", content: `**联系方式**\n${safeContact}` },
             },
             {
               is_short: true,
-              text: {
-                tag: "lark_md",
-                content: `**所属部门**\n${lead.department || "未填写"}`,
-              },
+              text: { tag: "lark_md", content: `**所属部门**\n${safeDepartment}` },
             },
           ],
         },
-        {
-          tag: "hr",
-        },
+        { tag: "hr" },
         {
           tag: "div",
-          text: {
-            tag: "lark_md",
-            content: `**想解决的核心业务痛点：**\n${lead.problem}`,
-          },
+          text: { tag: "lark_md", content: `**想解决的核心业务痛点：**\n${safeProblem}` },
         },
-        ...(lead.currentProcess
+        ...(safeProcess
           ? [
               {
                 tag: "div",
-                text: {
-                  tag: "lark_md",
-                  content: `**目前处理方式与瓶颈：**\n${lead.currentProcess}`,
-                },
+                text: { tag: "lark_md", content: `**目前处理方式与瓶颈：**\n${safeProcess}` },
               },
             ]
           : []),
-        ...(lead.systemsAndDocs || lead.expectedOutcome
+        ...(safeSystems || safeOutcome
           ? [
               {
                 tag: "div",
                 fields: [
-                  ...(lead.systemsAndDocs
+                  ...(safeSystems
                     ? [
                         {
                           is_short: true,
-                          text: {
-                            tag: "lark_md",
-                            content: `**涉及系统/资料**\n${lead.systemsAndDocs}`,
-                          },
+                          text: { tag: "lark_md", content: `**涉及系统/资料**\n${safeSystems}` },
                         },
                       ]
                     : []),
-                  ...(lead.expectedOutcome
+                  ...(safeOutcome
                     ? [
                         {
                           is_short: true,
-                          text: {
-                            tag: "lark_md",
-                            content: `**期望交付结果**\n${lead.expectedOutcome}`,
-                          },
+                          text: { tag: "lark_md", content: `**期望交付结果**\n${safeOutcome}` },
                         },
                       ]
                     : []),
@@ -233,64 +227,74 @@ async function sendFeishuNotification(lead: {
 
     const data = await res.json().catch(() => ({}));
     if (res.ok && data.code === 0) {
-      console.log(`[Diagnose API] Feishu card delivered successfully for lead ${lead.id}`);
+      console.log(`[Diagnose API] Feishu card delivered for lead ${lead.id}`);
       return true;
-    } else {
-      console.warn(`[Diagnose API] Feishu card failed (${data.msg}), falling back to text`);
-      await fetch(feishuUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          msg_type: "text",
-          content: {
-            text: `【共事官网 · 新业务诊断需求】\n企业：${lead.company}\n联系人：${lead.name} (${lead.contact})\n部门：${lead.department || "未填写"}\n核心问题：${lead.problem}\n时间：${lead.localTime}`,
-          },
-        }),
-        signal: AbortSignal.timeout(4000),
-      });
-      return false;
     }
-  } catch (err) {
-    console.error(`[Diagnose API] Feishu notification error:`, err);
+
+    console.warn(`[Diagnose API] Feishu card failed for lead ${lead.id} (code=${data.code ?? "unknown"}), falling back to text`);
+    const fallbackRes = await fetch(feishuUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        msg_type: "text",
+        content: {
+          text: `【共事官网 · 新业务诊断需求】\n企业：${safeCompany}\n联系人：${safeName} (${safeContact})\n部门：${safeDepartment}\n核心问题：${safeProblem}\n时间：${lead.localTime}\n编号：${lead.id}`,
+        },
+      }),
+      signal: AbortSignal.timeout(4000),
+    });
+    return fallbackRes.ok;
+  } catch {
+    console.error(`[Diagnose API] Feishu notification error for lead ${lead.id}`);
     return false;
   }
 }
 
 export async function POST(request: Request) {
   try {
-    const body: Partial<DiagnosePayload> = await request.json();
+    const validation = await parseAndValidateDiagnoseRequest(request);
+    if (!validation.ok) {
+      return NextResponse.json(
+        { success: false, error: validation.error },
+        { status: validation.status }
+      );
+    }
 
-    const name = body.name?.trim() || "";
-    const company = body.company?.trim() || "";
-    const contact = body.contact?.trim() || "";
-    const problem = body.problem?.trim() || "";
-    const department = body.department?.trim() || "";
-    const currentProcess = body.currentProcess?.trim() || "";
-    const systemsAndDocs = body.systemsAndDocs?.trim() || "";
-    const expectedOutcome = body.expectedOutcome?.trim() || "";
-    const riskAndHumanRole = body.riskAndHumanRole?.trim() || "";
-
-    // 必填项校验
-    if (!name || !company || !contact || !problem) {
+    if (validation.honeypot) {
       return NextResponse.json(
         {
-          success: false,
-          error: "请填写完整所有必填项（姓名、企业全称、联系方式、具体问题描述）。",
+          success: true,
+          message: "需求已成功提交！共事业务顾问将在 1 个工作日内与您联系。",
+          leadId: `lead_ignored`,
         },
-        { status: 400 }
+        { status: 200 }
+      );
+    }
+
+    const { data } = validation;
+    const ip = getClientIp(request.headers);
+
+    const rateDecision = diagnoseRateLimiter.check(ip, data.contact, data.problem);
+    if (!rateDecision.allowed) {
+      const errorMsg =
+        rateDecision.reason === "duplicate"
+          ? "您已提交过相同内容，请勿重复提交。"
+          : "提交过于频繁，请稍后再试。";
+      return NextResponse.json(
+        { success: false, error: errorMsg },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(rateDecision.retryAfterSeconds ?? 60),
+          },
+        }
       );
     }
 
     const now = new Date();
     const localTime = formatCSTDate(now);
-    const leadId = `lead_${now.getTime()}_${Math.random().toString(36).substring(2, 7)}`;
-
-    // 收集访客请求元信息
-    const ip =
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
-    const userAgent = request.headers.get("user-agent") || "unknown";
+    const leadId = `lead_${now.getTime()}_${crypto.randomBytes(4).toString("hex")}`;
+    const userAgent = (request.headers.get("user-agent") || "unknown").slice(0, 300);
 
     const leadRecord = {
       id: leadId,
@@ -298,57 +302,35 @@ export async function POST(request: Request) {
       localTime,
       ip,
       userAgent,
-      name,
-      company,
-      contact,
-      department,
-      problem,
-      currentProcess,
-      systemsAndDocs,
-      expectedOutcome,
-      riskAndHumanRole,
+      ...data,
     };
 
-    // 1. 本地文件安全持久化存盘（即使无网络配置，线索也 100% 不丢）
     try {
-      const leadsDir = path.join(process.cwd(), "data", "leads");
-      await fs.promises.mkdir(leadsDir, { recursive: true });
-      const filePath = path.join(leadsDir, "diagnose_submissions.jsonl");
-      await fs.promises.appendFile(
-        filePath,
-        JSON.stringify(leadRecord) + "\n",
-        "utf-8"
-      );
-      console.log(`[Diagnose API] Lead recorded to local backup: ${filePath} (id: ${leadId})`);
+      await persistLeadRecord(leadRecord);
+      console.log(`[Diagnose API] Lead persisted (id: ${leadId})`);
     } catch (fsErr) {
-      console.error("[Diagnose API] Failed to write local backup file:", fsErr);
+      if (fsErr instanceof LeadStorageQuotaError) {
+        console.error(`[Diagnose API] Lead storage quota reached (id: ${leadId})`);
+        return NextResponse.json(
+          {
+            success: false,
+            error: "系统存储配额已满，请直接联系官方客服或稍后再试。",
+          },
+          { status: 503 }
+        );
+      }
+      console.error(`[Diagnose API] Failed to persist lead (id: ${leadId})`);
     }
 
-    // 2. 企业微信群机器人即时推送
     await sendWeComNotification({
       id: leadId,
-      name,
-      company,
-      contact,
-      department,
-      problem,
-      currentProcess,
-      systemsAndDocs,
-      expectedOutcome,
+      ...data,
       localTime,
     });
 
-    // 3. （可选）飞书群机器人推送
     await sendFeishuNotification({
       id: leadId,
-      name,
-      company,
-      contact,
-      department,
-      problem,
-      currentProcess,
-      systemsAndDocs,
-      expectedOutcome,
+      ...data,
       localTime,
     });
 
@@ -360,8 +342,8 @@ export async function POST(request: Request) {
       },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("[Diagnose API] Server processing error:", error);
+  } catch {
+    console.error("[Diagnose API] Unexpected server error");
     return NextResponse.json(
       {
         success: false,
