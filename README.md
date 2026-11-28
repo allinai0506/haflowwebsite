@@ -116,3 +116,35 @@ pnpm push:baidu --url=/ --url=/about --url=/haflow --url=/methodology
 ```
 
 `--url=` 可重复，指定 URL 会绕过已推记录，受 `--limit=N` 限制，不清空其他提交记录。无 `--url` 时保留原有 sitemap 轮转行为。dry-run 不需要 token、不发送提交请求、不改写状态。提交受理不等于收录；发布后按周记录“共事智能”“共事智能官网”“HAFlow”“共事智能 HAFlow”的搜索展示、点击及有效咨询。
+
+---
+
+## 生产环境部署与运维架构
+
+- **运行方式**：Docker 容器化（`node:20-alpine`，内存限制 350M，宿主机端口仅绑定 `127.0.0.1:3000`）
+- **网关代理**：由 Nginx 统一接管 80 与 443 端口，通过内部网络反向代理至 `haflow-website:3000`
+- **SSL 证书**：Certbot webroot 模式自动续期
+- **详细架构记录**：详见 [2026-11-19-server-migration-digivoucher-ecs.md](docs/releases/2026-11-19-server-migration-digivoucher-ecs.md)
+
+### 1. 人工发布上线
+
+所有生产打包均在**本地完成**（Next.js 16 Standalone 模式），禁止在服务器上直接执行 `pnpm build`。部署前需设置受控环境变量 `DEPLOY_SERVER_IP` 与 `DEPLOY_SERVER_USER` 并由人工确认执行：
+
+```bash
+DEPLOY_SERVER_IP=<PROD_SERVER_IP> DEPLOY_SERVER_USER=<DEPLOY_USER> ./scripts/deploy/deploy.sh docker
+```
+
+脚本将执行：本地生产编译 $\rightarrow$ 组装精简包（不含本地线索数据与密钥）$\rightarrow$ rsync 同步至远端 $\rightarrow$ 远端重建拉起容器 $\rightarrow$ 本机回环健康度校验。
+
+### 2. 常用运维与排查命令
+
+```bash
+# 查看容器运行状态与内存占用
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "docker stats --no-stream haflow-website"
+
+# 查看应用运行时日志
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "docker logs -f --tail 100 haflow-website"
+
+# 手动验证 SSL 证书静默续期（干跑模拟）
+ssh <DEPLOY_USER>@<PROD_SERVER_IP> "certbot renew --dry-run --no-random-sleep-on-renew"
+```
