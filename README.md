@@ -126,15 +126,9 @@ pnpm push:baidu --url=/ --url=/about --url=/haflow --url=/methodology
 - **SSL 证书**：Certbot webroot 模式自动续期
 - **详细架构记录**：详见 [2026-11-19-server-migration-digivoucher-ecs.md](docs/releases/2026-11-19-server-migration-digivoucher-ecs.md)
 
-### 1. 人工发布上线
+### 1. 生产发布
 
-所有生产打包均在**本地完成**（Next.js 16 Standalone 模式），禁止在服务器上直接执行 `pnpm build`。部署前需设置受控环境变量 `DEPLOY_SERVER_IP` 与 `DEPLOY_SERVER_USER` 并由人工确认执行：
-
-```bash
-DEPLOY_SERVER_IP=<PROD_SERVER_IP> DEPLOY_SERVER_USER=<DEPLOY_USER> ./scripts/deploy/deploy.sh docker
-```
-
-脚本将执行：本地生产编译 $\rightarrow$ 组装精简包（不含本地线索数据与密钥）$\rightarrow$ rsync 同步至远端 $\rightarrow$ 远端重建拉起容器 $\rightarrow$ 本机回环健康度校验。
+按 [HAFlow 官网生产发布 SOP](docs/releases/haflow-website-production-sop.md) 在本地构建带版本标签的 Linux AMD64 镜像，验证候选容器后单独替换 HAFlow 官网服务。
 
 ### 2. 常用运维与排查命令
 
